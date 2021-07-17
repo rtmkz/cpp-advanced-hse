@@ -16,7 +16,7 @@ check-solutions:
 
 deploy:
   only:
-  - master
+  - main
   tags:
   - docker
   stage: release
