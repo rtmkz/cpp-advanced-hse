@@ -1,0 +1,26 @@
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+
+stages:
+  - test
+  - release
+
+check-solutions:
+  stage: test
+  image: eu.gcr.io/hse-ts/cpp-course-build
+  allow_failure: true
+  script:
+    - mkdir -p build/solutions
+    - cd build/solutions && CC=clang-11 CXX=clang++-11 cmake ../../ -G Ninja -DTEST_SOLUTION=ON -DENABLE_PRIVATE_TESTS=ON
+    - ninja test-all
+
+deploy:
+  only:
+  - master
+  tags:
+  - docker
+  stage: release
+  script:
+  - docker pull eu.gcr.io/hse-ts/cpp-course-build
+  - docker build -f testenv.docker -t eu.gcr.io/hse-ts/cpp-course .
+  - docker push eu.gcr.io/hse-ts/cpp-course:latest

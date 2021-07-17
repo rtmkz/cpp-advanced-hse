@@ -1,0 +1,6 @@
+[submodule "cpp-advanced-hse-grader"]
+	path = grader
+	url = https://gitlab.com/danlark/cpp-advanced-hse-grader
+[submodule "private"]
+	path = private
+	url = https://gitlab.com/danlark/cpp-advanced-hse-private
