@@ -21,6 +21,6 @@ deploy:
   - docker
   stage: release
   script:
-  - echo $USER && docker pull eu.gcr.io/hse-ts/cpp-course-build
-  - echo $USER && docker build -f testenv.docker -t eu.gcr.io/hse-ts/cpp-course .
-  - echo $USER && docker push eu.gcr.io/hse-ts/cpp-course:latest
+  - docker pull eu.gcr.io/hse-ts/cpp-course-build
+  - docker build -f testenv.docker -t eu.gcr.io/hse-ts/cpp-course .
+  - docker push eu.gcr.io/hse-ts/cpp-course:latest
