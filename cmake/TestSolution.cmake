@@ -34,6 +34,10 @@ function(add_hse_executable NAME)
     prepend(SHAD_LIBRARY_PRIVATE_TESTS "../private/${TASK_NAME}" ${SHAD_LIBRARY_PRIVATE_TESTS})
   endif()
 
+  if (TEST_SOLUTION)
+    file(COPY "../private/${TASK_NAME}" DESTINATION "${CMAKE_SOURCE_DIR}/")
+  endif()
+
   add_executable(${NAME}
     ${SHAD_LIBRARY_UNPARSED_ARGUMENTS}
     ${SHAD_LIBRARY_SOLUTION_SRCS}
