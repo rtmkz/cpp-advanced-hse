@@ -16,3 +16,4 @@ include_directories(util)
 
 add_subdirectory(multiplication)
 add_subdirectory(algo_spec_with_traits)
+add_subdirectory(transform_tuple)
