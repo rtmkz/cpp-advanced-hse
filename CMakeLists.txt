@@ -15,4 +15,4 @@ include(cmake/BuildFlags.cmake)
 include_directories(util)
 
 add_subdirectory(multiplication)
-
+add_subdirectory(algo_spec_with_traits)
