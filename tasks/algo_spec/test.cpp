@@ -1,7 +1,7 @@
 #include <catch.hpp>
 #include <cmath>
 
-#include "algo_spec_with_traits.h"
+#include "algo_spec.h"
 
 template <class T>
 bool Check(T value, AlgoRes(*target)(T)) {

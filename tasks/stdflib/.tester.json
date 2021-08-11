@@ -1,0 +1,6 @@
+{
+    "allow_change": "stdflib.h",
+    "tests": "test_stdflib",
+    "solutions": "private"
+}
+
