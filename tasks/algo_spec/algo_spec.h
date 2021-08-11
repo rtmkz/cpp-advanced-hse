@@ -1,5 +1,5 @@
 #pragma once
-#include <type_traits>
+
 #include "algo_impl.h"
 
 /// Use one of the following:

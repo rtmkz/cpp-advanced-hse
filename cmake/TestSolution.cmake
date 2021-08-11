@@ -26,6 +26,7 @@ function(add_hse_executable NAME)
   cmake_parse_arguments(SHAD_LIBRARY "" "" "${MULTI_VALUE_ARGS}" ${ARGN})
 
   get_filename_component(TASK_NAME ${CMAKE_CURRENT_SOURCE_DIR} NAME)
+
   if (TEST_SOLUTION)
     prepend(SHAD_LIBRARY_SOLUTION_SRCS "../private/${TASK_NAME}" ${SHAD_LIBRARY_SOLUTION_SRCS})
   endif()
@@ -51,6 +52,7 @@ function(add_hse_python_module NAME)
   cmake_parse_arguments(SHAD_LIBRARY "" "" "${MULTI_VALUE_ARGS}" ${ARGN})
 
   get_filename_component(TASK_NAME ${CMAKE_CURRENT_SOURCE_DIR} NAME)
+
   if (TEST_SOLUTION)
     prepend(SHAD_LIBRARY_SOLUTION_SRCS "../private/${TASK_NAME}" ${SHAD_LIBRARY_SOLUTION_SRCS})
   endif()

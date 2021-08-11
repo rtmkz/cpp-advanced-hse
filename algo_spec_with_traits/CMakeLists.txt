@@ -1,1 +1,0 @@
-add_catch(test_algo_spec_with_traits test.cpp algo_spec_with_traits.cpp)
