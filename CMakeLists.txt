@@ -13,4 +13,7 @@ include(cmake/TestSolution.cmake)
 include(cmake/BuildFlags.cmake)
 include_directories(util)
 
-include_directories(tasks)
+add_subdirectory(tasks/multiplication)
+add_subdirectory(tasks/algo_spec)
+add_subdirectory(tasks/transform_tuple)
+add_subdirectory(tasks/reflection)
