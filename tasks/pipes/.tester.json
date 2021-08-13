@@ -1,0 +1,6 @@
+{
+    "allow_change": "pipes.h",
+    "tests": "test_pipes",
+    "solutions": "private"
+}
+
