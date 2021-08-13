@@ -1,7 +1,6 @@
 #include <catch.hpp>
 #include <cstring>
 #include "pipes.h"
-#include "../curry/curry.h"
 
 TEST_CASE("Simple pipeline") {
     auto f = [](int a) { return a + 2; };
