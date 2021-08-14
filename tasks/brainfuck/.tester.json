@@ -1,0 +1,5 @@
+{
+    "allow_change": "brainfuck.h",
+    "tests": "test_brainfuck",
+    "solutions": "private"
+}
