@@ -201,3 +201,419 @@ void LatticeSimpleDecoder::ProcessEmitting(DecodableInterface *decodable) {
 
 # move семантика
 
+У C++-11 появились rvalue references для этого.
+
+---
+
+# move семантика. Зачем?
+
+Следить за динамическими ресурсами.
+
+```cpp
+class Holder {
+  public:
+    Holder(int size) {
+      data_ = new int[size];
+      size_ = size;
+    }
+
+    ~Holder() {
+      delete[] data_;
+    }
+  private:
+    int*   data_;
+    size_t size_;
+};
+```
+
+---
+
+# move семантика. Зачем?
+
+```cpp
+Holder h1(10000); // regular constructor
+Holder h2 = h1;   // copy constructor
+Holder h3(h1);    // copy constructor (alternate syntax)
+```
+
+---
+
+# move семантика
+
+Копирующий конструктор
+
+```cpp
+Holder(const Holder& other) {
+  data_ = new int[other.size_];  // (1)
+  std::copy(other.data_, other.data_ + other.size_, data_);  // (2)
+  size_ = other.size_;
+}
+```
+
+---
+
+# move семантика
+
+Копирующий оператор
+
+```cpp
+Holder& operator=(const Holder& other) {
+  if (this == &other) return *this;  // (1)
+  delete[] data_;  // (2)
+  data_ = new int[other.size_];
+  std::copy(other.data_, other.data_ + other.size_, data_);
+  size_ = other.size_;
+  return *this;  // (3)
+}
+```
+
+---
+
+# move семантика
+
+Что произойдёт здесь?
+
+```cpp
+Holder CreateHolder(int size) {
+  return Holder(size);
+}
+```
+
+---
+
+# move семантика
+
+Сколько аллокаций?
+
+```cpp
+int main() {
+  Holder h(10);
+  h = CreateHolder(1000);
+  return 0;
+}
+```
+
+Ответ: минимум 3
+
+---
+
+# move семантика
+
+Почему мы не можем просто украсть CreateHolder и ничего не присваивать?
+
+На помощь приходят другие ссылки, rvalue ссылки.
+
+```cpp
+Holder(Holder&& other) {
+  data_ = other.data_;  // (1)
+  size_ = other.size_;
+  other.data_ = nullptr;  // (2)
+  other.size_ = 0;
+}
+```
+
+---
+
+# move семантика
+
+Удалить левый объект, присвоить себе метаданные правого.
+
+```cpp
+Holder& operator=(Holder&& other) {
+  if (this == &other) return *this;
+
+  delete[] data_;  // (1)
+
+  data_ = other.data_;  // (2)
+  size_ = other.size_;
+
+  other.data_ = nullptr;  // (3)
+  other.size_ = 0;
+
+  return *this;
+}
+```
+
+---
+
+# move семантика
+
+Посвапать. Так тоже можно и деструктор сделает своё дело, но правило, что лучше не надо. Объекта после не существует.
+
+```cpp
+Holder& operator=(Holder&& other) {
+  std::swap(data_, other.data_);
+  std::swap(size_, other.size_);
+  return *this;
+}
+```
+
+---
+
+# move семантика
+
+Можно превращать lvalue в rvalues с помощью std::move.
+
+```cpp
+int main() {
+  Holder h1(1000);           // h1 is an lvalue
+  Holder h2(std::move(h1));  // move-constructor invoked (because of rvalue in input)
+}
+```
+
+---
+
+# move семантика
+
+```cpp
+// parameter is rvalue reference
+void fn(X &&) { std::cout << "X &&\n"; }
+
+int main() {
+  X a;
+  fn(a); // compiler error, argument is an lvalue
+
+  fn(X()); // works, argument is an rvalues
+}
+```
+
+---
+
+# move семантика
+
+```cpp
+
+template<typename T> struct remove_reference { typedef T type; };
+template<typename T> struct remove_reference<T&> { typedef T type; };
+template<typename T> struct remove_reference<T&&> { typedef T type; };
+
+template <class T>
+inline typename remove_reference<T>::type&&
+move(T&& t) {
+  using U = typename remove_reference<T>::type;
+  return static_cast<U&&>(t);
+}
+```
+
+---
+
+# move семантика
+
+Приоритет.
+
+![image](https://cdn.nextptr.com/images/uimages/B2Al-gbVpUhaENYKt8Nw3Upx.png)
+
+---
+
+# move семантика
+
+Никогда не делайте move на const объекты. const от типа не может отлипнуть.
+
+```cpp
+class Annotation {
+public:
+    explicit Annotation(const std::string text)
+     : value(std::move(text)) {} // we want to call string(string&&),
+                                 // text is const,
+                                 // std::move(text) is const std::string&&
+                                 // we called string(const std::string&)
+                                 // it is a perf issue.
+private:
+    std::string value;
+};
+```
+
+---
+
+# move семантика
+
+Конструкторы могут принимать по значению, а потом делать move. Так "модно".
+
+```cpp
+class Annotation {
+public:
+    explicit Annotation(std::string text)
+     : value(std::move(text)) {}
+private:
+    std::string value;
+};
+```
+
+---
+
+# move семантика
+
+```cpp
+void f1(std::string& s);
+void f2(const std::string& s);
+void f3(std::string&& s);
+void f4(const std::string&& s);
+
+std::string s("Hi"); //lvalue
+const std::string cs("Hi"); //const lvalue
+
+f1(s); // OK
+f1(cs); // ERROR
+f1(std::move(s)); // ERROR
+f1(std::move(cs)); // ERROR
+
+f2(s); // OK
+f2(cs); // OK
+f2(std::move(s)); // OK
+f2(std::move(cs)); // OK
+
+
+f3(s); // ERROR
+f3(cs); // ERROR
+f3(std::move(s)); // OK
+f3(std::move(cs)); // ERROR
+
+f4(s); // ERROR
+f4(cs); // ERROR
+f4(std::move(s)); // OK
+f4(std::move(cs)); // OK
+```
+
+---
+
+# Шаблоны и rvalue
+
+Шаблонные rvalue references означают немного другое.
+
+```cpp
+template<typename T>
+void foo(T&&); // forwarding reference here
+// T is a template parameter for foo
+
+template<typename T>
+void bar(std::vector<T>&&); // but not here
+// std::vector<T> is not a template parameter,
+// only T is a template parameter for bar
+```
+
+---
+
+# Шаблоны и rvalue
+
+```
+T&  + &   -> T&  // Lvalues are persistent
+T&  + &&  -> T&  // Lvalues are persistent
+T&& + &   -> T&  // Preserving what users want without copy
+T&& + &&  -> T&& // Preserving what users want without copy
+```
+
+---
+
+# Шаблоны и rvalue
+
+Чтобы сохранить переданное пользователем lvalue или rvalue, есть понятие perfect
+forwarding.
+
+```cpp
+template<class T>
+void Fwd(T&& v) { Call(std::forward<T>(v)); }
+```
+
+---
+
+# Зачем?
+
+Перенапривить аргументы в базовый класс, [abseil](https://github.com/abseil/abseil-cpp/blob/master/absl/status/statusor.h#L354).
+
+```cpp
+template <typename U>
+StatusOr(U&& v) : Base(std::forward<U>(v)) {}
+```
+
+---
+
+# Зачем?
+
+Избавиться от копипасты ([имплементация хэштаблицы](https://github.com/abseil/abseil-cpp/blob/17c954d90d5661e27db8fc5f086085690a8372d9/absl/container/internal/raw_hash_map.h#L72)).
+
+```cpp
+template <class K = key_type, class V = mapped_type, K* = nullptr,
+          V* = nullptr>
+std::pair<iterator, bool> insert_or_assign(key_arg<K>&& k, V&& v) {
+  return insert_or_assign_impl(std::forward<K>(k), std::forward<V>(v));
+}
+
+template <class K = key_type, class V = mapped_type, K* = nullptr>
+std::pair<iterator, bool> insert_or_assign(key_arg<K>&& k, const V& v) {
+  return insert_or_assign_impl(std::forward<K>(k), v);
+}
+
+template <class K = key_type, class V = mapped_type, V* = nullptr>
+std::pair<iterator, bool> insert_or_assign(const key_arg<K>& k, V&& v) {
+  return insert_or_assign_impl(k, std::forward<V>(v));
+}
+```
+
+---
+
+# Шаблоны и rvalue
+
+Без шаблона не скомпилируется, хотя тип вывести можно. Почему? На семинарах и по пути курса
+
+```cpp
+template<class T>
+void Fwd(T&& v) { Call(std::forward(v)); }
+```
+
+---
+
+# Применения
+
+* На `std::unique_ptr` можно только делать move, это гарантирует никаких копий и double free, один объект, один его разрущает. RAII (Resource Acquisition Is Initialization) идиома.
+* `std::string, std::vector` можно тоже перемещать между друг другом, то же RAII
+* На семинарах больше
+* Меньше ошибок с ресурсами
+* Меньше выстрелов в ногу как управлять памятью
+* Полное избавление от new/delete в коде и работе с сырыми указателями.
+
+---
+
+# vs Rust
+
+В Rust любой оператор `=` это move.
+
+```rust
+struct A;
+
+fn test() {
+    let a = A;
+    let b = a;
+    let c = a; // compile error, a is moved
+}
+```
+
+---
+
+# vs Rust
+
+Это гарантирует ещё больше, что вообще нет никогда никаких двух различных регионов памяти. По архитектуре не бывает double free. И вы не можете два объекта мультипоточными сделать на этапе компиляции.
+
+```rust
+struct A;
+
+fn move_to(a: A) {
+    // a is moved into here, you own it now.
+}
+
+fn test() {
+    let a = A;
+    move_to(a);
+    let c = a; // compile error, a is moved
+}
+```
+
+---
+
+# vs Rust
+
+У Rust
+
+* Все типы movable (у C++ есть не movable типы, а также до C++11 код)
+* Любое присваивание, вызов функции это move (у C++ сложная логика ссылок)
+* Нельзя пользоваться объектов после move (в C++ можно)
+* Не вызываются деструкторы у объектов после move (у C++ вызываются, поэтому стоит деинициализировать)
