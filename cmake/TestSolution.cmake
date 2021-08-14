@@ -6,7 +6,7 @@ function(patch_include_directories TARGET)
   if (TEST_SOLUTION)
     get_filename_component(TASK_NAME ${CMAKE_CURRENT_SOURCE_DIR} NAME)
     target_include_directories(${TARGET}
-      PRIVATE ../../private/${TASK_NAME})
+      PRIVATE ../private/${TASK_NAME})
   endif()
 
   target_include_directories(${TARGET}
@@ -28,15 +28,15 @@ function(add_hse_executable NAME)
   get_filename_component(TASK_NAME ${CMAKE_CURRENT_SOURCE_DIR} NAME)
 
   if (TEST_SOLUTION)
-    prepend(SHAD_LIBRARY_SOLUTION_SRCS "../../private/${TASK_NAME}" ${SHAD_LIBRARY_SOLUTION_SRCS})
+    prepend(SHAD_LIBRARY_SOLUTION_SRCS "../private/${TASK_NAME}" ${SHAD_LIBRARY_SOLUTION_SRCS})
   endif()
 
   if (ENABLE_PRIVATE_TESTS)
-    prepend(SHAD_LIBRARY_PRIVATE_TESTS "../../private/${TASK_NAME}" ${SHAD_LIBRARY_PRIVATE_TESTS})
+    prepend(SHAD_LIBRARY_PRIVATE_TESTS "../private/${TASK_NAME}" ${SHAD_LIBRARY_PRIVATE_TESTS})
   endif()
 
   if (TEST_SOLUTION)
-    file(COPY "../../private/${TASK_NAME}" DESTINATION "${CMAKE_SOURCE_DIR}/")
+    file(COPY "../../private/${TASK_NAME}" DESTINATION "${CMAKE_SOURCE_DIR}/tasks")
   endif()
 
   add_executable(${NAME}
@@ -54,7 +54,7 @@ function(add_hse_python_module NAME)
   get_filename_component(TASK_NAME ${CMAKE_CURRENT_SOURCE_DIR} NAME)
 
   if (TEST_SOLUTION)
-    prepend(SHAD_LIBRARY_SOLUTION_SRCS "../../private/${TASK_NAME}" ${SHAD_LIBRARY_SOLUTION_SRCS})
+    prepend(SHAD_LIBRARY_SOLUTION_SRCS "../private/${TASK_NAME}" ${SHAD_LIBRARY_SOLUTION_SRCS})
   endif()
 
   add_library(${NAME} SHARED
