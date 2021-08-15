@@ -1,7 +1,6 @@
 #pragma once
 
 #include <string>
-#include <utility>
 
 // Should not allow reuse and yell under sanitizers.
 // Fix the interface and implementation.
@@ -14,8 +13,5 @@ class OneTimeCallback {
 };
 
 // Implement ctor, operator(), maybe something else...
-class AwesomeCallback : public OneTimeCallback {
-public:
-private:
-};
+class AwesomeCallback : public OneTimeCallback {};
 
