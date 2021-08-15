@@ -1,4 +1,14 @@
+---
+style: |
+  {
+    justify-content: start;
+  }
+paginate: true
+---
+
 # Intro. Move семантика, perfect forwarding, lifetime
+
+Данила Кутенин. Лекция 1
 
 ---
 
@@ -16,6 +26,8 @@
 * https://t.me/cpp_advanced_hse_2021
 * Чат прилинкован к каналу
 * Больше практики, больше писать кода
+* Больше рассказов "почему", а не "просто так"
+* Больше инсайтов изнутри решений, сравнений с другими языками
 * Репозиторий https://gitlab.com/danlark/cpp-advanced-hse
 * Инструкция в SETUP.md этого репозитория
 * Тесты почти всегда открытые. Проверяются CI gitlab (не Яндекс.Контест)
@@ -365,6 +377,61 @@ int main() {
 
 # move семантика
 
+Иногда компилятор по умолчанию генерирует. Он генерирует, если нет никакого копируещего метода, или move метода, или деструктора.
+
+```cpp
+class Foo {
+public:
+  Foo() {} // OK, no restrictions on default ctor
+private:
+  std::string s_;
+};
+```
+
+```cpp
+class Foo {
+public:
+  Foo() {}  // OK, no restrictions on default ctor
+  ~Foo() {} // NO, user declared
+private:
+  std::string s_;
+};
+```
+
+---
+
+# move семантика
+
+```cpp
+class Foo {
+public:
+  Foo() {}
+  Foo(Foo&) = delete; // OK
+  Foo& operator=(const Foo&) { return *this; } // NO, user declared!
+  ~Foo() = default; // OK
+private:
+  std::string s_;
+};
+```
+
+---
+
+# move семантика
+
+Хорошее правило, либо вы указываете все операторы (rule of 5), либо ничего (rule of 0).
+
+1. Копирущий конструктор
+1. Копирущий оператор присваивания
+1. Перемещающий конструктор
+1. Перемещающий оператор присваивания
+1. Деструктор
+
+Там, где можно, ставьте `= default;`, `= delete`. Подавляющее большинство случаев.
+
+---
+
+# move семантика
+
 ```cpp
 // parameter is rvalue reference
 void fn(X &&) { std::cout << "X &&\n"; }
@@ -399,8 +466,6 @@ move(T&& t) {
 
 # move семантика
 
-Приоритет.
-
 ![image](https://cdn.nextptr.com/images/uimages/B2Al-gbVpUhaENYKt8Nw3Upx.png)
 
 ---
@@ -412,14 +477,14 @@ move(T&& t) {
 ```cpp
 class Annotation {
 public:
-    explicit Annotation(const std::string text)
-     : value(std::move(text)) {} // we want to call string(string&&),
-                                 // text is const,
-                                 // std::move(text) is const std::string&&
-                                 // we called string(const std::string&)
-                                 // it is a perf issue.
+  explicit Annotation(const std::string text)
+    : value(std::move(text)) {} // we want to call string(string&&),
+                                // text is const,
+                                // std::move(text) is const std::string&&
+                                // we called string(const std::string&)
+                                // it is a perf issue.
 private:
-    std::string value;
+  std::string value;
 };
 ```
 
@@ -427,15 +492,15 @@ private:
 
 # move семантика
 
-Конструкторы могут принимать по значению, а потом делать move. Так "модно".
+Конструкторы могут принимать по значению, а потом делать move. Так "модно". Лучше говорит
 
 ```cpp
 class Annotation {
 public:
-    explicit Annotation(std::string text)
-     : value(std::move(text)) {}
+  explicit Annotation(std::string text)
+   : value(std::move(text)) {}
 private:
-    std::string value;
+  std::string value;
 };
 ```
 
@@ -506,8 +571,7 @@ T&& + &&  -> T&& // Preserving what users want without copy
 
 # Шаблоны и rvalue
 
-Чтобы сохранить переданное пользователем lvalue или rvalue, есть понятие perfect
-forwarding.
+Чтобы сохранить переданное пользователем lvalue или rvalue, есть понятие perfect forwarding.
 
 ```cpp
 template<class T>
@@ -615,5 +679,15 @@ fn test() {
 
 * Все типы movable (у C++ есть не movable типы, а также до C++11 код)
 * Любое присваивание, вызов функции это move (у C++ сложная логика ссылок)
-* Нельзя пользоваться объектов после move (в C++ можно)
+* Нельзя пользоваться объектом после move (в C++ иногда можно, иногда это UB, иногда это unspecified)
 * Не вызываются деструкторы у объектов после move (у C++ вызываются, поэтому стоит деинициализировать)
+
+---
+
+# vs Go/Java
+
+* Все присваивания не мувают объекты
+* Перед каждым объектом есть reference counter
+* Когда он ноль, язык может удалить объект
+* Это называется Garbage Collection
+* C++ думал сделать gargabe collection, но из-за деструкторов и Бьярне оно не получило распространения.
