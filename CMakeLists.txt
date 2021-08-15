@@ -15,6 +15,7 @@ include_directories(util)
 
 # 0
 add_subdirectory(tasks/multiplication)
+add_subdirectory(tasks/harakiri)
 
 # 3
 add_subdirectory(tasks/bind_front)
