@@ -16,6 +16,9 @@ include_directories(util)
 # 0
 add_subdirectory(tasks/multiplication)
 add_subdirectory(tasks/harakiri)
+add_subdirectory(tasks/deque)
+add_subdirectory(tasks/dedup)
+add_subdirectory(tasks/cow-vector)
 
 # 3
 add_subdirectory(tasks/bind_front)
