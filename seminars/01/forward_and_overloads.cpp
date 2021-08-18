@@ -4,10 +4,6 @@ void f(int& x) {
   std::cout << "lvalue reference overload f(" << x << ")\n";
 }
 
-void f(const int& x) {
-  std::cout << "lvalue reference to const overload f(" << x << ")\n";
-}
-
 void f(int&& x) {
   std::cout << "rvalue reference overload f(" << x << ")\n";
 }
@@ -48,16 +44,16 @@ int main() {
   puts("");
 
   int&& y = 2;
-  Foo(y);
-  Foo(std::move(y));
+  Foo(y);  // calls f(int& x)
+  Foo(std::move(y));  // calls f(int&& x)
   puts("");
 
   int&& z = 3;
-  Bar(z);
-  Bar(std::move(z));
+  Bar(z);  // calls f(int& x)
+  Bar(std::move(z));  // calls f(int& x)
   puts("");
 
   int&& t = 4;
-  FooBar(t);
-  FooBar(std::move(t));
+  FooBar(t);  // calls f(int& x)
+  FooBar(std::move(t));  // calls f(int&& x)
 }
