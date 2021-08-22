@@ -16,13 +16,13 @@ stages:
     - cmake ../../ -G Ninja -DTEST_SOLUTION=ON -DENABLE_PRIVATE_TESTS=ON
     - ninja test-all
 
-check-solutions-gcc:
+check-solutions-gcc-10:
   extends: .check
   variables:
     CC: gcc-10
     CXX: g++-10
 
-check-solutions-clang:
+check-solutions-clang-11:
   extends: .check
   variables:
     CC: clang-11
