@@ -18,13 +18,13 @@ OSX тоже должен работать.
    ```
    ssh-keygen -N "" -f ~/.ssh/id_rsa
    ```
-1. Скопируйте содержимое файла id_rsa.pub (`cat ~/.ssh/id_rsa.pub`) в https://gitlab.$$$$.org/profile/keys
-1. Проверьте, что ssh ключ работает. Выполните команду `ssh git@gitlab.$$$$$.org`. Вы должны увидеть такое приветствие:
+1. Скопируйте содержимое файла id_rsa.pub (`cat ~/.ssh/id_rsa.pub`) в https://gitlab.com/-/profile/keys
+1. Проверьте, что ssh ключ работает. Выполните команду `ssh git@gitlab.com`. Вы должны увидеть такое приветствие:
    ```
-   $ ssh git@gitlab.$$$$$.org
+   $ ssh git@gitlab.com
    PTY allocation request failed on channel 0
    Welcome to GitLab, $USERNAME!
-   Connection to gitlab.$$$$$.org closed.
+   Connection to gitlab.com closed.
    ```
 
 ## Посылка задачи в систему
