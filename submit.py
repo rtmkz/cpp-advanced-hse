@@ -6,7 +6,8 @@ import json
 import os
 import shutil
 
-SHADOW_REPO_DIR="../.submit-repo"
+REPO_ROOT=os.path.dirname(os.path.realpath(__file__))
+SHADOW_REPO_DIR=os.path.join(REPO_ROOT, '.submit-repo')
 VERBOSE=False
 
 def git(*args):
@@ -44,7 +45,7 @@ def set_up_shadow_repo(task_name, user_name, user_email):
 
 def create_commits(task_name, files):
     git("checkout", "-b", "initial")
-    shutil.copyfile("../.grader-ci.yml", os.path.join(SHADOW_REPO_DIR, ".gitlab-ci.yml"))
+    shutil.copyfile(os.path.join(REPO_ROOT, ".grader-ci.yml"), os.path.join(SHADOW_REPO_DIR, ".gitlab-ci.yml"))
     git("add", ".gitlab-ci.yml")
     git("commit", "-m", "initial")
 
@@ -58,7 +59,7 @@ def create_commits(task_name, files):
     except:
         pass
 
-    shutil.copyfile("../.grader-ci.yml", os.path.join(SHADOW_REPO_DIR, ".gitlab-ci.yml"))
+    shutil.copyfile(os.path.join(REPO_ROOT, ".grader-ci.yml"), os.path.join(SHADOW_REPO_DIR, ".gitlab-ci.yml"))
     git("add", ".gitlab-ci.yml")
 
     for filename in files:
