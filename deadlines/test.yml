@@ -16,3 +16,9 @@
       score: 200
     - task: deque
       score: 400
+- group:    02-memory
+  start:    17-07-2021 18:00
+  deadline: 21-09-2022 18:00
+  tasks:
+    - task: compressed_pair
+      score: 100
