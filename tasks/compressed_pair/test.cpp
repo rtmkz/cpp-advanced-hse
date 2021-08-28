@@ -75,7 +75,7 @@ TEST_CASE("Constructors") {
 }
 
 template <class V>
-inline constexpr bool is_compressed_v = std::is_empty_v<V> && !std::is_final_v<V>; // NOLINT
+inline constexpr bool is_compressed_v = std::is_empty_v<V> && !std::is_final_v<V>;  // NOLINT
 
 template <class U, class V>
 void CheckSize() {
