@@ -9,12 +9,12 @@
 - lifetime extension
 
 ## forwarding & co
-- type deduction for forwarding references
-- template parameter in std::forward
+- type deduction for forwarding references (explain what type is deduced in different cases)
+- why is the template parameter non-optional in std::forward?
 
 ## move-семантика
 - moving from a const object
-- copy elision (rvo)
+- examples of copy elision (rvo)
 - [fun times with exceptions](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2009/n2855.html)
 - [push_back overloads](https://stackoverflow.com/questions/28130531/why-are-there-two-overloads-for-vectorpush-back), [push_back vs emplace_back](https://quuxplusone.github.io/blog/2021/03/03/push-back-emplace-back/)
 
