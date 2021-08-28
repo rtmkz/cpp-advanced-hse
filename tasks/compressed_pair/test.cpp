@@ -49,8 +49,8 @@ TEST_CASE("NonCompressedModificationWorks") {
 }
 
 TEST_CASE("SimpleOperationsWithCompressedPair") {
-    CompressedPair<std::string, std::allocator<std::string>> p
-        = {"hello", std::allocator<std::string>{}};
+    CompressedPair<std::string, std::allocator<std::string>> p = {"hello",
+                                                                  std::allocator<std::string>{}};
     std::string* ptr = new (p.GetSecond().allocate(1)) std::string{p.GetFirst()};
     REQUIRE(*ptr == "hello");
     ptr->~basic_string<char>();
@@ -67,7 +67,7 @@ TEST_CASE("Constructors") {
     CopyOnly copy1;
     MoveOnly move1;
     CompressedPair<CopyOnly, MoveOnly> p1{copy1, std::move(move1)};
-    
+
     // Copy and move for non-empty classes.
     NonEmptyCopyOnly copy2;
     NonEmptyMoveOnly move2;
