@@ -57,6 +57,14 @@ TEST_CASE("SimpleOperationsWithCompressedPair") {
     p.GetSecond().deallocate(ptr, 1);
 }
 
+struct NoDefaultConstructor {
+    NoDefaultConstructor() = delete;
+    NoDefaultConstructor(int f) : field(f) {
+    }
+
+    int field;
+};
+
 TEST_CASE("Constructors") {
     // Default.
     CompressedPair<int, std::string> p0;
@@ -72,6 +80,9 @@ TEST_CASE("Constructors") {
     NonEmptyCopyOnly copy2;
     NonEmptyMoveOnly move2;
     CompressedPair<NonEmptyCopyOnly, NonEmptyMoveOnly> p3{copy2, std::move(move2)};
+
+    CompressedPair<NoDefaultConstructor, int> p4(NoDefaultConstructor{3}, 0);
+    REQUIRE(p4.GetFirst().field == 3);
 }
 
 template <class V>
