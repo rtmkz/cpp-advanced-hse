@@ -9,7 +9,7 @@
 // We want to try to outline the code here.
 
 
-template<typename T, size_t I, bool = std::is_class_v<T> && !std::is_final_v<T>>
+template<typename T, size_t I, bool = std::is_empty_v<T> && !std::is_final_v<T>>
 struct CompressedPairElement {
   // Constructors.
   // Getters: return value.
