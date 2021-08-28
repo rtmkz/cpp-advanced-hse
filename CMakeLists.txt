@@ -21,6 +21,9 @@ add_subdirectory(tasks/deque)
 add_subdirectory(tasks/dedup)
 add_subdirectory(tasks/cow-vector)
 
+# 1
+add_subdirectory(tasks/compressed_pair)
+
 # 3
 add_subdirectory(tasks/bind_front)
 add_subdirectory(tasks/curry)
