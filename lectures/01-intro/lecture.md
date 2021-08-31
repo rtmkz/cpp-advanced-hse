@@ -593,23 +593,14 @@ StatusOr(U&& v) : Base(std::forward<U>(v)) {}
 
 # Зачем?
 
-Избавиться от копипасты ([имплементация хэштаблицы](https://github.com/abseil/abseil-cpp/blob/17c954d90d5661e27db8fc5f086085690a8372d9/absl/container/internal/raw_hash_map.h#L72)).
+Работать с функциональщиной ([пример из реального мира](https://github.com/abseil/abseil-cpp/blob/1ae9b71c474628d60eb251a3f62967fe64151bb2/absl/container/internal/raw_hash_set_allocator_test.cc)).
+
+Аккуратненько сохранили все аргументы так, как задумывал вызывающий:
 
 ```cpp
-template <class K = key_type, class V = mapped_type, K* = nullptr,
-          V* = nullptr>
-std::pair<iterator, bool> insert_or_assign(key_arg<K>&& k, V&& v) {
-  return insert_or_assign_impl(std::forward<K>(k), std::forward<V>(v));
-}
-
-template <class K = key_type, class V = mapped_type, K* = nullptr>
-std::pair<iterator, bool> insert_or_assign(key_arg<K>&& k, const V& v) {
-  return insert_or_assign_impl(std::forward<K>(k), v);
-}
-
-template <class K = key_type, class V = mapped_type, V* = nullptr>
-std::pair<iterator, bool> insert_or_assign(const key_arg<K>& k, V&& v) {
-  return insert_or_assign_impl(k, std::forward<V>(v));
+template <class F>
+static auto apply(F&& f, int32_t v) -> decltype(std::forward<F>(f)(v, v)) {
+  return std::forward<F>(f)(v, v);
 }
 ```
 

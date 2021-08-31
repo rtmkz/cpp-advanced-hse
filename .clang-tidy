@@ -37,5 +37,3 @@ CheckOptions:
     value: k
   - key: google-runtime-int.TypeSuffix
     value: _t
-  - key: readability-identifier-naming.TypeTemplateParameterCase
-    value: CamelCase

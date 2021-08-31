@@ -7,10 +7,11 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}")
 set(CMAKE_EXPORT_COMPILE_COMMANDS  ON)
 
+include(cmake/BuildFlags.cmake)
+include(cmake/TestSolution.cmake)
+
 find_package(Catch REQUIRED)
 
-include(cmake/TestSolution.cmake)
-include(cmake/BuildFlags.cmake)
 include_directories(util)
 
 # 0
@@ -19,6 +20,9 @@ add_subdirectory(tasks/harakiri)
 add_subdirectory(tasks/deque)
 add_subdirectory(tasks/dedup)
 add_subdirectory(tasks/cow-vector)
+
+# 1
+add_subdirectory(tasks/compressed_pair)
 
 # 3
 add_subdirectory(tasks/bind_front)

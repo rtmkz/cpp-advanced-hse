@@ -5,14 +5,28 @@ stages:
   - test
   - release
 
-check-solutions:
+.check:
   stage: test
   image: eu.gcr.io/hse-ts/cpp-course-build
   allow_failure: true
   script:
+    - cmake --version
     - mkdir -p build/solutions
-    - cd build/solutions && CC=clang-11 CXX=clang++-11 cmake ../../ -G Ninja -DTEST_SOLUTION=ON -DENABLE_PRIVATE_TESTS=ON
+    - cd build/solutions
+    - cmake ../../ -G Ninja -DTEST_SOLUTION=ON -DENABLE_PRIVATE_TESTS=ON
     - ninja test-all
+
+check-solutions-gcc-10:
+  extends: .check
+  variables:
+    CC: gcc-10
+    CXX: g++-10
+
+check-solutions-clang-11:
+  extends: .check
+  variables:
+    CC: clang-11
+    CXX: clang++-11
 
 deploy:
   only:
