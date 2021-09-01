@@ -491,8 +491,9 @@ class std_map {/*...*/};
 
 # Lambda функции
 
+* Lambda это отдельные типы
 * lvalues, rvalues, by value
-* variable initialization
+* variable initialization, конструкторы
 * Plan: go to c++ insights
 
 ```cpp
@@ -528,12 +529,44 @@ l<int>(1, 2);
 # Lambda функции
 
 * constexpr, trailing return types
+* Это кодген
 * Plan: go to c++ insights
 
 ```cpp
 template <int T>
-static constexpr int num_primes = []() -> bool {
+static constexpr int kNumPrimes = []() -> int {
   // Check all i from 2 to T if they are prime
 }();
+```
+
+---
+
+# Lambda функции
+
+* Это можно превращать в шаблонные аргументы, в том числе и классов.
+* Самый простой пример: `std::sort`
+
+```cpp
+template <class Callback>
+void DoWorkAndCallback(const std::vector<Data>& data, Callback&& cb);
+
+DoWorkAndCallback(data, [&]() { /*...*/ });
+```
+
+---
+
+# Lambda функции
+
+* Даже шаблонные аргументы классов с помощью deduction guides (будет в дз).
+
+```cpp
+template <class T>
+class Foo {
+public:
+  Foo(T&& t) : callback_(std::move(t)) {}
+private:
+  T callback_;
+};
+// You will learn how to write yourself.
 ```
 
