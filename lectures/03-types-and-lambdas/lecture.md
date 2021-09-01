@@ -226,10 +226,10 @@ struct iterator_traits<T, false> {
 ```cpp
 // Chooses iterator_traits<int*, true>
 iterator_traits<int*> x1;
-// Chooses iterator_traits<$ITERATOR_FROM_LIST>
+// Chooses iterator_traits<$ITERATOR_FROM_LIST, false>
 iterator_traits<decltype(std::list<int>().begin())> x2;
 // Prefferable to the above.
-// Chooses iterator_traits<$ITERATOR_FROM_LIST>
+// Chooses iterator_traits<$ITERATOR_FROM_LIST, false>
 iterator_traits<typename std::list<int>::iterator> x3;
 ```
 
