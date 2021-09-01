@@ -430,6 +430,57 @@ using block_ptr_t = typename std::pointer_traits<Ptr>::template rebind<block>;
 
 ---
 
+# Типы. Traits, policies, рубрика факап на миллион
+
+```cpp
+template<typename Key, /*...*/>
+class flat_hash_set : public raw_hash_set<Key, /*value_type=*/Key> {}
+template<typename Key, typename Value, /*...*/>
+class flat_hash_map : public raw_hash_set<Key, /*value_type=*/std::pair<const Key, Value>> {}
+class raw_hash_set::iterator {
+  using iterator_category = std::forward_iterator_tag;
+  using value_type = typename raw_hash_set::value_type;
+  using reference = value_type&;
+  using pointer = std::remove_reference_t<reference>*;
+  using difference_type = typename raw_hash_set::difference_type;
+};
+```
+
+---
+
+# Типы. Traits, policies, рубрика факап на миллион
+
+* 2 days of debugging
+
+```cpp
+flat_hash_set<int> x;
+x.insert(42);
+(*x.find(42))++;
+assert(x.find(43) == x.end()); // Sad :(
+```
+
+---
+
+# Типы. Traits, policies, рубрика факап на миллион
+
+```cpp
+template<typename Key, /*...*/>
+class flat_hash_set : public raw_hash_set<Key, /*value_type=*/Key> {}
+template<typename Key, typename Value, /*...*/>
+class flat_hash_map : public raw_hash_set<Key, /*value_type=*/std::pair<const Key, Value>> {}
+class raw_hash_set::iterator {
+  using iterator_category = std::forward_iterator_tag;
+  using value_type = typename raw_hash_set::value_type;
+  using reference = std::conditional_t<PolicyTraits::constant_iterators::value,
+                                  const value_type&, value_type&>;
+  using pointer = std::remove_reference_t<reference>*;
+  using difference_type = typename raw_hash_set::difference_type;
+};
+```
+
+---
+
+
 # Типы. Concepts
 
 * Огромные ошибки, сложности шаблонов и тд.
