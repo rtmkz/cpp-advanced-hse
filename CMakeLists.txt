@@ -16,12 +16,14 @@ include_directories(util)
 
 # 0
 add_subdirectory(tasks/multiplication)
+
+# 1
 add_subdirectory(tasks/harakiri)
 add_subdirectory(tasks/deque)
 add_subdirectory(tasks/dedup)
 add_subdirectory(tasks/cow-vector)
 
-# 1
+# 2
 add_subdirectory(tasks/compressed_pair)
 
 # 3
@@ -37,3 +39,6 @@ add_subdirectory(tasks/pipes)
 
 # bonus
 add_subdirectory(tasks/brainfuck)
+
+# ctf
+add_subdirectory(tasks/rule-of-5)
