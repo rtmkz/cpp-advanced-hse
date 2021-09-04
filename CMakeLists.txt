@@ -38,7 +38,7 @@ add_subdirectory(tasks/reflection)
 add_subdirectory(tasks/pipes)
 
 # bonus
-add_subdirectory(tasks/brainfuck)
+# add_subdirectory(tasks/brainfuck)
 
 # ctf
 add_subdirectory(tasks/rule-of-5)
