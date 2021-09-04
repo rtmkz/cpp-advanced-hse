@@ -4,6 +4,12 @@
   tasks:
     - task: multiplication
       score: 100
+- group:    00-setup-bonus
+  start:    17-07-2021 18:00
+  deadline: 21-09-2022 18:00
+  tasks:
+    - task: gcd
+      score: 100
 - group:    01-lifetime
   start:    17-07-2021 18:00
   deadline: 21-09-2022 18:00
