@@ -2,8 +2,8 @@
 
 Это задача типа [crashme](https://gitlab.com/danlark/cpp-advanced-hse/-/blob/main/docs/crashme.md).
 
-Исходный код находится в файле `main.cpp`. Исполняемый файл получен командой
+Исходный код находится в файле `main.cpp`. Исполняемый запускается на Ubuntu 20.04 и получен командой
 
 ```
-clang++11 main.cpp -o /tmp/a.out -std=c++11
+clang++-11 main.cpp -o /tmp/a.out -std=c++11
 ```
