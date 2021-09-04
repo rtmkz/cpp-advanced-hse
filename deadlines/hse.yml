@@ -1,6 +1,6 @@
 - group:    01-move
-  start:    09-04-2021 13:00
-  deadline: 22-04-2021 19:00
+  start:    04-09-2021 13:00
+  deadline: 17-09-2021 19:00
   tasks:
     - task: dedup
       score: 100
