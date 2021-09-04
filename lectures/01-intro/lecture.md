@@ -115,7 +115,7 @@ int SetValue() {
 }
 
 int& SetGlobal() {
-  static const int j;
+  static int j;
   return j;
 }
 
@@ -582,6 +582,16 @@ void bar(std::vector<T>&&); // but not here
 
 # Шаблоны и rvalue
 
+```cpp
+template<typename T>
+void foo(T&&); // forwarding reference here
+
+// Beacause we want to write:
+foo(42);
+int x = 42;
+foo(x); // Not always foo(std::move(x));
+```
+
 ```
 T&  + &   -> T&  // Lvalues are persistent
 T&  + &&  -> T&  // Lvalues are persistent
@@ -697,7 +707,7 @@ fn test() {
 
 ---
 
-# vs Go/Java
+# vs Go/Java/Python
 
 * Все присваивания не мувают объекты
 * Перед каждым объектом есть reference counter
