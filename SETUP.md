@@ -64,11 +64,11 @@ OSX тоже должен работать.
    git remote add student ADDRESS
    ```
 
-    `ADDRESS` нужно скопировать со страницы репозитория, доступный через. Синяя кнопка Clone -> Clone with SSH.
-    Адрес будет вида
-    ```
-    git@gitlab.com:cpp-advanced-hse-2021/group-Ivan-Ivanov-SuperVanechka1337.git
-    ```
+   `ADDRESS` нужно скопировать со страницы репозитория (My Repository в интерфейсе https://cpp-hse.org/). Синяя кнопка Clone -> Clone with SSH.
+   Адрес будет вида
+   ```
+   git@gitlab.com:cpp-advanced-hse-2021/group-Ivan-Ivanov-SuperVanechka1337.git
+   ```
 
 ## Сдайте первую задачу
  - Перейдите на cpp-hse.org и выберите задачу из группы [Setup](https://cpp-hse.org/#Setup). Решите ее.
