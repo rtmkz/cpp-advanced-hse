@@ -41,4 +41,5 @@ add_subdirectory(tasks/pipes)
 # add_subdirectory(tasks/brainfuck)
 
 # ctf
+add_subdirectory(tasks/gcd)
 add_subdirectory(tasks/rule-of-5)
