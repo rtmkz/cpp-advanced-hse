@@ -1,3 +1,17 @@
+- group:    01-move
+  start:    09-04-2021 13:00
+  deadline: 22-04-2021 19:00
+  tasks:
+    - task: dedup
+      score: 100
+    - task: harakiri
+      score: 100
+    - task: rule-of-5
+      score: 100
+    - task: cow-vector
+      score: 150
+    - task: deque
+      score: 250
 - group:    00-setup
   start:    17-07-2021 18:00
   deadline: 21-09-2022 18:00
