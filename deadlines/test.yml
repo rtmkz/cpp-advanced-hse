@@ -40,3 +40,5 @@
   tasks:
     - task:  smart-ptrs/unique_basic
       score: 0
+    - task:  smart-ptrs/shared_basic
+      score: 0
