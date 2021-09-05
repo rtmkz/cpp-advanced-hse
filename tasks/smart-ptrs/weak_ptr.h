@@ -7,7 +7,7 @@ template <typename T>
 class WeakPtr {
 public:
     ////////////////////////////////////////////////////////////////////////////////////////////////
-    // Constructors, `operator=`-s, destructor
+    // Constructors
 
     WeakPtr();
 
@@ -18,8 +18,14 @@ public:
     // #2 from https://en.cppreference.com/w/cpp/memory/weak_ptr/weak_ptr
     WeakPtr(const SharedPtr<T>& other);
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    // `operator=`-s
+
     WeakPtr& operator=(const WeakPtr& other);
     WeakPtr& operator=(WeakPtr&& other);
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    // Destructor
 
     ~WeakPtr();
 
