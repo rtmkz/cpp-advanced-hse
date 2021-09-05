@@ -9,7 +9,7 @@ template <typename T>
 class SharedPtr {
 public:
     ////////////////////////////////////////////////////////////////////////////////////////////////
-    // Constructors, `operator=`-s, destructor
+    // Constructors
 
     SharedPtr();
     SharedPtr(std::nullptr_t);
@@ -26,8 +26,14 @@ public:
     // #11 from https://en.cppreference.com/w/cpp/memory/shared_ptr/shared_ptr
     explicit SharedPtr(const WeakPtr<T>& other);
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    // `operator=`-s
+
     SharedPtr& operator=(const SharedPtr& other);
     SharedPtr& operator=(SharedPtr&& other);
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    // Destructor
 
     ~SharedPtr();
 
@@ -51,3 +57,14 @@ public:
 // Allocate memory only once
 template <typename T, typename... Args>
 SharedPtr<T> MakeShared(Args&&... args);
+
+// Look for examples in tests
+template <typename T>
+class EnableSharedFromThis {
+public:
+    SharedPtr<T> SharedFromThis();
+    SharedPtr<const T> SharedFromThis() const;
+
+    WeakPtr<T> WeakFromThis();
+    WeakPtr<const T> WeakFromThis() const;
+};
