@@ -90,8 +90,11 @@ TEST_CASE("Modifiers") {
     SECTION("Reset self pass") {
         struct A {
             UniquePtr<A> ptr_;
-            A() : ptr_(this) {}
-            void Reset() { ptr_.Reset(); }
+            A() : ptr_(this) {
+            }
+            void Reset() {
+                ptr_.Reset();
+            }
         };
         (new A)->Reset();
     }
