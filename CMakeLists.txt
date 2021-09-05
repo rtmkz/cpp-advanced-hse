@@ -37,7 +37,11 @@ add_subdirectory(tasks/transform_tuple)
 add_subdirectory(tasks/reflection)
 add_subdirectory(tasks/pipes)
 
-# bonus
+# Homeworks
+# 1
+add_subdirectory(tasks/smart-ptrs)
+
+# Bonuses
 # add_subdirectory(tasks/brainfuck)
 
 # ctf

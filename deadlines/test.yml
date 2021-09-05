@@ -4,12 +4,14 @@
   tasks:
     - task: multiplication
       score: 100
+
 - group:    00-setup-bonus
   start:    17-07-2021 18:00
   deadline: 21-09-2022 18:00
   tasks:
     - task: gcd
       score: 100
+
 - group:    01-lifetime
   start:    17-07-2021 18:00
   deadline: 21-09-2022 18:00
@@ -24,9 +26,17 @@
       score: 400
     - task: rule-of-5
       score: 100
+
 - group:    02-memory
   start:    17-07-2021 18:00
   deadline: 21-09-2022 18:00
   tasks:
     - task: compressed_pair
       score: 100
+
+- group:    03-smart-ptrs
+  start:    17-07-2021 18:00
+  deadline: 21-09-2022 18:00
+  tasks:
+    - task:  smart-ptrs/unique_basic
+      score: 0
