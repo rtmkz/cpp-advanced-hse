@@ -13,6 +13,7 @@ void* operator new(size_t size) {
 
 void operator delete(void* p) noexcept {
   printf("delete %p\n", p);
+  ::free(p);
 }
 
 struct Huge {
