@@ -1,18 +1,22 @@
 #include <iostream>
 #include <vector>
 
-struct MoveOnly {
-  MoveOnly() = default;
-  MoveOnly(const MoveOnly&) = delete;
-  MoveOnly& operator=(const MoveOnly&) = delete;
-//  MoveOnly(MoveOnly&&) = default;  // default actually implies noexcept
-//  MoveOnly& operator=(MoveOnly&&) = default;
+struct MoveAndCopy {
+  MoveAndCopy() = default;
+  MoveAndCopy(const MoveAndCopy&) {
+    puts("copying");
+  }
+  MoveAndCopy& operator=(const MoveAndCopy&) = delete;
+  MoveAndCopy(MoveAndCopy&&) {
+    puts("moving");
+  }
+  MoveAndCopy& operator=(MoveAndCopy&&) = default;
 };
 
 int main() {
-  std::vector<MoveOnly> kek(2);
-  kek.emplace_back();  // doesn't compile without move-constructor being marked noexcept!
-  // static_assert(std::is_nothrow_move_constructible_v<MoveOnly>);
+  std::vector<MoveAndCopy> kek(2);
+  kek.emplace_back();  // calls copy-constructor unless move-constructor is marked noexcept!
+  //static_assert(std::is_nothrow_move_constructible_v<MoveAndCopy>);
 
   // Why?
   // If the move-constructor throws, reallocation would violate strong exceptions safety guarantees:
@@ -20,4 +24,9 @@ int main() {
   // state, and it is not possible to move them back, since that could also throw.
   // If we are copying, we can simply destroy the newly created copies, as the originals were
   // kept intact.
+
+  // As a result, the order of precedence on reallocation (and other similar operations) is:
+  //   1. noexcept move-constructor
+  //   2. copy-constructor
+  //   3. move-constructor, but without any guarantees
 }
