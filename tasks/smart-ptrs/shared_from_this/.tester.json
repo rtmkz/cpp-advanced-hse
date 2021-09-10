@@ -4,5 +4,10 @@
     "../weak_ptr.h"
   ],
   "tests": "test_shared_from_this",
-  "solutions": "private"
+  "solutions": "private",
+  "forbidden_regexp": [
+    "std\\s*::\\s*shared_ptr",
+    "std\\s*::\\s*weak_ptr",
+    "#include\\s*<memory>"
+  ]
 }
