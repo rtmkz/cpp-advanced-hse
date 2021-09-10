@@ -25,6 +25,8 @@ add_subdirectory(tasks/cow-vector)
 
 # 2
 add_subdirectory(tasks/compressed_pair)
+add_subdirectory(tasks/lru-cache)
+add_subdirectory(tasks/string-operations)
 
 # 3
 add_subdirectory(tasks/bind_front)

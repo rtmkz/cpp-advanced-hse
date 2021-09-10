@@ -1,0 +1,5 @@
+{
+    "allow_change": ["string_operations.h", "string_operations.cpp"],
+    "tests": "test_string_operations",
+    "solutions": "private"
+}

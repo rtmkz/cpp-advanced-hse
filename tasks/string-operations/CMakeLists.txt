@@ -1,0 +1,1 @@
+add_catch(test_string_operations string_operations.cpp string_operations_test.cpp)
