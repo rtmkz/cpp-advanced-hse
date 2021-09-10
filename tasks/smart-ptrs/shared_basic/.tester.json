@@ -1,0 +1,5 @@
+{
+  "allow_change": "../shared_ptr.h",
+  "tests": "test_shared_basic",
+  "solutions": "private"
+}
