@@ -1,1 +1,1 @@
-add_executable(ctf_gcd main.cpp)
+add_ctf(NAME gcd SOURCES main.cpp)
