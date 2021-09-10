@@ -1,5 +1,9 @@
 {
   "allow_change": "../shared_ptr.h",
   "tests": "test_shared_basic",
-  "solutions": "private"
+  "solutions": "private",
+  "forbidden_regexp": [
+    "std\\s*::\\s*shared_ptr",
+    "#include\\s*<memory>"
+  ]
 }
