@@ -96,9 +96,10 @@ function(add_catch TARGET)
 endfunction()
 
 
-include(CMakeParseArguments)
 add_custom_target(build-ctf)
+add_dependencies(test-all build-ctf) # Build ctf tasks in CI
 
+include(CMakeParseArguments)
 function(add_ctf)
   cmake_parse_arguments(PARSED_ARGS "" "NAME" "SOURCES;OPTIONS" ${ARGN})
   set(TARGET ctf_${PARSED_ARGS_NAME})
