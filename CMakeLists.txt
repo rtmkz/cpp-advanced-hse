@@ -29,6 +29,7 @@ add_subdirectory(tasks/lru-cache)
 add_subdirectory(tasks/string-operations)
 add_subdirectory(tasks/intrusive-list)
 add_subdirectory(tasks/list)
+add_subdirectory(tasks/string-view)
 
 # 3
 add_subdirectory(tasks/bind_front)
