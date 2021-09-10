@@ -1,1 +1,1 @@
-add_executable(ctf_reallol main.cpp)
+add_ctf(NAME reallol SOURCES main.cpp OPTIONS -fsanitize=address)

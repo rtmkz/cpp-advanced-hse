@@ -1,1 +1,1 @@
-add_executable(ctf_rule_of_5 main.cpp)
+add_ctf(NAME rule_of_5 SOURCES main.cpp)

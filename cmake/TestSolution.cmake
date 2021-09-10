@@ -94,3 +94,16 @@ function(add_catch TARGET)
     add_dependencies(test-all run_${TARGET})
   endif()
 endfunction()
+
+
+include(CMakeParseArguments)
+add_custom_target(build-ctf)
+
+function(add_ctf)
+  cmake_parse_arguments(PARSED_ARGS "" "NAME" "SOURCES;OPTIONS" ${ARGN})
+  set(TARGET ctf_${PARSED_ARGS_NAME})
+  add_executable(${TARGET} ${PARSED_ARGS_SOURCES})
+  target_compile_options(${TARGET} PRIVATE ${PARSED_ARGS_OPTIONS})
+  target_link_options(${TARGET} PRIVATE ${PARSED_ARGS_OPTIONS})
+  add_dependencies(build-ctf ${TARGET})
+endfunction()
