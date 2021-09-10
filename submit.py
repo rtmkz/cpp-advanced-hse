@@ -24,8 +24,17 @@ def git_output(*args):
     return subprocess.check_output(["git"] + list(args)).strip().decode('utf-8')
 
 def set_up_shadow_repo(task_name, user_name, user_email):
+    # to fix access denied error occuring on Windows
+    def onerror(func, path, exc_info):
+        import stat
+        if not os.access(path, os.W_OK):
+            os.chmod(path, stat.S_IWUSR)
+            func(path)
+        else:
+            raise
+
     try:
-        shutil.rmtree(SHADOW_REPO_DIR)
+        shutil.rmtree(SHADOW_REPO_DIR, onerror=onerror)
     except FileNotFoundError:
         pass
     os.makedirs(SHADOW_REPO_DIR)
