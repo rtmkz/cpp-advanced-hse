@@ -1,4 +1,4 @@
-#include "../shared_ptr.h"
+#include "../shared.h"
 
 #include <catch.hpp>
 

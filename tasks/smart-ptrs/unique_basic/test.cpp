@@ -1,4 +1,4 @@
-#include "../unique_ptr.h"
+#include "../unique.h"
 
 #include <catch.hpp>
 
