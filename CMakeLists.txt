@@ -52,3 +52,4 @@ add_subdirectory(tasks/pipes)
 # ctf
 add_subdirectory(tasks/gcd)
 add_subdirectory(tasks/rule-of-5)
+add_subdirectory(tasks/reallol)
