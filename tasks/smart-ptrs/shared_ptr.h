@@ -51,20 +51,23 @@ public:
     T& operator*() const;
     T* operator->() const;
     size_t UseCount() const;
-    operator bool() const;
+    explicit operator bool() const;
 };
+
+template <typename T, typename U>
+inline bool operator==(const SharedPtr<T>& left, const SharedPtr<U>& right);
 
 // Allocate memory only once
 template <typename T, typename... Args>
 SharedPtr<T> MakeShared(Args&&... args);
 
-// Look for examples in tests
+// Look for usage examples in tests
 template <typename T>
 class EnableSharedFromThis {
 public:
     SharedPtr<T> SharedFromThis();
     SharedPtr<const T> SharedFromThis() const;
 
-    WeakPtr<T> WeakFromThis();
-    WeakPtr<const T> WeakFromThis() const;
+    WeakPtr<T> WeakFromThis() noexcept;
+    WeakPtr<const T> WeakFromThis() const noexcept;
 };
