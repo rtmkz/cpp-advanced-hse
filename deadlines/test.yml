@@ -33,6 +33,8 @@
   tasks:
     - task: compressed_pair
       score: 100
+    - task: reallol
+      score: 100
 
 - group:    03-smart-ptrs
   start:    17-07-2021 18:00
