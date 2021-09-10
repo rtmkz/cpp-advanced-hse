@@ -9,11 +9,17 @@
 struct MyInt {
     int v;
     static int count_alive;
-    MyInt(int v_) : v(v_) { count_alive++; };
-    MyInt() { count_alive++; }
-    ~MyInt() { count_alive--; }
+    MyInt(int v_) : v(v_) {
+        count_alive++;
+    };
+    MyInt() {
+        count_alive++;
+    }
+    ~MyInt() {
+        count_alive--;
+    }
     bool operator==(const int u) const {
-        return v==u;
+        return v == u;
     }
 };
 
@@ -83,8 +89,9 @@ TEST_CASE("Basics") {
 }
 
 TEST_CASE("Modifiers") {
-    SECTION("release noexcept"){
-        U u; ((void)u);
+    SECTION("release noexcept") {
+        U u;
+        ((void)u);
         REQUIRE_NOTHROW(u.Release());
     }
     SECTION("release") {
@@ -98,8 +105,9 @@ TEST_CASE("Modifiers") {
         delete a;
         REQUIRE(MyInt::count_alive == 0);
     }
-    SECTION("swap noexcept"){
-        U u; ((void)u);
+    SECTION("swap noexcept") {
+        U u;
+        ((void)u);
         REQUIRE_NOTHROW(u.Swap(u));
     }
     SECTION("swap") {
@@ -118,8 +126,9 @@ TEST_CASE("Modifiers") {
         REQUIRE(*s2.Get() == 1);
         REQUIRE(MyInt::count_alive == 2);
     }
-    SECTION("reset noexcept"){
-        U u; ((void)u);
+    SECTION("reset noexcept") {
+        U u;
+        ((void)u);
         REQUIRE_NOTHROW(u.Reset());
     }
     SECTION("reset") {
@@ -145,7 +154,8 @@ TEST_CASE("Modifiers") {
         REQUIRE(p.Get() == new_value);
     }
     SECTION("reset noexcept nullptr") {
-        U u; ((void)u);
+        U u;
+        ((void)u);
         REQUIRE_NOTHROW(u.Reset(nullptr));
     }
     SECTION("reset nullptr") {
@@ -168,8 +178,11 @@ TEST_CASE("Modifiers") {
     SECTION("reset self pass") {
         struct A {
             UniquePtr<A> ptr_;
-            A() : ptr_(this) {}
-            void reset() { ptr_.Reset(); }
+            A() : ptr_(this) {
+            }
+            void reset() {
+                ptr_.Reset();
+            }
         };
         (new A)->reset();
     }
@@ -208,7 +221,8 @@ TEST_CASE("Observers") {
         struct A {
             int i_;
 
-            A() : i_(7) {}
+            A() : i_(7) {
+            }
         };
 
         UniquePtr<A> p(new A);
@@ -240,23 +254,32 @@ TEST_CASE("Observers") {
     }
 }
 
+template <typename T>
+struct DefaultDelete {
+    void operator()(T* ptr) const noexcept {
+        static_assert(sizeof(T) > 0, "default_delete can not delete incomplete type");
+        static_assert(!std::is_void<T>::value, "default_delete can not delete incomplete type");
+        delete ptr;
+    }
+};
+
 TEST_CASE("test_pointer_deleter_ctor") {
     SECTION("1") {
         UniquePtr<MyInt> p(0);
         REQUIRE(p.Get() == 0);
     }
     SECTION("2") {
-        UniquePtr<MyInt, Deleter<MyInt> > p(0);
+        UniquePtr<MyInt, Deleter<MyInt>> p(0);
         REQUIRE(p.Get() == 0);
         REQUIRE(p.GetDeleter().state() == 0);
     }
     SECTION("3") {
-        std::default_delete<MyInt> d;
-        UniquePtr<MyInt, std::default_delete<MyInt>> p(new MyInt{0}, d);
+        DefaultDelete<MyInt> d;
+        UniquePtr p(new MyInt{0}, d);
         assert(p.Get() == 0);
     }
     SECTION("4") {
-        UniquePtr<MyInt, Deleter<MyInt> > p(0, Deleter<MyInt>(5));
+        UniquePtr<MyInt, Deleter<MyInt>> p(0, Deleter<MyInt>(5));
         assert(p.Get() == 0);
         assert(p.GetDeleter().state() == 5);
     }
