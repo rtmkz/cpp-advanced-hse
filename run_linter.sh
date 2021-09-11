@@ -16,14 +16,14 @@ if [ ! -f compile_commands.json ]; then
     exit 1
 fi
 
-if [ "$#" -eq 2 ]; then
+if [ "$#" -ge 2 ]; then
     TASK_PATH=../../tasks/$1
     CLANG_PATH=../../run-clang-format.py
     CLANG_TIDY="hse-clang-tidy --extra-arg=-I/usr/lib/clang/11/include/"
 fi
 
 if [ "$#" -eq 3 ]; then
-    $CLANG_TIDY --config="$3" $TASK_PATH/*.cpp
+    $CLANG_TIDY --config=$3 $TASK_PATH/*.cpp
 fi
 
 $CLANG_PATH -r $TASK_PATH
