@@ -1,5 +1,8 @@
 {
     "allow_change": "string_view.h",
     "tests": "test_string_view",
-    "solutions": "private"
+    "solutions": "private",
+    "forbidden_containers" : [
+        "string_view"
+    ]
 }
