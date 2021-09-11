@@ -12,4 +12,6 @@
 
 Как всегда, во всех неочевидных случаях лучше смотреть на тесты.
 
+В этой задаче **запрещено** пользоваться аттрибутом [`[[no_unique_address]]`](https://en.cppreference.com/w/cpp/language/attributes/no_unique_address), добавленным в C++20.
+
 
