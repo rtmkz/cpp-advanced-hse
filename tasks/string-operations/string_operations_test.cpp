@@ -11,30 +11,56 @@
 #include <type_traits>
 #include <unistd.h>
 
+#if defined(__has_feature)
+#if __has_feature(address_sanitizer)
+#define ASAN_ENABLED
+#include <sanitizer/allocator_interface.h>
+#endif
+#endif
+
 using namespace std::string_view_literals;
 using namespace std::string_literals;
 
 std::atomic<size_t> allocations_count{0};
 
+void MallocHook(const volatile void*, size_t) {
+    allocations_count.fetch_add(1);
+}
+
+void FreeHook(const volatile void*) {
+}
+
+#ifdef ASAN_ENABLED
+[[maybe_unused]] const auto init = [] {
+    int res = __sanitizer_install_malloc_and_free_hooks(MallocHook, FreeHook);
+    if (res == 0) {
+        throw std::runtime_error{"Failed to install ASan allocator hooks"}; // just terminate
+    }
+    return 0;
+}();
+#else
 void* operator new(size_t size) {
     void* p = malloc(size);
-    ++allocations_count;
+    MallocHook(p, size);
     return p;
 }
 
 void* operator new(size_t size, const std::nothrow_t&) noexcept {
     void* p = malloc(size);
-    ++allocations_count;
+    MallocHook(p, size);
     return p;
 }
 
 void operator delete(void* p) noexcept {
+    FreeHook(p);
     free(p);
 }
 
 void operator delete(void* p, size_t) noexcept {
+    FreeHook(p);
     free(p);
 }
+#endif
 
 #define EXPECT_ZERO_ALLOCATIONS(X)                  \
     do {                                            \
@@ -213,7 +239,7 @@ TEST_CASE("FileSystemsSplits") {
     ArgsCheckerOr<const std::string&, std::string_view, const std::string_view>(Basename);
     ReturnTypeCheckerOr<std::string, std::string_view>(Dirname);
     ArgsCheckerOr<const std::string&, std::string_view, const std::string_view>(Dirname);
-    EXPECT_ONE_ALLOCATION(REQUIRE(
+    EXPECT_NO_MORE_THAN_ONE_ALLOCATION(REQUIRE(
         "/a/" == CollapseSlashes("///////////////////////////////////////////////////////a//"
                                  "/////////////////////////////////////")));
     EXPECT_ONE_ALLOCATION(REQUIRE(
