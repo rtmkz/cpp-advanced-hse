@@ -31,7 +31,7 @@ void FreeHook(const volatile void*) {
 }
 
 #ifdef ASAN_ENABLED
-[[maybe_unused]] const auto init = [] {
+[[maybe_unused]] const auto kInit = [] {
     int res = __sanitizer_install_malloc_and_free_hooks(MallocHook, FreeHook);
     if (res == 0) {
         throw std::runtime_error{"Failed to install ASan allocator hooks"};  // just terminate
@@ -88,44 +88,44 @@ struct FunctionTraits;
 
 template <typename R, typename... Args>
 struct FunctionTraits<R(Args...)> {
-    static constexpr bool is_noexcept = false;
-    static constexpr size_t nargs = sizeof...(Args);
+    static constexpr bool kIsNoexcept = false;
+    static constexpr size_t kNargs = sizeof...(Args);
 
-    typedef R result_type;
+    typedef R ResultType;
 
     template <size_t i>
-    struct arg {
-        typedef typename std::tuple_element<i, std::tuple<Args...>>::type type;
+    struct Arg {
+        typedef typename std::tuple_element<i, std::tuple<Args...>>::type Type;
     };
 };
 
 // What if a student is pedantic and adds noexcept?
 template <typename R, typename... Args>
 struct FunctionTraits<R(Args...) noexcept> {
-    static constexpr bool is_noexcept = true;
-    static constexpr size_t nargs = sizeof...(Args);
+    static constexpr bool kIsNoexcept = true;
+    static constexpr size_t kNargs = sizeof...(Args);
 
-    typedef R result_type;
+    typedef R ResultType;
 
     template <size_t i>
-    struct arg {
-        typedef typename std::tuple_element<i, std::tuple<Args...>>::type type;
+    struct Arg {
+        typedef typename std::tuple_element<i, std::tuple<Args...>>::type Type;
     };
 };
 
 template <typename... Types, typename Func>
 void ReturnTypeCheckerOr(Func*) {
-    static_assert(!FunctionTraits<Func>::is_noexcept ||
-                      !std::is_same_v<typename FunctionTraits<Func>::result_type, std::string>,
+    static_assert(!FunctionTraits<Func>::kIsNoexcept ||
+                      !std::is_same_v<typename FunctionTraits<Func>::ResultType, std::string>,
                   "Noexcept function cannot return std::string");
-    static_assert((std::is_same_v<typename FunctionTraits<Func>::result_type, Types> || ...),
+    static_assert((std::is_same_v<typename FunctionTraits<Func>::ResultType, Types> || ...),
                   "Return type is incorrect!");
 }
 
 template <typename Func, size_t I, typename... Types>
 void ArgCheckerOr() {
     static_assert(
-        (std::is_same_v<typename FunctionTraits<Func>::template arg<I>::type, Types> || ...),
+        (std::is_same_v<typename FunctionTraits<Func>::template Arg<I>::Type, Types> || ...),
         "One of the argument is not correct!");
 }
 
@@ -137,7 +137,7 @@ void AllArgCheckerOr(std::index_sequence<I...>) {
 // Checks whether all arguments are at least one of Types.
 template <typename... Types, typename Func>
 void ArgsCheckerOr(Func*) {
-    AllArgCheckerOr<Func, Types...>(std::make_index_sequence<FunctionTraits<Func>::nargs>{});
+    AllArgCheckerOr<Func, Types...>(std::make_index_sequence<FunctionTraits<Func>::kNargs>{});
 }
 
 static constexpr const char kVeryLongString[] =
@@ -248,7 +248,7 @@ TEST_CASE("FileSystemsSplits") {
             "/a/b/c/d/e/f/g/h/aa/bb//cc/dd/ee/ff//gg////////////////////////////////////////a//"
             "/////////////////////////////////////heh")));
     EXPECT_ZERO_ALLOCATIONS(REQUIRE("/" == CollapseSlashes("//////")));
-    EXPECT_ZERO_ALLOCATIONS(REQUIRE("" == CollapseSlashes("")));
+    EXPECT_ZERO_ALLOCATIONS(REQUIRE(CollapseSlashes("").empty()));
     EXPECT_NO_MORE_THAN_ONE_ALLOCATION(
         REQUIRE(kVeryLongString == CollapseSlashes(kVeryLongString)));
     ReturnTypeCheckerOr<std::string, std::string_view>(CollapseSlashes);
@@ -268,7 +268,7 @@ TEST_CASE("Join") {
         ans += "heheheh"s + v.back().data();
         EXPECT_NO_MORE_THAN_ONE_ALLOCATION(REQUIRE(ans == StrJoin(v, "heheheh")));
     }
-    EXPECT_NO_MORE_THAN_ONE_ALLOCATION(REQUIRE("" == StrJoin({}, "danlark")));
+    EXPECT_NO_MORE_THAN_ONE_ALLOCATION(REQUIRE(StrJoin({}, "danlark").empty()));
     ReturnTypeCheckerOr<std::string>(StrJoin);
     ArgsCheckerOr<const std::vector<std::string>&, const std::vector<std::string_view>&,
                   std::string, std::string_view, const std::string&>(StrJoin);
@@ -279,7 +279,7 @@ TEST_CASE("ReadN") {
     almost_urandom.remove_suffix(5);
     for (int i = 0; i < 100; ++i) {
         auto once = ReadN(almost_urandom.data(), 100);
-        EXPECT_ZERO_ALLOCATIONS(REQUIRE(once != ""));
+        EXPECT_ZERO_ALLOCATIONS(REQUIRE(!once.empty()));
     }
     std::string urandom = std::string(almost_urandom);
     for (int i = 0; i < 100; ++i) {
@@ -356,7 +356,7 @@ TEST_CASE("StrCat") {
         REQUIRE("18446744073709551615042949672952147483647" ==
                 StrCat(std::numeric_limits<unsigned long long>::max(), 0,
                        std::numeric_limits<unsigned int>::max(), std::numeric_limits<int>::max())));
-    EXPECT_NO_MORE_THAN_ONE_ALLOCATION(REQUIRE("" == StrCat()));
+    EXPECT_NO_MORE_THAN_ONE_ALLOCATION(REQUIRE(StrCat().empty()));
     ReturnTypeCheckerOr<std::string, std::string_view>(StrCat<int>);
     ReturnTypeCheckerOr<std::string>(StrCat<>);
 }
