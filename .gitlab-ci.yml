@@ -30,13 +30,6 @@ check-solutions-clang-11-debug:
     CXX: clang++-11
     BUILD_TYPE: Debug
 
-check-solutions-gcc-10-asan:
-  extends: .check
-  variables:
-    CC: gcc-10
-    CXX: g++-10
-    BUILD_TYPE: ASAN
-
 check-solutions-clang-11-asan:
   extends: .check
   variables:
