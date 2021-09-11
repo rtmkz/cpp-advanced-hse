@@ -164,24 +164,24 @@ TEST_CASE("EndsStarts") {
 
 TEST_CASE("Strip") {
     EXPECT_ZERO_ALLOCATIONS(REQUIRE("st" == StripPrefix("test", "te")));
-    EXPECT_ZERO_ALLOCATIONS(REQUIRE("" == StripPrefix("", kVeryLongString)));
-    EXPECT_ZERO_ALLOCATIONS(REQUIRE("" == StripPrefix(kVeryLongString, kVeryLongString)));
+    EXPECT_ZERO_ALLOCATIONS(REQUIRE(StripPrefix("", kVeryLongString).empty()));
+    EXPECT_ZERO_ALLOCATIONS(REQUIRE(StripPrefix(kVeryLongString, kVeryLongString).empty()));
     EXPECT_ZERO_ALLOCATIONS(
         REQUIRE(kVeryLongString == StripPrefix(kVeryLongString, "What is luf")));
-    EXPECT_ZERO_ALLOCATIONS(REQUIRE("" == StripPrefix("", "")));
+    EXPECT_ZERO_ALLOCATIONS(REQUIRE(StripPrefix("", "").empty()));
     ReturnTypeCheckerOr<std::string, std::string_view>(StripPrefix);
     ArgsCheckerOr<const std::string&, std::string_view, const std::string_view>(StripPrefix);
 
     EXPECT_ZERO_ALLOCATIONS(REQUIRE("te" == StripSuffix("test", "st")));
-    EXPECT_ZERO_ALLOCATIONS(REQUIRE("" == StripSuffix("", kVeryLongString)));
-    EXPECT_ZERO_ALLOCATIONS(REQUIRE("" == StripSuffix(kVeryLongString, kVeryLongString)));
+    EXPECT_ZERO_ALLOCATIONS(REQUIRE(StripSuffix("", kVeryLongString).empty()));
+    EXPECT_ZERO_ALLOCATIONS(REQUIRE(StripSuffix(kVeryLongString, kVeryLongString).empty()));
     EXPECT_ZERO_ALLOCATIONS(REQUIRE(kVeryLongString == StripSuffix(kVeryLongString, "Noo more")));
-    EXPECT_ZERO_ALLOCATIONS(REQUIRE("" == StripSuffix("", "")));
+    EXPECT_ZERO_ALLOCATIONS(REQUIRE(StripSuffix("", "").empty()));
     ReturnTypeCheckerOr<std::string, std::string_view>(StripSuffix);
     ArgsCheckerOr<const std::string&, std::string_view, const std::string_view>(StripSuffix);
 
     EXPECT_ZERO_ALLOCATIONS(
-        REQUIRE("" == StripAsciiWhitespace("                                   ")));
+        REQUIRE(StripAsciiWhitespace("                                   ").empty()));
     EXPECT_ZERO_ALLOCATIONS(
         REQUIRE("some very long words, trust me, you will doom me after this" ==
                 StripAsciiWhitespace("  \n\r\n\t\f   some very long words, trust me, you will doom "
