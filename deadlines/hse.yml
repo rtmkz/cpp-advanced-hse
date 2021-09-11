@@ -28,3 +28,20 @@
       score: 150
     - task: deque
       score: 250
+
+- group:    02-memory
+  start:    11-09-2021 13:00
+  deadline: 24-09-2021 19:00
+  tasks:
+    - task: string-view
+      score: 100
+    - task: lru-cache
+      score: 100
+    - task: intrusive-list
+      score: 100
+    - task: reallol
+      score: 100
+    - task: string-operations
+      score: 150
+    - task: compressed_pair
+      score: 150
