@@ -23,7 +23,7 @@ if [ "$#" -eq 2 ]; then
 fi
 
 if [ "$#" -eq 3 ]; then
-    $CLANG_TIDY --config=$3 $TASK_PATH/*.cpp
+    $CLANG_TIDY --config="$3" $TASK_PATH/*.cpp
 fi
 
 $CLANG_PATH -r $TASK_PATH
