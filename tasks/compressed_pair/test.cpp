@@ -119,6 +119,12 @@ struct NonEmptyDescendant : Empty {
     int field;
 };
 
+union EmptyUnion {};
+
+struct Empty4 {};
+struct Empty5 {};
+struct Empty6 {};
+
 TEST_CASE("Sizes") {
     CheckSize<int, Empty>();
     CheckSize<Empty, long double>();
@@ -130,6 +136,11 @@ TEST_CASE("Sizes") {
     CheckSize<Empty, Empty2>();
     CheckSize<Empty2, Empty3>();
     CheckSize<Empty, NonEmptyDescendant>();
+    CheckSize<EmptyUnion, int>();
+    static_assert(std::is_empty_v<CompressedPair<Empty4, Empty5>>);
+    static_assert(
+        sizeof(CompressedPair<CompressedPair<Empty4, Empty5>, CompressedPair<Empty6, char>>) ==
+        sizeof(char));
 }
 
 TEST_CASE("ConstMethods") {
