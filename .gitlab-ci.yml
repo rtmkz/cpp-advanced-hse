@@ -13,20 +13,36 @@ stages:
     - cmake --version
     - mkdir -p build/solutions
     - cd build/solutions
-    - cmake ../../ -G Ninja -DTEST_SOLUTION=ON -DENABLE_PRIVATE_TESTS=ON
+    - cmake ../../ -G Ninja -DTEST_SOLUTION=ON -DENABLE_PRIVATE_TESTS=ON -DCMAKE_BUILD_TYPE=$BUILD_TYPE
     - ninja test-all
 
-check-solutions-gcc-10:
+check-solutions-gcc-10-debug:
   extends: .check
   variables:
     CC: gcc-10
     CXX: g++-10
+    BUILD_TYPE: Debug
 
-check-solutions-clang-11:
+check-solutions-clang-11-debug:
   extends: .check
   variables:
     CC: clang-11
     CXX: clang++-11
+    BUILD_TYPE: Debug
+
+check-solutions-gcc-10-asan:
+  extends: .check
+  variables:
+    CC: gcc-10
+    CXX: g++-10
+    BUILD_TYPE: ASAN
+
+check-solutions-clang-11-asan:
+  extends: .check
+  variables:
+    CC: clang-11
+    CXX: clang++-11
+    BUILD_TYPE: ASAN
 
 deploy:
   only:
