@@ -9,6 +9,7 @@ fi
 
 TASK_PATH=../tasks/$1
 CLANG_PATH=../run-clang-format.py
+CLANG_TIDY=clang-tidy-11
 
 if [ ! -f compile_commands.json ]; then
     echo "Run this script from the build directory"
@@ -18,6 +19,12 @@ fi
 if [ "$#" -eq 2 ]; then
     TASK_PATH=../../tasks/$1
     CLANG_PATH=../../run-clang-format.py
+    CLANG_TIDY="hse-clang-tidy --extra-arg=-I/usr/lib/clang/11/include/"
 fi
 
-$CLANG_PATH -r $TASK_PATH && clang-tidy-11 $TASK_PATH/*.cpp
+if [ "$#" -eq 3 ]; then
+    $CLANG_TIDY --config=$3 $TASK_PATH/*.cpp
+fi
+
+$CLANG_PATH -r $TASK_PATH
+$CLANG_TIDY $TASK_PATH/*.cpp
