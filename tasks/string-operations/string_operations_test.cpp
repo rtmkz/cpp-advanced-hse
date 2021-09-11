@@ -34,7 +34,7 @@ void FreeHook(const volatile void*) {
 [[maybe_unused]] const auto init = [] {
     int res = __sanitizer_install_malloc_and_free_hooks(MallocHook, FreeHook);
     if (res == 0) {
-        throw std::runtime_error{"Failed to install ASan allocator hooks"}; // just terminate
+        throw std::runtime_error{"Failed to install ASan allocator hooks"};  // just terminate
     }
     return 0;
 }();
