@@ -22,7 +22,7 @@ if [ "$#" -ge 2 ]; then
     CLANG_TIDY="hse-clang-tidy --extra-arg=-I/usr/lib/clang/11/include/"
 fi
 
-CPP_PATHS=$(find $TASK_PATH -name "*.cpp" -or -name "*.h" | grep -v "test.cpp")
+CPP_PATHS=$(find $TASK_PATH \( -name "*.cpp" -or -name "*.h" \) ! -path "*test.cpp*")
 
 set -e
 set -u
