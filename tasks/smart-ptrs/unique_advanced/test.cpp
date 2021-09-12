@@ -30,8 +30,7 @@ typedef UniquePtr<MyInt, Deleter<MyInt>> UD;
 
 TEST_CASE("Basics") {
     SECTION("move") {
-        U s1(new MyInt);
-        U s2(new MyInt);
+        UniquePtr<MyInt> s1(new MyInt), s2(new MyInt);
         MyInt* p = s1.Get();
         REQUIRE(MyInt::count_alive == 2);
         s2 = std::move(s1);
@@ -249,8 +248,8 @@ TEST_CASE("Observers") {
         const DeleterCheckConst d;
         UPtr p(nullptr, d);
         const UPtr& cp = p;
-        assert(p.GetDeleter().test() == 6);
-        assert(cp.GetDeleter().test() == 6);
+        REQUIRE(p.GetDeleter().test() == 6);
+        REQUIRE(cp.GetDeleter().test() == 6);
     }
 }
 
@@ -275,12 +274,77 @@ TEST_CASE("test_pointer_deleter_ctor") {
     }
     SECTION("3") {
         DefaultDelete<MyInt> d;
-        UniquePtr p(new MyInt{0}, d);
-        assert(p.Get() == 0);
+        UniquePtr<MyInt, DefaultDelete<MyInt>> p(new MyInt{0}, d);
+        // REQUIRE(p.Get() == 0);
     }
     SECTION("4") {
         UniquePtr<MyInt, Deleter<MyInt>> p(0, Deleter<MyInt>(5));
-        assert(p.Get() == 0);
-        assert(p.GetDeleter().state() == 5);
+        REQUIRE(p.Get() == 0);
+        REQUIRE(p.GetDeleter().state() == 5);
+    }
+}
+
+TEST_CASE("UniquePtr<void, CheckVoidPtrDeleter>") {
+    SECTION("It compiles!") {
+        UniquePtr<void, CheckVoidPtrDeleter> p(malloc(100));
+    }
+}
+
+TEST_CASE("Array specialization") {
+    SECTION("Just exists") {
+        UniquePtr<MyInt[]> u(new MyInt[100]);
+        REQUIRE(MyInt::count_alive == 100);
+        u.Reset();
+        REQUIRE(MyInt::count_alive == 0);
+    }
+
+    SECTION("Able to use custom deleters") {
+        UniquePtr<MyInt[], CheckArrayDeleter<MyInt>> u(new MyInt[100], CheckArrayDeleter<MyInt>{});
+        REQUIRE(MyInt::count_alive == 100);
+        u.Reset();
+        REQUIRE(MyInt::count_alive == 0);
+    }
+
+    SECTION("Operator []") {
+        UniquePtr<int[]> u(new int[]{0, 1, 2, 3, 4});
+        for (int i = 0; i < 5; ++i) {
+            REQUIRE(u[i] == i);
+            u[i] = -i;
+            REQUIRE(u[i] == -i);
+        }
+    }
+}
+
+TEST_CASE("Compressed pair usage") {
+    SECTION("Stateless struct deleter") {
+        static_assert(sizeof(UniquePtr<int>) == 8);
+        static_assert(sizeof(UniquePtr<int, CheckArrayDeleter<int>>) == 8);
+    }
+
+    SECTION("Stateful struct deleter") {
+        static_assert(sizeof(UniquePtr<int, CheckArrayDeleterStateful<int>>) == 16);
+    }
+
+    SECTION("Stateless lambda deleter") {
+        auto lambda_deleter = [](int* ptr) { delete ptr; };
+        static_assert(sizeof(UniquePtr<int, decltype(lambda_deleter)>) == 8);
+    }
+
+    SECTION("Stateful lambda deleter") {
+        int some_useless_counter = 0;
+        auto lambda_deleter = [&some_useless_counter](int* ptr) {
+            delete ptr;
+            ++some_useless_counter;
+        };
+        static_assert(sizeof(UniquePtr<int, decltype(lambda_deleter)>) == 16);
+    }
+
+    SECTION("Function pointer deleter") {
+        static_assert(sizeof(UniquePtr<int, decltype(&DeleteFunction<int>)>) == 16);
+    }
+
+    SECTION("std::function heavy deleter") {
+        std::function<void(int*)> function = [](int* ptr) { delete ptr; };
+        static_assert(sizeof(UniquePtr<int, decltype(function)>) == 64);
     }
 }
