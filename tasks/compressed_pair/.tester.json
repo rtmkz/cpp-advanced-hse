@@ -2,6 +2,9 @@
     "allow_change": "compressed_pair.h",
     "tests": "test_compressed_pair",
     "solutions": "private",
+    "forbidden_containers" : [
+        "tuple"
+    ],
     "forbidden_regexp": [
         "[[no_unique_address]]"
     ]
