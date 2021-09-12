@@ -408,3 +408,31 @@ struct DeleterCheckConst {
         return 6;
     }
 };
+
+struct CheckVoidPtrDeleter {
+    void operator()(void* ptr) {
+        free(ptr);
+    }
+};
+
+template <typename T>
+struct CheckArrayDeleter {
+    void operator()(T* ptr) {
+        delete[] ptr;
+    }
+};
+
+template <typename T>
+struct CheckArrayDeleterStateful {
+    int some_useless_field;
+
+    void operator()(T* ptr) {
+        delete[] ptr;
+        ++some_useless_field;
+    }
+};
+
+template <typename T>
+void DeleteFunction(T* ptr) {
+    delete ptr;
+}
