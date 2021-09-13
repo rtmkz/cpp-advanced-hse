@@ -1,4 +1,5 @@
 #include "../shared.h"
+#include "count_new.h"
 
 #include <catch.hpp>
 
@@ -263,4 +264,51 @@ TEST_CASE("Observers") {
             REQUIRE(!p);
         }
     }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+struct A {
+    static int count;
+
+    A(int i, char c) : int_(i), char_(c) {++count;}
+    A(const A& a)
+        : int_(a.int_), char_(a.char_)
+    {++count;}
+    ~A() {--count;}
+
+    int get_int() const {return int_;}
+    char get_char() const {return char_;}
+
+    A* operator& () = delete;
+
+private:
+    int int_;
+    char char_;
+};
+
+int A::count = 0;
+
+TEST_CASE("MakeShared one allocation") {
+    int nc = globalMemCounter.outstanding_new;
+    {
+        int i = 67;
+        char c = 'e';
+        std::shared_ptr<A> p = std::make_shared<A>(i, c);
+        REQUIRE(globalMemCounter.checkOutstandingNewEq(nc+1));
+        REQUIRE(A::count == 1);
+        REQUIRE(p->get_int() == 67);
+        REQUIRE(p->get_char() == 'e');
+    }
+
+    nc = globalMemCounter.outstanding_new;
+    {
+        char c = 'e';
+        std::shared_ptr<A> p = std::make_shared<A>(67, c);
+        REQUIRE(globalMemCounter.checkOutstandingNewEq(nc+1));
+        REQUIRE(A::count == 1);
+        REQUIRE(p->get_int() == 67);
+        REQUIRE(p->get_char() == 'e');
+    }
+    REQUIRE(A::count == 0);
 }
