@@ -5,28 +5,32 @@
 
 #include <catch.hpp>
 
-#include <memory>
-
 TEST_CASE("Construction with deleters") {
-    SECTION("From move-only deleter") {
-        Deleter<MyInt> d;
-        UniquePtr<MyInt, Deleter<MyInt>> s(new MyInt, std::move(d));
-    }
-
     SECTION("From copyable deleter") {
         const CopyableDeleter<MyInt> cd;
         UniquePtr<MyInt, CopyableDeleter<MyInt>> s(new MyInt, cd);
+    }
+
+    SECTION("From move-only deleter") {
+        Deleter<MyInt> d;
+        UniquePtr<MyInt, Deleter<MyInt>> s(new MyInt, std::move(d));
     }
 
     SECTION("From temporary") {
         UniquePtr<MyInt, Deleter<MyInt>> s(new MyInt, Deleter<MyInt>{});
     }
 
-    SECTION("From const reference to copy-able object") {
-        CopyableDeleter<MyInt> d;
-        const auto& cr = d;
+    SECTION("Deleter type is non-const reference") {
+        Deleter<MyInt> d;
+        UniquePtr<MyInt, Deleter<MyInt>&> s(new MyInt, d);
+    }
 
-        UniquePtr<MyInt, CopyableDeleter<MyInt>> s(new MyInt, cr);
+    SECTION("Deleter type is const reference") {
+        Deleter<MyInt> d;
+        UniquePtr<MyInt, const Deleter<MyInt>&> s1(new MyInt, d);
+
+        const Deleter<MyInt>& cr = d;
+        UniquePtr<MyInt, const Deleter<MyInt>&> s2(new MyInt, cr);
     }
 }
 
