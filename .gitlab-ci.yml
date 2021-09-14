@@ -45,5 +45,6 @@ deploy:
   stage: release
   script:
   - docker pull eu.gcr.io/hse-ts/cpp-course-build
+  - git checkout .
   - docker build -f testenv.docker -t eu.gcr.io/hse-ts/cpp-course .
   - docker push eu.gcr.io/hse-ts/cpp-course:latest
