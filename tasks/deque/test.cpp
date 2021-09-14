@@ -199,3 +199,32 @@ TEST_CASE("Empty correctness") {
         Check(a, std::vector<int>());
     }
 }
+
+TEST_CASE("Correct work of cycled buffer") {
+    Deque a;
+    a.PushFront(1);
+    a.PushBack(2);
+    Check(a, std::vector<int>{1, 2});
+
+    Deque b;
+    b.PushBack(1);
+    b.PushFront(2);
+    Check(b, std::vector<int>{2, 1});
+
+    // Check cycled buffer work after reallocation
+    const int iterations = 128;
+
+    std::vector<int> v{1, 2};
+    for (int i = 0; i < iterations; ++i) {
+        a.PushBack(i);
+        v.push_back(i);
+    }
+    Check(a, v);
+
+    std::deque<int> w{2, 1};
+    for (int i = 0; i < iterations; ++i) {
+        b.PushFront(i);
+        w.push_front(i);
+    }
+    Check(b, std::vector<int>(w.begin(), w.end()));
+}
