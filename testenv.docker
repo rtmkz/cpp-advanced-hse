@@ -2,4 +2,4 @@ FROM eu.gcr.io/hse-ts/cpp-course-build:latest
 
 COPY . /opt/shad
 
-RUN find /opt/shad/private -name '*.cpp' -or -name '*.h' | xargs chmod o-rwx
+RUN rm -rf /opt/shad/private
