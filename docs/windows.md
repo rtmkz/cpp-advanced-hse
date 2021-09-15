@@ -2,14 +2,16 @@
 
 Здесь описано, как настроить окружение на Windows с использованием WSL (Windows Subsystem from Linux) и IDE CLion.
 
-1. Установите WSL [по инструкции](https://docs.microsoft.com/ru-ru/windows/wsl/install-win10#manual-installation-steps). Дистрибутив лучше взять Ubuntu 20.04.
-2. Запустите WSL и установите в ней необходимые инструменты (компилятор, отладчик, CMake):
+1. Установите WSL2 [по инструкции](https://docs.microsoft.com/ru-ru/windows/wsl/install-win10#manual-installation-steps). Дистрибутив лучше взять Ubuntu 20.04.
+2. Запустите WSL2 и установите в ней необходимые инструменты (компилятор, отладчик, CMake):
 
 ```
 sudo apt update
 sudo apt install -y g++-10 gdb cmake
 sudo ln -s /usr/bin/g++-10 /usr/bin/g++
 ```
+
+После убедитесь, что все установилось как надо: `cmake --version` должен выдавать версию не ниже 3.13, `g++ --version`--- не ниже 10.3.
 
 3. Откройте Windows Powershell. Перейдите с помощью `cd` в каталог, в котором будет храниться репозиторий курса, можно использовать домашний: `cd ~`.
 
@@ -19,7 +21,7 @@ sudo ln -s /usr/bin/g++-10 /usr/bin/g++
 
 Если PowerShell пишет, что не найден `git`, то установите его [по инструкции](https://github.com/git-guides/install-git#install-git-on-windows).
 
-5. Установите CLion [с официального сайта](https://www.jetbrains.com/clion/).
+5. Установите свежий CLion [с официального сайта](https://www.jetbrains.com/clion/).
 
 6. Настройте в CLion WSL-toolchain по [инструкции](https://www.jetbrains.com/help/clion/how-to-use-wsl-development-environment-in-product.html#wsl-general).
 
@@ -40,3 +42,5 @@ sudo ln -s /usr/bin/g++-10 /usr/bin/g++
 ![](images/windows-setup-3.png)
 
 9. Окружение настроено, можно переходить к пункту "Сдача первой задачи" основной инструкции.
+
+**Важно!** В случае проблем при submit проверьте, что `python3` есть в системе и добавлен в PATH.
