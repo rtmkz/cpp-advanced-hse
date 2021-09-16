@@ -3,6 +3,6 @@
     "tests": "test_cow_vector",
     "solutions": "private",
     "forbidden_containers" : [
-        "shared_ptr",
+        "shared_ptr"
     ]
 }
