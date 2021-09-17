@@ -1,0 +1,5 @@
+{
+    "allow_change": "../unique_ptr.h",
+    "tests": "test_unique_advanced",
+    "solutions": "private"
+}

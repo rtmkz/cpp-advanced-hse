@@ -1,134 +1,247 @@
-#include "../unique_ptr.h"
+#include "../unique.h"
+#include "../my_int.h"
 
 #include <catch.hpp>
 
-using U = UniquePtr<int>;
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
-TEST_CASE("Basics") {
+TEST_CASE("Basic") {
+    SECTION("Lifetime") {
+        {
+            UniquePtr<MyInt> s(new MyInt);
+
+            REQUIRE(MyInt::AliveCount() == 1);
+        }
+
+        REQUIRE(MyInt::AliveCount() == 0);
+    }
+
+    SECTION("Cannot copy") {
+        static_assert(!std::is_copy_constructible_v<UniquePtr<int>> &&
+                      !std::is_copy_assignable_v<UniquePtr<int>>);
+    }
+
+    SECTION("Default value") {
+        UniquePtr<int> s;
+
+        REQUIRE(s.Get() == nullptr);
+    }
+
     SECTION("Move") {
-        U s1(new int);
-        U s2(new int);
+        UniquePtr<int> s1(new int);
+        UniquePtr<int> s2(new int);
+
         int* p = s1.Get();
         s2 = std::move(s1);
+
         REQUIRE(s2.Get() == p);
-        REQUIRE(s1.Get() == 0);
+        REQUIRE(s1.Get() == nullptr);
     }
-    SECTION("Move itself") {
-        U s(new int);
-        int* p = s.Get();
+
+    SECTION("Self move") {
+        UniquePtr<MyInt> s(new MyInt(42));
+        MyInt* p = s.Get();
         s = std::move(s);
+
+        REQUIRE(MyInt::AliveCount() == 1);
         REQUIRE(s.Get() == p);
+        REQUIRE(*p == 42);
     }
+
     SECTION("NULL") {
-        U s(new int);
+        UniquePtr<MyInt> s(new MyInt);
+
+        REQUIRE(MyInt::AliveCount() == 1);
+
         s = NULL;
-        REQUIRE(s.Get() == 0);
+
+        REQUIRE(MyInt::AliveCount() == 0);
+        REQUIRE(s.Get() == nullptr);
     }
-    SECTION("nullptr") {
-        U s(new int);
+
+    SECTION("Nullptr") {
+        UniquePtr<MyInt> s(new MyInt);
+
+        REQUIRE(MyInt::AliveCount() == 1);
+
         s = nullptr;
-        REQUIRE(s.Get() == 0);
+
+        REQUIRE(MyInt::AliveCount() == 0);
+        REQUIRE(s.Get() == nullptr);
     }
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
 TEST_CASE("Modifiers") {
     SECTION("Release") {
-        U p(new int);
-        int* ap = p.Get();
-        int* a = p.Release();
-        REQUIRE(p.Get() == nullptr);
-        REQUIRE(ap == a);
-        REQUIRE(a != nullptr);
-        delete a;
+        UniquePtr<MyInt> s(new MyInt(42));
+        MyInt* ps = s.Get();
+        MyInt* p = s.Release();
+
+        REQUIRE(MyInt::AliveCount() == 1);
+        REQUIRE(s.Get() == nullptr);
+        REQUIRE(ps == p);
+        REQUIRE(*p == 42);
+
+        delete p;
+
+        REQUIRE(MyInt::AliveCount() == 0);
     }
+
     SECTION("Swap") {
-        int* p1 = new int(1);
-        U s1(p1);
-        int* p2 = new int(2);
-        U s2(p2);
+        MyInt* p1 = new MyInt(1);
+        UniquePtr<MyInt> s1(p1);
+        MyInt* p2 = new MyInt(2);
+        UniquePtr<MyInt> s2(p2);
 
         REQUIRE(s1.Get() == p1);
-        REQUIRE(*s1.Get() == 1);
+        REQUIRE(*s1 == 1);
         REQUIRE(s2.Get() == p2);
-        REQUIRE(*s2.Get() == 2);
+        REQUIRE(*s2 == 2);
+
         s1.Swap(s2);
+
         REQUIRE(s1.Get() == p2);
-        REQUIRE(*s1.Get() == 2);
+        REQUIRE(*s1 == 2);
         REQUIRE(s2.Get() == p1);
-        REQUIRE(*s2.Get() == 1);
+        REQUIRE(*s2 == 1);
+        REQUIRE(MyInt::AliveCount() == 2);
+
+        std::swap(s1, s2);
+
+        REQUIRE(s1.Get() == p1);
+        REQUIRE(*s1 == 1);
+        REQUIRE(s2.Get() == p2);
+        REQUIRE(*s2 == 2);
     }
+
     SECTION("Reset") {
-        U p(new int);
-        int* i = p.Get();
-        REQUIRE(i != nullptr);
-        int* new_value = new int;
-        p.Reset(new_value);
-        REQUIRE(p.Get() == new_value);
+        UniquePtr<MyInt> s(new MyInt);
+
+        REQUIRE(MyInt::AliveCount() == 1);
+
+        MyInt* p = s.Get();
+
+        REQUIRE(p != nullptr);
+
+        MyInt* new_value = new MyInt;
+
+        REQUIRE(MyInt::AliveCount() == 2);
+
+        s.Reset(new_value);
+
+        REQUIRE(MyInt::AliveCount() == 1);
+        REQUIRE(s.Get() == new_value);
     }
+
     SECTION("Reset const") {
-        UniquePtr<const int> p(new int);
-        const int* i = p.Get();
-        REQUIRE(i != nullptr);
-        int* new_value = new int;
-        p.Reset(new_value);
-        REQUIRE(p.Get() == new_value);
+        UniquePtr<const MyInt> s(new MyInt);
+
+        REQUIRE(MyInt::AliveCount() == 1);
+
+        const MyInt* p = s.Get();
+
+        REQUIRE(p != nullptr);
+
+        MyInt* new_value = new MyInt;
+
+        REQUIRE(MyInt::AliveCount() == 2);
+
+        s.Reset(new_value);
+
+        REQUIRE(MyInt::AliveCount() == 1);
+        REQUIRE(s.Get() == new_value);
     }
+
     SECTION("Reset nullptr") {
-        U p(new int);
-        int* i = p.Get();
-        REQUIRE(i != nullptr);
-        p.Reset(nullptr);
-        REQUIRE(p.Get() == nullptr);
+        UniquePtr<MyInt> s(new MyInt);
+
+        REQUIRE(MyInt::AliveCount() == 1);
+
+        MyInt* p = s.Get();
+
+        REQUIRE(p != nullptr);
+
+        s.Reset(nullptr);
+
+        REQUIRE(MyInt::AliveCount() == 0);
+        REQUIRE(s.Get() == nullptr);
     }
-    SECTION("Reset empty") {
-        U p(new int);
-        int* i = p.Get();
-        REQUIRE(i != nullptr);
-        p.Reset();
-        REQUIRE(p.Get() == nullptr);
+
+    SECTION("Reset no arg") {
+        UniquePtr<MyInt> s(new MyInt);
+
+        REQUIRE(MyInt::AliveCount() == 1);
+
+        MyInt* p = s.Get();
+
+        REQUIRE(p != nullptr);
+
+        s.Reset();
+
+        REQUIRE(s.Get() == nullptr);
     }
+
     SECTION("Reset self pass") {
-        struct A {
-            UniquePtr<A> ptr_;
-            A() : ptr_(this) {
+        struct Sui {
+            UniquePtr<Sui> ptr_;
+
+            Sui() : ptr_(this) {
             }
+
             void Reset() {
                 ptr_.Reset();
             }
         };
-        (new A)->Reset();
+
+        (new Sui)->Reset();
     }
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
 TEST_CASE("Observers") {
     SECTION("Dereference") {
-        U p(new int(3));
+        UniquePtr<int> p(new int(3));
+
         REQUIRE(*p == 3);
     }
+
     SECTION("operator bool") {
-        U p(new int(1));
-        U const& cp = p;
-        CHECK(p);
-        CHECK(cp);
-        U p0;
-        U const& cp0 = p0;
-        CHECK(!p0);
-        CHECK(!cp0);
+        UniquePtr<int> p(new int(1));
+        UniquePtr<int> const& cp = p;
+
+        REQUIRE(p);
+        REQUIRE(cp);
+
+        UniquePtr<int> p0;
+        UniquePtr<int> const& cp0 = p0;
+
+        REQUIRE(!p0);
+        REQUIRE(!cp0);
     }
+
     SECTION("Get") {
         int* p = new int(1);
-        U s(p);
-        U const& sc = s;
+
+        UniquePtr<int> s(p);
+        UniquePtr<int> const& sc = s;
+
         REQUIRE(s.Get() == p);
         REQUIRE(sc.Get() == s.Get());
     }
+
     SECTION("Get const") {
         const int* p = new int(1);
+
         UniquePtr<const int> s(p);
         UniquePtr<const int> const& sc = s;
+
         REQUIRE(s.Get() == p);
         REQUIRE(sc.Get() == s.Get());
     }
+
     SECTION("operator->") {
         struct A {
             int i_{7};

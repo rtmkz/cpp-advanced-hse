@@ -1,5 +1,7 @@
 #pragma once
 
+#include "compressed_pair.h"
+
 #include <cstddef>  // std::nullptr_t
 
 struct Slug {};
@@ -12,6 +14,7 @@ public:
     // Constructors
 
     explicit UniquePtr(T* ptr = nullptr);
+    UniquePtr(T *ptr, Deleter deleter);
 
     UniquePtr(UniquePtr&& other);
 

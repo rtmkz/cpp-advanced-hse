@@ -53,10 +53,10 @@
 
 ## Как решать и сдавать задачу?
 
-* Весь код для ```SomePtr``` нужно держать в файле ```some_ptr.h```:
+* Весь код для ```SomePtr``` нужно держать в файле ```some.h```:
 
    | ```SomePtr``` | File |
    | --- | --- |
-   | ```UniquePtr``` | [```unique_ptr.h```](unique_ptr.h) |
-   | ```SharedPtr``` | [```shared_ptr.h```](shared_ptr.h) |
-   | ```WeakPtr``` | [```weak_ptr.h```](weak_ptr.h) |
+   | ```UniquePtr``` | [```unique.h```](unique.h) |
+   | ```SharedPtr``` | [```shared.h```](shared.h) |
+   | ```WeakPtr``` | [```weak.h```](weak.h) |
