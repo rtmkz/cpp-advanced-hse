@@ -17,7 +17,7 @@ clang++-11 main.cpp -o /tmp/a.out -std=c++20
 
 Послать ввод из файла на сервер можно [командой](https://gitlab.com/danlark/cpp-advanced-hse/-/blob/main/docs/crashme.md#подготовленный-ввод):
 ```shell
-(echo reallol; cat input.txt) | nc crashme.cpp-hse.org 9090
+(echo bad-hash; cat input.txt) | nc crashme.cpp-hse.org 9090
 ```
 
 ### Генератор
