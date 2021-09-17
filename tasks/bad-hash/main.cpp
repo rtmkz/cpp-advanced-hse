@@ -41,6 +41,9 @@ std::vector<std::string> GetUsers(size_t max_count) {
             std::cout << "Too long username " << cur_line << "\n";
             exit(0);
         }
+        if (cur_line.empty()) {
+            break;
+        }
         if (CheckUserName(cur_line)) {
             users.push_back(cur_line);
         } else {
@@ -48,6 +51,7 @@ std::vector<std::string> GetUsers(size_t max_count) {
             exit(0);
         }
     }
+    std::cout << "Read " << users.size() << " users\n";
     return users;
 }
 
@@ -58,7 +62,7 @@ int main() {
     size_t init_size = dist(gen);
     std::unordered_set<string> users(init_size);
 
-    auto users_list = GetUsers(15000u);
+    auto users_list = GetUsers(20000u);
     auto start_time = std::clock();
 
     for (const auto& user : users_list) {
