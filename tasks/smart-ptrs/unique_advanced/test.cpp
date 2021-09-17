@@ -194,3 +194,19 @@ TEST_CASE("Compressed pair usage") {
         static_assert(sizeof(UniquePtr<int, decltype(function)>) == 64);
     }
 }
+
+template <typename T>
+class DerivedDeleter : public Deleter<T> {};
+
+TEST_CASE("Upcasts") {
+    SECTION("Upcast in move constructor") {
+        UniquePtr<MyInt, DerivedDeleter<MyInt>> s(new MyInt);
+        UniquePtr<MyInt, Deleter<MyInt>> s2(std::move(s));
+    }
+
+    SECTION("Upcast in move assignment") {
+        UniquePtr<MyInt, DerivedDeleter<MyInt>> s(new MyInt);
+        UniquePtr<MyInt, Deleter<MyInt>> s2(new MyInt);
+        s2 = std::move(s);
+    }
+}
