@@ -1,5 +1,9 @@
 {
-    "allow_change": "../unique_ptr.h",
+    "allow_change": "../unique.h",
     "tests": "test_unique_advanced",
-    "solutions": "private"
+    "solutions": "private",
+    "forbidden_containers": [
+        "shared_ptr",
+        "unique_ptr"
+    ]
 }
