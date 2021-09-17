@@ -35,6 +35,8 @@ add_subdirectory(tasks/string-view)
 add_subdirectory(tasks/bind_front)
 add_subdirectory(tasks/curry)
 add_subdirectory(tasks/stdflib)
+add_subdirectory(tasks/dungeon)
+add_subdirectory(tasks/fold)
 
 # 7
 add_subdirectory(tasks/algo_spec)
