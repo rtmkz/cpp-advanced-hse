@@ -53,7 +53,7 @@ TEST_CASE("Basic") {
 
         REQUIRE(MyInt::AliveCount() == 1);
 
-        s = NULL;
+        s = NULL; // NOLINT
 
         REQUIRE(MyInt::AliveCount() == 0);
         REQUIRE(s.Get() == nullptr);
