@@ -6,9 +6,10 @@ import json
 import os
 import shutil
 
-REPO_ROOT=os.path.dirname(os.path.realpath(__file__))
-SHADOW_REPO_DIR=os.path.join(REPO_ROOT, '.submit-repo')
-VERBOSE=False
+REPO_ROOT = os.path.dirname(os.path.realpath(__file__))
+SHADOW_REPO_DIR = os.path.join(REPO_ROOT, '.submit-repo')
+VERBOSE = False
+
 
 def git(*args):
     if VERBOSE:
@@ -17,11 +18,13 @@ def git(*args):
     else:
         subprocess.check_output(["git"] + list(args), cwd=SHADOW_REPO_DIR, stderr=subprocess.PIPE)
 
+
 def git_output(*args):
     if VERBOSE:
         print("> {}".format(" ".join(["git"] + list(args))))
 
     return subprocess.check_output(["git"] + list(args)).strip().decode('utf-8')
+
 
 def set_up_shadow_repo(task_name, user_name, user_email):
     # to fix access denied error occuring on Windows
@@ -52,7 +55,8 @@ def set_up_shadow_repo(task_name, user_name, user_email):
     with open(os.path.join(SHADOW_REPO_DIR, ".git", "config"), mode="a", encoding="utf-8") as config:
         config.write("[user]\n\tname = {}\n\temail = {}\n".format(user_name, user_email))
 
-def create_commits(task_name, files):
+
+def create_commits(task_name, original_task_name, files):
     git("checkout", "-b", "initial")
     shutil.copyfile(os.path.join(REPO_ROOT, ".grader-ci.yml"), os.path.join(SHADOW_REPO_DIR, ".gitlab-ci.yml"))
     git("add", ".gitlab-ci.yml")
@@ -73,7 +77,7 @@ def create_commits(task_name, files):
 
     for filename in files:
         directory = os.path.join(SHADOW_REPO_DIR, task_name, os.path.dirname(filename))
-        for path in glob.glob('../' + task_name + '/' + filename):
+        for path in glob.glob('../' + original_task_name + '/' + filename):
             try:
                 os.makedirs(directory)
             except:
@@ -84,6 +88,7 @@ def create_commits(task_name, files):
 
     git("commit", "-m", task_name, "--allow-empty")
 
+
 def push_branches(task_name):
     git("push", "local", "submits/" + task_name)
     try:
@@ -92,10 +97,12 @@ def push_branches(task_name):
         pass
     git("push", "-f", "student", "submits/" + task_name)
 
+
 def ensure_list(value):
     if not isinstance(value, list):
         return [value]
     return value
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -117,7 +124,7 @@ if __name__ == "__main__":
     task_name = args.task_path or os.path.basename(os.path.realpath("."))
 
     try:
-        task_config = json.load(open(os.path.join(os.pardir, task_name,  ".tester.json")))
+        task_config = json.load(open(os.path.join(os.pardir, task_name, ".tester.json")))
     except FileNotFoundError:
         print("error: Task config not found. Are you running tool from correct directory?")
         exit(1)
@@ -127,6 +134,18 @@ if __name__ == "__main__":
 
     set_up_shadow_repo(task_name, user_name, user_email)
 
-    create_commits(task_name, ensure_list(task_config["allow_change"]))
+    allowed_smart_ptrs_dirs = [
+        "unique_basic",
+        "unique_advanced",
+        "shared_basic",
+        "shared_weak",
+        "shared_from_this",
+    ]
+
+    original_task_name = task_name
+    if task_name in allowed_smart_ptrs_dirs:
+        task_name = 'smart-ptrs/' + task_name
+
+    create_commits(task_name, original_task_name, ensure_list(task_config["allow_change"]))
 
     push_branches(task_name)
