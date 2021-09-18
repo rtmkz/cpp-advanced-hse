@@ -22,7 +22,6 @@ if [ "$#" -ge 2 ]; then
     CLANG_TIDY="hse-clang-tidy --extra-arg=-I/usr/lib/clang/11/include/"
 fi
 
-CPP_PATHS=$(find $TASK_PATH \( -name "*.cpp" -or -name "*.h" \) ! -path "*test.cpp*")
 
 set -e
 set -u
@@ -30,7 +29,7 @@ set -o pipefail
 set -x
 
 if [ "$#" -eq 3 ]; then
-    $CLANG_TIDY --config="$3" $CPP_PATHS
+    jq -r '.allow_change[]' --raw-output $TASK_PATH/.tester.json | sed "s/^/$TASK_PATH\//g" | xargs $CLANG_TIDY --config="$3" $CPP_PATHS
 fi
 
 $CLANG_PATH -r $TASK_PATH
