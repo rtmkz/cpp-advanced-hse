@@ -75,3 +75,10 @@
       score: 0
     - task:  smart-ptrs/shared_from_this
       score: 0
+
+- group:    bonus
+  start:    17-07-2021 18:00
+  deadline: 21-09-2022 18:00
+  tasks:
+    - task: bad-hash
+      score: 100
