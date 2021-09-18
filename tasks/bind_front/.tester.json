@@ -1,6 +1,23 @@
 {
     "allow_change": "bind_front.h",
     "tests": "test_bind_front",
-    "solutions": "private"
+    "solutions": "private",
+    "forbidden_functions": [
+        "bind",
+        "bind_front",
+        "binary_function",
+        "ptr_fun",
+        "pointer_to_unary_function",
+        "pointer_to_binary_function",
+        "mem_fun",
+        "mem_fun_t",
+        "mem_fun1_t",
+        "not1",
+        "not2",
+        "binder1st",
+        "binder2nd",
+        "bind1st",
+        "bind2nd"
+    ]
 }
 
