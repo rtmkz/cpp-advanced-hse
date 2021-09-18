@@ -21,10 +21,13 @@ TEST_CASE("Fix all arguments") {
 TEST_CASE("Check for forwarding") {
     struct Foo {};
 
-    auto f = [](bool, Foo &&) {};
+    auto f = [](Foo&&, Foo &&) {};
 
-    Foo foo;
-    BindFront(f, false)(std::move(foo));
+    BindFront(f, Foo())(Foo());
+
+    auto g = [](const std::string&) {};
+    std::string other;
+    BindFront(g, other)();
 }
 
 TEST_CASE("No arguments") {
