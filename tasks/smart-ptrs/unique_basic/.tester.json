@@ -4,5 +4,17 @@
     "../compressed_pair.h"
   ],
   "tests": "test_unique_basic",
-  "solutions": "private"
+  "solutions": "private",
+  "forbidden_containers": [
+    "unique_ptr",
+    "shared_ptr",
+    "weak_ptr",
+    "enable_shared_from_this"
+  ],
+  "forbidden_functions": [
+    "make_unique",
+    "make_unique_for_overwrite",
+    "make_shared",
+    "make_shared_for_overwrite"
+  ]
 }
