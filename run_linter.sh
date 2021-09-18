@@ -29,7 +29,7 @@ set -o pipefail
 set -x
 
 if [ "$#" -eq 3 ]; then
-    jq -r '.allow_change[]' --raw-output $TASK_PATH/.tester.json | sed "s|^|$TASK_PATH\/|g" | xargs $CLANG_TIDY --config="$3"
+    jq -r '.allow_change | if type=="array" then .[] else . end' --raw-output $TASK_PATH/.tester.json | sed "s|^|$TASK_PATH\/|g" | xargs $CLANG_TIDY --config="$3"
 fi
 
 $CLANG_PATH -r $TASK_PATH
