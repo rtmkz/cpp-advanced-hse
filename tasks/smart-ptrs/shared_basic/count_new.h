@@ -1,7 +1,6 @@
-# include <new>
-# include <cstdlib>
-
-
+#include <new>
+#include <cstdlib>
+#include <cassert>
 
 class MemCounter {
 public:
@@ -111,7 +110,7 @@ inline MemCounter* getGlobalMemCounter() {
     return &counter;
 }
 
-MemCounter &globalMemCounter = *getGlobalMemCounter();
+MemCounter& globalMemCounter = *getGlobalMemCounter();
 
 void* operator new(std::size_t s) {
     getGlobalMemCounter()->newCalled(s);
@@ -119,7 +118,7 @@ void* operator new(std::size_t s) {
     return ret;
 }
 
-void  operator delete(void* p) {
+void operator delete(void* p) noexcept {
     getGlobalMemCounter()->deleteCalled(p);
     std::free(p);
 }
@@ -129,7 +128,7 @@ void* operator new[](std::size_t s) {
     return operator new(s);
 }
 
-void operator delete[](void* p) {
+void operator delete[](void* p) noexcept {
     getGlobalMemCounter()->deleteArrayCalled(p);
     operator delete(p);
 }
@@ -137,13 +136,13 @@ void operator delete[](void* p) {
 void* operator new(std::size_t s, std::align_val_t av) {
     const std::size_t a = static_cast<std::size_t>(av);
     getGlobalMemCounter()->alignedNewCalled(s, a);
-    void *ret;
+    void* ret;
     posix_memalign(&ret, a, s);
     if (ret == nullptr)
-    return ret;
+        return ret;
 }
 
-void operator delete(void *p, std::align_val_t av) {
+void operator delete(void* p, std::align_val_t av) noexcept {
     const std::size_t a = static_cast<std::size_t>(av);
     getGlobalMemCounter()->alignedDeleteCalled(p, a);
     if (p) {
@@ -157,7 +156,7 @@ void* operator new[](std::size_t s, std::align_val_t av) {
     return operator new(s, av);
 }
 
-void operator delete[](void *p, std::align_val_t av) {
+void operator delete[](void* p, std::align_val_t av) noexcept {
     const std::size_t a = static_cast<std::size_t>(av);
     getGlobalMemCounter()->alignedDeleteArrayCalled(p, a);
     return operator delete(p, av);
