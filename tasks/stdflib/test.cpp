@@ -11,8 +11,8 @@ TEST_CASE("Fib") {
     // Using higher values would produce "constexpr evaluation hit maximum step limit; possible
     // infinite loop" To solve the issue one could use explicit memoization with templated
     // variables.
-    constexpr auto res = Fib<25>()();
-    REQUIRE(res == 75025);
+    constexpr auto kRes = Fib<25>()();
+    REQUIRE(kRes == 75025);
 }
 
 TEST_CASE("Fact") {
@@ -22,8 +22,8 @@ TEST_CASE("Fact") {
     REQUIRE(Fact<3>()() == 6);
     REQUIRE(Fact<4>()() == 24);
 
-    constexpr auto res = Fact<15>()();
-    REQUIRE(res == 1307674368000);
+    constexpr auto kRes = Fact<15>()();
+    REQUIRE(kRes == 1307674368000);
 }
 
 TEST_CASE("GCD") {
@@ -37,8 +37,8 @@ TEST_CASE("GCD") {
     REQUIRE(GCD<1, 5>()() == 1);
     REQUIRE(GCD<250, 1000>()() == 250);
 
-    constexpr auto res = GCD<91231232, 12938710>()();
-    REQUIRE(res == 2);
+    constexpr auto kRes = GCD<91231232, 12938710>()();
+    REQUIRE(kRes == 2);
 }
 
 TEST_CASE("Prime") {
@@ -48,6 +48,6 @@ TEST_CASE("Prime") {
     REQUIRE(Prime<3>()() == true);
     REQUIRE(Prime<4>()() == false);
 
-    constexpr auto res = Prime<104729>()();
-    REQUIRE(res == true);
+    constexpr auto kRes = Prime<104729>()();
+    REQUIRE(kRes == true);
 }
