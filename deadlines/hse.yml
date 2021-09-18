@@ -45,3 +45,33 @@
       score: 150
     - task: compressed_pair
       score: 150
+
+- group:    03-types
+  start:    18-09-2021 13:00
+  deadline: 01-10-2021 19:00
+  tasks:
+    - task: dungeon
+      score: 100
+    - task: fold
+      score: 100
+    - task: bind_front
+      score: 100
+    - task: curry
+      score: 100
+    - task: stdflib
+      score: 100
+
+- group:    03-smart-ptrs
+  start:    18-09-2021 13:00
+  deadline: 10-10-2021 19:00
+  tasks:
+    - task:  smart-ptrs/unique_basic
+      score: 0
+    - task:  smart-ptrs/unique_advanced
+      score: 0
+    - task:  smart-ptrs/shared_basic
+      score: 0
+    - task:  smart-ptrs/shared_weak
+      score: 0
+    - task:  smart-ptrs/shared_from_this
+      score: 0
