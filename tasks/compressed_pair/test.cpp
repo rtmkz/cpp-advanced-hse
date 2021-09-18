@@ -125,6 +125,12 @@ struct Empty4 {};
 struct Empty5 {};
 struct Empty6 {};
 
+struct EmptyBase {};
+struct EmptyDerived1 : EmptyBase {};
+struct EmptyDerived2 : EmptyBase {};
+struct NonEmptyDerived : NonEmpty, EmptyBase {
+};
+
 TEST_CASE("Sizes") {
     CheckSize<int, Empty>();
     CheckSize<Empty, long double>();
@@ -141,6 +147,8 @@ TEST_CASE("Sizes") {
     static_assert(
         sizeof(CompressedPair<CompressedPair<Empty4, Empty5>, CompressedPair<Empty6, char>>) ==
         sizeof(char));
+    static_assert(sizeof(CompressedPair<EmptyDerived1, EmptyDerived2>) == 2);
+    static_assert(sizeof(CompressedPair<NonEmptyDerived, EmptyDerived1>) == 8);
 }
 
 TEST_CASE("ConstMethods") {
