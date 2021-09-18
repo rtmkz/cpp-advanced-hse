@@ -11,7 +11,7 @@ TEST_CASE("Empty weak") {
     a = b;
     WeakPtr c(a);
     b = std::move(c);
-    
+
     auto shared = b.Lock();
     REQUIRE(shared.Get() == nullptr);
 }

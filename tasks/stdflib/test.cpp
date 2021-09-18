@@ -8,8 +8,9 @@ TEST_CASE("Fib") {
     REQUIRE(Fib<2>()() == 1);
     REQUIRE(Fib<9>()() == 34);
 
-    // Using higher values would produce "constexpr evaluation hit maximum step limit; possible infinite loop"
-    // To solve the issue one could use explicit memoization with templated variables.
+    // Using higher values would produce "constexpr evaluation hit maximum step limit; possible
+    // infinite loop" To solve the issue one could use explicit memoization with templated
+    // variables.
     constexpr auto res = Fib<25>()();
     REQUIRE(res == 75025);
 }
@@ -50,5 +51,3 @@ TEST_CASE("Prime") {
     constexpr auto res = Prime<104729>()();
     REQUIRE(res == true);
 }
-
-
