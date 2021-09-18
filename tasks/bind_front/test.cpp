@@ -27,7 +27,7 @@ TEST_CASE("No arguments") {
 }
 
 TEST_CASE("Func as arg") {
-    auto f = [](auto && f, char c) { return f(c); };
+    auto f = [](auto&& f, char c) { return f(c); };
     auto g = [](char c) { return c; };
 
     REQUIRE(BindFront(f, g)('a') == 'a');
@@ -35,7 +35,9 @@ TEST_CASE("Func as arg") {
 }
 
 TEST_CASE("Variadic") {
-    auto f = []<class A1, class ...A>(A1 && a1, A &&...) { return a1; };
+    auto f = []<class A1, class... A>(A1 && a1, A && ...) {
+        return a1;
+    };
 
     REQUIRE(BindFront(f, false, 0, "hello world", 1337)("hello", true, 0.0f) == false);
     REQUIRE(BindFront(f, 84, 0, "hello world", 1337)("hello", true, 0.0f) == 84);
