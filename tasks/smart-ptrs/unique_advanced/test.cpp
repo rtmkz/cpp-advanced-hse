@@ -188,11 +188,6 @@ TEST_CASE("Compressed pair usage") {
     SECTION("Function pointer deleter") {
         static_assert(sizeof(UniquePtr<int, decltype(&DeleteFunction<int>)>) == 16);
     }
-
-    SECTION("std::function heavy deleter") {
-        std::function<void(int*)> function = [](int* ptr) { delete ptr; };
-        static_assert(sizeof(UniquePtr<int, decltype(function)>) == 64);
-    }
 }
 
 template <typename T>
