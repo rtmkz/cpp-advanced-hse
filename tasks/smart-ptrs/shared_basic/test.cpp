@@ -271,16 +271,24 @@ TEST_CASE("Observers") {
 struct A {
     static int count;
 
-    A(int i, char c) : int_(i), char_(c) {++count;}
-    A(const A& a)
-        : int_(a.int_), char_(a.char_)
-    {++count;}
-    ~A() {--count;}
+    A(int i, char c) : int_(i), char_(c) {
+        ++count;
+    }
+    A(const A& a) : int_(a.int_), char_(a.char_) {
+        ++count;
+    }
+    ~A() {
+        --count;
+    }
 
-    int get_int() const {return int_;}
-    char get_char() const {return char_;}
+    int get_int() const {
+        return int_;
+    }
+    char get_char() const {
+        return char_;
+    }
 
-    A* operator& () = delete;
+    A* operator&() = delete;
 
 private:
     int int_;
@@ -295,7 +303,7 @@ TEST_CASE("MakeShared one allocation") {
         int i = 67;
         char c = 'e';
         std::shared_ptr<A> p = std::make_shared<A>(i, c);
-        REQUIRE(globalMemCounter.checkOutstandingNewEq(nc+1));
+        REQUIRE(globalMemCounter.checkOutstandingNewEq(nc + 1));
         REQUIRE(A::count == 1);
         REQUIRE(p->get_int() == 67);
         REQUIRE(p->get_char() == 'e');
@@ -305,7 +313,7 @@ TEST_CASE("MakeShared one allocation") {
     {
         char c = 'e';
         std::shared_ptr<A> p = std::make_shared<A>(67, c);
-        REQUIRE(globalMemCounter.checkOutstandingNewEq(nc+1));
+        REQUIRE(globalMemCounter.checkOutstandingNewEq(nc + 1));
         REQUIRE(A::count == 1);
         REQUIRE(p->get_int() == 67);
         REQUIRE(p->get_char() == 'e');
