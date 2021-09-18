@@ -42,5 +42,11 @@
   tasks:
     - task:  smart-ptrs/unique_basic
       score: 0
+    - task: smart-ptrs/unique_advanced
+      score: 0
     - task:  smart-ptrs/shared_basic
+      score: 0
+    - task: smart-ptrs/shared_weak
+      score: 0
+    - task: smart-ptrs/shared_from_this
       score: 0
