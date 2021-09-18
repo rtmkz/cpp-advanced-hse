@@ -2,8 +2,26 @@
 #include "../my_int.h"
 
 #include <catch.hpp>
+#include <vector>
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+struct Person {
+    virtual int GetFavoriteNumber() const = 0;
+    virtual ~Person() = default;
+};
+
+struct Alice : Person {
+    int GetFavoriteNumber() const override {
+        return 37;
+    }
+};
+
+struct Bob : Person {
+    int GetFavoriteNumber() const override {
+        return 43;
+    }
+};
 
 TEST_CASE("Basic") {
     SECTION("Lifetime") {
@@ -19,6 +37,11 @@ TEST_CASE("Basic") {
     SECTION("Cannot copy") {
         static_assert(!std::is_copy_constructible_v<UniquePtr<int>> &&
                       !std::is_copy_assignable_v<UniquePtr<int>>);
+    }
+
+    SECTION("Noexcept") {
+        static_assert(std::is_nothrow_move_constructible_v<UniquePtr<int>>);
+        static_assert(std::is_nothrow_move_assignable_v<UniquePtr<int>>);
     }
 
     SECTION("Default value") {
@@ -68,6 +91,18 @@ TEST_CASE("Basic") {
 
         REQUIRE(MyInt::AliveCount() == 0);
         REQUIRE(s.Get() == nullptr);
+    }
+
+    SECTION("Upcasts") {
+        std::vector<UniquePtr<Person>> v;
+        UniquePtr<Alice> alice(new Alice);
+        v.push_back(std::move(alice));
+        v.emplace_back(new Bob);
+        std::vector<int> res;
+        for (const auto& ptr : v) {
+            res.push_back(ptr->GetFavoriteNumber());
+        }
+        REQUIRE(res == std::vector<int>{37, 43});
     }
 }
 
