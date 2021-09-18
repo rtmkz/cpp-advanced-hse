@@ -18,6 +18,15 @@ TEST_CASE("Fix all arguments") {
     REQUIRE(BindFront(f, false, "hello world")() == "hello world");
 }
 
+TEST_CASE("Check for forwarding") {
+    struct Foo {};
+
+    auto f = [](bool, Foo &&) {};
+
+    Foo foo;
+    BindFront(f, false)(std::move(foo));
+}
+
 TEST_CASE("No arguments") {
     auto f = [](bool, char) { return 0; };
     REQUIRE(BindFront(f, true, 1)() == 0);
