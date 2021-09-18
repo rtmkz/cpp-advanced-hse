@@ -30,7 +30,7 @@ set -o pipefail
 set -x
 
 if [ "$#" -eq 3 ]; then
-    $CLANG_TIDY --config="$3" "$CPP_PATHS"
+    $CLANG_TIDY --config="$3" $CPP_PATHS
 fi
 
 $CLANG_PATH -r $TASK_PATH
