@@ -12,10 +12,11 @@ TEST_CASE("Simple pipeline") {
 }
 
 TEST_CASE("Inline pipeline") {
-    auto pipeline = empty_pl
-        | [](bool should_pass) { return std::make_tuple(should_pass, "hello world", nullptr); }
-        | [](const auto & t) { return std::get<0>(t) ? std::get<1>(t) : std::get<2>(t); }
-        | [](const char * ptr) { return ptr ? strlen(ptr) : 0; };
+    auto pipeline = empty_pl | [](bool should_pass) {
+        return std::make_tuple(should_pass, "hello world", nullptr);
+    } | [](const auto& t) {
+        return std::get<0>(t) ? std::get<1>(t) : std::get<2>(t);
+    } | [](const char* ptr) { return ptr ? strlen(ptr) : 0; };
 
     REQUIRE(pipeline(true) == 11);
     REQUIRE(pipeline(false) == 0);
