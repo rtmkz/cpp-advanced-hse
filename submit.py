@@ -56,7 +56,7 @@ def set_up_shadow_repo(task_name, user_name, user_email):
         config.write("[user]\n\tname = {}\n\temail = {}\n".format(user_name, user_email))
 
 
-def create_commits(task_name, original_task_name, files):
+def create_commits(task_name, files):
     git("checkout", "-b", "initial")
     shutil.copyfile(os.path.join(REPO_ROOT, ".grader-ci.yml"), os.path.join(SHADOW_REPO_DIR, ".gitlab-ci.yml"))
     git("add", ".gitlab-ci.yml")
@@ -77,7 +77,7 @@ def create_commits(task_name, original_task_name, files):
 
     for filename in files:
         directory = os.path.join(SHADOW_REPO_DIR, task_name, os.path.dirname(filename))
-        for path in glob.glob('../' + original_task_name + '/' + filename):
+        for path in glob.glob(filename):
             try:
                 os.makedirs(directory)
             except:
@@ -123,8 +123,20 @@ if __name__ == "__main__":
     VERBOSE = args.verbose
     task_name = args.task_path or os.path.basename(os.path.realpath("."))
 
+    allowed_smart_ptrs_dirs = [
+        "unique_basic",
+        "unique_advanced",
+        "shared_basic",
+        "shared_weak",
+        "shared_from_this",
+    ]
+
+    subtask_name = task_name
+    if task_name in allowed_smart_ptrs_dirs:
+        task_name = 'smart-ptrs/' + task_name
+
     try:
-        task_config = json.load(open(os.path.join(os.pardir, task_name, ".tester.json")))
+        task_config = json.load(open(os.path.join(os.pardir, subtask_name, ".tester.json")))
     except FileNotFoundError:
         print("error: Task config not found. Are you running tool from correct directory?")
         exit(1)
@@ -134,18 +146,6 @@ if __name__ == "__main__":
 
     set_up_shadow_repo(task_name, user_name, user_email)
 
-    allowed_smart_ptrs_dirs = [
-        "unique_basic",
-        "unique_advanced",
-        "shared_basic",
-        "shared_weak",
-        "shared_from_this",
-    ]
-
-    original_task_name = task_name
-    if task_name in allowed_smart_ptrs_dirs:
-        task_name = 'smart-ptrs/' + task_name
-
-    create_commits(task_name, original_task_name, ensure_list(task_config["allow_change"]))
+    create_commits(task_name, ensure_list(task_config["allow_change"]))
 
     push_branches(task_name)
