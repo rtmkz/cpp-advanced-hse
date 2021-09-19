@@ -128,8 +128,7 @@ struct Empty6 {};
 struct EmptyBase {};
 struct EmptyDerived1 : EmptyBase {};
 struct EmptyDerived2 : EmptyBase {};
-struct NonEmptyDerived : NonEmpty, EmptyBase {
-};
+struct NonEmptyDerived : NonEmpty, EmptyBase {};
 
 TEST_CASE("Sizes") {
     CheckSize<int, Empty>();
