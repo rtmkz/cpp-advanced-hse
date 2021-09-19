@@ -7,19 +7,16 @@ For group 3:
 - static variables, SIOF, cin & cout
 - constexpr variables
 
-Lambdas:
+Templates:
 
-- Lambdas: why are they needed in C++
-- Decay to pointer-to-function
-- Capture list: capturing by value, reference, rvalue reference
-- Capture list: capturing this, this-by-copy
-- Capture list: renamed args, args with default values, variadic capture, capture with functor application.
-- Lambdas in code: cppinsights -- unnamed functor with unique type
-- Mutable lambdas
-- Template lambdas (and their operator())
-- Recursive lambdas
-- decltype(lambda_type) for STL containers.
-- [optional] Abbreviated lambdas proposal -- why and what for
+- Why and what for
+- typename and template -- why and what for (parsing ambiguity)
+- traits in STL (aliases, constexpr variables). SFINAE basics.
+- Partial spec for structs. Spec for functions.
+- Remind: forward declaration.
+- Special case: templates in .cpp and template class.
+- concepts
+- [optional] Non-type template parameters
 
 Smart pointers -- unique:
 
@@ -38,8 +35,25 @@ Smart pointers -- shared & weak
 
 - Shared without a deleter: pointer + atomic
 - Move/copy semantics on underlying atomic
-- Deleters: why should we create a control block. How many allocations we get (without make-shared)
+- Aliasing constructor: pointer to member object while keeping its parent alive
+- Deleters: why should we create a control block. How many allocations we get (without make-shared). weak-count
 - Remind: why shared-from-this is needed
-- Remind: cyclic dependencies with shared, solution -- weak
+- Remind: cyclic dependencies with shared, solution -- weak (control block + pointer).
+- weak ptr and lock().
 - optional<> semantics for weak ptr.
 - weak-from-this
+
+Lambdas (optional):
+
+- Lambdas: why are they needed in C++
+- Decay to pointer-to-function (operator +)
+- IILE
+- Capture list: capturing by value, reference, rvalue reference
+- Capture list: capturing this, this-by-copy
+- Capture list: renamed args, args with default values, variadic capture, capture with functor application.
+- Lambdas in code: cppinsights -- unnamed functor with unique type
+- Mutable lambdas
+- Template lambdas (and their operator())
+- Recursive lambdas
+- decltype(lambda_type) for STL containers.
+- Abbreviated lambdas proposal -- why and what for
