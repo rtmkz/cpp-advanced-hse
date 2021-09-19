@@ -302,8 +302,8 @@ TEST_CASE("MakeShared one allocation") {
     {
         int i = 67;
         char c = 'e';
-        std::shared_ptr<A> p = std::make_shared<A>(i, c);
-        REQUIRE(globalMemCounter.checkOutstandingNewEq(nc + 1));
+        SharedPtr<A> p = MakeShared<A>(i, c);
+        REQUIRE(globalMemCounter.checkOutstandingNewEq(nc+1));
         REQUIRE(A::count == 1);
         REQUIRE(p->get_int() == 67);
         REQUIRE(p->get_char() == 'e');
@@ -312,8 +312,8 @@ TEST_CASE("MakeShared one allocation") {
     nc = globalMemCounter.outstanding_new;
     {
         char c = 'e';
-        std::shared_ptr<A> p = std::make_shared<A>(67, c);
-        REQUIRE(globalMemCounter.checkOutstandingNewEq(nc + 1));
+        SharedPtr<A> p = MakeShared<A>(67, c);
+        REQUIRE(globalMemCounter.checkOutstandingNewEq(nc+1));
         REQUIRE(A::count == 1);
         REQUIRE(p->get_int() == 67);
         REQUIRE(p->get_char() == 'e');
