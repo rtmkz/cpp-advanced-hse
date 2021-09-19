@@ -4,7 +4,7 @@
 #include "algo_spec.h"
 
 template <class T>
-bool Check(T value, AlgoRes(*target)(T)) {
+bool Check(T value, AlgoRes (*target)(T)) {
     return Run(value) == target(value);
 }
 

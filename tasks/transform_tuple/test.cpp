@@ -9,12 +9,12 @@ using namespace std::literals::string_literals;
 using namespace std::literals::string_view_literals;
 
 TEST_CASE("Trait check") {
-    auto f = [] (int) -> double { return {}; };
+    auto f = [](int) -> double { return {}; };
     REQUIRE(std::is_same_v<std::tuple<double>, TransformResult<decltype(f), int>>);
 }
 
 TEST_CASE("To integral") {
-    auto functor = [] (auto num) { return int(num); };
+    auto functor = [](auto num) { return int(num); };
     auto tuple = std::make_tuple(25, 30u, 0.12f);
     auto result = TransformTuple(functor, tuple);
 
@@ -23,8 +23,8 @@ TEST_CASE("To integral") {
 }
 
 TEST_CASE("Heterogeneous return types in functor") {
-    auto functor = []<class T>(const T& item) { 
-        if constexpr(std::is_same_v<T, std::string>)
+    auto functor = []<class T>(const T& item) {
+        if constexpr (std::is_same_v<T, std::string>)
             return item.size();
         else
             return int(strlen(item));
@@ -39,7 +39,7 @@ TEST_CASE("Heterogeneous return types in functor") {
 
 TEST_CASE("Only strings allowed") {
     auto functor = []<class T>(const T& item) {
-        if constexpr(std::is_same_v<T, std::string>)
+        if constexpr (std::is_same_v<T, std::string>)
             return item;
     };
 

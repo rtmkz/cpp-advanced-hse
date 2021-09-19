@@ -2,7 +2,8 @@
 #include "brainfuck.h"
 
 TEST_CASE("Consume") {
-    REQUIRE(std::is_same_v<Str<'0', '0', '0'>::Consume, decltype(std::pair{Char<'0'>{}, Str<'0', '0'>{}})>);
+    REQUIRE(std::is_same_v<Str<'0', '0', '0'>::Consume,
+                           decltype(std::pair{Char<'0'>{}, Str<'0', '0'>{}})>);
     REQUIRE(std::is_same_v<Str<'a'>::Consume, decltype(std::pair{Char<'a'>{}, Str<>{}})>);
 }
 

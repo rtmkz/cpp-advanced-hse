@@ -21,7 +21,7 @@ TEST_CASE("Fix all arguments") {
 TEST_CASE("Check for forwarding") {
     struct Foo {};
 
-    auto f = [](Foo&&, Foo &&) {};
+    auto f = [](Foo&&, Foo&&) {};
 
     BindFront(f, Foo())(Foo());
 
