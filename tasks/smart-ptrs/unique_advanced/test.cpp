@@ -205,3 +205,15 @@ TEST_CASE("Upcasts") {
         s2 = std::move(s);
     }
 }
+
+void* Create() {
+    return std::malloc(5);
+}
+
+void Destroy(void* ptr) {
+    ::free(ptr);
+}
+
+TEST_CASE("void") {
+    UniquePtr<void, decltype(&Destroy)> ptr(Create(), Destroy);
+}

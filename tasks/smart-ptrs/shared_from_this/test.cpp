@@ -24,8 +24,6 @@ struct Bar : public Foo {
     }
 };
 
-struct PrivateBase : private EnableSharedFromThis<PrivateBase> {};
-
 std::atomic<int32_t> outstanding_new{0};
 
 void* operator new(size_t size) {
@@ -51,9 +49,10 @@ void operator delete(void* p, size_t) noexcept {
 }
 
 TEST_CASE("SharedFromThis") {
+    outstanding_new.store(0);
     {
-        SharedPtr<const T> t1(new T);
-        SharedPtr<const T> t2(MakeShared<const T>());
+        SharedPtr<T> t1(new T);
+        SharedPtr<T> t2(MakeShared<T>());
     }
     REQUIRE(outstanding_new.load() == 0);
 
@@ -64,21 +63,16 @@ TEST_CASE("SharedFromThis") {
         SharedPtr<Bar> t2(MakeShared<Bar>(x));
         REQUIRE(t2->SharedFromThis() == t2);
     }
+    REQUIRE(outstanding_new.load() == 0);
 
     {
         SharedPtr<Y> p(new Z);
         SharedPtr<T> q = p->SharedFromThis();
         REQUIRE(p == q);
     }
+    REQUIRE(outstanding_new.load() == 0);
 
     {
-        typedef SharedPtr<PrivateBase> APtr;
-        APtr a1 = MakeShared<PrivateBase>();
-        REQUIRE(a1.UseCount() == 1);
-    }
-
-    {
-        REQUIRE(outstanding_new.load() == 0);
         T* ptr = new T;
         SharedPtr<T> s(ptr);
         REQUIRE(!ptr->WeakFromThis().Expired());
@@ -95,8 +89,6 @@ TEST_CASE("SharedFromThis") {
     }
 
     {
-        REQUIRE(outstanding_new.load() == 0);
-
         T* ptr = new T;
         WeakPtr<T> weak;
         {
