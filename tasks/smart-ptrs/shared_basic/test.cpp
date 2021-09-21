@@ -3,6 +3,7 @@
 #include <catch.hpp>
 
 #include <memory>
+#include <atomic>
 
 #if defined(__has_feature)
 #if __has_feature(address_sanitizer)
