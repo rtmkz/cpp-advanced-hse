@@ -1,18 +1,90 @@
 #include "../shared.h"
-#include "count_new.h"
 
 #include <catch.hpp>
+
+#include <memory>
+
+#if defined(__has_feature)
+#if __has_feature(address_sanitizer)
+#define ASAN_ENABLED
+#include <sanitizer/allocator_interface.h>
+#endif
+#endif
+
+std::atomic<size_t> allocations_count{0};
+
+void MallocHook(const volatile void*, size_t) {
+    allocations_count.fetch_add(1);
+}
+
+void FreeHook(const volatile void*) {
+}
+
+#ifdef ASAN_ENABLED
+[[maybe_unused]] const auto kInit = [] {
+    int res = __sanitizer_install_malloc_and_free_hooks(MallocHook, FreeHook);
+    if (res == 0) {
+        throw std::runtime_error{"Failed to install ASan allocator hooks"};  // just terminate
+    }
+    return 0;
+}();
+#else
+void* operator new(size_t size) {
+    void* p = malloc(size);
+    MallocHook(p, size);
+    return p;
+}
+
+void* operator new(size_t size, const std::nothrow_t&) noexcept {
+    void* p = malloc(size);
+    MallocHook(p, size);
+    return p;
+}
+
+void operator delete(void* p) noexcept {
+    FreeHook(p);
+    free(p);
+}
+
+void operator delete(void* p, size_t) noexcept {
+    FreeHook(p);
+    free(p);
+}
+#endif
+
+#define EXPECT_ZERO_ALLOCATIONS(X)                  \
+    do {                                            \
+        auto __xxx = allocations_count.load();      \
+        X;                                          \
+        REQUIRE(allocations_count.load() == __xxx); \
+    } while (0)
+
+#define EXPECT_ONE_ALLOCATION(X)                        \
+    do {                                                \
+        auto __xxx = allocations_count.load();          \
+        X;                                              \
+        REQUIRE(allocations_count.load() == __xxx + 1); \
+    } while (0)
+
+#define EXPECT_NO_MORE_THAN_ONE_ALLOCATION(X)           \
+    do {                                                \
+        auto __xxx = allocations_count.load();          \
+        X;                                              \
+        REQUIRE(allocations_count.load() <= __xxx + 1); \
+    } while (0)
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 TEST_CASE("Empty") {
-    SharedPtr<int> a;
-    SharedPtr<int> b;
+    SharedPtr<int> a, b;
+
     b = a;
     SharedPtr c(a);
     b = std::move(c);
+
     REQUIRE(a.Get() == nullptr);
     REQUIRE(b.Get() == nullptr);
+    REQUIRE(c.Get() == nullptr);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -268,55 +340,131 @@ TEST_CASE("Observers") {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-struct A {
-    static int count;
-
-    A(int i, char c) : int_(i), char_(c) {
-        ++count;
-    }
-    A(const A& a) : int_(a.int_), char_(a.char_) {
-        ++count;
-    }
-    ~A() {
-        --count;
+struct Pinned {
+    Pinned(int tag) : tag_(tag) {
     }
 
-    int get_int() const {
-        return int_;
-    }
-    char get_char() const {
-        return char_;
-    }
+    Pinned(const Pinned& a) = delete;
+    Pinned(Pinned&& a) = delete;
 
-    A* operator&() = delete;
+    Pinned& operator=(const Pinned& a) = delete;
+    Pinned& operator=(Pinned&& a) = delete;
+
+    ~Pinned() = default;
+
+    int GetTag() const {
+        return tag_;
+    }
 
 private:
-    int int_;
-    char char_;
+    int tag_;
 };
 
-int A::count = 0;
+TEST_CASE("No copies") {
+    SharedPtr<Pinned> p(new Pinned(1));
+}
 
-TEST_CASE("MakeShared one allocation") {
-    int nc = globalMemCounter.outstanding_new;
-    {
-        int i = 67;
-        char c = 'e';
-        SharedPtr<A> p = MakeShared<A>(i, c);
-        REQUIRE(globalMemCounter.checkOutstandingNewEq(nc+1));
-        REQUIRE(A::count == 1);
-        REQUIRE(p->get_int() == 67);
-        REQUIRE(p->get_char() == 'e');
+struct D {
+    D(Pinned& pinned, std::unique_ptr<int>&& p)
+        : some_uncopyable_thing_(std::move(p)), pinned_(pinned) {
     }
 
-    nc = globalMemCounter.outstanding_new;
-    {
-        char c = 'e';
-        SharedPtr<A> p = MakeShared<A>(67, c);
-        REQUIRE(globalMemCounter.checkOutstandingNewEq(nc+1));
-        REQUIRE(A::count == 1);
-        REQUIRE(p->get_int() == 67);
-        REQUIRE(p->get_char() == 'e');
+    int GetUP() const {
+        return *some_uncopyable_thing_;
     }
-    REQUIRE(A::count == 0);
+
+    Pinned& GetPinned() const {
+        return pinned_;
+    }
+
+private:
+    std::unique_ptr<int> some_uncopyable_thing_;
+    Pinned& pinned_;
+};
+
+TEST_CASE("MakeShared") {
+    SECTION("One allocation") {
+        EXPECT_ONE_ALLOCATION(REQUIRE(*MakeShared<int>(42) == 42));
+    }
+
+    SECTION("Parameters passing") {
+        auto p_int = std::make_unique<int>(42);
+        Pinned pinned(1312);
+        auto p = MakeShared<D>(pinned, std::move(p_int));
+
+        REQUIRE(p->GetUP() == 42);
+        REQUIRE(p->GetPinned().GetTag() == 1312);
+    }
+}
+
+struct Data {
+    static bool data_was_deleted;
+
+    int x;
+    double y;
+
+    ~Data() {
+        data_was_deleted = true;
+    }
+};
+
+bool Data::data_was_deleted = false;
+
+TEST_CASE("Aliasing constructor") {
+    SECTION("It just exists") {
+        SharedPtr sp(new Data{42, 3.14});
+
+        SharedPtr<double> sp2(sp, &sp->y);
+
+        REQUIRE(*sp2 == 3.14);
+    }
+
+    SECTION("Lifetime extension") {
+        {
+            Data::data_was_deleted = false;
+            SharedPtr<double> sp3;
+            {
+                SharedPtr sp(new Data{42, 3.14});
+                SharedPtr<double> sp2(sp, &sp->y);
+                sp3 = sp2;
+            }
+            REQUIRE(*sp3 == 3.14);
+            REQUIRE(!Data::data_was_deleted);
+        }
+        REQUIRE(Data::data_was_deleted);
+    }
+}
+
+class Base {
+public:
+    virtual ~Base() = default;
+};
+
+class Derived : public Base {
+public:
+    static bool i_was_deleted;
+
+    ~Derived() {
+        i_was_deleted = true;
+    }
+};
+
+bool Derived::i_was_deleted = false;
+
+TEST_CASE("Type conversions") {
+    SECTION("Destruction") {
+        Derived::i_was_deleted = false;
+        { SharedPtr<Base> sb(new Derived); }
+        REQUIRE(Derived::i_was_deleted);
+    }
+
+    SECTION("Constness") {
+        SharedPtr<int> s1(new int(42));
+        SharedPtr<const int> s2 = s1;
+        SharedPtr<const int> s3 = std::move(s1);
+
+        s1.Reset(new int(43));
+        s2 = s1;
+        s3 = std::move(s1);
+    }
 }
