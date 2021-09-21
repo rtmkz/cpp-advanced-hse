@@ -5,14 +5,14 @@
 Исходный код находится в файле `main.cpp`.
 Исполняемый файл запускается на Ubuntu 20.04 и получен командой
 ```shell
-clang++-11 main.cpp -o /tmp/a.out -std=c++20
+clang++-11 main.cpp -o bad_hash -std=c++20
 ```
 **Обратите внимание**, файл скомпилирован с `libstdc++`.
 
 Советуем не писать ввод каждый раз руками, а сохранить его в файл и
 пользоваться перенаправлением ввода
 ```shell
-./reallol <input.txt
+./bad_hash <input.txt
 ```
 
 Послать ввод из файла на сервер можно [командой](https://gitlab.com/danlark/cpp-advanced-hse/-/blob/main/docs/crashme.md#подготовленный-ввод):
