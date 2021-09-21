@@ -32,7 +32,11 @@ TEST_CASE("Copy/move") {
     REQUIRE(c.Expired());
 
     b = std::move(c);
-    auto locked = d.Lock();
+
+    WeakPtr e(std::move(d));
+    REQUIRE(d.Lock().Get() == nullptr);
+
+    auto locked = e.Lock();
     REQUIRE(*locked == "aba");
 
     WeakPtr<std::string> start(a);
