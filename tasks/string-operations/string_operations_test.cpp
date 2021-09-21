@@ -1,4 +1,5 @@
 #include <catch.hpp>
+#include <allocations_checker.h>
 
 #include <string_operations.h>
 
@@ -11,77 +12,8 @@
 #include <type_traits>
 #include <unistd.h>
 
-#if defined(__has_feature)
-#if __has_feature(address_sanitizer)
-#define ASAN_ENABLED
-#include <sanitizer/allocator_interface.h>
-#endif
-#endif
-
 using namespace std::string_view_literals;
 using namespace std::string_literals;
-
-std::atomic<size_t> allocations_count{0};
-
-void MallocHook(const volatile void*, size_t) {
-    allocations_count.fetch_add(1);
-}
-
-void FreeHook(const volatile void*) {
-}
-
-#ifdef ASAN_ENABLED
-[[maybe_unused]] const auto kInit = [] {
-    int res = __sanitizer_install_malloc_and_free_hooks(MallocHook, FreeHook);
-    if (res == 0) {
-        throw std::runtime_error{"Failed to install ASan allocator hooks"};  // just terminate
-    }
-    return 0;
-}();
-#else
-void* operator new(size_t size) {
-    void* p = malloc(size);
-    MallocHook(p, size);
-    return p;
-}
-
-void* operator new(size_t size, const std::nothrow_t&) noexcept {
-    void* p = malloc(size);
-    MallocHook(p, size);
-    return p;
-}
-
-void operator delete(void* p) noexcept {
-    FreeHook(p);
-    free(p);
-}
-
-void operator delete(void* p, size_t) noexcept {
-    FreeHook(p);
-    free(p);
-}
-#endif
-
-#define EXPECT_ZERO_ALLOCATIONS(X)                  \
-    do {                                            \
-        auto __xxx = allocations_count.load();      \
-        X;                                          \
-        REQUIRE(allocations_count.load() == __xxx); \
-    } while (0)
-
-#define EXPECT_ONE_ALLOCATION(X)                        \
-    do {                                                \
-        auto __xxx = allocations_count.load();          \
-        X;                                              \
-        REQUIRE(allocations_count.load() == __xxx + 1); \
-    } while (0)
-
-#define EXPECT_NO_MORE_THAN_ONE_ALLOCATION(X)           \
-    do {                                                \
-        auto __xxx = allocations_count.load();          \
-        X;                                              \
-        REQUIRE(allocations_count.load() <= __xxx + 1); \
-    } while (0)
 
 template <typename T>
 struct FunctionTraits;
