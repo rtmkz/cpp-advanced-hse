@@ -20,7 +20,8 @@ public:
 
     // Aliasing constructor
     // #8 from https://en.cppreference.com/w/cpp/memory/shared_ptr/shared_ptr
-    SharedPtr(const SharedPtr& other, T* ptr);
+    template<typename Y>
+    SharedPtr(const SharedPtr<Y>& other, T* ptr);
 
     // Promote `WeakPtr`
     // #11 from https://en.cppreference.com/w/cpp/memory/shared_ptr/shared_ptr
