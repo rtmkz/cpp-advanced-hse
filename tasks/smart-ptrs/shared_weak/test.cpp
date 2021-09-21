@@ -25,7 +25,7 @@ TEST_CASE("Copy/move") {
     WeakPtr c(b);
     WeakPtr<std::string> d(a);
 
-    REQUIRE(d.UseCount() == 3);
+    REQUIRE(d.UseCount() == 1);
 
     REQUIRE(!c.Expired());
     c = empty;
@@ -74,6 +74,20 @@ TEST_CASE("Shared from Weak") {
     WeakPtr<std::string> y(*x);
     delete x;
     REQUIRE(y.Expired());
-    SharedPtr z(y);
+    SharedPtr z = y.Lock();
     REQUIRE(z.Get() == nullptr);
+}
+
+TEST_CASE("Shared from invalid Weak") {
+    WeakPtr<int> w_ptr;
+    {
+        SharedPtr<int> ptr = MakeShared<int>(42);
+        w_ptr = ptr;
+    }
+    REQUIRE_THROWS_AS(SharedPtr<int>(w_ptr), BadWeakPtr);
+}
+
+TEST_CASE("Constness") {
+    SharedPtr<int> sp(new int(42));
+    WeakPtr<const int> wp(sp);
 }
