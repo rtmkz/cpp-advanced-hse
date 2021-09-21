@@ -137,7 +137,11 @@ TEST_CASE("Array specialization") {
     }
 
     SECTION("Operator []") {
-        int* arr = new int[]{0, 1, 2, 3, 4};
+        int* arr = new int[5];
+        for (size_t i = 0; i < 5; ++i) {
+            arr[i] = i;
+        }
+
         UniquePtr<int[]> u(arr);
         for (int i = 0; i < 5; ++i) {
             REQUIRE(u[i] == i);
