@@ -461,10 +461,15 @@ TEST_CASE("Type conversions") {
     SECTION("Constness") {
         SharedPtr<int> s1(new int(42));
         SharedPtr<const int> s2 = s1;
+
         SharedPtr<const int> s3 = std::move(s1);
+        REQUIRE(!s1);
+        REQUIRE(s2.UseCount() == 2);
 
         s1.Reset(new int(43));
         s2 = s1;
         s3 = std::move(s1);
+        REQUIRE(!s1);
+        REQUIRE(s3.UseCount() == 2);
     }
 }
