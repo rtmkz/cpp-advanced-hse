@@ -18,7 +18,7 @@ TEST_CASE("Empty weak") {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-TEST_CASE("Copy/move") {
+TEST_CASE("Copy/move WeakPtr") {
     SharedPtr<std::string> a(new std::string("aba"));
     WeakPtr<std::string> b(a);
     WeakPtr<std::string> empty;
