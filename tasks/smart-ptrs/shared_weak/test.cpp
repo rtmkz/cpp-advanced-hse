@@ -19,7 +19,7 @@ TEST_CASE("Empty weak") {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 TEST_CASE("Copy/move") {
-    SharedPtr a(new std::string("aba"));
+    SharedPtr<std::string> a(new std::string("aba"));
     WeakPtr<std::string> b(a);
     WeakPtr<std::string> empty;
     WeakPtr c(b);
@@ -53,7 +53,7 @@ TEST_CASE("Copy/move") {
 TEST_CASE("Weak expiration") {
     WeakPtr<std::string>* a;
     {
-        SharedPtr b(new std::string("aba"));
+        SharedPtr<std::string> b(new std::string("aba"));
         SharedPtr c(b);
         a = new WeakPtr<std::string>(c);
         auto test = a->Lock();
@@ -65,7 +65,7 @@ TEST_CASE("Weak expiration") {
 }
 
 TEST_CASE("Weak extends Shared") {
-    SharedPtr<std::string>* b = new SharedPtr(new std::string("aba"));
+    SharedPtr<std::string>* b = new SharedPtr<std::string>(new std::string("aba"));
     WeakPtr<std::string> c(*b);
     auto a = c.Lock();
     delete b;
@@ -74,7 +74,7 @@ TEST_CASE("Weak extends Shared") {
 }
 
 TEST_CASE("Shared from Weak") {
-    SharedPtr<std::string>* x = new SharedPtr(new std::string("aba"));
+    SharedPtr<std::string>* x = new SharedPtr<std::string>(new std::string("aba"));
     WeakPtr<std::string> y(*x);
     delete x;
     REQUIRE(y.Expired());
