@@ -127,7 +127,7 @@ TEST_CASE("Modifiers") {
             REQUIRE(ModifiersA::count == 0);
             REQUIRE(ModifiersB::count == 0);
             REQUIRE(p.UseCount() == 0);
-            REQUIRE(p.Get() == 0);
+            REQUIRE(p.Get() == nullptr);
         }
         REQUIRE(ModifiersA::count == 0);
     }
@@ -176,7 +176,7 @@ TEST_CASE("Modifiers") {
         REQUIRE(ModifiersC::count == 0);
         {
             ModifiersC* ptr1 = new ModifiersC;
-            ModifiersC* ptr2 = 0;
+            ModifiersC* ptr2 = nullptr;
             SharedPtr<ModifiersC> p1(ptr1);
             {
                 SharedPtr<ModifiersC> p2;
@@ -193,7 +193,7 @@ TEST_CASE("Modifiers") {
         }
         REQUIRE(ModifiersC::count == 0);
         {
-            ModifiersC* ptr1 = 0;
+            ModifiersC* ptr1 = nullptr;
             ModifiersC* ptr2 = new ModifiersC;
             SharedPtr<ModifiersC> p1;
             {
@@ -211,8 +211,8 @@ TEST_CASE("Modifiers") {
         }
         REQUIRE(ModifiersC::count == 0);
         {
-            ModifiersC* ptr1 = 0;
-            ModifiersC* ptr2 = 0;
+            ModifiersC* ptr1 = nullptr;
+            ModifiersC* ptr2 = nullptr;
             SharedPtr<ModifiersC> p1;
             {
                 SharedPtr<ModifiersC> p2;
