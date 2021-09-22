@@ -5,7 +5,6 @@
 
 #include <memory>
 
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 TEST_CASE("Empty") {
@@ -23,7 +22,7 @@ TEST_CASE("Empty") {
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 TEST_CASE("Copy/move") {
-    SharedPtr a(new std::string("aba"));
+    SharedPtr<std::string> a(new std::string("aba"));
     std::string* ptr;
     {
         SharedPtr b(a);
@@ -33,7 +32,7 @@ TEST_CASE("Copy/move") {
     REQUIRE(ptr == a.Get());
     REQUIRE(*ptr == "aba");
 
-    SharedPtr b(new std::string("caba"));
+    SharedPtr<std::string> b(new std::string("caba"));
     {
         SharedPtr c(b);
         SharedPtr d(b);
@@ -47,7 +46,7 @@ TEST_CASE("Copy/move") {
 
     SharedPtr<std::string> end;
     {
-        SharedPtr d(new std::string("delete"));
+        SharedPtr<std::string> d(new std::string("delete"));
         d = b;
         SharedPtr c(std::move(b));
         REQUIRE(*d == "test");
@@ -114,7 +113,7 @@ int ModifiersC::count = 0;
 TEST_CASE("Modifiers") {
     SECTION("Reset") {
         {
-            SharedPtr p(new ModifiersB);
+            SharedPtr<ModifiersB> p(new ModifiersB);
             p.Reset();
             REQUIRE(ModifiersA::count == 0);
             REQUIRE(ModifiersB::count == 0);
@@ -135,7 +134,7 @@ TEST_CASE("Modifiers") {
 
     SECTION("Reset ptr") {
         {
-            SharedPtr p(new ModifiersB);
+            SharedPtr<ModifiersB> p(new ModifiersB);
             ModifiersA* ptr = new ModifiersA;
             p.Reset(ptr);
             REQUIRE(ModifiersA::count == 1);
@@ -160,9 +159,9 @@ TEST_CASE("Modifiers") {
         {
             ModifiersC* ptr1 = new ModifiersC;
             ModifiersC* ptr2 = new ModifiersC;
-            SharedPtr p1(ptr1);
+            SharedPtr<ModifiersC> p1(ptr1);
             {
-                SharedPtr p2(ptr2);
+                SharedPtr<ModifiersC> p2(ptr2);
                 p1.Swap(p2);
                 REQUIRE(p1.UseCount() == 1);
                 REQUIRE(p1.Get() == ptr2);
@@ -345,7 +344,7 @@ bool Data::data_was_deleted = false;
 
 TEST_CASE("Aliasing constructor") {
     SECTION("It just exists") {
-        SharedPtr sp(new Data{42, 3.14});
+        SharedPtr<Data> sp(new Data{42, 3.14});
 
         SharedPtr<double> sp2(sp, &sp->y);
 
@@ -357,7 +356,7 @@ TEST_CASE("Aliasing constructor") {
             Data::data_was_deleted = false;
             SharedPtr<double> sp3;
             {
-                SharedPtr sp(new Data{42, 3.14});
+                SharedPtr<Data> sp(new Data{42, 3.14});
                 SharedPtr<double> sp2(sp, &sp->y);
                 sp3 = sp2;
             }
@@ -404,5 +403,42 @@ TEST_CASE("Type conversions") {
         s3 = std::move(s1);
         REQUIRE(!s1);
         REQUIRE(s3.UseCount() == 2);
+    }
+}
+
+struct A {
+    ~A() = default;
+};
+
+struct B : A {
+    ~B() {
+        destructor_called = true;
+    }
+
+    static bool destructor_called;
+};
+
+bool B::destructor_called = false;
+
+TEST_CASE("Destructor for correct type") {
+    SECTION("Regular constructor") {
+        B::destructor_called = false;
+        { SharedPtr<A>(new B()); }
+        REQUIRE(B::destructor_called);
+    }
+
+    SECTION("MakeShared") {
+        B::destructor_called = false;
+        { SharedPtr<A> ptr = MakeShared<B>(); }
+        REQUIRE(B::destructor_called);
+    }
+
+    SECTION("Reset") {
+        B::destructor_called = false;
+        {
+            SharedPtr<A> ptr(new A);
+            ptr.Reset(new B);
+        }
+        REQUIRE(B::destructor_called);
     }
 }
