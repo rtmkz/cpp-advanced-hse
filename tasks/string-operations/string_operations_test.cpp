@@ -290,5 +290,4 @@ TEST_CASE("StrCat") {
                        std::numeric_limits<unsigned int>::max(), std::numeric_limits<int>::max())));
     EXPECT_NO_MORE_THAN_ONE_ALLOCATION(REQUIRE(StrCat().empty()));
     ReturnTypeCheckerOr<std::string, std::string_view>(StrCat<int>);
-    ReturnTypeCheckerOr<std::string>(StrCat<>);
 }
