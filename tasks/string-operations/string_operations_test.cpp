@@ -290,4 +290,8 @@ TEST_CASE("StrCat") {
                        std::numeric_limits<unsigned int>::max(), std::numeric_limits<int>::max())));
     EXPECT_NO_MORE_THAN_ONE_ALLOCATION(REQUIRE(StrCat().empty()));
     ReturnTypeCheckerOr<std::string, std::string_view>(StrCat<int>);
+
+    std::string result = StrCat(kVeryLongString, 1);
+    std::string large_string(result.capacity() + 1, 'a');
+    EXPECT_ONE_ALLOCATION(StrCat(large_string, 1));
 }
