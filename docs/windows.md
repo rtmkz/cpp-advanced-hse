@@ -21,7 +21,7 @@ sudo ln -s /usr/bin/g++-10 /usr/bin/g++
 
 Если PowerShell пишет, что не найден `git`, то установите его [по инструкции](https://github.com/git-guides/install-git#install-git-on-windows).
 
-5. Установите свежий CLion [с официального сайта](https://www.jetbrains.com/clion/).
+5. Установите свежий (версия не ниже 2021.2) CLion [с официального сайта](https://www.jetbrains.com/clion/).
 
 6. Настройте в CLion WSL-toolchain по [инструкции](https://www.jetbrains.com/help/clion/how-to-use-wsl-development-environment-in-product.html#wsl-general).
 
@@ -41,6 +41,6 @@ sudo ln -s /usr/bin/g++-10 /usr/bin/g++
 
 ![](images/windows-setup-3.png)
 
-9. Окружение настроено, можно переходить к пункту "Сдача первой задачи" основной инструкции.
+9. Окружение настроено, можно переходить к пункту "Сдача первой задачи" основной инструкции. Сдавать задачи нужно из PowerShell, обновлять репозиторий тоже.
 
 **Важно!** В случае проблем при submit проверьте, что `python3` есть в системе и добавлен в PATH.
