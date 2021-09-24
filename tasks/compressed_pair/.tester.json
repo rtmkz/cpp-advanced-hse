@@ -6,6 +6,6 @@
         "tuple"
     ],
     "forbidden_regexp": [
-        "[[no_unique_address]]"
+        "no_unique_address"
     ]
 }
