@@ -28,12 +28,35 @@
       score: 100
 
 - group:    02-memory
-  start:    17-07-2021 18:00
-  deadline: 21-09-2022 18:00
+  start:    11-09-2021 13:00
+  deadline: 24-09-2021 19:00
   tasks:
-    - task: compressed_pair
+    - task: string-view
+      score: 100
+    - task: lru-cache
+      score: 100
+    - task: intrusive-list
       score: 100
     - task: reallol
+      score: 100
+    - task: string-operations
+      score: 150
+    - task: compressed_pair
+      score: 150
+
+- group:    03-types
+  start:    18-09-2021 13:00
+  deadline: 08-10-2021 19:00
+  tasks:
+    - task: dungeon
+      score: 100
+    - task: fold
+      score: 100
+    - task: bind_front
+      score: 100
+    - task: curry
+      score: 100
+    - task: stdflib
       score: 100
 
 - group:    03-smart-ptrs
