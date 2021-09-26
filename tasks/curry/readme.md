@@ -20,3 +20,5 @@ curried_func(int, char, bool);
 original_func(int, char, bool);
 uncurried_func(const std::tuple<int, char, bool>&);
 ```
+
+В этой задаче можно пользоваться [`std::apply`](https://en.cppreference.com/w/cpp/utility/apply).
