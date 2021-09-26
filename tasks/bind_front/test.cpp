@@ -54,3 +54,32 @@ TEST_CASE("Variadic") {
     REQUIRE(BindFront(f, false, 0, "hello world", 1337)("hello", true, 0.0f) == false);
     REQUIRE(BindFront(f, 84, 0, "hello world", 1337)("hello", true, 0.0f) == 84);
 }
+
+struct Functor {
+    int operator()(int x, int y) const {
+        return x + y + val;
+    }
+
+    int val = 71;
+};
+
+TEST_CASE("LvalueReferences") {
+    std::function<int(int)> func;
+    {
+        int scoped = 55;
+        func = BindFront(Functor{}, scoped);
+    }
+    REQUIRE(func(3) == 129);
+}
+
+TEST_CASE("MoveOnlyParams") {
+    auto ptr = std::make_unique<int>(5);
+    auto f = [ptr = std::move(ptr)](std::unique_ptr<int> a, std::unique_ptr<int> b) mutable {
+        *ptr = *a + *b;
+        return ptr.release();
+    };
+    auto pa = std::make_unique<int>(13);
+    auto pb = std::make_unique<int>(41);
+    ptr.reset(BindFront(std::move(f), std::move(pa))(std::move(pb)));
+    REQUIRE(*ptr == 54);
+}
