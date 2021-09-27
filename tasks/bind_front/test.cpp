@@ -1,6 +1,9 @@
-#include <catch.hpp>
-#include <type_traits>
 #include "bind_front.h"
+
+#include <catch.hpp>
+#include <functional>
+#include <memory>
+#include <type_traits>
 
 TEST_CASE("Simple") {
     auto f = [](int, char c) { return c; };
@@ -82,4 +85,13 @@ TEST_CASE("MoveOnlyParams") {
     auto pb = std::make_unique<int>(41);
     ptr.reset(BindFront(std::move(f), std::move(pa))(std::move(pb)));
     REQUIRE(*ptr == 54);
+}
+
+TEST_CASE("DoNotMoveFunctor") {
+    std::function<int()> incrementer = [count=0]() mutable {
+        return ++count;
+    };
+
+    REQUIRE(BindFront(incrementer)() == 1);
+    REQUIRE(BindFront(incrementer)() == 1);
 }
