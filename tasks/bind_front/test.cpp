@@ -88,9 +88,7 @@ TEST_CASE("MoveOnlyParams") {
 }
 
 TEST_CASE("DoNotMoveFunctor") {
-    std::function<int()> incrementer = [count=0]() mutable {
-        return ++count;
-    };
+    std::function<int()> incrementer = [count = 0]() mutable { return ++count; };
 
     REQUIRE(BindFront(incrementer)() == 1);
     REQUIRE(BindFront(incrementer)() == 1);
