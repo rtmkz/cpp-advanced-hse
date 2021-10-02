@@ -89,7 +89,7 @@ public:
     //
     // Returns the associated `absl::Status` of the `absl::StatusOr<T>` object's
     // error.
-    const absl::Status& status() const;
+    const absl::Status& status() const;  // NOLINT
 
 private:
     void InitWhat() const;
@@ -189,7 +189,7 @@ public:
     // This instance data provides a generic `value_type` member for use within
     // generic programming. This usage is analogous to that of
     // `optional::value_type` in the case of `std::optional`.
-    typedef T value_type;
+    typedef T value_type;  // NOLINT
 
     // Constructors
 
@@ -465,8 +465,8 @@ public:
     // Returns a reference to the current `absl::Status` contained within the
     // `absl::StatusOr<T>`. If `absl::StatusOr<T>` contains a `T`, then this
     // function returns `absl::OkStatus()`.
-    const Status& status() const&;
-    Status status() &&;
+    const Status& status() const&;  // NOLINT
+    Status status() &&;             // NOLINT
 
     // StatusOr<T>::value()
     //
@@ -494,10 +494,10 @@ public:
     //
     // The `std::move` on statusor instead of on the whole expression enables
     // warnings about possible uses of the statusor object after the move.
-    const T& value() const& ABSL_ATTRIBUTE_LIFETIME_BOUND;
-    T& value() & ABSL_ATTRIBUTE_LIFETIME_BOUND;
-    const T&& value() const&& ABSL_ATTRIBUTE_LIFETIME_BOUND;
-    T&& value() && ABSL_ATTRIBUTE_LIFETIME_BOUND;
+    const T& value() const& ABSL_ATTRIBUTE_LIFETIME_BOUND;    // NOLINT
+    T& value() & ABSL_ATTRIBUTE_LIFETIME_BOUND;               // NOLINT
+    const T&& value() const&& ABSL_ATTRIBUTE_LIFETIME_BOUND;  // NOLINT
+    T&& value() && ABSL_ATTRIBUTE_LIFETIME_BOUND;             // NOLINT
 
     // StatusOr<T>:: operator*()
     //
@@ -538,9 +538,9 @@ public:
     // Unlike with `value`, calling `std::move()` on the result of `value_or` will
     // still trigger a copy.
     template <typename U>
-    T value_or(U&& default_value) const&;
+    T value_or(U&& default_value) const&;  // NOLINT
     template <typename U>
-    T value_or(U&& default_value) &&;
+    T value_or(U&& default_value) &&;  // NOLINT
 
     // StatusOr<T>::IgnoreError()
     //
@@ -554,7 +554,7 @@ public:
     // Reconstructs the inner value T in-place using the provided args, using the
     // T(args...) constructor. Returns reference to the reconstructed `T`.
     template <typename... Args>
-    T& emplace(Args&&... args) {
+    T& emplace(Args&&... args) {  // NOLINT
         if (ok()) {
             this->Clear();
             this->MakeValue(std::forward<Args>(args)...);
@@ -568,7 +568,7 @@ public:
     template <typename U, typename... Args,
               std::enable_if_t<
                   std::is_constructible<T, std::initializer_list<U>&, Args&&...>::value, int> = 0>
-    T& emplace(std::initializer_list<U> ilist, Args&&... args) {
+    T& emplace(std::initializer_list<U> ilist, Args&&... args) {  // NOLINT
         if (ok()) {
             this->Clear();
             this->MakeValue(ilist, std::forward<Args>(args)...);
@@ -592,8 +592,9 @@ private:
 // This operator checks the equality of two `absl::StatusOr<T>` objects.
 template <typename T>
 bool operator==(const StatusOr<T>& lhs, const StatusOr<T>& rhs) {
-    if (lhs.ok() && rhs.ok())
+    if (lhs.ok() && rhs.ok()) {
         return *lhs == *rhs;
+    }
     return lhs.status() == rhs.status();
 }
 
@@ -656,15 +657,17 @@ Status StatusOr<T>::status() && {
 
 template <typename T>
 const T& StatusOr<T>::value() const& {
-    if (!this->ok())
+    if (!this->ok()) {
         internal_statusor::ThrowBadStatusOrAccess(this->status_);
+    }
     return this->data_;
 }
 
 template <typename T>
 T& StatusOr<T>::value() & {
-    if (!this->ok())
+    if (!this->ok()) {
         internal_statusor::ThrowBadStatusOrAccess(this->status_);
+    }
     return this->data_;
 }
 
