@@ -38,6 +38,11 @@ add_subdirectory(tasks/stdflib)
 add_subdirectory(tasks/dungeon)
 add_subdirectory(tasks/fold)
 
+# 5
+add_subdirectory(tasks/grep)
+add_subdirectory(tasks/safe-transform)
+add_subdirectory(tasks/tryhard)
+
 # 7
 add_subdirectory(tasks/algo_spec)
 add_subdirectory(tasks/transform_tuple)
