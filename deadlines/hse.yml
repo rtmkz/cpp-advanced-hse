@@ -76,9 +76,24 @@
     - task:  smart-ptrs/shared_from_this
       score: 0
 
+- group:    05-errors
+  start:    02-10-2021 13:00
+  deadline: 15-10-2021 19:00
+  tasks:
+    - task: safe-transform
+      score: 100
+    - task: defer
+      score: 100
+    - task: tryhard
+      score: 100
+    - task: grep
+      score: 100
+
 - group:    bonus
   start:    17-07-2021 18:00
   deadline: 21-09-2022 18:00
   tasks:
     - task: bad-hash
+      score: 100
+    - task: solve_or_die
       score: 100

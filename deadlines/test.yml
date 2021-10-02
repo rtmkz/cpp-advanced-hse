@@ -78,11 +78,13 @@
   start:    17-07-2021 18:00
   deadline: 21-09-2022 18:00
   tasks:
-    - task: grep
+    - task: safe-transform
+      score: 100
+    - task: defer
       score: 100
     - task: tryhard
       score: 100
-    - task: safe-transform
+    - task: grep
       score: 100
 
 - group:    bonus
