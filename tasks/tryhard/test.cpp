@@ -63,7 +63,7 @@ void CheckValueExistence(Type) {
 }
 
 template <class Type, class... Args>
-void CheckValueExistence(Type, Args... args) {
+void CheckValueExistence(Type, Args...) {
     // OK
 }
 
