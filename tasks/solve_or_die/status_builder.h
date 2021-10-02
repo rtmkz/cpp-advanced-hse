@@ -162,8 +162,9 @@ public:
 
     template <typename T>
     StatusBuilder& operator<<(const T& msg) {
-        if (status_.ok())
+        if (status_.ok()) {
             return *this;
+        }
         *stream_ << msg;
         return *this;
     }
