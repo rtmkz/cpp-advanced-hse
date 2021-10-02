@@ -42,6 +42,7 @@ add_subdirectory(tasks/fold)
 add_subdirectory(tasks/grep)
 add_subdirectory(tasks/safe-transform)
 add_subdirectory(tasks/tryhard)
+add_subdirectory(tasks/defer)
 
 # 7
 add_subdirectory(tasks/algo_spec)
