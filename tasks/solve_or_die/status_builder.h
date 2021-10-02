@@ -57,12 +57,12 @@ public:
     }
 
     // The line number of the captured source location.
-    constexpr std::uint_least32_t line() const {
+    constexpr std::uint_least32_t line() const {  // NOLINT
         return line_;
     }
 
     // The file name of the captured source location.
-    constexpr const char* file_name() const {
+    constexpr const char* file_name() const {  // NOLINT
         return file_name_;
     }
 
@@ -120,7 +120,7 @@ public:
         : status_(original_status), line_(line), file_(file), stream_(new std::ostringstream) {
     }
 
-    bool ok() const {
+    bool ok() const {  // NOLINT
         return status_.ok();
     }
 

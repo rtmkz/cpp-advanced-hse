@@ -32,7 +32,7 @@ template <typename T, typename U, typename = void>
 struct HasConversionOperatorToStatusOr : std::false_type {};
 
 template <typename T, typename U>
-void test(char (*)[sizeof(std::declval<U>().operator absl::StatusOr<T>())]);
+void test(char (*)[sizeof(std::declval<U>().operator absl::StatusOr<T>())]);  // NOLINT
 
 template <typename T, typename U>
 struct HasConversionOperatorToStatusOr<T, U, decltype(test<T, U>(0))> : std::true_type {};
@@ -193,22 +193,26 @@ public:
     }
 
     StatusOrData& operator=(const StatusOrData& other) {
-        if (this == &other)
+        if (this == &other) {
             return *this;
-        if (other.ok())
+        }
+        if (other.ok()) {
             Assign(other.data_);
-        else
+        } else {
             AssignStatus(other.status_);
+        }
         return *this;
     }
 
     StatusOrData& operator=(StatusOrData&& other) {
-        if (this == &other)
+        if (this == &other) {
             return *this;
-        if (other.ok())
+        }
+        if (other.ok()) {
             Assign(std::move(other.data_));
-        else
+        } else {
             AssignStatus(std::move(other.status_));
+        }
         return *this;
     }
 
@@ -238,7 +242,7 @@ public:
         EnsureNotOk();
     }
 
-    bool ok() const {
+    bool ok() const {  // NOLINT
         return status_.ok();
     }
 
@@ -262,18 +266,21 @@ protected:
     };
 
     void Clear() {
-        if (ok())
+        if (ok()) {
             data_.~T();
+        }
     }
 
     void EnsureOk() const {
-        if (!ok())
+        if (!ok()) {
             Helper::Crash(status_);
+        }
     }
 
     void EnsureNotOk() {
-        if (ok())
+        if (ok()) {
             Helper::HandleInvalidStatusCtorArg(&status_);
+        }
     }
 
     // Construct the value (ie. data_) through placement new with the passed

@@ -461,12 +461,12 @@ public:
     //
     // Returns `true` if `this->ok()`. Prefer checking for an OK status using this
     // member function.
-    ABSL_MUST_USE_RESULT bool ok() const;
+    ABSL_MUST_USE_RESULT bool ok() const;  // NOLINT
 
     // Status::code()
     //
     // Returns the canonical error code of type `absl::StatusCode` of this status.
-    absl::StatusCode code() const;
+    absl::StatusCode code() const;  // NOLINT
 
     // Status::raw_code()
     //
@@ -478,7 +478,7 @@ public:
     //
     // NOTE: This function should only be called when converting to an associated
     // wire format. Use `Status::code()` for error handling.
-    int raw_code() const;
+    int raw_code() const;  // NOLINT
 
     // Status::message()
     //
@@ -486,7 +486,7 @@ public:
     // Note that this message rarely describes the error code.  It is not unusual
     // for the error message to be the empty string. As a result, prefer
     // `Status::ToString()` for debug logging.
-    std::string_view message() const;
+    std::string_view message() const;  // NOLINT
 
     friend bool operator==(const Status&, const Status&);
     friend bool operator!=(const Status&, const Status&);
@@ -514,7 +514,7 @@ public:
     // swap()
     //
     // Swap the contents of one status with another.
-    friend void swap(Status& a, Status& b);
+    friend void swap(Status& a, Status& b);  // NOLINT
 
     //----------------------------------------------------------------------------
     // Payload Management APIs
