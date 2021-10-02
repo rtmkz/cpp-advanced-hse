@@ -74,6 +74,17 @@
     - task: smart-ptrs/shared_from_this
       score: 0
 
+- group:    05-errors
+  start:    17-07-2021 18:00
+  deadline: 21-09-2022 18:00
+  tasks:
+    - task: grep
+      score: 100
+    - task: tryhard
+      score: 100
+    - task: safe-transform
+      score: 100
+
 - group:    bonus
   start:    17-07-2021 18:00
   deadline: 21-09-2022 18:00
