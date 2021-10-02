@@ -1,0 +1,6 @@
+{
+    "allow_change": "status_macros.h",
+    "tests": "test_solve_or_die",
+    "solutions": "private",
+    "forbidden_regexp": [],
+}
