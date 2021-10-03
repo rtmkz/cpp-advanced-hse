@@ -23,6 +23,7 @@ perf 0  0.18s user 0.00s system 98% cpu 0.183 total
 perf 1  15.58s user 0.00s system 99% cpu 15.587 total
 ```
 Very simple try-catch block to [asm](https://godbolt.org/z/4f93nMcaP)
+
 6. **Throw by value, catch by reference** (catch_reference_of_value.cpp) [some text](http://ptgmedia.pearsoncmg.com/images/0321113586/items/sutter_item73.pdf)
 7. Exceptions: where they live (heap or some memory for a small amount of std::bad_alloc)
 8. Don't use **setjmp** and **longjmp** with С++
