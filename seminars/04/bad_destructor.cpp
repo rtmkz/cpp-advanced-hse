@@ -8,7 +8,8 @@ class Holder {
         std::cout << "Holder( " << value << " )\n";
     }
 
-    ~Holder() {
+    ~Holder()  // noexcept(false) // uncomment and try again, it will catch it
+    {
         std::cout << "~Holder( " << value << " )\n";
         throw std::runtime_error("Try to catch me");
     }
@@ -24,6 +25,13 @@ void Foo()
 }
 
 
+void Hopelessness()
+{
+    Holder hope{"hopelessness"};
+    throw std::runtime_error("First exception");
+}
+
+
 int main()
 {
     try {
@@ -31,5 +39,14 @@ int main()
     } catch (std::runtime_error& e) {
         std::cout << "Caught!\n";
     }
-}
 
+    try{
+        try {
+            Hopelessness();
+        } catch (std::runtime_error& e) {
+            std::cout << "Caught " << e.what() << "!\n";
+        }
+    } catch (std::runtime_error& e) {
+        std::cout << "Caught " << e.what() << "!\n";
+    }
+}
