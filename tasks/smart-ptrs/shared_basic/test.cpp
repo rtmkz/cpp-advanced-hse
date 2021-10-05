@@ -8,15 +8,22 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 TEST_CASE("Empty") {
-    SharedPtr<int> a, b;
+    SECTION("Empty state") {
+        SharedPtr<int> a, b;
 
-    b = a;
-    SharedPtr c(a);
-    b = std::move(c);
+        b = a;
+        SharedPtr c(a);
+        b = std::move(c);
 
-    REQUIRE(a.Get() == nullptr);
-    REQUIRE(b.Get() == nullptr);
-    REQUIRE(c.Get() == nullptr);
+        REQUIRE(a.Get() == nullptr);
+        REQUIRE(b.Get() == nullptr);
+        REQUIRE(c.Get() == nullptr);
+    }
+
+    SECTION("No allocations in default ctor") {
+        EXPECT_ZERO_ALLOCATIONS(SharedPtr<int>());
+        EXPECT_ZERO_ALLOCATIONS(SharedPtr<int>(nullptr));
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
