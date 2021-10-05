@@ -4,6 +4,7 @@
 #include "../my_int.h"
 
 #include <catch.hpp>
+#include <tuple>
 
 TEST_CASE("Construction with deleters") {
     SECTION("From copyable deleter") {
@@ -35,7 +36,7 @@ TEST_CASE("Construction with deleters") {
 }
 
 TEST_CASE("Swap with deleters") {
-    SECTION("If ftoring deleter by value") {
+    SECTION("If storing deleter by value") {
         MyInt* p1 = new MyInt(1);
         UniquePtr<MyInt, Deleter<MyInt>> s1(p1, Deleter<MyInt>(1));
         MyInt* p2 = new MyInt(2);
@@ -206,16 +207,17 @@ TEST_CASE("Compressed pair usage") {
 
     SECTION("Stateless struct deleter") {
         static_assert(sizeof(UniquePtr<int>) == sizeof(void*));
-        static_assert(sizeof(UniquePtr<int, std::default_delete<int>>) == 8);
+        static_assert(sizeof(UniquePtr<int, std::default_delete<int>>) == sizeof(int*));
     }
 
     SECTION("Stateful struct deleter") {
-        static_assert(sizeof(UniquePtr<int, StatefulDeleter<int>>) == 16);
+        static_assert(sizeof(UniquePtr<int, StatefulDeleter<int>>) ==
+                      sizeof(std::pair<int*, StatefulDeleter<int>>));
     }
 
     SECTION("Stateless lambda deleter") {
         auto lambda_deleter = [](int* ptr) { delete ptr; };
-        static_assert(sizeof(UniquePtr<int, decltype(lambda_deleter)>) == 8);
+        static_assert(sizeof(UniquePtr<int, decltype(lambda_deleter)>) == sizeof(int*));
     }
 
     SECTION("Stateful lambda deleter") {
@@ -224,11 +226,13 @@ TEST_CASE("Compressed pair usage") {
             delete ptr;
             ++some_useless_counter;
         };
-        static_assert(sizeof(UniquePtr<int, decltype(lambda_deleter)>) == 16);
+        static_assert(sizeof(UniquePtr<int, decltype(lambda_deleter)>) ==
+                      sizeof(std::pair<int*, decltype(lambda_deleter)>));
     }
 
     SECTION("Function pointer deleter") {
-        static_assert(sizeof(UniquePtr<int, decltype(&DeleteFunction<int>)>) == 16);
+        static_assert(sizeof(UniquePtr<int, decltype(&DeleteFunction<int>)>) ==
+                      sizeof(std::pair<int*, decltype(&DeleteFunction<int>)>));
     }
 }
 
