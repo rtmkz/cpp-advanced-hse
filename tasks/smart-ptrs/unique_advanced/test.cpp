@@ -34,6 +34,42 @@ TEST_CASE("Construction with deleters") {
     }
 }
 
+TEST_CASE("Swap with deleters") {
+    SECTION("If ftoring deleter by value") {
+        MyInt* p1 = new MyInt(1);
+        UniquePtr<MyInt, Deleter<MyInt>> s1(p1, Deleter<MyInt>(1));
+        MyInt* p2 = new MyInt(2);
+        UniquePtr<MyInt, Deleter<MyInt>> s2(p2, Deleter<MyInt>(2));
+
+        s1.Swap(s2);
+
+        REQUIRE(s1.Get() == p2);
+        REQUIRE(*s1 == 2);
+        REQUIRE(s2.Get() == p1);
+        REQUIRE(*s2 == 1);
+        REQUIRE(s1.GetDeleter().GetTag() == 2);
+        REQUIRE(s2.GetDeleter().GetTag() == 1);
+        REQUIRE(MyInt::AliveCount() == 2);
+
+        std::swap(s1, s2);
+
+        REQUIRE(s1.Get() == p1);
+        REQUIRE(*s1 == 1);
+        REQUIRE(s2.Get() == p2);
+        REQUIRE(*s2 == 2);
+        REQUIRE(s1.GetDeleter().GetTag() == 1);
+        REQUIRE(s2.GetDeleter().GetTag() == 2);
+    }
+
+    /*
+     * SECTION("If storing reference to deleter") {
+     *
+     * }
+     *
+     * well, me think it's enough for you this time...
+     */
+}
+
 TEST_CASE("Moving deleters") {
     SECTION("Move with custom deleter") {
         UniquePtr<MyInt, Deleter<MyInt>> s1(new MyInt, Deleter<MyInt>(5));
@@ -166,9 +202,15 @@ struct StatefulDeleter {
     }
 };
 
+template <typename T>
+constexpr size_t GetSize() {
+    return sizeof(UniquePtr<T>);
+}
+
 TEST_CASE("Compressed pair usage") {
+
     SECTION("Stateless struct deleter") {
-        static_assert(sizeof(UniquePtr<int>) == 8);
+        static_assert(sizeof(UniquePtr<int>) == sizeof(void*));
         static_assert(sizeof(UniquePtr<int, std::default_delete<int>>) == 8);
     }
 
