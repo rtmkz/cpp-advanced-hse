@@ -48,6 +48,71 @@ TEST_CASE("Copy/move WeakPtr") {
     }
 }
 
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+TEST_CASE("Modifiers WeakPtr") {
+    SECTION("Reset") {
+        {
+            SharedPtr<int> shared = MakeShared<int>(42), shared2 = shared, shared3 = shared2;
+            WeakPtr<int> weak = WeakPtr<int>{shared};
+            REQUIRE(shared.UseCount() == 3);
+            REQUIRE(weak.UseCount() == 3);
+            REQUIRE(!weak.Expired());
+            weak.Reset();
+            REQUIRE(shared.UseCount() == 3);
+            REQUIRE(weak.UseCount() == 0);
+            REQUIRE(weak.Expired());
+        }
+    }
+
+    SECTION("Swap") {
+        {
+            SharedPtr<int> shared = MakeShared<int>(42), shared3 = shared;
+            SharedPtr<int> shared2 = MakeShared<int>(13);
+            WeakPtr<int> weak = WeakPtr<int>{shared};
+            WeakPtr<int> weak2 = WeakPtr<int>{shared2};
+            REQUIRE(weak.UseCount() == 2);
+            REQUIRE(weak2.UseCount() == 1);
+            weak.Swap(weak2);
+            REQUIRE(weak.UseCount() == 1);
+            REQUIRE(weak2.UseCount() == 2);
+        }
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+TEST_CASE("Modifiers WeakPtr") {
+    SECTION("Reset") {
+        {
+            SharedPtr<int> shared = MakeShared<int>(42), shared2 = shared, shared3 = shared2;
+            WeakPtr<int> weak = WeakPtr<int>{shared};
+            REQUIRE(shared.UseCount() == 3);
+            REQUIRE(weak.UseCount() == 3);
+            REQUIRE(!weak.Expired());
+            weak.Reset();
+            REQUIRE(shared.UseCount() == 3);
+            REQUIRE(weak.UseCount() == 0);
+            REQUIRE(weak.Expired());
+        }
+    }
+
+    SECTION("Swap") {
+        {
+            SharedPtr<int> shared = MakeShared<int>(42), shared3 = shared;
+            SharedPtr<int> shared2 = MakeShared<int>(13);
+            WeakPtr<int> weak = WeakPtr<int>{shared};
+            WeakPtr<int> weak2 = WeakPtr<int>{shared2};
+            REQUIRE(weak.UseCount() == 2);
+            REQUIRE(weak2.UseCount() == 1);
+            weak.Swap(weak2);
+            REQUIRE(weak.UseCount() == 1);
+            REQUIRE(weak2.UseCount() == 2);
+        }
+    }
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 TEST_CASE("Weak expiration") {
