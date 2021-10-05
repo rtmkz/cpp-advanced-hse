@@ -202,11 +202,6 @@ struct StatefulDeleter {
     }
 };
 
-template <typename T>
-constexpr size_t GetSize() {
-    return sizeof(UniquePtr<T>);
-}
-
 TEST_CASE("Compressed pair usage") {
 
     SECTION("Stateless struct deleter") {
