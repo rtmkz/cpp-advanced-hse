@@ -30,7 +30,7 @@ TEST_CASE("Empty") {
 
 TEST_CASE("Copy/move") {
     SharedPtr<std::string> a(new std::string("aba"));
-    std::string* ptr;
+    std::string *ptr;
     {
         SharedPtr b(a);
         SharedPtr c(a);
@@ -75,9 +75,11 @@ struct ModifiersB {
     ModifiersB() {
         ++count;
     }
-    ModifiersB(const ModifiersB&) {
+
+    ModifiersB(const ModifiersB &) {
         ++count;
     }
+
     virtual ~ModifiersB() {
         --count;
     }
@@ -91,9 +93,11 @@ struct ModifiersA : public ModifiersB {
     ModifiersA() {
         ++count;
     }
-    ModifiersA(const ModifiersA& other) : ModifiersB(other) {
+
+    ModifiersA(const ModifiersA &other) : ModifiersB(other) {
         ++count;
     }
+
     ~ModifiersA() {
         --count;
     }
@@ -107,9 +111,11 @@ struct ModifiersC {
     ModifiersC() {
         ++count;
     }
-    ModifiersC(const ModifiersC&) {
+
+    ModifiersC(const ModifiersC &) {
         ++count;
     }
+
     ~ModifiersC() {
         --count;
     }
@@ -142,7 +148,7 @@ TEST_CASE("Modifiers") {
     SECTION("Reset ptr") {
         {
             SharedPtr<ModifiersB> p(new ModifiersB);
-            ModifiersA* ptr = new ModifiersA;
+            ModifiersA *ptr = new ModifiersA;
             p.Reset(ptr);
             REQUIRE(ModifiersA::count == 1);
             REQUIRE(ModifiersB::count == 1);
@@ -152,7 +158,7 @@ TEST_CASE("Modifiers") {
         REQUIRE(ModifiersA::count == 0);
         {
             SharedPtr<ModifiersB> p;
-            ModifiersA* ptr = new ModifiersA;
+            ModifiersA *ptr = new ModifiersA;
             p.Reset(ptr);
             REQUIRE(ModifiersA::count == 1);
             REQUIRE(ModifiersB::count == 1);
@@ -164,8 +170,8 @@ TEST_CASE("Modifiers") {
 
     SECTION("Swap") {
         {
-            ModifiersC* ptr1 = new ModifiersC;
-            ModifiersC* ptr2 = new ModifiersC;
+            ModifiersC *ptr1 = new ModifiersC;
+            ModifiersC *ptr2 = new ModifiersC;
             SharedPtr<ModifiersC> p1(ptr1);
             {
                 SharedPtr<ModifiersC> p2(ptr2);
@@ -182,8 +188,8 @@ TEST_CASE("Modifiers") {
         }
         REQUIRE(ModifiersC::count == 0);
         {
-            ModifiersC* ptr1 = new ModifiersC;
-            ModifiersC* ptr2 = nullptr;
+            ModifiersC *ptr1 = new ModifiersC;
+            ModifiersC *ptr2 = nullptr;
             SharedPtr<ModifiersC> p1(ptr1);
             {
                 SharedPtr<ModifiersC> p2;
@@ -200,8 +206,8 @@ TEST_CASE("Modifiers") {
         }
         REQUIRE(ModifiersC::count == 0);
         {
-            ModifiersC* ptr1 = nullptr;
-            ModifiersC* ptr2 = new ModifiersC;
+            ModifiersC *ptr1 = nullptr;
+            ModifiersC *ptr2 = new ModifiersC;
             SharedPtr<ModifiersC> p1;
             {
                 SharedPtr<ModifiersC> p2(ptr2);
@@ -218,8 +224,8 @@ TEST_CASE("Modifiers") {
         }
         REQUIRE(ModifiersC::count == 0);
         {
-            ModifiersC* ptr1 = nullptr;
-            ModifiersC* ptr2 = nullptr;
+            ModifiersC *ptr1 = nullptr;
+            ModifiersC *ptr2 = nullptr;
             SharedPtr<ModifiersC> p1;
             {
                 SharedPtr<ModifiersC> p2;
@@ -242,7 +248,8 @@ TEST_CASE("Modifiers") {
 
 struct OperatorBoolA {
     int a;
-    virtual ~OperatorBoolA(){};
+
+    virtual ~OperatorBoolA() {};
 };
 
 TEST_CASE("Observers") {
@@ -283,11 +290,13 @@ struct Pinned {
     Pinned(int tag) : tag_(tag) {
     }
 
-    Pinned(const Pinned& a) = delete;
-    Pinned(Pinned&& a) = delete;
+    Pinned(const Pinned &a) = delete;
 
-    Pinned& operator=(const Pinned& a) = delete;
-    Pinned& operator=(Pinned&& a) = delete;
+    Pinned(Pinned &&a) = delete;
+
+    Pinned &operator=(const Pinned &a) = delete;
+
+    Pinned &operator=(Pinned &&a) = delete;
 
     ~Pinned() = default;
 
@@ -304,21 +313,21 @@ TEST_CASE("No copies") {
 }
 
 struct D {
-    D(Pinned& pinned, std::unique_ptr<int>&& p)
-        : some_uncopyable_thing_(std::move(p)), pinned_(pinned) {
+    D(Pinned &pinned, std::unique_ptr<int> &&p)
+            : some_uncopyable_thing_(std::move(p)), pinned_(pinned) {
     }
 
     int GetUP() const {
         return *some_uncopyable_thing_;
     }
 
-    Pinned& GetPinned() const {
+    Pinned &GetPinned() const {
         return pinned_;
     }
 
 private:
     std::unique_ptr<int> some_uncopyable_thing_;
-    Pinned& pinned_;
+    Pinned &pinned_;
 };
 
 TEST_CASE("MakeShared") {
@@ -333,6 +342,10 @@ TEST_CASE("MakeShared") {
 
         REQUIRE(p->GetUP() == 42);
         REQUIRE(p->GetPinned().GetTag() == 1312);
+    }
+
+    SECTION("Constructed only once") {
+        auto sp = MakeShared<Pinned>(1);
     }
 }
 
