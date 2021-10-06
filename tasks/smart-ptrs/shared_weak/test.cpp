@@ -1,5 +1,6 @@
 #include "../shared.h"
 #include "../weak.h"
+#include "../my_int.h"
 
 #include <catch.hpp>
 
@@ -94,4 +95,17 @@ TEST_CASE("Shared from invalid Weak") {
 TEST_CASE("Constness") {
     SharedPtr<int> sp(new int(42));
     WeakPtr<const int> wp(sp);
+}
+
+TEST_CASE("Destructor is called in time") {
+    WeakPtr<MyInt>* wp;
+    {
+        auto sp = MakeShared<MyInt>();
+
+        REQUIRE(MyInt::AliveCount() == 1);
+
+        wp = new WeakPtr<MyInt>(sp);
+    }
+    REQUIRE(MyInt::AliveCount() == 0);
+    delete wp;
 }
