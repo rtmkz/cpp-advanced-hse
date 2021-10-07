@@ -1,31 +1,35 @@
 #pragma once
 
-#include <tuple>
+#include <limits>
 #include <utility>
+#include "impl.h"
 
-template <char ...> struct Str {};
-template <char c> struct Char {};
+/// Return a Tape with h appended to Tape.
+template <char h, class Tape>
+using Produce = void;
 
-/// You can add template specializations if you want
-template<>
-struct Str</**/> {
-    /// Return a Str with char appended to current Str end
-    template <char h> using Produce = bool; ///1
+/// Return a pair type (Char<c>, Tape) with first (leftmost) char popped from Tape.
+/// If Tape was empty, return Error.
+template <class Tape>
+using Consume = void;
 
-    /// Return a pair type with a consumed Char and Str with left chars
-    using Consume = bool; ///2
-};
+/// Return Tape with incremented pos.
+/// If pos falls out of bounds, return Error.
+template <class Tape>
+using IncrementPos = void;
 
-template <size_t pos, char ...chars>
-struct Tape {
-    using IncrementPos = bool; ///3
-    using DecrementPos = bool; ///4
+/// Return Tape with decremented pos.
+/// Is pos falls out of bounds, return Error.
+template <class Tape>
+using DecrementPos = void;
 
-    /// Return a tape with pos'th char incremented
-    using IncrementCell = bool; ///5
+/// Return Tape with pos'th char incremented.
+/// If pos'th char would overflow, return Error.
+/// Keep in mind that "char" needn't be signed on all platforms.
+template <class Tape>
+using IncrementCell = void;
 
-    /// Return a tape with pos'th char decremented
-    using DecrementCell = bool; ///6
-};
-
-
+/// Return Tape with pos'th char decremented.
+/// If pos'th char would underflow, return Error.
+template <class Tape>
+using DecrementCell = void;
