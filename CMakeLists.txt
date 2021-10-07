@@ -55,7 +55,7 @@ add_subdirectory(tasks/pipes)
 add_subdirectory(tasks/smart-ptrs)
 
 # Bonuses
-# add_subdirectory(tasks/brainfuck)
+add_subdirectory(tasks/brainfuck)
 add_subdirectory(tasks/solve_or_die)
 
 # ctf
