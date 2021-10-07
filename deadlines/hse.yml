@@ -97,3 +97,5 @@
       score: 100
     - task: solve_or_die
       score: 100
+    - task: brainfuck
+      score: 100
