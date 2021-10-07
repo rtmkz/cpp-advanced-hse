@@ -1,6 +1,6 @@
 add_catch(test_grep test.cpp)
 set_property(TARGET test_grep PROPERTY CXX_STANDARD 17)
-if (CMAKE_CXX_COMPILER_ID MATCHES "AppleClang")
+if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
   set (CLANG_MINIMUM_VERSION 12)
   if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS ${CLANG_MINIMUM_VERSION})
     target_link_libraries(test_grep c++fs)
