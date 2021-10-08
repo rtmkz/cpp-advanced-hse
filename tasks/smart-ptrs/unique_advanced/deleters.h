@@ -35,6 +35,7 @@ public:
         static_assert(sizeof(T) > 0);
         static_assert(!std::is_void<T>::value);
         delete p;
+        was_called_ = true;
     }
 
     bool IsConst() const {
@@ -45,8 +46,13 @@ public:
         return false;
     }
 
+    bool WasCalled() const {
+        return was_called_;
+    }
+
 private:
     int tag_ = 0;
+    mutable bool was_called_ = false;
 };
 
 template <class T>

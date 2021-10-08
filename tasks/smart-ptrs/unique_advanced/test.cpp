@@ -251,3 +251,17 @@ TEST_CASE("Upcasts") {
         s2 = std::move(s);
     }
 }
+
+TEST_CASE("Deleter call check") {
+    SECTION("Was called") {
+        Deleter<int> d;
+        { UniquePtr<int, Deleter<int>&> up(new int, d); }
+        REQUIRE(d.WasCalled());
+    }
+
+    SECTION("Was not called") {
+        Deleter<int> d;
+        { UniquePtr<int, Deleter<int>&> up(nullptr, d); }
+        REQUIRE(!d.WasCalled());
+    }
+}
