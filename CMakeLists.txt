@@ -44,6 +44,13 @@ add_subdirectory(tasks/safe-transform)
 add_subdirectory(tasks/tryhard)
 add_subdirectory(tasks/defer)
 
+# 6
+add_subdirectory(tasks/pimpl)
+add_subdirectory(tasks/small-test-framework)
+add_subdirectory(tasks/editor)
+add_subdirectory(tasks/any)
+add_subdirectory(tasks/scala-vector)
+
 # 7
 add_subdirectory(tasks/algo_spec)
 add_subdirectory(tasks/transform_tuple)
@@ -57,6 +64,7 @@ add_subdirectory(tasks/smart-ptrs)
 # Bonuses
 add_subdirectory(tasks/brainfuck)
 add_subdirectory(tasks/solve_or_die)
+add_subdirectory(tasks/matrix-2.0)
 
 # ctf
 add_subdirectory(tasks/gcd)
