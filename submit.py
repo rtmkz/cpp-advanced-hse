@@ -98,7 +98,7 @@ def push_branches(task_name):
     git(
         "push", "-f", "student", "submits/" + task_name,
         '-o', 'merge_request.create',
-        '-o', 'merge_request.target=initial',
+        '-o', 'merge_request.target=master',
         '-o', 'merge_request.title=' + task_name,
         '-o', 'merge_request.label=task/' + task_name
     )
