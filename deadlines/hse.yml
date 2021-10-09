@@ -100,7 +100,7 @@
     - task: editor
       score: 100
     - task: small-test-framework
-      score: 150
+      score: 100
     - task: scala-vector
       score: 150 
 
