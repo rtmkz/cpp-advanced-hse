@@ -77,3 +77,12 @@ TEST_CASE("Any throws") {
     REQUIRE(b.GetValue<std::vector<int>>().size() == 3);
     REQUIRE_THROWS_AS(b.GetValue<std::string>(), std::bad_cast);
 }
+
+class Base {};
+
+class Derived : public Base {};
+
+TEST_CASE("Exact cast") {
+    Any a = Derived();
+    REQUIRE_THROWS_AS(a.GetValue<Base>(), std::bad_cast);
+}
