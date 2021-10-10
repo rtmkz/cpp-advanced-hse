@@ -66,6 +66,16 @@ TEST_CASE("Modifiers WeakPtr") {
         }
     }
 
+    SECTION("Reset deletes block") {
+        WeakPtr<int>* wp;
+        {
+            auto sp = MakeShared<int>();
+            wp = new WeakPtr<int>(sp);
+        }
+        wp->Reset();
+        delete wp;
+    }
+
     SECTION("Swap") {
         {
             SharedPtr<int> shared = MakeShared<int>(42), shared3 = shared;
