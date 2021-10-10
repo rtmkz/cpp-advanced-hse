@@ -1,5 +1,6 @@
 # Add new groups at the bottom
 
+
 - group:    00-setup
   start:    17-07-2021 18:00
   deadline: 21-09-2022 18:00
@@ -66,15 +67,15 @@
   deadline: 10-10-2021 19:00
   tasks:
     - task:  smart-ptrs/unique_basic
-      score: 0
+      score: 2
     - task:  smart-ptrs/unique_advanced
-      score: 0
+      score: 2
     - task:  smart-ptrs/shared_basic
-      score: 0
+      score: 3
     - task:  smart-ptrs/shared_weak
-      score: 0
+      score: 2
     - task:  smart-ptrs/shared_from_this
-      score: 0
+      score: 1
 
 - group:    05-errors
   start:    02-10-2021 13:00
