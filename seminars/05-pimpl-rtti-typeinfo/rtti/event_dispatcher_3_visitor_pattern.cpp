@@ -31,7 +31,7 @@ struct ErrorEvent : IEvent {
     std::string what_happened;
 
     void AcceptHandling(IEventHandler* handler) override {
-        handler->HandleError(this);  // give access to out context
+        handler->HandleError(this);  // give access to our context
     }
 };
 
@@ -98,7 +98,7 @@ int main() {
 
     EventLogger logger;
 
-    for (auto& event : events) {
+    for (const auto& event : events) {
         Process(event.get(), &logger);
     }
 }
