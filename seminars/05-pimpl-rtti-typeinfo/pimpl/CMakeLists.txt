@@ -9,6 +9,9 @@ add_executable(raw-ptr raw-ptr/main.cpp raw-ptr/string-splitter.cpp)
 add_executable(unique-ptr unique-ptr/main.cpp unique-ptr/string-splitter.cpp)
 add_executable(fast fast/main.cpp fast/string-splitter.cpp)
 
+# OS X   : brew install boost
+# Ubuntu : sudo apt-get install libboost-all-dev
+
 find_package(Boost)
 if(Boost_FOUND)
   include_directories(${Boost_INCLUDE_DIRS})
