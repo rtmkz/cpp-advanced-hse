@@ -1,4 +1,4 @@
-// compile with
+// compile with -fno-rtti
 
 #include <tuple>
 #include <memory>
