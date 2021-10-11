@@ -9,7 +9,7 @@ struct IEvent {
     virtual ~IEvent() = default;
 
     virtual void Print() {
-        std::cout << "Unknown command!\n";
+        std::cout << "Unknown event!\n";
     }
 };
 
@@ -34,7 +34,6 @@ struct CommandEvent : IEvent {
 
     void Print() override {
         std::cout << "Received command\n";
-        return;
     }
 };
 
