@@ -121,6 +121,10 @@ struct Int {
 int Int::counter = 0;
 int Int::max_value = 0;
 
+std::ostream& operator<<(std::ostream& os, const Int& i) {
+    return os << i.x;
+}
+
 TEST_CASE("Copy fails") {
     Int::Reset(100);
     std::vector<Int> data{Int(1), Int(2), Int(3), Int(4), Int(5)};
