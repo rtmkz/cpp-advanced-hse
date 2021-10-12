@@ -92,7 +92,7 @@
 
 - group:    06-patterns
   start:    09-10-2021 13:00
-  deadline: 22-10-2021 19:00
+  deadline: 29-10-2021 19:00
   tasks:
     - task: pimpl
       score: 100
