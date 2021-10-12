@@ -56,5 +56,4 @@ std::vector<std::string> StringSplitter::Split(const std::string& s) {
     return p_impl->Split(s);
 }
 
-StringSplitter::~StringSplitter() {
-}
+StringSplitter::~StringSplitter() = default;
