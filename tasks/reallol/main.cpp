@@ -125,8 +125,8 @@ int main() {
                 }
 
                 subscribe_to->subscribers.push_back(user);
-                std::cout << "User " << user->username << " subscribed to " << subscribe_to->username
-                          << std::endl;
+                std::cout << "User " << user->username << " subscribed to "
+                          << subscribe_to->username << std::endl;
                 break;
             }
         }
