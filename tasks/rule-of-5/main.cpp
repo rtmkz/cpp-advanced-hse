@@ -18,18 +18,19 @@ std::string LimitedGetline() {
 
 // This class is following rule of 5.
 // http://en.cppreference.com/w/cpp/language/rule_of_three
-class SlowNumber
-{
+class SlowNumber {
 public:
-    SlowNumber(int value) : value_(new int(value)) {}
+    SlowNumber(int value) : value_(new int(value)) {
+    }
 
     SlowNumber(SlowNumber&& other) : value_(other.value_) {
         other.value_ = nullptr;
     }
 
-    SlowNumber(const SlowNumber& other) : value_(new int(*other.value_)) {}
+    SlowNumber(const SlowNumber& other) : value_(new int(*other.value_)) {
+    }
 
-    SlowNumber& operator = (SlowNumber&& other) {
+    SlowNumber& operator=(SlowNumber&& other) {
         if (value_) {
             delete value_;
         }
@@ -39,7 +40,7 @@ public:
         return *this;
     }
 
-    SlowNumber& operator = (const SlowNumber& other) {
+    SlowNumber& operator=(const SlowNumber& other) {
         if (value_) {
             delete value_;
             value_ = nullptr;
@@ -73,7 +74,7 @@ int main() {
         if (cmd == "push") {
             int value = 0;
             std::cin >> value;
-            std::cin.get(); // eat up newline
+            std::cin.get();  // eat up newline
             stack.emplace_back(std::make_shared<SlowNumber>(value));
         } else if (cmd == "pop") {
             if (!stack.empty()) {
@@ -89,7 +90,7 @@ int main() {
             size_t i = 0;
             size_t j = 0;
             std::cin >> i >> j;
-            std::cin.get(); // eat up newline
+            std::cin.get();  // eat up newline
 
             if (i < 0 || i >= stack.size() || j < 0 || j >= stack.size()) {
                 std::cout << "error: invalid index" << std::endl;

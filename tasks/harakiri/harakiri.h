@@ -7,11 +7,11 @@
 // AwesomeCallback should add "awesomeness".
 
 class OneTimeCallback {
- public:
-  virtual ~OneTimeCallback() { }
-  virtual std::string operator()() = 0;
+public:
+    virtual ~OneTimeCallback() {
+    }
+    virtual std::string operator()() = 0;
 };
 
 // Implement ctor, operator(), maybe something else...
 class AwesomeCallback : public OneTimeCallback {};
-
