@@ -100,20 +100,7 @@
     - task: small-test-framework
       score: 150
     - task: scala-vector
-      score: 150 
-
-- group:    bonus
-  start:    17-07-2021 18:00
-  deadline: 21-09-2022 18:00
-  tasks:
-    - task: bad-hash
-      score: 100
-    - task: solve_or_die
-      score: 100
-    - task: brainfuck
-      score: 100
-    - task: matrix-2.0
-      score: 100
+      score: 150
 
 - group:    scheme
   start:    17-07-2021 18:00
@@ -127,3 +114,16 @@
       score: 3
     - task: scheme/advanced
       score: 4
+
+- group:    bonus
+  start:    17-07-2021 18:00
+  deadline: 21-09-2022 18:00
+  tasks:
+    - task: bad-hash
+      score: 100
+    - task: solve_or_die
+      score: 100
+    - task: brainfuck
+      score: 100
+    - task: matrix-2.0
+      score: 100

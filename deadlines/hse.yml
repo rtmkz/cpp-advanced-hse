@@ -103,7 +103,20 @@
     - task: small-test-framework
       score: 100
     - task: scala-vector
-      score: 150 
+      score: 150
+
+# - group:    scheme
+#  start:    17-07-2021 18:00
+#  deadline: 21-09-2022 18:00
+#  tasks:
+#    - task: scheme/tokenizer
+#      score: 1
+#    - task: scheme/parser
+#      score: 2
+#    - task: scheme/basic
+#      score: 3
+#    - task: scheme/advanced
+#      score: 4
 
 - group:    bonus
   start:    17-07-2021 18:00
@@ -118,15 +131,3 @@
     - task: matrix-2.0
       score: 100
 
-# - group:    scheme
-#  start:    17-07-2021 18:00
-#  deadline: 21-09-2022 18:00
-#  tasks:
-#    - task: scheme/tokenizer
-#      score: 1
-#    - task: scheme/parser
-#      score: 2
-#    - task: scheme/basic
-#      score: 3
-#    - task: scheme/advanced
-#      score: 4
