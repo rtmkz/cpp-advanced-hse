@@ -60,6 +60,8 @@ add_subdirectory(tasks/pipes)
 # Homeworks
 # 1
 add_subdirectory(tasks/smart-ptrs)
+# 2
+add_subdirectory(tasks/scheme)
 
 # Bonuses
 add_subdirectory(tasks/brainfuck)
