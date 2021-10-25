@@ -80,14 +80,14 @@ struct ConstantToken {
 struct DotToken {
 };
 
-// Чтобы следовать принципу DRY, заводим typedef.
+// Чтобы следовать принципу DRY, заводим `using` декларацию.
 // Если в будущем добавится новый вариант токена, будет
 // достаточно поменять определение в одном месте.
-typedef std::variant<
+using Token = std::variant<
     ConstantToken,
     BracketToken,
     QuoteToken
-> Token;
+>;
 ```
 
 Как работать с таким типом?
