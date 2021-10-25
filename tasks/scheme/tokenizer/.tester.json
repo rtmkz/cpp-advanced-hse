@@ -1,6 +1,7 @@
 {
   "allow_change": [
-    "../tokenizer.h"
+    "../*.cpp",
+    "../*.h"
   ],
   "tests": "test_scheme_tokenizer",
   "solutions": "private"
