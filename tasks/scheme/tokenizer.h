@@ -1,7 +1,5 @@
 #pragma once
 
-#pragma once
-
 #include <variant>
 #include <optional>
 #include <istream>
@@ -28,9 +26,8 @@ struct ConstantToken {
     bool operator==(const ConstantToken& other) const;
 };
 
-typedef std::variant<ConstantToken, BracketToken, SymbolToken, QuoteToken, DotToken> Token;
+using Token = std::variant<ConstantToken, BracketToken, SymbolToken, QuoteToken, DotToken>;
 
-// Интерфейс позволяющий читать токены по одному из потока.
 class Tokenizer {
 public:
     Tokenizer(std::istream* in);
