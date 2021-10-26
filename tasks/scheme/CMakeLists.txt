@@ -29,6 +29,7 @@ add_catch(test_scheme_tokenizer
 add_catch(test_scheme_parser
         ${TOKENIZER_TESTS}
         ${PARSER_TESTS}
+        tokenizer.cpp
         parser.cpp)
 
 add_catch(test_scheme_basic
