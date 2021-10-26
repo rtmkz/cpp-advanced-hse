@@ -23,7 +23,8 @@ set(TEST_ENV
         test/scheme_test.cpp)
 
 add_catch(test_scheme_tokenizer
-        ${TOKENIZER_TESTS})
+        ${TOKENIZER_TESTS}
+        tokenizer.cpp)
 
 add_catch(test_scheme_parser
         ${TOKENIZER_TESTS}
