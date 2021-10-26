@@ -1,5 +1,6 @@
 #include <catch.hpp>
 
+#include "../error.h"
 #include "../tokenizer.h"
 
 #include <sstream>
@@ -147,4 +148,12 @@ TEST_CASE("Empty string handled correctly") {
     Tokenizer tokenizer{&ss};
 
     REQUIRE(tokenizer.IsEnd());
+}
+
+TEST_CASE("Exception is thrown") {
+    std::string input = "1/";
+    std::stringstream ss{input};
+    Tokenizer tokenizer{&ss};
+
+    REQUIRE_THROWS_AS(tokenizer.Next(), SyntaxError);
 }
