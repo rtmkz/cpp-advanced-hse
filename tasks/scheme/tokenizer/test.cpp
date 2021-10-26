@@ -151,7 +151,7 @@ TEST_CASE("Empty string handled correctly") {
 }
 
 TEST_CASE("Exception is thrown") {
-    std::string input = "1/";
+    std::string input = "1@";
     std::stringstream ss{input};
     Tokenizer tokenizer{&ss};
 
