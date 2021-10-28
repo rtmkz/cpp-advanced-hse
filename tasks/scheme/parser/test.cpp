@@ -6,7 +6,7 @@
 #include "../parser.h"
 #include "../error.h"
 
-std::shared_ptr<Object> ReadFull(const std::string& str) {
+auto ReadFull(const std::string& str) {
     std::stringstream ss{str};
     Tokenizer tokenizer{&ss};
 
