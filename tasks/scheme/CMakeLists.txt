@@ -41,8 +41,6 @@ add_catch(test_scheme_basic
 target_link_libraries(test_scheme_basic libscheme)
 
 add_catch(test_scheme_advanced
-        ${TOKENIZER_TESTS}
-        ${PARSER_TESTS}
         ${BASIC_TESTS}
         ${ADVANCED_TESTS}
         ${TEST_ENV})
