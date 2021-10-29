@@ -115,7 +115,7 @@
       score: 100
     - task: transform_tuple
       score: 100
-    - task: reflection
+    - task: constexpr-map
       score: 100
     - task: pipes
       score: 100

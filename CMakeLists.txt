@@ -54,9 +54,9 @@ add_subdirectory(tasks/scala-vector)
 # 7
 add_subdirectory(tasks/algo_spec)
 add_subdirectory(tasks/transform_tuple)
-add_subdirectory(tasks/reflection)
+#add_subdirectory(tasks/reflection)
+add_subdirectory(tasks/constexpr-map)
 add_subdirectory(tasks/pipes)
-add_subdirectory(tasks/concepts)
 add_subdirectory(tasks/compile-eval)
 
 # Homeworks
@@ -69,6 +69,7 @@ add_subdirectory(tasks/scheme)
 add_subdirectory(tasks/brainfuck)
 add_subdirectory(tasks/solve_or_die)
 add_subdirectory(tasks/matrix-2.0)
+add_subdirectory(tasks/concepts)
 
 # ctf
 add_subdirectory(tasks/gcd)
