@@ -24,10 +24,11 @@ TEST_CASE("To integral") {
 
 TEST_CASE("Heterogeneous return types in functor") {
     auto functor = []<class T>(const T& item) {
-        if constexpr (std::is_same_v<T, std::string>)
+        if constexpr (std::is_same_v<T, std::string>) {
             return item.size();
-        else
+        } else {
             return int(strlen(item));
+        }
     };
 
     auto tuple = std::make_tuple("string literal", "string"s, "another literal");
@@ -39,8 +40,9 @@ TEST_CASE("Heterogeneous return types in functor") {
 
 TEST_CASE("Only strings allowed") {
     auto functor = []<class T>(const T& item) {
-        if constexpr (std::is_same_v<T, std::string>)
+        if constexpr (std::is_same_v<T, std::string>) {
             return item;
+        }
     };
 
     auto tuple = std::make_tuple("string literal", "string"s, "another literal", "other string"s);
