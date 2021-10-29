@@ -56,6 +56,7 @@ add_subdirectory(tasks/algo_spec)
 add_subdirectory(tasks/transform_tuple)
 add_subdirectory(tasks/reflection)
 add_subdirectory(tasks/pipes)
+add_subdirectory(tasks/concepts)
 add_subdirectory(tasks/compile-eval)
 
 # Homeworks
