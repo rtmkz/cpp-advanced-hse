@@ -102,6 +102,21 @@
     - task: scala-vector
       score: 150
 
+- group:    07-meta
+  start:    30-10-2021 13:00
+  deadline: 10-11-2021 19:00
+  tasks:
+    - task: algo_spec
+      score: 100
+    - task: compile-eval
+      score: 100
+    - task: transform_tuple
+      score: 100
+    - task: reflection
+      score: 100
+    - task: pipes
+      score: 100
+
 - group:    scheme
   start:    26-10-2021 00:00
   deadline: 15-11-2021 23:59
@@ -126,4 +141,6 @@
     - task: brainfuck
       score: 100
     - task: matrix-2.0
+      score: 100
+    - task: concepts
       score: 100

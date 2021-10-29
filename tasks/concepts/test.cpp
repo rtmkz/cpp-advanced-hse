@@ -20,7 +20,7 @@ void PredicateTest() {
         }
     };
 
-    std::function<bool(std::vector<int>)> vector_pred = [&simple](const std::vector<int>&) {
+    std::function<bool(std::vector<int>)> vector_pred = [&](const std::vector<int>&) {
         return true;
     };
 
