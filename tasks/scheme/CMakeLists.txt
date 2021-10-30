@@ -24,13 +24,12 @@ set(TEST_ENV
 
 add_catch(test_scheme_tokenizer
         ${TOKENIZER_TESTS}
-        tokenizer.cpp)
+        ${SOURCES})
 
 add_catch(test_scheme_parser
         ${TOKENIZER_TESTS}
         ${PARSER_TESTS}
-        tokenizer.cpp
-        parser.cpp)
+        ${SOURCES})
 
 add_catch(test_scheme_basic
         ${TOKENIZER_TESTS}
