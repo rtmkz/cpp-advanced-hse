@@ -1,6 +1,6 @@
 {
-    "allow_change": "algo_spec_with_traits.h",
-    "tests": "test_algo_spec_with_traits",
+    "allow_change": "algo_spec.h",
+    "tests": "test_algo_spec",
     "solutions": "private"
 }
 
