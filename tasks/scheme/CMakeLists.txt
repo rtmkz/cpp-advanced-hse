@@ -23,13 +23,15 @@ set(TEST_ENV
         test/scheme_test.cpp)
 
 add_catch(test_scheme_tokenizer
-        ${TOKENIZER_TESTS}
-        ${SOURCES})
+        ${TOKENIZER_TESTS})
+
+target_link_libraries(test_scheme_tokenizer libscheme)
 
 add_catch(test_scheme_parser
         ${TOKENIZER_TESTS}
-        ${PARSER_TESTS}
-        ${SOURCES})
+        ${PARSER_TESTS})
+
+target_link_libraries(test_scheme_parser libscheme)
 
 add_catch(test_scheme_basic
         ${TOKENIZER_TESTS}
@@ -48,4 +50,3 @@ target_link_libraries(test_scheme_advanced libscheme)
 
 add_executable(scheme-repl repl/main.cpp)
 target_link_libraries(scheme-repl libscheme)
-
