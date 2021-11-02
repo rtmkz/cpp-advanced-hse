@@ -136,6 +136,7 @@ TEST_CASE("Lists") {
     }
 
     SECTION("Invalid lists") {
+        REQUIRE_THROWS_AS(ReadFull(""), SyntaxError);
         REQUIRE_THROWS_AS(ReadFull("("), SyntaxError);
         REQUIRE_THROWS_AS(ReadFull("(1"), SyntaxError);
         REQUIRE_THROWS_AS(ReadFull("(1 ."), SyntaxError);
@@ -143,5 +144,6 @@ TEST_CASE("Lists") {
         REQUIRE_THROWS_AS(ReadFull("(1 . ()"), SyntaxError);
         REQUIRE_THROWS_AS(ReadFull("(1 . )"), SyntaxError);
         REQUIRE_THROWS_AS(ReadFull("(1 . 2 3)"), SyntaxError);
+        REQUIRE_THROWS_AS(ReadFull("(1))"), SyntaxError);
     }
 }
