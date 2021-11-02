@@ -2,6 +2,8 @@ project(cpp-advanced-hse)
 
 cmake_minimum_required(VERSION 3.13)
 
+option(ENABLE_SEMINARS OFF)
+
 set(CMAKE_MODULE_PATH              "${CMAKE_SOURCE_DIR}/cmake")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}")
@@ -9,6 +11,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS  ON)
 
 include(cmake/BuildFlags.cmake)
 include(cmake/TestSolution.cmake)
+include(cmake/SeminarUtils.cmake)
 
 find_package(Catch REQUIRED)
 
@@ -76,3 +79,8 @@ add_subdirectory(tasks/gcd)
 add_subdirectory(tasks/rule-of-5)
 add_subdirectory(tasks/reallol)
 add_subdirectory(tasks/bad-hash)
+
+# Seminars
+if (${ENABLE_SEMINARS})
+  add_subdirectory(seminars)
+endif()
