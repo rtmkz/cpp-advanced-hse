@@ -1,6 +1,6 @@
 #include <catch.hpp>
 
-#include <sstream
+#include <sstream>
 #include <iostream>
 
 #include "../parser.h"
