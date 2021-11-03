@@ -2,6 +2,7 @@
 
 #include <sstream>
 #include <random>
+#include <iostream>
 
 #include "../parser.h"
 #include "../error.h"
@@ -145,5 +146,37 @@ TEST_CASE("Lists") {
         REQUIRE_THROWS_AS(ReadFull("(1 . )"), SyntaxError);
         REQUIRE_THROWS_AS(ReadFull("(1 . 2 3)"), SyntaxError);
         REQUIRE_THROWS_AS(ReadFull("(1))"), SyntaxError);
+    }
+}
+
+constexpr uint32_t kShotsCount = 100000;
+constexpr uint32_t kSeed = 16;
+constexpr uint32_t kSeqCount = 21;
+
+TEST_CASE("Fuzzzzzzing") {
+    std::array<std::string, kSeqCount> sequences = {"(", "(",  "(", "(",  ")", ")",      ")",
+                                                    ")", "-",  "+", "#t", "",  "symbol", "0",
+                                                    "1", "-2", ".", ".",  ".", ".",      "'"};
+
+    std::stringstream ss;
+    std::mt19937 gen(kSeed);
+    std::uniform_int_distribution<uint32_t> dist(1, kSeqCount);
+
+    for (uint32_t i = 0; i < kShotsCount; ++i) {
+        std::shuffle(sequences.begin(), sequences.end(), gen);
+
+        uint32_t len = dist(gen);
+
+        for (uint32_t j = 0; j < len; ++j) {
+            ss << sequences[j] << " ";
+        }
+
+        try {
+            // std::cerr << ss.str() << std::endl;  // uncomment to debug, random is deterministic
+            ReadFull(ss.str());
+        } catch (const SyntaxError&) {
+        }
+
+        ss.str("");
     }
 }
