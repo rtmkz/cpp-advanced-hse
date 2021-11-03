@@ -135,17 +135,22 @@ TEST_CASE("Lists") {
         ReadFull("(1 2 (3 4) (()))");
         ReadFull("(+ 1 2 (- 3 4))");
     }
+}
 
-    SECTION("Invalid lists") {
-        REQUIRE_THROWS_AS(ReadFull(""), SyntaxError);
-        REQUIRE_THROWS_AS(ReadFull("("), SyntaxError);
-        REQUIRE_THROWS_AS(ReadFull("(1"), SyntaxError);
-        REQUIRE_THROWS_AS(ReadFull("(1 ."), SyntaxError);
-        REQUIRE_THROWS_AS(ReadFull("( ."), SyntaxError);
-        REQUIRE_THROWS_AS(ReadFull("(1 . ()"), SyntaxError);
-        REQUIRE_THROWS_AS(ReadFull("(1 . )"), SyntaxError);
-        REQUIRE_THROWS_AS(ReadFull("(1 . 2 3)"), SyntaxError);
-    }
+TEST_CASE("Invalid") {
+    REQUIRE_THROWS_AS(ReadFull(""), SyntaxError);
+    REQUIRE_THROWS_AS(ReadFull("'"), SyntaxError);
+    REQUIRE_THROWS_AS(ReadFull("("), SyntaxError);
+    REQUIRE_THROWS_AS(ReadFull("(1"), SyntaxError);
+    REQUIRE_THROWS_AS(ReadFull("(1 ."), SyntaxError);
+    REQUIRE_THROWS_AS(ReadFull("( ."), SyntaxError);
+    REQUIRE_THROWS_AS(ReadFull("(1 . ()"), SyntaxError);
+    REQUIRE_THROWS_AS(ReadFull("(1 . )"), SyntaxError);
+    REQUIRE_THROWS_AS(ReadFull("(1 . 2 3)"), SyntaxError);
+}
+
+TEST_CASE("Other") {
+    ReadFull("'()");
 }
 
 constexpr uint32_t kShotsCount = 100000;
