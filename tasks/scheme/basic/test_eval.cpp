@@ -8,4 +8,5 @@ TEST_CASE_METHOD(SchemeTest, "Quote") {
 TEST_CASE_METHOD(SchemeTest, "Be careful") {
     ExpectRuntimeError("(())");
     ExpectRuntimeError("(+ ())");
+    ExpectRuntimeError("('() ())");
 }

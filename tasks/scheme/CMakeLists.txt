@@ -11,11 +11,12 @@ set(BASIC_TESTS
         basic/test_boolean.cpp
         basic/test_eval.cpp
         basic/test_integer.cpp
-        basic/test_list.cpp)
+        basic/test_list.cpp
+        basic/test_fuzzer.cpp)
 
 set(ADVANCED_TESTS
         advanced/test_symbol.cpp
-        advanced/test_define.cpp
+        advanced/test_pair_mut.cpp
         advanced/test_control_flow.cpp
         advanced/test_lambda.cpp)
 
