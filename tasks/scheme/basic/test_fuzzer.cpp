@@ -4,7 +4,7 @@
 
 #include <iostream>
 
-constexpr uint32_t kShotsCount = 100000;
+constexpr uint32_t kShotsCount = 10000;
 
 // Need to run it here as parser tests are disabled
 TEST_CASE("Fuzzing") {
