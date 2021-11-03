@@ -42,3 +42,14 @@ TEST_CASE_METHOD(SchemeTest, "SetInvalidSyntax") {
     ExpectSyntaxError("(set! 1)");
     ExpectSyntaxError("(set! x 1 2)");
 }
+
+TEST_CASE_METHOD(SchemeTest, "CopySemantics") {
+    ExpectNoError("(define x 1)");
+    ExpectNoError("(define y x)");
+    ExpectEq("x", "1");
+    ExpectEq("y", "1");
+    ExpectNoError("(define x y");
+    ExpectNoError("(set! y (+ 1 y))");
+    ExpectEq("y", "2");
+    ExpectEq("x", "1");
+}
