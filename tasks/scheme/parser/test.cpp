@@ -145,7 +145,6 @@ TEST_CASE("Lists") {
         REQUIRE_THROWS_AS(ReadFull("(1 . ()"), SyntaxError);
         REQUIRE_THROWS_AS(ReadFull("(1 . )"), SyntaxError);
         REQUIRE_THROWS_AS(ReadFull("(1 . 2 3)"), SyntaxError);
-        REQUIRE_THROWS_AS(ReadFull("(1))"), SyntaxError);
     }
 }
 
@@ -158,7 +157,11 @@ TEST_CASE("Fuzzzzzzing") {
         try {
             auto req = fuzzer.Next();
             // std::cerr << req << std::endl;  // uncomment to debug, random is deterministic
-            ReadFull(req);
+            std::stringstream ss{req};
+            Tokenizer tokenizer{&ss};
+            while (!tokenizer.IsEnd()) {
+                Read(&tokenizer);
+            }
         } catch (const SyntaxError&) {
         }
     }
