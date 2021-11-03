@@ -1,5 +1,5 @@
 file(GLOB SOURCES "*.cpp")
-add_library(libscheme ${SOURCES})
+add_library(scheme ${SOURCES})
 
 set(TOKENIZER_TESTS
         tokenizer/test.cpp)
@@ -25,13 +25,13 @@ set(TEST_ENV
 add_catch(test_scheme_tokenizer
         ${TOKENIZER_TESTS})
 
-target_link_libraries(test_scheme_tokenizer libscheme)
+target_link_libraries(test_scheme_tokenizer scheme)
 
 add_catch(test_scheme_parser
         ${TOKENIZER_TESTS}
         ${PARSER_TESTS})
 
-target_link_libraries(test_scheme_parser libscheme)
+target_link_libraries(test_scheme_parser scheme)
 
 add_catch(test_scheme_basic
         ${TOKENIZER_TESTS}
@@ -39,14 +39,14 @@ add_catch(test_scheme_basic
         ${BASIC_TESTS}
         ${TEST_ENV})
 
-target_link_libraries(test_scheme_basic libscheme)
+target_link_libraries(test_scheme_basic scheme)
 
 add_catch(test_scheme_advanced
         ${BASIC_TESTS}
         ${ADVANCED_TESTS}
         ${TEST_ENV})
 
-target_link_libraries(test_scheme_advanced libscheme)
+target_link_libraries(test_scheme_advanced scheme)
 
 add_executable(scheme-repl repl/main.cpp)
-target_link_libraries(scheme-repl libscheme)
+target_link_libraries(scheme-repl scheme)

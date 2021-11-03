@@ -50,8 +50,19 @@ TEST_CASE_METHOD(SchemeTest, "ListPredicate") {
 
 TEST_CASE_METHOD(SchemeTest, "PairOperations") {
     ExpectEq("(cons 1 2)", "(1 . 2)");
+
     ExpectEq("(car '(1 . 2))", "1");
+    ExpectEq("(car '(1))", "1");
+    ExpectEq("(car '(1 2 3))", "1");
+
     ExpectEq("(cdr '(1 . 2))", "2");
+    ExpectEq("(cdr '(1))", "()");
+    ExpectEq("(cdr '(1 2))", "(2)");
+    ExpectEq("(cdr '(1 2 3))", "(2 3)");
+    ExpectEq("(cdr '(1 2 3 . 4))", "(2 3 . 4)");
+
+    ExpectRuntimeError("(car '())");
+    ExpectRuntimeError("(cdr '())");
 }
 
 TEST_CASE_METHOD(SchemeTest, "ListOperations") {
