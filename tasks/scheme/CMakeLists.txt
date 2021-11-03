@@ -7,6 +7,9 @@ set(TOKENIZER_TESTS
 set(PARSER_TESTS
         parser/test.cpp)
 
+set(PARSER_FUZZING_TEST
+        parser/fuzzing.cpp)
+
 set(BASIC_TESTS
         basic/test_boolean.cpp
         basic/test_eval.cpp
@@ -30,7 +33,8 @@ target_link_libraries(test_scheme_tokenizer scheme)
 
 add_catch(test_scheme_parser
         ${TOKENIZER_TESTS}
-        ${PARSER_TESTS})
+        ${PARSER_TESTS}
+        ${PARSER_FUZZING_TEST})
 
 target_link_libraries(test_scheme_parser scheme)
 

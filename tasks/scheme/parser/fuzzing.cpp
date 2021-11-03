@@ -1,23 +1,26 @@
-#include "../scheme.h"
-#include "../test/scheme_test.h"
+#include <catch.hpp>
+
 #include "../test/fuzzer.h"
+#include "../tokenizer.h"
+#include "../parser.h"
 
 #include <iostream>
 
-constexpr uint32_t kShotsCount = 10000;
+constexpr uint32_t kShotsCount = 100000;
 
-TEST_CASE("Fuzzing") {
+TEST_CASE("Fuzzzzzzing") {
     Fuzzer fuzzer;
-    Interpreter interpreter;
 
     for (uint32_t i = 0; i < kShotsCount; ++i) {
         try {
             auto req = fuzzer.Next();
             // std::cerr << req << std::endl;  // uncomment to debug, random is deterministic
-            interpreter.Run(req);
+            std::stringstream ss{req};
+            Tokenizer tokenizer{&ss};
+            while (!tokenizer.IsEnd()) {
+                Read(&tokenizer);
+            }
         } catch (const SyntaxError&) {
-        } catch (const RuntimeError&) {
-        } catch (const NameError&) {
         }
     }
 }

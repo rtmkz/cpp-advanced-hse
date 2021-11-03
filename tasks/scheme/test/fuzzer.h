@@ -2,6 +2,7 @@
 
 #include <sstream>
 #include <random>
+#include <array>
 
 constexpr uint32_t kSeed = 16;
 constexpr uint32_t kSeqCount = 21;

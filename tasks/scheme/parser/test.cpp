@@ -1,11 +1,9 @@
 #include <catch.hpp>
 
 #include <sstream>
-#include <iostream>
 
-#include "../parser.h"
 #include "../error.h"
-#include "../test/fuzzer.h"
+#include "../parser.h"
 
 auto ReadFull(const std::string& str) {
     std::stringstream ss{str};
@@ -147,27 +145,4 @@ TEST_CASE("Invalid") {
     REQUIRE_THROWS_AS(ReadFull("(1 . ()"), SyntaxError);
     REQUIRE_THROWS_AS(ReadFull("(1 . )"), SyntaxError);
     REQUIRE_THROWS_AS(ReadFull("(1 . 2 3)"), SyntaxError);
-}
-
-TEST_CASE("Other") {
-    ReadFull("'()");
-}
-
-constexpr uint32_t kShotsCount = 100000;
-
-TEST_CASE("Fuzzzzzzing") {
-    Fuzzer fuzzer;
-
-    for (uint32_t i = 0; i < kShotsCount; ++i) {
-        try {
-            auto req = fuzzer.Next();
-            // std::cerr << req << std::endl;  // uncomment to debug, random is deterministic
-            std::stringstream ss{req};
-            Tokenizer tokenizer{&ss};
-            while (!tokenizer.IsEnd()) {
-                Read(&tokenizer);
-            }
-        } catch (const SyntaxError&) {
-        }
-    }
 }
