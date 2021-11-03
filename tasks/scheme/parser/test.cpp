@@ -1,7 +1,6 @@
 #include <catch.hpp>
 
-#include <sstream>
-#include <random>
+#include <sstream
 #include <iostream>
 
 #include "../parser.h"

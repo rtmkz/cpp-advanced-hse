@@ -1,5 +1,8 @@
 #pragma once
 
+#include <sstream>
+#include <random>
+
 constexpr uint32_t kSeed = 16;
 constexpr uint32_t kSeqCount = 21;
 
