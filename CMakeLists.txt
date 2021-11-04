@@ -14,6 +14,8 @@ include(cmake/TestSolution.cmake)
 include(cmake/SeminarUtils.cmake)
 
 find_package(Catch REQUIRED)
+find_package(Benchmark REQUIRED)
+find_package(GTest REQUIRED)
 
 include_directories(util)
 
@@ -61,6 +63,10 @@ add_subdirectory(tasks/transform_tuple)
 add_subdirectory(tasks/constexpr-map)
 add_subdirectory(tasks/pipes)
 add_subdirectory(tasks/compile-eval)
+
+#8
+
+add_subdirectory(tasks/is-prime)
 
 # Homeworks
 # 1

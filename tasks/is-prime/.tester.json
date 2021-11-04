@@ -1,0 +1,6 @@
+{
+    "allow_change": ["is_prime.cpp"],
+    "tests": ["test_isprime"],
+    "benchmarks": ["bench_isprime"],
+    "scorer": "scorer.py"
+}
