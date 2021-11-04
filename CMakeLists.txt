@@ -67,6 +67,7 @@ add_subdirectory(tasks/compile-eval)
 #8
 
 add_subdirectory(tasks/is-prime)
+add_subdirectory(tasks/reduce)
 
 # Homeworks
 # 1
