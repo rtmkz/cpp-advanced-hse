@@ -123,6 +123,8 @@
   tasks:
     - task: is-prime
       score: 100
+    - task: reduce
+      score: 100
 
 - group:    scheme
   start:    26-10-2021 00:00
