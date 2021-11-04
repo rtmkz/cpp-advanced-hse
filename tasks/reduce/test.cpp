@@ -29,9 +29,8 @@ TEST(Correctness, SimpleTest) {
 }
 
 template <class RandomAccessIterator, class T, class Func>
-__attribute__((noinline))
-T CanonicalReduce(RandomAccessIterator first, RandomAccessIterator last, const T& initial_value,
-                  Func func) {
+__attribute__((noinline)) T CanonicalReduce(RandomAccessIterator first, RandomAccessIterator last,
+                                            const T& initial_value, Func func) {
     auto cur_value(initial_value);
     while (first != last) {
         cur_value = func(cur_value, *first++);
