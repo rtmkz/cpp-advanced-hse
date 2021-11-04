@@ -113,7 +113,7 @@ endfunction()
 
 function(add_gtest TARGET)
   add_hse_test_binary(${TARGET}
-    ${CMAKE_CURRENT_SOURCE_DIR}/../contrib/gmock_main.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../contrib/gmock_main.cc
     ${ARGN})
 
   target_link_libraries(${TARGET}
