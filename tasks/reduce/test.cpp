@@ -29,8 +29,8 @@ TEST(Correctness, SimpleTest) {
 }
 
 template <class RandomAccessIterator, class T, class Func>
-T CanonicalReduce(RandomAccessIterator first, RandomAccessIterator last,
-                  const T& initial_value, Func func) {
+T CanonicalReduce(RandomAccessIterator first, RandomAccessIterator last, const T& initial_value,
+                  Func func) {
     auto cur_value(initial_value);
     while (first != last) {
         cur_value = func(cur_value, *first++);
@@ -43,7 +43,8 @@ uint32_t Gcd(uint32_t a, uint32_t b) {
 }
 
 // That's a bad test, don't write this in production. Also if it does not work,
-// it may work in a server.
+// it may work on a server.
+#ifdef NDEBUG
 TEST(Perf, BetterReduce) {
     using namespace std::literals;
     std::vector<uint32_t> lst(GenTest(1000 * 1000 * 100));
@@ -60,3 +61,4 @@ TEST(Perf, BetterReduce) {
     // At least 50% faster.
     ASSERT_GE(time_simple, 2 * time_optimized);
 }
+#endif
