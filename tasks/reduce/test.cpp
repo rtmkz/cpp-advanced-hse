@@ -50,14 +50,15 @@ TEST(Perf, BetterReduce) {
     std::vector<uint32_t> lst(GenTest(1000 * 1000 * 100));
 
     std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
-    Reduce(lst.begin(), lst.end(), 0, Gcd);
+    auto left = Reduce(lst.begin(), lst.end(), 0, Gcd);
     std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
     auto time_optimized = (end - begin) / 1ms;
 
     begin = std::chrono::steady_clock::now();
-    CanonicalReduce(lst.begin(), lst.end(), 0, Gcd);
+    auto right = CanonicalReduce(lst.begin(), lst.end(), 0, Gcd);
     end = std::chrono::steady_clock::now();
     auto time_simple = (end - begin) / 1ms;
+    ASSERT_EQ(left, right);
     // At least 50% faster.
     ASSERT_GE(time_simple, 2 * time_optimized);
 }
