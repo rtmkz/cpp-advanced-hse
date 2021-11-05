@@ -147,4 +147,5 @@
       score: 100
     - task: concepts
       score: 100
-
+    - task: simple_defer
+      score: 100
