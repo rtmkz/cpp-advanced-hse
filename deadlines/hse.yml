@@ -107,7 +107,7 @@
 
 - group:    07-meta
   start:    30-10-2021 13:00
-  deadline: 10-11-2021 19:00
+  deadline: 12-11-2021 19:00
   tasks:
     - task: algo_spec
       score: 100
