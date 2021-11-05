@@ -7,7 +7,9 @@ TEST_CASE("Basic") {
     int checker_num1 = 0;
 
     {
-        defer { checker_num1 = set_value1; };
+        defer {
+            checker_num1 = set_value1;
+        };
         ++set_value1;
         REQUIRE(checker_num1 == 0);
     }
@@ -17,8 +19,12 @@ TEST_CASE("Basic") {
     int set_value2 = 12;
     int checker_num2 = 0;
     {
-        defer { checker_num2 = set_value2; };
-        defer { checker_num2 *= 2; };
+        defer {
+            checker_num2 = set_value2;
+        };
+        defer {
+            checker_num2 *= 2;
+        };
         REQUIRE(checker_num2 == 0);
     }
     REQUIRE(checker_num2 == 12);
@@ -26,8 +32,12 @@ TEST_CASE("Basic") {
     int set_value3 = 12;
     int checker_num3 = 0;
     {
-        defer { checker_num3 *= 2; };
-        defer { checker_num3 = set_value3; };
+        defer {
+            checker_num3 *= 2;
+        };
+        defer {
+            checker_num3 = set_value3;
+        };
         REQUIRE(checker_num3 == 0);
     }
     REQUIRE(checker_num3 == 24);
@@ -38,8 +48,12 @@ TEST_CASE("Nested") {
 
     {
         defer {
-            defer { x += 10; };
-            defer { x *= 2; };
+            defer {
+                x += 10;
+            };
+            defer {
+                x *= 2;
+            };
         };
 
         ++x;
@@ -50,13 +64,15 @@ TEST_CASE("Nested") {
 }
 
 constexpr int Foo(int x) {
-    defer { x *= 2; };
+    defer {
+        x *= 2;
+    };
     return x;
 }
 
 TEST_CASE("Constexpr") {
     constexpr int kX = 1;
-    constexpr int kRes = Foo(kX); //NOLINT
+    constexpr int kRes = Foo(kX);  // NOLINT
     REQUIRE(kRes == 1);
 }
 
