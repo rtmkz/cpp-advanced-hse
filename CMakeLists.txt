@@ -69,6 +69,7 @@ add_subdirectory(tasks/compile-eval)
 add_subdirectory(tasks/is-prime)
 add_subdirectory(tasks/reduce)
 add_subdirectory(tasks/subset-sum)
+add_subdirectory(tasks/hash-table)
 
 # Homeworks
 # 1
