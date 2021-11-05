@@ -1,0 +1,5 @@
+{
+    "allow_change": ["reduce.h"],
+    "tests": ["test_reduce"],
+    "benchmarks": ["bench_reduce"]
+}

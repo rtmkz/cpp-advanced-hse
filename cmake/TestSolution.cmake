@@ -77,6 +77,22 @@ endfunction()
 
 add_custom_target(test-all)
 
+
+function(add_hse_test_binary TARGET)
+  add_hse_executable(${TARGET}
+    ${ARGN})
+
+  if (TEST_SOLUTION)
+    add_custom_target(
+      run_${TARGET}
+      WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+      DEPENDS ${TARGET}
+      COMMAND ${CMAKE_BINARY_DIR}/${TARGET})
+
+    add_dependencies(test-all run_${TARGET})
+  endif()
+endfunction()
+
 function(add_catch TARGET)
   add_hse_executable(${TARGET}
     ${ARGN})
@@ -93,6 +109,23 @@ function(add_catch TARGET)
 
     add_dependencies(test-all run_${TARGET})
   endif()
+endfunction()
+
+function(add_gtest TARGET)
+  add_hse_test_binary(${TARGET}
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../contrib/gmock_main.cc
+    ${ARGN})
+
+  target_link_libraries(${TARGET}
+    gmock)
+endfunction()
+
+function(add_benchmark TARGET)
+  add_hse_test_binary(${TARGET}
+    ${ARGN})
+
+  target_link_libraries(${TARGET}
+    benchmark)
 endfunction()
 
 

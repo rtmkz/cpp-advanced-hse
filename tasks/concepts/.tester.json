@@ -1,0 +1,7 @@
+{
+    "allow_change": ["concepts.h"],
+    "tests": ["test_concepts"],
+    "benchmarks": [],
+    "scorer": [],
+    "linter": false
+}

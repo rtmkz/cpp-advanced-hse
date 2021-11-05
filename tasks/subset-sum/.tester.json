@@ -1,0 +1,6 @@
+{
+    "allow_change": ["find_subsets.cpp"],
+    "tests": ["test_subset_sum"],
+    "benchmarks": ["bench_subset_sum"],
+    "scorer": "scorer.py"
+}

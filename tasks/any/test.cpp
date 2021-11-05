@@ -43,17 +43,19 @@ TEST_CASE("Empty") {
 }
 
 TEST_CASE("Copy") {
-    Any a(5);
+    std::vector<int> v{1, 2, 3, 4, 5};
+
+    Any a(v);
     Any b = a;
 
-    REQUIRE(a.GetValue<int>() == b.GetValue<int>());
+    REQUIRE(a.GetValue<std::vector<int>>() == b.GetValue<std::vector<int>>());
 
     Any c;
     c = b;
 
-    REQUIRE(b.GetValue<int>() == c.GetValue<int>());
+    REQUIRE(b.GetValue<std::vector<int>>() == c.GetValue<std::vector<int>>());
     b.Clear();
-    REQUIRE(5 == c.GetValue<int>());
+    REQUIRE(v == c.GetValue<std::vector<int>>());
 
     Any d(SomeStruct{3});
     REQUIRE(3 == d.GetValue<SomeStruct>().x);
@@ -67,7 +69,7 @@ TEST_CASE("Copy") {
     REQUIRE("dorou" == e.GetValue<std::string>());
 
     a.Swap(e);
-    REQUIRE(5 == e.GetValue<int>());
+    REQUIRE(v == e.GetValue<std::vector<int>>());
 }
 
 TEST_CASE("Any throws") {

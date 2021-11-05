@@ -100,7 +100,44 @@
     - task: small-test-framework
       score: 150
     - task: scala-vector
-      score: 150 
+      score: 150
+
+- group:    07-meta
+  start:    17-07-2021 18:00
+  deadline: 21-09-2022 18:00
+  tasks:
+    - task: algo_spec
+      score: 100
+    - task: compile-eval
+      score: 100
+    - task: transform_tuple
+      score: 100
+    - task: constexpr-map
+      score: 100
+    - task: pipes
+      score: 100
+
+- group:    08-baby-threads
+  start:    17-07-2021 18:00
+  deadline: 21-09-2022 18:00
+  tasks:
+    - task: is-prime
+      score: 100
+    - task: reduce
+      score: 100
+
+- group:    scheme
+  start:    26-10-2021 00:00
+  deadline: 15-11-2021 23:59
+  tasks:
+    - task: scheme/tokenizer
+      score: 1
+    - task: scheme/parser
+      score: 2
+    - task: scheme/basic
+      score: 3
+    - task: scheme/advanced
+      score: 4
 
 - group:    bonus
   start:    17-07-2021 18:00
@@ -113,4 +150,6 @@
     - task: brainfuck
       score: 100
     - task: matrix-2.0
+      score: 100
+    - task: concepts
       score: 100

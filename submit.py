@@ -137,9 +137,18 @@ if __name__ == "__main__":
         "shared_from_this",
     ]
 
+    allowed_scheme_dirs = [
+        "tokenizer",
+        "parser",
+        "basic",
+        "advanced",
+    ]
+
     subtask_name = task_name
     if task_name in allowed_smart_ptrs_dirs:
         task_name = 'smart-ptrs/' + task_name
+    elif task_name in allowed_scheme_dirs:
+        task_name = 'scheme/' + task_name
 
     try:
         task_config = json.load(open(os.path.join(os.pardir, subtask_name, ".tester.json")))
