@@ -64,7 +64,7 @@ public:
         //     mutexes_[to].unlock();
         // }
         //
-        // 2. Use std::lock + adapt_lock
+        // 2. Use std::lock + adopt_lock
         // std::lock(mutexes_[from], mutexes_[to]);
         // std::unique_lock guard1{mutexes_[from], std::adopt_lock};
         // std::unique_lock guard2{mutexes_[to], std::adopt_lock};
