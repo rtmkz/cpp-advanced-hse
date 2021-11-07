@@ -11,6 +11,8 @@
 #include <iostream>
 #include <syncstream>
 
+#define LOG std::osyncstream{std::cerr}
+
 
 class SharedResource {
 public:
@@ -23,7 +25,7 @@ public:
     }
 
     ~SharedResource() {
-        std::osyncstream{std::cerr}
+        LOG
             << "Destroying resource " << Generation()
             << " from thread " << std::this_thread::get_id()
             << std::endl;
@@ -53,20 +55,17 @@ private:
 };
 
 void Updater(ResourceRegistry* registry) {
-    std::osyncstream{std::cerr} << "Start updater at thread " << std::this_thread::get_id() << std::endl;
+    LOG << "Start updater at thread " << std::this_thread::get_id() << std::endl;
 
     for (size_t seq = 0; true; ++seq) {
         registry->Store(std::make_shared<SharedResource>(seq));
-
-        std::osyncstream{std::cerr}
-            << "Stored new resource " << seq << std::endl;
-
+        LOG << "Stored new resource " << seq << std::endl;
         std::this_thread::sleep_for(std::chrono::milliseconds(1000));
     }
 }
 
 void Reader(ResourceRegistry* registry, int i) {
-    std::osyncstream{std::cerr} << "Start reader " << i << " at thread " << std::this_thread::get_id() << std::endl;
+    LOG << "Start reader " << i << " at thread " << std::this_thread::get_id() << std::endl;
 
     // Generator for timeouts
     std::mt19937 mt{42u * i};
@@ -76,11 +75,9 @@ void Reader(ResourceRegistry* registry, int i) {
         auto resource = registry->Load();
 
         if (resource) {
-            std::osyncstream{std::cerr}
-                << "Reader " << i << " loaded resource " << resource->Generation() << std::endl;
+            LOG << "Reader " << i << " loaded resource " << resource->Generation() << std::endl;
         } else {
-            std::osyncstream{std::cerr}
-                << "Reader " << i << " loaded empty resource" << std::endl;
+            LOG << "Reader " << i << " loaded empty resource" << std::endl;
         }
 
         std::this_thread::sleep_for(std::chrono::milliseconds(dist(mt)));
