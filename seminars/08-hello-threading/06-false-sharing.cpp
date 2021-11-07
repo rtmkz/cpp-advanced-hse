@@ -43,12 +43,12 @@ public:
         value_ = value_ + 1;
     }
 
-    unsigned Value() {
+    unsigned Value() const {
         return value_;
     }
 
 private:
-    std::atomic<unsigned> value_ = 0;
+    volatile unsigned value_ = 0;
 };
 
 constexpr size_t kCacheLineSize = 64;
