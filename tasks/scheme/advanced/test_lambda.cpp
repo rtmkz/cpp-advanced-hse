@@ -28,6 +28,8 @@ TEST_CASE_METHOD(SchemeTest, "LambdaClosure") {
               x)))
                     )EOF");
 
+    // (define range (lambda (x) (lambda () (set! x (+ x 1)) x)))
+
     ExpectNoError("(define my-range (range 10))");
     ExpectEq("(my-range)", "11");
     ExpectEq("(my-range)", "12");
@@ -51,4 +53,22 @@ TEST_CASE_METHOD(SchemeTest, "DefineLambdaSugar") {
 
     ExpectNoError("(define (zero) 0)");
     ExpectEq("(zero)", "0");
+}
+
+TEST_CASE_METHOD(SchemeTest, "LambdaMultipleRecurseCalls") {
+    ExpectNoError("(define (fib x) (if (< x 3) 1 (+ (fib (- x 1)) (fib (- x 2)) )))");
+    ExpectEq("(fib 1)", "1");
+    ExpectEq("(fib 2)", "1");
+    ExpectEq("(fib 3)", "2");
+    ExpectEq("(fib 7)", "13");
+    ExpectEq("(fib 8)", "21");
+}
+
+TEST_CASE_METHOD(SchemeTest, "MutualCalls") {
+    ExpectNoError("(define (foo x) (if (< x 2) 42 (bar (- x 1))))");
+    ExpectNoError("(define (bar x) (if (< x 2) 24 (foo (/ x 2))))");
+    ExpectEq("(foo 3)", "42");
+    ExpectEq("(foo 6)", "24");
+    ExpectEq("(bar 7)", "42");
+    ExpectEq("(bar 13)", "24");
 }
