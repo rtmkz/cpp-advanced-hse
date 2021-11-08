@@ -1,7 +1,7 @@
 #include "../scheme.h"
 #include "../test/scheme_test.h"
 #include "../test/fuzzer.h"
-// #include "allocations_checker.h"
+#include "allocations_checker.h"
 
 #include <iostream>
 
@@ -11,8 +11,8 @@ TEST_CASE("Fuzzing") {
     Fuzzer fuzzer;
     Interpreter interpreter;
 
-    // allocations_count.store(0);
-    // deallocations_count.store(0);
+    allocations_count.store(0);
+    deallocations_count.store(0);
 
     for (uint32_t i = 0; i < kShotsCount; ++i) {
         try {
@@ -25,13 +25,13 @@ TEST_CASE("Fuzzing") {
         }
     }
 
-    // int alloc_count = allocations_count.load(), dealloc_count = deallocations_count.load();
+    int alloc_count = allocations_count.load(), dealloc_count = deallocations_count.load();
 
-    // std::cerr << "Allocations: " << alloc_count << "\n";
-    // std::cerr << "Deallocations: " << dealloc_count << "\n";
+    std::cerr << "Allocations: " << alloc_count << "\n";
+    std::cerr << "Deallocations: " << dealloc_count << "\n";
 
     // If falling here:
     // - if it happens on advanced task, check that you invoke GC after each command
     // - if it happens on basic task, contact us
-    // REQUIRE(alloc_count - dealloc_count <= 10'000);
+    REQUIRE(alloc_count - dealloc_count <= 10'000);
 }
