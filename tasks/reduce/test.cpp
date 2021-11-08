@@ -32,7 +32,7 @@ TEST(VectorBool, Tricky) {
     // See https://stackoverflow.com/questions/33617421/write-concurrently-vectorbool
     std::vector<bool> go(GenTest<bool>(1000));
     auto func = [](bool cur, bool next) { return cur && next; };
-        ASSERT_EQ(std::accumulate(go.begin(), go.end(), true, func),
+    ASSERT_EQ(std::accumulate(go.begin(), go.end(), true, func),
               Reduce(go.begin(), go.end(), true, func));
 }
 
