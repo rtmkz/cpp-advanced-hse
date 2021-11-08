@@ -19,14 +19,12 @@ public:
     }
 };
 
-std::vector<uint32_t> GenTest(int size) {
-    std::vector<uint32_t> result(size);
+template <class T>
+std::vector<T> GenTest(int size) {
+    std::vector<T> result(size);
     static std::mt19937 gen(7347475);
-    for (auto& cur : result) {
-        cur = gen();
-        if (!cur) {
-            ++cur;
-        }
+    for (int i = 0; i < size; ++i) {
+        result[i] = gen();
     }
     return result;
 }

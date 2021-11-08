@@ -21,11 +21,19 @@ TEST(Correctness, Empty) {
 }
 
 TEST(Correctness, SimpleTest) {
-    std::vector<uint32_t> lst(GenTest(1000));
+    std::vector<uint32_t> lst(GenTest<uint32_t>(1000));
 
     auto func = [](uint32_t cur, uint32_t next) { return cur + next; };
     ASSERT_EQ(std::accumulate(lst.begin(), lst.end(), 0, func),
               Reduce(lst.begin(), lst.end(), 0, func));
+}
+
+TEST(VectorBool, Tricky) {
+    // See https://stackoverflow.com/questions/33617421/write-concurrently-vectorbool
+    std::vector<bool> go(GenTest<bool>(1000));
+    auto func = [](bool cur, bool next) { return cur && next; };
+        ASSERT_EQ(std::accumulate(go.begin(), go.end(), true, func),
+              Reduce(go.begin(), go.end(), true, func));
 }
 
 template <class RandomAccessIterator, class T, class Func>
