@@ -133,6 +133,14 @@ TEST_CASE("Lists") {
         ReadFull("(1 2 (3 4) (()))");
         ReadFull("(+ 1 2 (- 3 4))");
     }
+
+    SECTION("Tricky cell") {
+        auto cell = ReadFull("(())");
+
+        REQUIRE(Is<Cell>(cell));
+        REQUIRE(!As<Cell>(cell)->GetFirst());
+        REQUIRE(!As<Cell>(cell)->GetSecond());
+    }
 }
 
 TEST_CASE("Invalid") {
