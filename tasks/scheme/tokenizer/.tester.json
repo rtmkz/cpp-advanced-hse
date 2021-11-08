@@ -4,5 +4,6 @@
     "../*.h"
   ],
   "tests": "test_scheme_tokenizer",
-  "solutions": "private"
+  "solutions": "private",
+  "disable_tsan": true
 }
