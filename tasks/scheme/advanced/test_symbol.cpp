@@ -53,3 +53,7 @@ TEST_CASE_METHOD(SchemeTest, "CopySemantics") {
     ExpectEq("y", "2");
     ExpectEq("x", "1");
 }
+
+TEST_CASE_METHOD(SchemeTest, "EvaluationOrder") {
+    ExpectNameError("(define x x)");
+}

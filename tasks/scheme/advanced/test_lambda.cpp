@@ -72,3 +72,31 @@ TEST_CASE_METHOD(SchemeTest, "MutualCalls") {
     ExpectEq("(bar 7)", "42");
     ExpectEq("(bar 13)", "24");
 }
+
+TEST_CASE_METHOD(SchemeTest, "LambdasShareContext") {
+    ExpectNoError(R"EOF(
+        (define (foo x)
+            (cons
+                (lambda () (set! x (+ x 1)) x)
+                (lambda () (set! x (* x 2)) x)
+            )
+        )
+    )EOF");
+    ExpectNoError("(define my-foo (foo 15))");
+    ExpectEq("((cdr my-foo))", "30");
+    ExpectEq("((car my-foo))", "31");
+    ExpectEq("((car my-foo))", "32");
+    ExpectEq("((cdr my-foo))", "64");
+}
+
+TEST_CASE_METHOD(SchemeTest, "CyclicLocalContextDependencies") {
+    ExpectNoError(R"EOF(
+        (define (foo x)
+            (define (bar) (set! x (+ (* x 2) 2)) x)
+            bar
+        )
+    )EOF");
+    ExpectNoError("(define my-foo (foo 20))");
+    ExpectNoError("(define foo 1543)");
+    ExpectEq("(my-foo)", "42");
+}
