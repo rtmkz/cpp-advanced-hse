@@ -3,8 +3,8 @@
 #include <atomic>
 
 #if defined(__has_feature)
-#if __has_feature(address_sanitizer)
-#define ASAN_ENABLED
+#if __has_feature(address_sanitizer) || __has_feature(thread_sanitizer)
+#define HAS_SANITIZER
 #include <sanitizer/allocator_interface.h>
 #endif
 #endif
@@ -19,7 +19,7 @@ void FreeHook(const volatile void*) {
     deallocations_count.fetch_add(1);
 }
 
-#ifdef ASAN_ENABLED
+#ifdef HAS_SANITIZER
 [[maybe_unused]] const auto kInit = [] {
     int res = __sanitizer_install_malloc_and_free_hooks(MallocHook, FreeHook);
     if (res == 0) {
