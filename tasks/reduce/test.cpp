@@ -55,7 +55,7 @@ uint32_t Gcd(uint32_t a, uint32_t b) {
 #ifdef NDEBUG
 TEST(Perf, BetterReduce) {
     using namespace std::literals;
-    std::vector<uint32_t> lst(GenTest(1000 * 1000 * 100));
+    std::vector<uint32_t> lst(GenTest<uint32_t>(1000 * 1000 * 100));
 
     std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
     auto left = Reduce(lst.begin(), lst.end(), 0, Gcd);
