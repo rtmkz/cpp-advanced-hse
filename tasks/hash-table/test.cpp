@@ -71,6 +71,7 @@ TEST(Correctness, Constness) {
     ASSERT_EQ(std::make_pair(true, 3), ref.Find(3));
     ASSERT_FALSE(ref.Find(4).first);
     ASSERT_EQ(1, ref.At(1));
+    // NOLINTNEXTLINE
     ASSERT_THROW(ref.At(0), std::out_of_range);
 }
 
