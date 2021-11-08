@@ -1,6 +1,7 @@
 #include "../scheme.h"
 #include "../test/scheme_test.h"
 #include "../test/fuzzer.h"
+#include "allocations_checker.h"
 
 #include <iostream>
 
@@ -20,4 +21,9 @@ TEST_CASE("Fuzzing") {
         } catch (const NameError&) {
         }
     }
+
+    // If falling here:
+    // - if it happens on advanced task, check that you invoke GC after each command
+    // - if it happens on basic task, contact us
+    REQUIRE(allocations_count.load() - deallocations_count.load() <= 10'000);
 }
