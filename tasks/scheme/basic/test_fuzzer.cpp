@@ -4,7 +4,7 @@
 
 #include <iostream>
 
-constexpr uint32_t kShotsCount = 10000;
+constexpr uint32_t kShotsCount = 100000;
 
 TEST_CASE("Fuzzing") {
     Fuzzer fuzzer;
