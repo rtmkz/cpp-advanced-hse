@@ -8,6 +8,8 @@ bool Check(T value, AlgoRes (*target)(T)) {
     return Run(value) == target(value);
 }
 
+#include "algo_spec_test.inc"
+
 TEST_CASE("Integral") {
     REQUIRE(Check(-200, ComputeIntegral));
     REQUIRE(Check(40, ComputeIntegral));

@@ -1,0 +1,47 @@
+struct ${HOHOHO}Int {
+};
+
+struct ${HOHOHO}Float {
+};
+
+// Forgive me father for i have sinned
+
+// You cannot extend namespace std and add specialisations of these templates
+// This code is ill-formed and the behaviour is undefined, but who cares
+namespace std {
+
+template <>
+struct is_integral<::${HOHOHO}Int> : std::true_type {
+};
+
+template <>
+struct is_signed<::${HOHOHO}Int> : std::true_type {
+};
+
+template <>
+struct is_unsigned<::${HOHOHO}Int> : std::false_type {
+};
+
+////////////////////////////////////////////////////////////////////////////////
+
+template <>
+struct is_floating_point<::${HOHOHO}Float> : std::true_type {
+};
+
+template <>
+struct is_signed<::${HOHOHO}Float> : std::true_type {
+};
+
+template <>
+struct is_unsigned<::${HOHOHO}Float> : std::false_type {
+};
+
+}
+
+TEST_CASE("Generated") {
+    ${HOHOHO}Int imAnInteger;
+    REQUIRE(Run(imAnInteger) == ComputeIntegral(imAnInteger));
+
+    ${HOHOHO}Float imAFloat;
+    REQUIRE(Run(imAFloat) == ComputeFloat(imAFloat));
+}
