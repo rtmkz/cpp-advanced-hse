@@ -64,7 +64,9 @@ TEST_CASE_METHOD(SchemeTest, "IntegerArithmetics") {
     ExpectEq("(+ 1 (+ 3 4 5))", "13");
     ExpectEq("(- 1 2)", "-1");
     ExpectEq("(- 2 1)", "1");
+    ExpectEq("(- 2 1 1)", "0");
     ExpectEq("(* 5 6)", "30");
+    ExpectEq("(* 5 6 7)", "210");
     ExpectEq("(/ 4 2)", "2");
     ExpectEq("(/ 4 2 2)", "1");
 }
