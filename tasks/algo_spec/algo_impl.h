@@ -11,15 +11,22 @@ struct Int256 {
     Int128 lo, hi;
 };
 
-AlgoRes ComputeUnsignedIntegral(auto) {
+template <typename T>
+AlgoRes ComputeUnsignedIntegral(T) {
     return 1 << 3;
 }
-AlgoRes ComputeIntegral(auto) {
+
+template <typename T>
+AlgoRes ComputeIntegral(T) {
     return 1 << 2;
 }
-AlgoRes ComputeFloat(auto) {
+
+template <typename T>
+AlgoRes ComputeFloat(T) {
     return 1 << 1;
 }
-AlgoRes ComputeGeneral(auto) {
+
+template <typename T>
+AlgoRes ComputeGeneral(T) {
     return 1 << 0;
 }
