@@ -1,0 +1,8 @@
+{
+    "allow_change": ["rw_lock.h"],
+    "tests": ["test_rwlock"],
+    "benchmarks": ["bench_rwlock"],
+    "forbidden_containers" : [
+        "shared_mutex"
+    ]
+}
