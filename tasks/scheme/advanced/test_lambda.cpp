@@ -1,4 +1,9 @@
+#include <string>
+#include <iostream>
+
 #include "../test/scheme_test.h"
+#include "catch.hpp"
+#include "allocations_checker.h"
 
 TEST_CASE_METHOD(SchemeTest, "SimpleLambda") {
     ExpectEq("((lambda (x) (+ 1 x)) 5)", "6");
@@ -99,4 +104,22 @@ TEST_CASE_METHOD(SchemeTest, "CyclicLocalContextDependencies") {
     ExpectNoError("(define my-foo (foo 20))");
     ExpectNoError("(define foo 1543)");
     ExpectEq("(my-foo)", "42");
+}
+
+TEST_CASE_METHOD(SchemeTest, "LambdaScopePrune") {
+    alloc_checker::ResetCounters();
+
+    for (uint32_t i = 0; i < 100; ++i) {
+        std::string fn = "ahaha" + std::to_string(i);
+        ExpectNoError("(define (" + fn + " x) (if (= x 0) 0 (+ 1 (" + fn + " (- x 1)))))");
+        ExpectEq("(" + fn + " 1000)", "1000");
+    }
+
+    size_t alloc_count = alloc_checker::AllocCount(), dealloc_count = alloc_checker::DeallocCount();
+
+    std::cerr << "LambdaScopePrune:\n";
+    std::cerr << "Allocations: " << alloc_count << "\n";
+    std::cerr << "Deallocations: " << dealloc_count << "\n\n";
+
+    REQUIRE(alloc_count - dealloc_count <= 30'000);
 }
