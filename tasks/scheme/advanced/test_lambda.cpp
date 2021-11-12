@@ -115,7 +115,8 @@ TEST_CASE_METHOD(SchemeTest, "LambdaScopePrune") {
         ExpectEq("(" + fn + " 1000)", "1000");
     }
 
-    size_t alloc_count = alloc_checker::AllocCount(), dealloc_count = alloc_checker::DeallocCount();
+    int64_t alloc_count = alloc_checker::AllocCount(),
+            dealloc_count = alloc_checker::DeallocCount();
 
     std::cerr << "LambdaScopePrune:\n";
     std::cerr << "Allocations: " << alloc_count << "\n";

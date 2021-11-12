@@ -24,7 +24,8 @@ TEST_CASE("Fuzzing") {
         }
     }
 
-    size_t alloc_count = alloc_checker::AllocCount(), dealloc_count = alloc_checker::DeallocCount();
+    int64_t alloc_count = alloc_checker::AllocCount(),
+            dealloc_count = alloc_checker::DeallocCount();
 
     std::cerr << "Fuzzer:\n";
     std::cerr << "Allocations: " << alloc_count << "\n";
