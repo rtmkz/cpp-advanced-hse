@@ -50,8 +50,8 @@ add_library(scheme ${SOURCES})
 
 target_link_libraries(test_scheme_tokenizer scheme)
 target_link_libraries(test_scheme_parser scheme)
-target_link_libraries(test_scheme_basic scheme)
-target_link_libraries(test_scheme_advanced scheme)
+target_link_libraries(test_scheme_basic scheme allocations_checker)
+target_link_libraries(test_scheme_advanced scheme allocations_checker)
 
 add_executable(scheme-repl repl/main.cpp)
 target_link_libraries(scheme-repl scheme)

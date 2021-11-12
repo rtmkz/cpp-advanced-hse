@@ -19,6 +19,8 @@ find_package(GTest REQUIRED)
 
 include_directories(util)
 
+add_subdirectory(allocations_checker)
+
 # 0
 add_subdirectory(tasks/multiplication)
 

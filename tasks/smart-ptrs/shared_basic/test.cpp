@@ -1,7 +1,8 @@
 #include "../shared.h"
 
 #include <catch.hpp>
-#include <allocations_checker.h>
+
+#include "allocations_checker.h"
 
 #include <memory>
 

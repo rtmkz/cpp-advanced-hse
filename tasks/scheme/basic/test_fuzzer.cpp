@@ -11,8 +11,7 @@ TEST_CASE("Fuzzing") {
     Fuzzer fuzzer;
     Interpreter interpreter;
 
-    allocations_count.store(0);
-    deallocations_count.store(0);
+    alloc_checker::ResetCounters();
 
     for (uint32_t i = 0; i < kShotsCount; ++i) {
         try {
@@ -25,10 +24,11 @@ TEST_CASE("Fuzzing") {
         }
     }
 
-    int alloc_count = allocations_count.load(), dealloc_count = deallocations_count.load();
+    size_t alloc_count = alloc_checker::AllocCount(), dealloc_count = alloc_checker::DeallocCount();
 
+    std::cerr << "Fuzzer:\n";
     std::cerr << "Allocations: " << alloc_count << "\n";
-    std::cerr << "Deallocations: " << dealloc_count << "\n";
+    std::cerr << "Deallocations: " << dealloc_count << "\n\n";
 
     // If falling here:
     // - if it happens on advanced task, check that you invoke GC after each command
