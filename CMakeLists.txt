@@ -73,6 +73,7 @@ add_subdirectory(tasks/subset-sum)
 add_subdirectory(tasks/hash-table)
 
 # 9
+add_subdirectory(tasks/timerqueue)
 add_subdirectory(tasks/semaphore)
 add_subdirectory(tasks/rw-lock)
 add_subdirectory(tasks/buffered-channel)
