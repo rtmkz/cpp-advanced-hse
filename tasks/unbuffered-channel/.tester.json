@@ -1,0 +1,6 @@
+{
+    "allow_change": ["unbuffered_channel.h"],
+    "tests": ["test_unbuffered_channel"],
+    "benchmarks": ["bench_unbuffered_channel"],
+    "scorer": "scorer.py"
+}
