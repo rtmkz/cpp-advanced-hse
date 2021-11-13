@@ -1,10 +1,11 @@
+#include "sema.h"
+
 #include <thread>
 #include <vector>
 #include <chrono>
 #include <atomic>
 
 #include <gtest/gtest.h>
-#include <semaphore.h>
 
 void RunTest(int threads_count, int concurrency_level) {
     Semaphore semaphore(concurrency_level);
