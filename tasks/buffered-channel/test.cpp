@@ -9,7 +9,6 @@
 #include <chrono>
 #include <algorithm>
 
-
 std::vector<int> Unpack(const std::vector<std::vector<int>>& values) {
     std::vector<int> all;
     for (const auto& vector : values) {

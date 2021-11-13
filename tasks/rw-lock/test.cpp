@@ -1,3 +1,5 @@
+#include "rw_lock.h"
+
 #include <thread>
 #include <vector>
 #include <atomic>
@@ -5,7 +7,7 @@
 #include <chrono>
 
 #include <gtest/gtest.h>
-#include <rw_lock.h>
+
 
 std::chrono::high_resolution_clock::time_point Now() {
     return std::chrono::high_resolution_clock::now();
