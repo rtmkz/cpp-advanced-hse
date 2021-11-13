@@ -1,5 +1,5 @@
 {
-    "allow_change": ["semaphore.h"],
+    "allow_change": ["sema.h"],
     "tests": ["test_semaphore"],
     "benchmarks": []
 }
