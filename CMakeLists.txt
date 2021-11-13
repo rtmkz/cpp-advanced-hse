@@ -66,12 +66,17 @@ add_subdirectory(tasks/constexpr-map)
 add_subdirectory(tasks/pipes)
 add_subdirectory(tasks/compile-eval)
 
-#8
-
+# 8
 add_subdirectory(tasks/is-prime)
 add_subdirectory(tasks/reduce)
 add_subdirectory(tasks/subset-sum)
 add_subdirectory(tasks/hash-table)
+
+# 9
+add_subdirectory(tasks/semaphore)
+add_subdirectory(tasks/rw-lock)
+add_subdirectory(tasks/buffered-channel)
+add_subdirectory(tasks/unbuffered-channel)
 
 # Homeworks
 # 1
