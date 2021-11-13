@@ -134,6 +134,8 @@
   start:    13-11-2021 13:00
   deadline: 26-11-2021 19:00
   tasks:
+    - task: timerqueue
+      score: 100
     - task: semaphore
       score: 100
     - task: rw-lock
