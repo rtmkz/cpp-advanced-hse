@@ -133,6 +133,21 @@
     - task: subset-sum
       score: 150
 
+- group:    09-condition-variables
+  start:    13-11-2021 13:00
+  deadline: 26-11-2021 19:00
+  tasks:
+    - task: timerqueue
+      score: 100
+    - task: semaphore
+      score: 100
+    - task: rw-lock
+      score: 100
+    - task: buffered-channel
+      score: 100
+    - task: unbuffered-channel
+      score: 100
+
 - group:    scheme
   start:    26-10-2021 00:00
   deadline: 15-11-2021 23:59
