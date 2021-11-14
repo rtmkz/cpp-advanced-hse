@@ -8,7 +8,6 @@
 
 #include <gtest/gtest.h>
 
-
 std::chrono::high_resolution_clock::time_point Now() {
     return std::chrono::high_resolution_clock::now();
 }
