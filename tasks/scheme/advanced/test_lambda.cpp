@@ -112,7 +112,7 @@ TEST_CASE_METHOD(SchemeTest, "LambdaScopePrune") {
     for (uint32_t i = 0; i < 100; ++i) {
         std::string fn = "ahaha" + std::to_string(i);
         ExpectNoError("(define (" + fn + " x) (if (= x 0) 0 (+ 1 (" + fn + " (- x 1)))))");
-        ExpectEq("(" + fn + " 1000)", "1000");
+        ExpectEq("(" + fn + " 100)", "100");
     }
 
     int64_t alloc_count = alloc_checker::AllocCount(),
@@ -122,5 +122,5 @@ TEST_CASE_METHOD(SchemeTest, "LambdaScopePrune") {
     std::cerr << "Allocations: " << alloc_count << "\n";
     std::cerr << "Deallocations: " << dealloc_count << "\n\n";
 
-    REQUIRE(alloc_count - dealloc_count <= 30'000);
+    REQUIRE(alloc_count - dealloc_count <= 10'000);
 }
