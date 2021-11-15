@@ -122,5 +122,5 @@ TEST_CASE_METHOD(SchemeTest, "LambdaScopePrune") {
     std::cerr << "Allocations: " << alloc_count << "\n";
     std::cerr << "Deallocations: " << dealloc_count << "\n\n";
 
-    REQUIRE(alloc_count - dealloc_count <= 10'000);
+    REQUIRE(alloc_count - dealloc_count <= 15'000);
 }
