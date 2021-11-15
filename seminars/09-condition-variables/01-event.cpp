@@ -8,8 +8,11 @@
 class Event {
 public:
     void Signal() {
-        std::lock_guard lock{mtx_};
-        ready_ = true;
+        {
+            std::lock_guard lock{mtx_};
+            ready_ = true;
+        }
+        // We do not hold the lock here in order to increase throughput
         cv_.notify_all();
     }
 
