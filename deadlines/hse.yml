@@ -150,7 +150,7 @@
 
 - group:    scheme
   start:    26-10-2021 00:00
-  deadline: 15-11-2021 23:59
+  deadline: 16-11-2021 00:01
   tasks:
     - task: scheme/tokenizer
       score: 2
