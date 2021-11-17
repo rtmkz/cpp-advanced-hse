@@ -13,6 +13,10 @@ include(cmake/BuildFlags.cmake)
 include(cmake/TestSolution.cmake)
 include(cmake/SeminarUtils.cmake)
 
+#find_package(PNG)
+#find_package(JPEG)
+#find_package(FFTW)
+
 find_package(Catch REQUIRED)
 find_package(Benchmark REQUIRED)
 find_package(GTest REQUIRED)
@@ -84,6 +88,8 @@ add_subdirectory(tasks/unbuffered-channel)
 add_subdirectory(tasks/smart-ptrs)
 # 2
 add_subdirectory(tasks/scheme)
+# 3
+#add_subdirectory(tasks/jpeg-decoder)
 
 # Bonuses
 add_subdirectory(tasks/brainfuck)
