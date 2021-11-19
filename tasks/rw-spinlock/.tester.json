@@ -1,0 +1,9 @@
+{
+    "allow_change": ["rw_spinlock.h"],
+    "tests": ["test_rw_spinlock"],
+    "benchmarks": ["bench_rw_spinlock"],
+    "forbidden_containers": [
+        "shared_mutex",
+        "mutex"
+    ]
+}
