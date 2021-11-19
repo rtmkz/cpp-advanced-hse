@@ -85,6 +85,7 @@ add_subdirectory(tasks/unbuffered-channel)
 
 # 10
 add_subdirectory(tasks/futex)
+add_subdirectory(tasks/fast-queue)
 
 # Homeworks
 # 1

@@ -1,0 +1,7 @@
+{
+    "allow_change": ["mpmc.h"],
+    "tests": ["test_fast_queue"],
+    "benchmarks": ["bench_fast_queue"],
+    "scorer": "scorer.py",
+    "forbidden_containers": ["mutex"]
+}
