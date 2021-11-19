@@ -83,6 +83,9 @@ add_subdirectory(tasks/rw-lock)
 add_subdirectory(tasks/buffered-channel)
 add_subdirectory(tasks/unbuffered-channel)
 
+# 10
+add_subdirectory(tasks/futex)
+
 # Homeworks
 # 1
 add_subdirectory(tasks/smart-ptrs)

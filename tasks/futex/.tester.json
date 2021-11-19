@@ -1,0 +1,9 @@
+{
+    "allow_change": ["mutex.h"],
+    "tests": ["test_futex"],
+    "benchmarks": ["bench_futex"],
+    "forbidden_containers": [
+        "mutex"
+    ],
+    "scorer": "scorer.py"
+}
