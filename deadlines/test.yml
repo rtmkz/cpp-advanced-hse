@@ -153,7 +153,7 @@
       score: 100
     - task: fast-queue
       score: 100
-    - task: mpsc-queue
+    - task: mpsc-stack
       score: 100
     - task: rw-spinlock
       score: 100
