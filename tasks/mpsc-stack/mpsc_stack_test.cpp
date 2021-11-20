@@ -1,55 +1,55 @@
 #include <gtest/gtest.h>
 
-#include <mpsc_queue.h>
+#include <mpsc_stack.h>
 
 #include <algorithm>
 #include <unordered_set>
 #include <thread>
 
-TEST(TestMPSCQueue, PushPop) {
-    MPSCQueue<int> queue;
+TEST(TestMPSCStack, PushPop) {
+    MPSCStack<int> stack;
 
-    queue.Push(1);
-    queue.Push(2);
+    stack.Push(1);
+    stack.Push(2);
 
-    auto [value, ok] = queue.Pop();
-    EXPECT_TRUE(ok);
-    EXPECT_EQ(2, value);
+    auto value = stack.Pop();
+    EXPECT_TRUE(value);
+    EXPECT_EQ(2, *value);
 
-    std::tie(value, ok) = queue.Pop();
-    EXPECT_TRUE(ok);
-    EXPECT_EQ(1, value);
+    value = stack.Pop();
+    EXPECT_TRUE(value);
+    EXPECT_EQ(1, *value);
 
-    std::tie(value, ok) = queue.Pop();
-    EXPECT_FALSE(ok);
+    value = stack.Pop();
+    EXPECT_FALSE(value);
 }
 
-TEST(TestMPSCQueue, SingleThread) {
-    MPSCQueue<int> queue;
+TEST(TestMPSCStack, SingleThread) {
+    MPSCStack<int> stack;
 
     std::vector<int> result;
     for (int i = 0; i < 1024; i++) {
         result.push_back(i);
-        queue.Push(i);
+        stack.Push(i);
     }
 
     std::vector<int> dequeued;
-    queue.DequeueAll([&](int j) { dequeued.push_back(j); });
+    stack.DequeueAll([&](int j) { dequeued.push_back(j); });
 
     std::reverse(dequeued.begin(), dequeued.end());
     EXPECT_EQ(dequeued, result);
 }
 
-TEST(TestMPSCQueue, Destructor) {
-    MPSCQueue<int> queue;
-    queue.Push(1);
-    queue.Push(2);
-    queue.Push(3);
+TEST(TestMPSCStack, Destructor) {
+    MPSCStack<int> stack;
+    stack.Push(1);
+    stack.Push(2);
+    stack.Push(3);
 }
 
-TEST(TestMPSCQueue, Threaded) {
+TEST(TestMPSCStack, Threaded) {
     std::unordered_set<int> all_dequeued;
-    MPSCQueue<int> queue;
+    MPSCStack<int> stack;
 
     std::atomic<bool> stop = false;
     std::thread dequeuer([&] {
@@ -59,15 +59,15 @@ TEST(TestMPSCQueue, Threaded) {
         };
 
         while (!stop) {
-            queue.DequeueAll(save);
+            stack.DequeueAll(save);
         }
 
-        queue.DequeueAll(save);
+        stack.DequeueAll(save);
     });
 
     constexpr int kN = 100000;
     for (int i = 0; i < kN; i++) {
-        queue.Push(i);
+        stack.Push(i);
     }
 
     stop = true;

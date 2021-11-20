@@ -1,0 +1,4 @@
+{
+    "allow_change": ["mpsc_stack.h"],
+    "tests": ["test_mpsc_stack"]
+}

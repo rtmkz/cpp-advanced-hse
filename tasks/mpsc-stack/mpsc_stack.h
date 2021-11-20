@@ -1,11 +1,12 @@
 #pragma once
 
 #include <atomic>
+#include <optional>
 #include <stdexcept>
 #include <utility>
 
 template <class T>
-class MPSCQueue {
+class MPSCStack {
 public:
     // Push adds one element to stack top.
     //
@@ -18,7 +19,7 @@ public:
     // Pop removes top element from the stack.
     //
     // Not safe to call concurrently.
-    std::pair<T, bool> Pop() {
+    std::optional<T> Pop() {
         throw std::runtime_error{"Unimplemented"};
     }
 
@@ -31,6 +32,6 @@ public:
         throw std::runtime_error{"Unimplemented"};
     }
 
-    ~MPSCQueue() {
+    ~MPSCStack() {
     }
 };

@@ -1,4 +1,4 @@
-# mpsc-queue
+# mpsc-stack
 
 В этой вам нужно реализовать lock free stack. MPSC расшифровываеся как
 Multiple Producer Single Consumer. Множество потоков могут добавлять элементы

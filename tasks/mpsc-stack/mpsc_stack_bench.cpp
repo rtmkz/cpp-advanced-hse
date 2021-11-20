@@ -1,15 +1,15 @@
-#include <mpsc_queue.h>
+#include <mpsc_stack.h>
 
 #include <benchmark/benchmark.h>
 
 #include <thread>
 
 static void BenchmarkPushPop(benchmark::State& state) {
-    MPSCQueue<int> queue;
+    MPSCStack<int> stack;
 
     for (auto _ : state) {
-        queue.Push(42);
-        queue.Pop();
+        stack.Push(42);
+        stack.Pop();
     }
 }
 

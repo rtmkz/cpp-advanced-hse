@@ -1,4 +1,0 @@
-{
-    "allow_change": ["mpsc_queue.h"],
-    "tests": ["test_mpsc_queue"]
-}
