@@ -106,24 +106,3 @@ TEST(TimerQueue, TimerReschedule) {
 
     ASSERT_TRUE(std::chrono::system_clock::now() < now + 1s);
 }
-
-TEST(TimerQueue, TimerCorrectness) {
-    auto now = std::chrono::system_clock::now();
-
-    TimerQueue<int> queue;
-    queue.Add(0, now + 10s);
-
-    std::thread worker([&] { queue.Pop(); });
-    std::thread worker2([&] { queue.Pop(); });
-
-    std::this_thread::sleep_for(100ms);
-
-    queue.Add(0, now + 2s);
-    queue.Add(0, now + 200s);
-
-    worker.join();
-    worker2.join();
-
-    ASSERT_TRUE(std::chrono::system_clock::now() > now + 1s);
-    ASSERT_TRUE(std::chrono::system_clock::now() < now + 8s);
-}
