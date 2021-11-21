@@ -148,6 +148,19 @@
     - task: unbuffered-channel
       score: 100
 
+- group:    10-advanced-threads
+  start:    21-11-2021 13:00
+  deadline: 04-12-2021 19:00
+  tasks:
+    - task: futex
+      score: 100
+    - task: fast-queue
+      score: 100
+    - task: mpsc-stack
+      score: 100
+    - task: rw-spinlock
+      score: 100
+
 - group:    scheme
   start:    26-10-2021 00:00
   deadline: 18-11-2021 00:01
