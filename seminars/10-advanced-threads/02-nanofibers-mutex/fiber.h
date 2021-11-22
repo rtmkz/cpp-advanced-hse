@@ -13,19 +13,7 @@
 
 namespace nanofibers {
 
-class Fiber;
-
-namespace this_fiber {
-    Fiber* Get();
-    void Yield();
-    void Terminate();
-    void Suspend(); // 02-mutex
-    void WakeUp(Fiber* fiber); // 02-mutex
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-enum class EState {
+enum class EFiberState {
     Runnable,
     Suspended, // 02-mutex: Add suspended state
     Finished,
@@ -43,11 +31,11 @@ public:
         context_.rip = reinterpret_cast<void*>(Trampoline);
     }
 
-    EState GetState() const {
+    EFiberState GetState() const {
         return state_;
     }
 
-    void SetState(EState state) {
+    void SetState(EFiberState state) {
         state_ = state;
     }
 
@@ -55,22 +43,13 @@ public:
         return &context_;
     }
 
-    void Run() {
-        assert(GetState() == EState::Runnable);
-        routine_();
-        SetState(EState::Finished);
-        this_fiber::Terminate();
-    }
+    void Run();
 
 private:
-    // Fiber entry point
-    // Should be void(void)
-    static void Trampoline() {
-        this_fiber::Get()->Run();
-    }
+    static void Trampoline();
 
 private:
-    EState state_ = EState::Runnable;
+    EFiberState state_ = EFiberState::Runnable;
     Context context_ = {};
     Stack stack_;
     std::function<void()> routine_;

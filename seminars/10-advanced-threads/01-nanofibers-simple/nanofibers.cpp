@@ -1,3 +1,4 @@
+#include "context.h"
 #include "fiber.h"
 #include "scheduler.h"
 
@@ -8,6 +9,14 @@
 #include <memory>
 
 int main() {
+    Context ctx;
+    if (SaveContext(&ctx) == ESaveContextResult::Saved) {
+        printf("First\n");
+        JumpContext(&ctx);
+    } else {
+        printf("Second\n");
+    }
+
     nanofibers::Scheduler scheduler;
     scheduler.Run([&] {
         scheduler.Spawn([&] {

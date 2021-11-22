@@ -17,7 +17,7 @@ public:
 
     // Put fiber to the queue
     void Schedule(Fiber* fiber) {
-        fiber->SetState(EState::Runnable);
+        fiber->SetState(EFiberState::Runnable);
         queue_.PushBack(fiber);
     }
 
@@ -26,11 +26,18 @@ public:
         Switch(current_fiber_->GetContext(), &main_context_);
     }
 
+    // 02-mutex
+    // Like Yield(), but do not schedule current_fiber again
+    // Used in Mutex / ConditionVariable
+    void Suspend() {
+        current_fiber_->SetState(EFiberState::Suspended);
+    }
+
     // Kill current fiber
     void Terminate() {
         // Q: Why can't we just delete current_fiber_ here?
-        current_fiber_->SetState(EState::Finished);
-        Switch(current_fiber_->GetContext(), &main_context_);
+        current_fiber_->SetState(EFiberState::Finished);
+        Yield();
     }
 
     // Run routine and spawned fibers
@@ -45,12 +52,13 @@ public:
             Switch(&main_context_, fiber->GetContext());
 
             switch (fiber->GetState()) {
-            case EState::Runnable:
+            case EFiberState::Runnable:
                 Schedule(fiber);
                 break;
-            case EState::Suspended:
+            case EFiberState::Suspended:
+                // 02-mutex: do nothing
                 break;
-            case EState::Finished:
+            case EFiberState::Finished:
                 delete fiber;
                 break;
             }
@@ -83,20 +91,16 @@ private:
 
 ////////////////////////////////////////////////////////////////////////////////
 
-namespace this_fiber {
+inline Scheduler* GetCurrentScheduler() {
+    return Scheduler::GetCurrentScheduler();
+}
 
-void Yield() {
+inline Fiber* GetCurrentFiber() {
+    return GetCurrentScheduler()->GetCurrentFiber();
+}
+
+inline void Yield() {
     Scheduler::GetCurrentScheduler()->Yield();
 }
-
-Fiber* Get() {
-    return Scheduler::GetCurrentScheduler()->GetCurrentFiber();
-}
-
-void Terminate() {
-    Scheduler::GetCurrentScheduler()->Terminate();
-}
-
-} // namespace this_fiber
 
 } // namespace nanofibers

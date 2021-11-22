@@ -17,21 +17,20 @@ public:
 
     // Put fiber to the queue
     void Schedule(Fiber* fiber) {
-        fiber->SetState(EState::Runnable);
+        fiber->SetState(EFiberState::Runnable);
         queue_.PushBack(fiber);
     }
 
-    // Pause current fiber and let other fibers to run
+    // Pause current fiber and switch to scheduler
     void Yield() {
-        Schedule(current_fiber_);
-        SwitchToNextFiber(current_fiber_->GetContext());
+        Switch(current_fiber_->GetContext(), &main_context_);
     }
 
     // Kill current fiber
-    void TerminateFiber() {
-        assert(current_fiber_->GetState() == EState::Finished);
-        JumpContext(&main_context_);
+    void Terminate() {
         // Q: Why can't we just delete current_fiber_ here?
+        current_fiber_->SetState(EFiberState::Finished);
+        Yield();
     }
 
     // Run routine and spawned fibers
@@ -40,7 +39,19 @@ public:
 
         Spawn(std::move(routine));
         while (!queue_.Empty()) {
-            SwitchToNextFiber(&main_context_);
+            Fiber* fiber = queue_.PopFront();
+
+            current_fiber_ = fiber;
+            Switch(&main_context_, fiber->GetContext());
+
+            switch (fiber->GetState()) {
+            case EFiberState::Runnable:
+                Schedule(fiber);
+                break;
+            case EFiberState::Finished:
+                delete fiber;
+                break;
+            }
         }
     }
 
@@ -53,14 +64,9 @@ public:
     }
 
 private:
-    void SwitchToNextFiber(Context* current) {
-        Fiber* fiber = queue_.PopFront();
-        if (SaveContext(current) == ESaveContextResult::Saved) {
-            current_fiber_ = fiber;
-            JumpContext(fiber->GetContext());
-        }
-        if (current_fiber_->GetState() == EState::Finished) {
-            delete current_fiber_;
+    void Switch(Context* from, Context* to) {
+        if (SaveContext(from) == ESaveContextResult::Saved) {
+            JumpContext(to);
         }
     }
 
@@ -75,20 +81,16 @@ private:
 
 ////////////////////////////////////////////////////////////////////////////////
 
-namespace this_fiber {
+inline Scheduler* GetCurrentScheduler() {
+    return Scheduler::GetCurrentScheduler();
+}
 
-void Yield() {
+inline Fiber* GetCurrentFiber() {
+    return GetCurrentScheduler()->GetCurrentFiber();
+}
+
+inline void Yield() {
     Scheduler::GetCurrentScheduler()->Yield();
 }
-
-Fiber* Get() {
-    return Scheduler::GetCurrentScheduler()->GetCurrentFiber();
-}
-
-void Terminate() {
-    Scheduler::GetCurrentScheduler()->TerminateFiber();
-}
-
-} // namespace this_fiber
 
 } // namespace nanofibers

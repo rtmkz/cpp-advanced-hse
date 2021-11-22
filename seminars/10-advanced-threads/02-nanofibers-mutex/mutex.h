@@ -9,10 +9,9 @@ namespace nanofibers {
 class ConditionVariable {
 public:
     void Wait() {
-        Fiber* self = Scheduler::GetCurrentScheduler()->GetCurrentFiber();
-        self->SetState(EState::Suspended);
-        queue_.PushBack(self);
-        this_fiber::Yield();
+        GetCurrentScheduler()->Suspend();
+        queue_.PushBack(GetCurrentFiber());
+        Yield();
     }
 
     bool NotifyOne() {
@@ -54,3 +53,4 @@ private:
 };
 
 } // namespace nanofibers
+
