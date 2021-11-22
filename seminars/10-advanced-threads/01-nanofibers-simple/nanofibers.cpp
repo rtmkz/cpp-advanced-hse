@@ -11,17 +11,17 @@ int main() {
     nanofibers::Scheduler scheduler;
     scheduler.Run([&] {
         scheduler.Spawn([&] {
-            for (int i = 0; i < 10; ++i) {
-                printf("Fiber #1 \n");
+            for (int i = 0; i < 5; ++i) {
+                printf("{Fiber #1} Ping\n");
                 scheduler.Yield();
             }
         });
         scheduler.Spawn([&] {
-            for (int i = 0; i < 10; ++i) {
-                printf("Fiber #2\n");
+            for (int i = 0; i < 5; ++i) {
+                printf("{Fiber #2} Pong\n");
                 scheduler.Yield();
             }
         });
-        printf("Spawned 2 children\n");
+        printf("{Fiber #0} Spawned 2 children\n");
     });
 }
