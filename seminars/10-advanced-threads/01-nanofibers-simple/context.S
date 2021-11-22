@@ -3,7 +3,7 @@
 
 // Save execution context to %rdi
 // %rdi == address of struct Context
-// %(rdi) == first 8 bytes of struct Context
+// (%rdi) == first 8 bytes of struct Context
 SaveContext:
 	// ctx->rip = return address;
 	mov	(%rsp), %rax
