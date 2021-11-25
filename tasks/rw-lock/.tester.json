@@ -6,7 +6,6 @@
         "shared_mutex"
     ],
     "forbidden_regexp" : [
-        "std\\s*::\\s*mutex",
         "std\\s*::\\s*shared_mutex"
     ]
 }
