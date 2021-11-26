@@ -42,7 +42,7 @@ thread_local Coroutine* currentCoroutine = nullptr;
 #include <boost/context/continuation.hpp>
 ```
 
-Обратите внимание, что если вы используете ubuntu, то вполне вероятно, что пакет по умолчанию у вас ниже версией, поэтому
+Обратите внимание, что если вы используете ubuntu старой версии, то вполне вероятно, что пакет по умолчанию у вас ниже версией, поэтому
 воспользуйтесь следующей инструкцией для локальной сборки нужной версии буста:
 [ссылка](https://www.boost.org/doc/libs/1_66_0/more/getting_started/unix-variants.html).
 
