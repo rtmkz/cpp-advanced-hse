@@ -32,9 +32,7 @@ thread_local Coroutine* currentCoroutine = nullptr;
 
 ## Context
 
-Для решения этой задачи нужно использовать boost версии не ниже 1.64. На сервере установлена версия 1.66.
-
-Сначала попробуйте установить libboost-dev и если не сработает, то читайте дальше.
+Для решения этой задачи нужно использовать boost версии не ниже 1.64. На сервере установлена версия 1.71.
 
 Используйте инклюд
 
@@ -42,9 +40,11 @@ thread_local Coroutine* currentCoroutine = nullptr;
 #include <boost/context/continuation.hpp>
 ```
 
+На Ubuntu и подобных сначала попробуйте установить libboost-context-dev, если не сработает, то libboost-dev и если снова нет, то читайте дальше. Если у вас Mac, попробуйте `brew install boost`, но оно принесёт очень много всего.
+
 Обратите внимание, что если вы используете ubuntu старой версии, то вполне вероятно, что пакет по умолчанию у вас ниже версией, поэтому
 воспользуйтесь следующей инструкцией для локальной сборки нужной версии буста:
-[ссылка](https://www.boost.org/doc/libs/1_66_0/more/getting_started/unix-variants.html).
+[ссылка](https://www.boost.org/doc/libs/1_71_0/more/getting_started/unix-variants.html).
 
 Вам нужна только библиотека `context`, используйте флаг `--with-libraries=context` при установке, как указано в инструкции.
 Если вы не хотите, чтобы возникали коллизии с уже установленной версией boost, вы можете установить его в локальную директорию
@@ -55,7 +55,7 @@ thread_local Coroutine* currentCoroutine = nullptr;
 [здесь](https://askubuntu.com/questions/355565/how-do-i-install-the-latest-version-of-cmake-from-the-command-line/355574)
 (следующий ответ после одобренного).
 
-Для реализации понадобится манипуляция с контекстом исполнения, т.е. мы будем переключать контекст с одного на другой. Используйте [`boost::context::callcc`](https://www.boost.org/doc/libs/1_68_0/libs/context/doc/html/context/cc.html).
+Для реализации понадобится манипуляция с контекстом исполнения, т.е. мы будем переключать контекст с одного на другой. Используйте [`boost::context::callcc`](https://www.boost.org/doc/libs/1_71_0/libs/context/doc/html/context/cc.html).
 
 ### Полезные ссылки
 
