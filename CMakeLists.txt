@@ -89,6 +89,9 @@ add_subdirectory(tasks/mpsc-stack)
 add_subdirectory(tasks/fast-queue)
 add_subdirectory(tasks/rw-spinlock)
 
+# 11
+add_subdirectory(tasks/coroutine)
+
 # Homeworks
 # 1
 add_subdirectory(tasks/smart-ptrs)
