@@ -35,6 +35,7 @@ RUN apt-get install -y \
     libpoco-dev \
     libjsoncpp-dev \
     libboost-dev \
+    libboost-context-dev \
     libpng-dev \
     libre2-dev
 
