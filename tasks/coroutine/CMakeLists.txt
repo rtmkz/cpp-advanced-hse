@@ -5,10 +5,6 @@ if (TEST_SOLUTION)
   include_directories(../private/coroutine)
 endif()
 
-if (GRADER)
-  set(BOOST_ROOT /opt/boost_1_66_0)
-endif()
-
 find_package(Boost
     1.64
     REQUIRED
