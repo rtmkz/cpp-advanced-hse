@@ -92,6 +92,7 @@ add_subdirectory(tasks/rw-spinlock)
 # 11
 add_subdirectory(tasks/coroutine)
 add_subdirectory(tasks/generator)
+add_subdirectory(tasks/untyped-generator)
 
 # Homeworks
 # 1
