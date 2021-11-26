@@ -3,8 +3,7 @@
 
 #include <coroutine.h>
 
-TEST(Simple, Start)
-{
+TEST(Simple, Start) {
     int counter = 0;
     Coroutine c([&] {
         ASSERT_EQ(counter, 0);
@@ -13,8 +12,7 @@ TEST(Simple, Start)
     ASSERT_EQ(counter, 1);
 }
 
-TEST(Simple, ResumeSuspend)
-{
+TEST(Simple, ResumeSuspend) {
     int counter = 0;
     Coroutine c([&] {
         ASSERT_EQ(counter, 0);
@@ -29,13 +27,11 @@ TEST(Simple, ResumeSuspend)
     ASSERT_EQ(counter, 3);
 }
 
-TEST(Error, Suspend)
-{
+TEST(Error, Suspend) {
     EXPECT_THROW(suspend(), std::runtime_error);
 }
 
-TEST(Error, Start)
-{
+TEST(Error, Start) {
     int counter = 0;
     Coroutine c([&] {
         ASSERT_EQ(counter, 0);
@@ -46,8 +42,7 @@ TEST(Error, Start)
     EXPECT_THROW(c.resume(), std::runtime_error);
 }
 
-TEST(Error, ResumeSuspend)
-{
+TEST(Error, ResumeSuspend) {
     int counter = 0;
     Coroutine c([&] {
         EXPECT_THROW(c.resume(), std::runtime_error);
@@ -66,28 +61,23 @@ TEST(Error, ResumeSuspend)
     EXPECT_THROW(c.resume(), std::runtime_error);
 }
 
-void recursive(int invocation)
-{
+void recursive(int invocation) {
     if (invocation) {
         recursive(invocation - 1);
     }
     suspend();
 }
 
-TEST(Loop, ResumeSuspendRecursive)
-{
-    Coroutine c([] {
-        recursive(30);
-    });
+TEST(Loop, ResumeSuspendRecursive) {
+    Coroutine c([] { recursive(30); });
     for (int i = 0; i <= 30; ++i) {
         c.resume();
     }
     EXPECT_THROW(c.resume(), std::runtime_error);
 }
 
-TEST(Ownership, Ptr)
-{
-    std::vector<std::string> strs = { "hello", "world" };
+TEST(Ownership, Ptr) {
+    std::vector<std::string> strs = {"hello", "world"};
     Coroutine c([strs = std::move(strs)]() mutable {
         suspend();
         ASSERT_STREQ(strs[0].c_str(), "hello");
@@ -103,12 +93,9 @@ TEST(Ownership, Ptr)
     EXPECT_THROW(c.resume(), std::runtime_error);
 }
 
-TEST(Threads, Recursive)
-{
+TEST(Threads, Recursive) {
     auto mt = [] {
-        Coroutine c([] {
-            recursive(100);
-        });
+        Coroutine c([] { recursive(100); });
         for (int i = 0; i <= 100; ++i) {
             c.resume();
         }
@@ -121,8 +108,7 @@ TEST(Threads, Recursive)
     t2.join();
 }
 
-TEST(Pair, Simple)
-{
+TEST(Pair, Simple) {
     int counter = 0;
     Coroutine c([&] {
         ASSERT_EQ(counter, 0);
