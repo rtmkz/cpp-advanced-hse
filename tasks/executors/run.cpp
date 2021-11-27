@@ -1,6 +1,6 @@
 #include <benchmark/benchmark.h>
 
-#include <executors/executors.h>
+#include <executors.h>
 
 class EmptyTask : public Task {
 public:
