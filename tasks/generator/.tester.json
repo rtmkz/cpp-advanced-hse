@@ -6,5 +6,6 @@
         "#include\\s*<.*coroutine.*>",
         "#include\\s*<.*fiber.*>"
     ],
-    "scorer": []
+    "scorer": [],
+    "linter": false
 }
