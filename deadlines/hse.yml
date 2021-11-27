@@ -161,6 +161,15 @@
     - task: rw-spinlock
       score: 100
 
+- group:    11-threading-ending
+  start:    27-11-2021 13:00
+  deadline: 10-12-2021 19:00
+  tasks:
+    - task: coroutine
+      score: 100
+    - task: generator
+      score: 100
+
 - group:    scheme
   start:    26-10-2021 00:00
   deadline: 18-11-2021 00:01
@@ -190,3 +199,5 @@
       score: 100
     - task: simple_defer
       score: 100
+    - task: executors
+      score: 200
