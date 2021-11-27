@@ -1,0 +1,6 @@
+{
+    "allow_change": ["executors/**/*.cpp", "executors/**/*.h", "CMakeLists.txt"],
+    "tests": ["test_executors"],
+    "benchmarks": ["bench_executors"],
+    "linter": false
+}

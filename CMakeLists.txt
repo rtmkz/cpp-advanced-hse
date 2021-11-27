@@ -107,6 +107,7 @@ add_subdirectory(tasks/solve_or_die)
 add_subdirectory(tasks/matrix-2.0)
 add_subdirectory(tasks/concepts)
 add_subdirectory(tasks/simple_defer)
+add_subdirectory(tasks/executors)
 
 # ctf
 add_subdirectory(tasks/gcd)
