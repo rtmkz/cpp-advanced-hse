@@ -4,7 +4,7 @@
 #include <chrono>
 #include <atomic>
 
-#include <executors/executors.h>
+#include <executors.h>
 
 typedef std::function<std::shared_ptr<Executor>()> ExecutorMaker;
 

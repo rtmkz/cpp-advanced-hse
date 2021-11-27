@@ -4,7 +4,7 @@
 #include <chrono>
 #include <atomic>
 
-#include <executors/executors.h>
+#include <executors.h>
 
 struct FutureTest : public ::testing::Test {
     std::shared_ptr<Executor> pool;
