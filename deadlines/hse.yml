@@ -183,6 +183,23 @@
     - task: scheme/advanced
       score: 3
 
+# - group:    jpeg-decoder
+#   start:    30-10-2021 00:00
+#   deadline: ???
+#   tasks:
+#     - task: jpeg-decoder/huffman
+#       score: 20
+#     - task: jpeg-decoder/fftw
+#       score: 15
+#     - task: jpeg-decoder/baseline
+#       score: 25
+#     - task: jpeg-decoder/faster
+#       score: 15
+#     - task: jpeg-decoder/fuzzing
+#       score: 25
+#     - task: jpeg-decoder/progressive
+#       score: 25
+
 - group:    bonus
   start:    17-07-2021 18:00
   deadline: 21-09-2022 18:00
