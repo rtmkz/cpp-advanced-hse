@@ -1,7 +1,8 @@
 {
   "allow_change": [
     "../*.cpp",
-    "../*.h"
+    "../*.h",
+    "../CMakeLists.txt"
   ],
   "tests": "test_jpeg_huffman",
   "solutions": "private",
