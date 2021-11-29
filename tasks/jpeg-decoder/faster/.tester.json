@@ -1,0 +1,9 @@
+{
+  "allow_change": [
+    "../*.cpp",
+    "../*.h"
+  ],
+  "tests": "test_jpeg_faster",
+  "solutions": "private",
+  "disable_tsan" : true
+}

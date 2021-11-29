@@ -144,11 +144,21 @@ if __name__ == "__main__":
         "advanced",
     ]
 
+    allowed_jpeg_dirs = [
+        "huffman",
+        "fftw",
+        "baseline",
+        "faster",
+        "progressive"
+    ]
+
     subtask_name = task_name
     if task_name in allowed_smart_ptrs_dirs:
         task_name = 'smart-ptrs/' + task_name
     elif task_name in allowed_scheme_dirs:
         task_name = 'scheme/' + task_name
+    elif task_name in allowed_jpeg_dirs:
+        task_name = 'jpeg-decoder/' + task_name
 
     try:
         task_config = json.load(open(os.path.join(os.pardir, subtask_name, ".tester.json")))

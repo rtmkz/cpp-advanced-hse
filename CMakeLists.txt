@@ -1,6 +1,6 @@
-project(cpp-advanced-hse)
-
 cmake_minimum_required(VERSION 3.13)
+
+project(cpp-advanced-hse)
 
 option(ENABLE_SEMINARS OFF)
 
@@ -13,9 +13,13 @@ include(cmake/BuildFlags.cmake)
 include(cmake/TestSolution.cmake)
 include(cmake/SeminarUtils.cmake)
 
-#find_package(PNG)
-#find_package(JPEG)
-#find_package(FFTW)
+# include(FetchContent)
+# set(FETCHCONTENT_QUIET off)
+# include(cmake/FindGlog.cmake)
+
+# find_package(PNG)
+# find_package(JPEG)
+# find_package(FFTW)
 
 find_package(Catch REQUIRED)
 find_package(Benchmark REQUIRED)
@@ -99,7 +103,7 @@ add_subdirectory(tasks/smart-ptrs)
 # 2
 add_subdirectory(tasks/scheme)
 # 3
-#add_subdirectory(tasks/jpeg-decoder)
+# add_subdirectory(tasks/jpeg-decoder)
 
 # Bonuses
 add_subdirectory(tasks/brainfuck)
