@@ -17,9 +17,9 @@ include(cmake/SeminarUtils.cmake)
 # set(FETCHCONTENT_QUIET off)
 # include(cmake/FindGlog.cmake)
 
-# find_package(PNG)
-# find_package(JPEG)
-# find_package(FFTW)
+find_package(PNG)
+find_package(JPEG)
+find_package(FFTW)
 
 find_package(Catch REQUIRED)
 find_package(Benchmark REQUIRED)
@@ -103,7 +103,7 @@ add_subdirectory(tasks/smart-ptrs)
 # 2
 add_subdirectory(tasks/scheme)
 # 3
-# add_subdirectory(tasks/jpeg-decoder)
+add_subdirectory(tasks/jpeg-decoder)
 
 # Bonuses
 add_subdirectory(tasks/brainfuck)
