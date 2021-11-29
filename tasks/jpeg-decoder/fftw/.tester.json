@@ -4,7 +4,7 @@
     "../*.h",
     "../CMakeLists.txt"
   ],
-  "tests": "test_fftw",
+  "tests": "test_fft",
   "solutions": "private",
   "disable_tsan" : true
 }
