@@ -24,7 +24,7 @@ Image ReadJpg(const std::string& filename) {
 
     int row_stride = cinfo.output_width * cinfo.output_components;
     JSAMPARRAY buffer =
-        (*cinfo.mem->alloc_sarray)((j_common_ptr)&cinfo, JPOOL_IMAGE, row_stride, 1);
+        (*cinfo.mem->alloc_sarray)((j_common_ptr)&cinfo, JPOOL_IMAGE, row_stride, 1);  // NOLINT
 
     Image result(cinfo.output_width, cinfo.output_height);
     size_t y = 0;

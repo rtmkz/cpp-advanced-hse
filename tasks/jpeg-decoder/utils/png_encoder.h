@@ -11,7 +11,7 @@ void WritePng(const std::string& filename, const Image& image) {
     if (!fp) {
         throw std::runtime_error("Can't open file for writing " + filename);
     }
-    png_structp png = png_create_write_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
+    png_structp png = png_create_write_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);  // NOLINT
     png_infop info = png_create_info_struct(png);
     if (setjmp(png_jmpbuf(png))) {
         throw std::runtime_error("Shit happens");
@@ -23,9 +23,9 @@ void WritePng(const std::string& filename, const Image& image) {
                  PNG_INTERLACE_NONE, PNG_COMPRESSION_TYPE_DEFAULT, PNG_FILTER_TYPE_DEFAULT);
     png_write_info(png, info);
 
-    png_bytep* bytes = (png_bytep*)malloc(sizeof(png_bytep) * image.Height());
+    png_bytep* bytes = (png_bytep*)malloc(sizeof(png_bytep) * image.Height());  // NOLINT
     for (size_t y = 0; y < image.Height(); y++) {
-        bytes[y] = (png_byte*)malloc(png_get_rowbytes(png, info));
+        bytes[y] = (png_byte*)malloc(png_get_rowbytes(png, info));  // NOLINT
         for (size_t x = 0; x < image.Width(); ++x) {
             auto pixel = image.GetPixel(y, x);
             bytes[y][x * 4] = pixel.r;
@@ -35,7 +35,7 @@ void WritePng(const std::string& filename, const Image& image) {
         }
     }
     png_write_image(png, bytes);
-    png_write_end(png, NULL);
+    png_write_end(png, NULL);  // NOLINT
 
     fclose(fp);
     png_destroy_write_struct(&png, &info);

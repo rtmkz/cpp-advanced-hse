@@ -31,7 +31,7 @@ inline std::string ConstructBasePath() {
 
 const std::string kBasePath = ConstructBasePath();
 
-int sqr(int x) {
+int sqr(int x) {  // NOLINT
     return x * x;
 }
 
@@ -58,11 +58,8 @@ void Compare(const Image& actual, const Image& expected) {
     REQUIRE(mean <= 5);
 }
 
-void CheckImage(
-    const std::string& filename,
-    const std::string& expected_comment = "",
-    std::optional<std::string> output_filename = std::nullopt)
-{
+void CheckImage(const std::string& filename, const std::string& expected_comment = "",
+                std::optional<std::string> output_filename = std::nullopt) {
     std::cerr << "Running " << filename << "\n";
     std::ifstream fin(kBasePath + "tests/" + filename);
     if (!fin.is_open()) {
