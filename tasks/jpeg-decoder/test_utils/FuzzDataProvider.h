@@ -79,8 +79,9 @@ public:
         static_assert(std::is_integral<T>::value, "An integral type is required.");
         static_assert(sizeof(T) <= sizeof(uint64_t), "Unsupported integral type.");
 
-        if (min > max)
+        if (min > max) {
             abort();
+        }
 
         // Use the biggest type possible to hold the range and the result.
         uint64_t range = static_cast<uint64_t>(max) - min;
@@ -100,8 +101,9 @@ public:
         }
 
         // Avoid division by 0, in case |range + 1| results in overflow.
-        if (range != std::numeric_limits<decltype(range)>::max())
+        if (range != std::numeric_limits<decltype(range)>::max()) {
             result = result % (range + 1);
+        }
 
         return static_cast<T>(min + result);
     }
@@ -127,8 +129,9 @@ public:
             if (next == '\\' && remaining_bytes_ != 0) {
                 next = ConvertUnsignedToSigned<char>(data_ptr_[0]);
                 Advance(1);
-                if (next != '\\')
+                if (next != '\\') {
                     break;
+                }
             }
             result += next;
         }
@@ -173,8 +176,9 @@ public:
     template <typename T>
     T PickValueInArray(std::initializer_list<const T> list) {
         // TODO(Dor1s): switch to static_assert once C++14 is allowed.
-        if (!list.size())
+        if (!list.size()) {
             abort();
+        }
 
         return *(list.begin() + ConsumeIntegralInRange<size_t>(0, list.size() - 1));
     }
@@ -219,12 +223,13 @@ public:
     // |min| must be less than or equal to |max|.
     template <typename T>
     T ConsumeFloatingPointInRange(T min, T max) {
-        if (min > max)
+        if (min > max) {
             abort();
+        }
 
         T range = .0;
         T result = min;
-        constexpr T zero(.0);
+        constexpr T zero(.0);  // NOLINT
         if (max > zero && min < zero && max > min + std::numeric_limits<T>::max()) {
             // The diff |max - min| would overflow the given floating point type. Use
             // the half of the diff as the range and consume a bool to decide whether
@@ -241,7 +246,7 @@ public:
     }
 
     // Reports the remaining bytes available for fuzzed input.
-    size_t remaining_bytes() {
+    size_t remaining_bytes() {  // NOLINT
         return remaining_bytes_;
     }
 
@@ -250,8 +255,9 @@ private:
     FuzzedDataProvider &operator=(const FuzzedDataProvider &) = delete;
 
     void Advance(size_t num_bytes) {
-        if (num_bytes > remaining_bytes_)
+        if (num_bytes > remaining_bytes_) {
             abort();
+        }
 
         data_ptr_ += num_bytes;
         remaining_bytes_ -= num_bytes;
@@ -269,8 +275,9 @@ private:
         // To increase the odds even more, we also call |shrink_to_fit| below.
         std::vector<T> result(size);
         if (size == 0) {
-            if (num_bytes_to_consume != 0)
+            if (num_bytes_to_consume != 0) {
                 abort();
+            }
             return result;
         }
 
@@ -290,15 +297,16 @@ private:
         static_assert(!std::numeric_limits<TU>::is_signed, "Source type must be unsigned.");
 
         // TODO(Dor1s): change to `if constexpr` once C++17 becomes mainstream.
-        if (std::numeric_limits<TS>::is_modulo)
+        if (std::numeric_limits<TS>::is_modulo) {
             return static_cast<TS>(value);
+        }
 
         // Avoid using implementation-defined unsigned to signer conversions.
         // To learn more, see https://stackoverflow.com/questions/13150449.
         if (value <= std::numeric_limits<TS>::max()) {
             return static_cast<TS>(value);
         } else {
-            constexpr auto TS_min = std::numeric_limits<TS>::min();
+            constexpr auto TS_min = std::numeric_limits<TS>::min();  // NOLINT
             return TS_min + static_cast<char>(value - TS_min);
         }
     }
