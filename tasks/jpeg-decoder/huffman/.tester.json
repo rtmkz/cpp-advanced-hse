@@ -4,7 +4,7 @@
     "../*.h",
     "../CMakeLists.txt"
   ],
-  "tests": "test_jpeg_huffman",
+  "tests": "test_huffman",
   "solutions": "private",
   "disable_tsan" : true
 }

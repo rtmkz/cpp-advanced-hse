@@ -4,7 +4,7 @@
     "../*.h",
     "../CMakeLists.txt"
   ],
-  "tests": "test_jpeg_fftw",
+  "tests": "test_fftw",
   "solutions": "private",
   "disable_tsan" : true
 }

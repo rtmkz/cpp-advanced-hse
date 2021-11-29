@@ -4,7 +4,7 @@
     "../*.h",
     "../CMakeLists.txt"
   ],
-  "tests": "test_jpeg_baseline",
+  "tests": "test_baseline",
   "solutions": "private",
   "disable_tsan" : true
 }

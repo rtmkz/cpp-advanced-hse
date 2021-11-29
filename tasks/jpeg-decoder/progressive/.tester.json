@@ -4,7 +4,7 @@
     "../*.h",
     "../CMakeLists.txt"
   ],
-  "tests": "test_jpeg_progressive",
+  "tests": "test_progressive",
   "solutions": "private",
   "disable_tsan" : true
 }
