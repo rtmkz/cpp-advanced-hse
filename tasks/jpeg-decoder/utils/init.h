@@ -7,7 +7,6 @@
 
 #ifndef NDEBUG
 
-#define GLOG_CUSTOM_PREFIX_SUPPORT
 #include <glog/logging.h>
 
 class LoggerInitializer : public Catch::TestEventListenerBase {
