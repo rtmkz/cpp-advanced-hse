@@ -15,7 +15,7 @@ target_link_libraries(decoder PUBLIC
         ${FFTW_LIBRARIES}
         ${PNG_LIBRARY}
         ${JPEG_LIBRARIES}
-        #glog::glog
+        glog::glog
         )
 
 add_catch(test_huffman huffman/test_huffman.cpp)
@@ -23,28 +23,28 @@ add_catch(test_fft fftw/test_fft.cpp)
 add_catch(test_baseline baseline/test_baseline.cpp)
 if (NOT TEST_SOLUTION)
     add_catch(test_progressive progressive/test_progressive.cpp)
-endif()
+endif ()
 add_catch(test_faster faster/test_faster.cpp)
 
 target_compile_definitions(test_baseline PUBLIC HSE_TASK_DIR="${CMAKE_CURRENT_SOURCE_DIR}/")
 target_compile_definitions(test_faster PUBLIC HSE_TASK_DIR="${CMAKE_CURRENT_SOURCE_DIR}/")
 if (NOT TEST_SOLUTION)
     target_compile_definitions(test_progressive PUBLIC HSE_TASK_DIR="${CMAKE_CURRENT_SOURCE_DIR}/")
-endif()
+endif ()
 
 if (GRADER)
     target_compile_definitions(test_baseline PUBLIC HSE_ARTIFACTS_DIR="/tmp/artifacts")
     target_compile_definitions(test_faster PUBLIC HSE_ARTIFACTS_DIR="/tmp/artifacts")
     if (NOT TEST_SOLUTION)
         target_compile_definitions(test_progressive PUBLIC HSE_ARTIFACTS_DIR="/tmp/artifacts")
-    endif()
+    endif ()
 endif ()
 
 target_link_libraries(test_baseline decoder)
 target_link_libraries(test_faster decoder)
 if (NOT TEST_SOLUTION)
     target_link_libraries(test_progressive decoder)
-endif()
+endif ()
 target_link_libraries(test_huffman decoder)
 target_link_libraries(test_fft decoder)
 

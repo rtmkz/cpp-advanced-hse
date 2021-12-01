@@ -1,4 +1,4 @@
-#include <catch.hpp>
+#include "../utils/init.h"
 
 #include "../utils/test_commons.hpp"
 

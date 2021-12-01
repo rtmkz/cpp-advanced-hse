@@ -1,4 +1,5 @@
-#include <catch.hpp>
+#include "../utils/init.h"
+
 #include <chrono>
 
 #include "../utils/test_commons.hpp"

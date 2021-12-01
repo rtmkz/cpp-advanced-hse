@@ -1,5 +1,8 @@
 set(FETCHCONTENT_BASE_DIR ${CMAKE_BINARY_DIR}/glog)
-# set(WITH_GFLAGS off)
+set(WITH_GFLAGS off)
+set(CMAKE_POLICY_DEFAULT_CMP0077 NEW)
+
+add_compile_definitions(GLOG_CUSTOM_PREFIX_SUPPORT)
 
 FetchContent_Declare(
         Glog

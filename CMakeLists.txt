@@ -13,9 +13,8 @@ include(cmake/BuildFlags.cmake)
 include(cmake/TestSolution.cmake)
 include(cmake/SeminarUtils.cmake)
 
-# include(FetchContent)
-# set(FETCHCONTENT_QUIET off)
-# include(cmake/FindGlog.cmake)
+include(FetchContent)
+include(cmake/FindGlog.cmake)
 
 find_package(PNG)
 find_package(JPEG)
