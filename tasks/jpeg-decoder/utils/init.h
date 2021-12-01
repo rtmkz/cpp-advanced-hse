@@ -9,10 +9,6 @@
 
 #include <glog/logging.h>
 
-void CustomPrefix(std::ostream &s, const LogMessageInfo &l, void *) {
-    s << "[" << l.severity[0] << ' ' << l.filename << ':' << l.line_number << "]";
-}
-
 class LoggerInitializer : public Catch::TestEventListenerBase {
 public:
     using Catch::TestEventListenerBase::TestEventListenerBase;
@@ -22,7 +18,8 @@ public:
         // NOLINTNEXTLINE
         FLAGS_logtostderr = true;
 
-        google::InitGoogleLogging("", CustomPrefix);
+        google::InitGoogleLogging("");
+
         google::InstallFailureSignalHandler();
 
         DLOG(INFO) << "Hello from logging subsystem!";
