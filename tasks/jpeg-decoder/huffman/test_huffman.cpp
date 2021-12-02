@@ -98,7 +98,8 @@ TEST_CASE("Huffman real") {
     REQUIRE(x == 2);
     REQUIRE_THROWS_AS(([&tree, &x]() {
                           for (int i = 0; i < 32; ++i) {
-                              REQUIRE_FALSE(tree.Move(1, x));
+                              bool is_terminal = tree.Move(1, x);
+                              REQUIRE_FALSE(is_terminal);
                           }
                       }()),
                       std::invalid_argument);
