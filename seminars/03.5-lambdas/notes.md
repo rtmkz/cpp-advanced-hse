@@ -97,20 +97,20 @@ Immediately invoked lambda
 ```cpp
 std::string s;
 if (cond) {
-   s = this_string;
+    s = this_string;
 } else {
-   s = that_string;
+    s = that_string;
 }
 ```
 
 Вызывает оператор копирования, а вот
 ```cpp
 std::string s = [&] {
-   if (cond) {
-      return this_string;
-   } else {
-      return that_string;
-   }
+    if (cond) {
+        return this_string;
+    } else {
+        return that_string;
+    }
 }();
 ```
 
@@ -135,7 +135,7 @@ Foo f(std::move(lambda));
 
 Ад c capture this (опционально)
 
-[=, this] разрешили только с C++20
+`[=, this]` разрешили только с C++20
 
 https://www.nextptr.com/tutorial/ta1430524603/capture-this-in-lambda-expression-timeline-of-change
 
@@ -146,8 +146,9 @@ https://www.nextptr.com/tutorial/ta1430524603/capture-this-in-lambda-expression-
 https://gcc.godbolt.org/z/xsYe8TEW4
 
 В итоге
-
+```cpp
 std::function<void()> f = []() -> Status { ... return Error(); };
+```
 
 В одном из кодов было проигнорировано
 
@@ -155,6 +156,8 @@ std::function<void()> f = []() -> Status { ... return Error(); };
 
 Когда давным давно когда пытались принять structured bindings столкнулись с проблемой, что
 
+```cpp
 const [a, b, c]{f()};
+```
 
 имеет двоякое понимание из-за лямбд, поэтому решили сделать, что они могут только инициализироваться через =
