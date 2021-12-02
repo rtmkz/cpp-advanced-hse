@@ -15,8 +15,7 @@ target_link_libraries(decoder PUBLIC
         ${FFTW_LIBRARIES}
         ${PNG_LIBRARY}
         ${JPEG_LIBRARIES}
-        glog::glog
-        )
+        glog::glog)
 
 add_catch(test_huffman huffman/test_huffman.cpp)
 add_catch(test_fft fftw/test_fft.cpp)
@@ -48,16 +47,8 @@ endif ()
 target_link_libraries(test_huffman decoder)
 target_link_libraries(test_fft decoder)
 
-if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-    set(COMPILER_GCC 1)
-elseif (CMAKE_CXX_COMPILER_ID MATCHES "AppleClang")
-    set(COMPILER_CLANG 1) # Safe to treat AppleClang as a regular Clang, in general.
-elseif (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-    set(COMPILER_CLANG 1)
-endif ()
-
-if (COMPILER_GCC)
-    message(WARNING "Fuzzing is not support with GCC backend")
+if (NOT CMAKE_CXX_COMPILER_ID MATCHES "^Clang$")
+    message(WARNING "Clang is required for fuzzing tests")
 endif ()
 
 if (COMPILER_CLANG)
