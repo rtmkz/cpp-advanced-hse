@@ -75,9 +75,7 @@
 
 > Суть: проверить, что ваше решение не содержит известных багов с помощью fuzzing-тестирования.
 
-Таргеты для fuzzing называются `fuzz_huffman`, `fuzz_fft` и `fuzz_jpeg`. Обратите внимание, для локальной отладки вам потребуется clang (apple clang не подойдет).
-
-На Ubuntu можно установить с помощью [скрипта](https://apt.llvm.org/), на OS X выполните `brew install llvm`.
+Таргеты для fuzzing называются `fuzz_huffman`, `fuzz_fft` и `fuzz_jpeg`. Обратите внимание, для локальной отладки вам потребуется clang (apple clang не подойдет). На Ubuntu его можно установить с помощью [скрипта](https://apt.llvm.org/), на OS X выполните `brew install llvm`.
 
 Чтобы собрать таргеты не дефолтным компилятором, создайте отдельную сборочную директорию и передайте `cmake` аргументы `-DCMAKE_C_COMPILER=PATH_TO_YOUR_CLANG -DCMAKE_CXX_COMPILER=PATH_TO_YOUR_CLANG++`. Проверьте, что компилятор в выводе `cmake` тот, который вы ожидаете.
 
