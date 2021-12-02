@@ -49,9 +49,7 @@ target_link_libraries(test_fft decoder)
 
 if (NOT CMAKE_CXX_COMPILER_ID MATCHES "^Clang$")
     message(WARNING "Clang is required for fuzzing tests")
-endif ()
-
-if (COMPILER_CLANG)
+else()
     add_executable(fuzz_huffman huffman/fuzz_huffman.cpp)
     add_executable(fuzz_fft fftw/fuzz_fft.cpp)
     add_executable(fuzz_jpeg jpeg-fuzz/fuzz_jpeg.cpp)
