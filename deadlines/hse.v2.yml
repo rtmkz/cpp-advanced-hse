@@ -21,9 +21,14 @@ scoring:
   - name: large
     weight: 6.0
     policy: hard
+    maxScore: 300
 
   - name: bonus
-    weight: 2.0
+    weight: 1.5
+    policy: hard
+
+  - name: executors
+    weight: 0.5
     policy: hard
 
   defaultGroup: weekly
@@ -41,8 +46,6 @@ assignments:
   start:    17-07-2021 18:00
   deadline: 21-09-2022 18:00
   tasks:
-    - task: gcd
-      score: 100
 
 - title:     01-move
   start:    04-09-2021 13:00
@@ -97,15 +100,15 @@ assignments:
   group:    large
   tasks:
     - task:  smart-ptrs/unique_basic
-      score: 2
+      score: 20
     - task:  smart-ptrs/unique_advanced
-      score: 2
+      score: 20
     - task:  smart-ptrs/shared_basic
-      score: 3
+      score: 30
     - task:  smart-ptrs/shared_weak
-      score: 2
+      score: 20
     - task:  smart-ptrs/shared_from_this
-      score: 1
+      score: 10
 
 - title:     05-errors
   start:    02-10-2021 13:00
@@ -206,13 +209,13 @@ assignments:
   group:    large
   tasks:
     - task: scheme/tokenizer
-      score: 2
+      score: 20
     - task: scheme/parser
-      score: 2
+      score: 20
     - task: scheme/basic
-      score: 3
+      score: 30
     - task: scheme/advanced
-      score: 3
+      score: 30
 
 - title:     jpeg-decoder
   start:    30-11-2021 00:00
@@ -237,6 +240,8 @@ assignments:
   deadline: 21-09-2022 18:00
   group:    bonus
   tasks:
+    - task: gcd
+      score: 100
     - task: bad-hash
       score: 100
     - task: solve_or_die
@@ -249,5 +254,11 @@ assignments:
       score: 100
     - task: simple_defer
       score: 100
+
+- title:    executors
+  start:    17-07-2021 18:00
+  deadline: 21-09-2022 18:00
+  group:    executors
+  tasks:
     - task: executors
-      score: 200
+      score: 100
