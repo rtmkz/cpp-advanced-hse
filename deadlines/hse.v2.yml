@@ -18,36 +18,36 @@ scoring:
 
   groups:
   - name: weekly
-    weight: 0.4
+    weight: 4.0
     policy: notsohard
 
   - name: large
-    weight: 0.6
+    weight: 6.0
     policy: hard
 
   - name: bonus
-    weight: 0.2
+    weight: 2.0
     policy: hard
 
   default_group: weekly
 
 
 assignments:
-- name:     00-setup
+- title:     00-setup
   start:    17-07-2021 18:00
   deadline: 21-09-2022 18:00
   tasks:
     - task: multiplication
       score: 100
 
-- name:     00-setup-bonus
+- title:     00-setup-bonus
   start:    17-07-2021 18:00
   deadline: 21-09-2022 18:00
   tasks:
     - task: gcd
       score: 100
 
-- name:     01-move
+- title:     01-move
   start:    04-09-2021 13:00
   deadline: 17-09-2021 19:00
   tasks:
@@ -62,7 +62,7 @@ assignments:
     - task: deque
       score: 250
 
-- name:     02-memory
+- title:     02-memory
   start:    11-09-2021 13:00
   deadline: 24-09-2021 19:00
   tasks:
@@ -79,7 +79,7 @@ assignments:
     - task: compressed_pair
       score: 150
 
-- name:     03-types
+- title:     03-types
   start:    18-09-2021 13:00
   deadline: 08-10-2021 19:00
   tasks:
@@ -94,7 +94,7 @@ assignments:
     - task: stdflib
       score: 100
 
-- name:     03-smart-ptrs
+- title:     03-smart-ptrs
   start:    18-09-2021 13:00
   deadline: 10-10-2021 19:00
   group:    large
@@ -110,7 +110,7 @@ assignments:
     - task:  smart-ptrs/shared_from_this
       score: 1
 
-- name:     05-errors
+- title:     05-errors
   start:    02-10-2021 13:00
   deadline: 15-10-2021 19:00
   tasks:
@@ -123,7 +123,7 @@ assignments:
     - task: grep
       score: 100
 
-- name:     06-patterns
+- title:     06-patterns
   start:    09-10-2021 13:00
   deadline: 29-10-2021 19:00
   tasks:
@@ -138,7 +138,7 @@ assignments:
     - task: scala-vector
       score: 150
 
-- name:     07-meta
+- title:     07-meta
   start:    30-10-2021 13:00
   deadline: 12-11-2021 19:00
   tasks:
@@ -153,7 +153,7 @@ assignments:
     - task: pipes
       score: 100
 
-- name:     08-baby-threads
+- title:     08-baby-threads
   start:    06-11-2021 13:00
   deadline: 19-11-2021 20:20
   tasks:
@@ -166,7 +166,7 @@ assignments:
     - task: subset-sum
       score: 150
 
-- name:     09-condition-variables
+- title:     09-condition-variables
   start:    13-11-2021 13:00
   deadline: 26-11-2021 20:20
   tasks:
@@ -181,7 +181,7 @@ assignments:
     - task: unbuffered-channel
       score: 100
 
-- name:     10-advanced-threads
+- title:     10-advanced-threads
   start:    21-11-2021 13:00
   deadline: 04-12-2021 19:00
   tasks:
@@ -194,7 +194,7 @@ assignments:
     - task: rw-spinlock
       score: 100
 
-- name:     11-threading-ending
+- title:     11-threading-ending
   start:    27-11-2021 13:00
   deadline: 10-12-2021 19:00
   tasks:
@@ -203,7 +203,7 @@ assignments:
     - task: generator
       score: 100
 
-- name:     scheme
+- title:     scheme
   start:    26-10-2021 00:00
   deadline: 18-11-2021 00:01
   group:    large
@@ -217,7 +217,7 @@ assignments:
     - task: scheme/advanced
       score: 3
 
-- name:     jpeg-decoder
+- title:     jpeg-decoder
   start:    30-11-2021 00:00
   deadline: 26-12-2021 23:59
   group:    large
@@ -235,7 +235,7 @@ assignments:
     - task: jpeg-decoder/progressive
       score: 25
 
-- name:     bonus
+- title:     bonus
   start:    17-07-2021 18:00
   deadline: 21-09-2022 18:00
   group:    bonus
