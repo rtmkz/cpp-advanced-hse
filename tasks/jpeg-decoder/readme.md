@@ -1,8 +1,22 @@
-#JPEG Decoder
+# JPEG Decoder
 
 <img src="tests/bad_quality.jpg" alt="harold" width="600"/>
 
 В этом домашнем задании вам предстоит реализовать декодер JPEG. Подробности будут рассказаны на семинарах.
+
+## Установка библиотек
+
+### Ubuntu
+
+```sh
+sudo apt install libjpeg-dev libpng-dev libfftw3-dev
+```
+
+### OS X
+
+```sh
+brew install libjpeg libpng fftw
+```
 
 ## Оценивание
 
@@ -97,20 +111,6 @@
 ## Проверка
 
 Перед отправкой решения отключите запись png файлов в тестах.
-
-## Установка библиотек
-
-### Ubuntu
-
-```sh
-sudo apt install libjpeg-dev libpng-dev libfftw3-dev
-```
-
-### OS X
-
-```sh
-brew install libjpeg libpng fftw
-```
 
 ## Как не страдать при отладке
 
