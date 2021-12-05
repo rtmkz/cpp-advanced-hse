@@ -234,6 +234,8 @@ assignments:
       score: 25
     - task: jpeg-decoder/progressive
       score: 25
+    - task: jpeg-decoder/bonus
+      score: 10
 
 - title:     bonus
   start:    17-07-2021 18:00
