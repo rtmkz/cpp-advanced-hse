@@ -4,9 +4,9 @@
 
 DctCalculator::DctCalculator(size_t width, std::vector<double> *input,
                              std::vector<double> *output) {
-    (void) width;
-    (void) input;
-    (void) output;
+    (void)width;
+    (void)input;
+    (void)output;
 }
 
 void DctCalculator::Inverse() {

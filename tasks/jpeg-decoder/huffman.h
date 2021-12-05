@@ -17,5 +17,4 @@ public:
     // returns true and overwrites |value|. If it is intermediate, returns false
     // and value is unmodified.
     bool Move(bool bit, int& value);
-
 };
