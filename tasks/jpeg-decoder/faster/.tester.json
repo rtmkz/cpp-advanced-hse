@@ -8,7 +8,7 @@
     "test_faster",
     "test_baseline",
     "test_huffman",
-    "test_fftw"
+    "test_fft"
   ],
   "solutions": "private",
   "disable_tsan": true
