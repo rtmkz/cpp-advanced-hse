@@ -7,7 +7,7 @@
   "tests": "test_fft",
   "solutions": "private",
   "disable_tsan" : true,
-  "forbidden_functions" : [
+  "forbidden_regexp" : [
     "acos",
     "cos"
   ]
