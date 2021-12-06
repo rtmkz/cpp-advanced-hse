@@ -8,7 +8,7 @@
   "solutions": "private",
   "disable_tsan" : true,
   "forbidden_regexp" : [
-    "acos",
+    "sin",
     "cos"
   ]
 }
