@@ -4,7 +4,12 @@
     "../*.h",
     "../CMakeLists.txt"
   ],
-  "tests": "test_faster",
+  "tests": [
+    "test_faster",
+    "test_baseline",
+    "test_huffman",
+    "test_fftw"
+  ],
   "solutions": "private",
-  "disable_tsan" : true
+  "disable_tsan": true
 }
