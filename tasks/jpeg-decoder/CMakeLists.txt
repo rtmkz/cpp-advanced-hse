@@ -33,7 +33,6 @@ endif ()
 
 if (GRADER)
     target_compile_definitions(test_baseline PUBLIC HSE_ARTIFACTS_DIR="/tmp/artifacts")
-    target_compile_definitions(test_faster PUBLIC HSE_ARTIFACTS_DIR="/tmp/artifacts")
     if (NOT TEST_SOLUTION)
         target_compile_definitions(test_progressive PUBLIC HSE_ARTIFACTS_DIR="/tmp/artifacts")
     endif ()
