@@ -28,9 +28,7 @@ set -u
 set -o pipefail
 set -x
 
-echo "Sources to be checked by clang-tidy:"
-
-jq -r '.allow_change | if type=="array" then .[] else . end' --raw-output $TASK_PATH/.tester.json | sed "s|^|$TASK_PATH\/|g" | egrep '\.c$|\.cpp$|\.h$|\.hpp$' | xargs -I@ sh -c "ls @" | xargs stat
+jq -r '.allow_change | if type=="array" then .[] else . end' --raw-output $TASK_PATH/.tester.json | sed "s|^|$TASK_PATH\/|g" | egrep '\.c$|\.cpp$|\.h$|\.hpp$' | xargs -I@ sh -c "ls @" | xargs $CLANG_PATH -r
 
 if [ "$#" -eq 3 ]; then
     jq -r '.allow_change | if type=="array" then .[] else . end' --raw-output $TASK_PATH/.tester.json | sed "s|^|$TASK_PATH\/|g" | egrep '\.c$|\.cpp$|\.h$|\.hpp$' | xargs -I@ sh -c "ls @" | xargs $CLANG_TIDY --config="$3"
