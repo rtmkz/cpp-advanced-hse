@@ -17,6 +17,9 @@ target_link_libraries(decoder PUBLIC
         ${JPEG_LIBRARIES}
         glog::glog)
 
+get_target_property(GLOG_INCLUDES glog::glog INCLUDE_DIRECTORIES)
+target_include_directories(decoder SYSTEM PUBLIC ${GLOG_INCLUDES})
+
 add_catch(test_huffman huffman/test_huffman.cpp)
 add_catch(test_fft fftw/test_fft.cpp)
 add_catch(test_baseline baseline/test_baseline.cpp)
