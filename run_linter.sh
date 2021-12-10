@@ -28,11 +28,13 @@ set -u
 set -o pipefail
 set -x
 
-jq -r '.allow_change | if type=="array" then .[] else . end' --raw-output $TASK_PATH/.tester.json | sed "s|^|$TASK_PATH\/|g" | egrep '\.c$|\.cpp$|\.h$|\.hpp$' | xargs -I@ sh -c "ls @" | xargs $CLANG_PATH -r
+# clang-format all sources
+jq -r '.allow_change | if type=="array" then .[] else . end' --raw-output $TASK_PATH/.tester.json | sed "s|^|$TASK_PATH\/|g" | egrep '\.c$|\.cpp$|\.h$|\.hpp$' | xargs -t -I@ sh -c "ls @" | xargs -t $CLANG_PATH -r
 
+# clang-tidy all TUs
+jq -r '.allow_change | if type=="array" then .[] else . end' --raw-output $TASK_PATH/.tester.json | sed "s|^|$TASK_PATH\/|g" | egrep '\.c$|\.cpp$' | xargs -t -I@ sh -c "ls @" | xargs -t $CLANG_TIDY
+
+# additional checks
 if [ "$#" -eq 3 ]; then
     jq -r '.allow_change | if type=="array" then .[] else . end' --raw-output $TASK_PATH/.tester.json | sed "s|^|$TASK_PATH\/|g" | egrep '\.c$|\.cpp$|\.h$|\.hpp$' | xargs -t -I@ sh -c "ls @" | xargs -t $CLANG_TIDY --config="$3"
 fi
-
-$CLANG_PATH -r $TASK_PATH
-$CLANG_TIDY $TASK_PATH/*.cpp
