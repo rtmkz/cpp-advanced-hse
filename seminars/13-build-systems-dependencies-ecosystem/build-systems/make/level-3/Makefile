@@ -7,7 +7,7 @@ objects = deep_thought.o thinker.o
 all: $(objects) link run
 
 # Implicit rules for C/C++ files:
-# 	`n.o` is made automatically from `n.cc` or `n.cpp`
+#   `n.o` is made automatically from `n.cc` or `n.cpp`
 #   with a command of the form $(CXX) -c $(CPPFLAGS) $(CXXFLAGS)
 deep_thought.o: deep_thought.cpp
 thinker.o: thinker.cpp
