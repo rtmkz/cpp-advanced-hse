@@ -13,7 +13,7 @@ __pycache__
 .doit.db
 .idea
 perf.data*
-cmake-*
+cmake-build-*
 .submit-repo/
 CMakeSettings.json
 CppProperties.json
