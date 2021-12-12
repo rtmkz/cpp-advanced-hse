@@ -4,3 +4,6 @@
 [submodule "private"]
 	path = private
 	url = ../cpp-advanced-hse-private.git
+[submodule "seminars/13-build-systems-dependencies-ecosystem/dependencies/git/dependencies/spdlog"]
+	path = seminars/13-build-systems-dependencies-ecosystem/dependencies/git/dependencies/spdlog
+	url = git@github.com:gabime/spdlog.git
