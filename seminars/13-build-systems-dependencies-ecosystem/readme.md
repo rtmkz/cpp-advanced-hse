@@ -195,3 +195,31 @@ test.target = $cxx.target
 * Единственный вариант подключения этой библиотеки -- через CMake
 
 ### [Отлично](./project-examples/great)
+
+## Материалы
+
+### General
+
+* [CppCon 2018: Mateusz Pusz “Git, CMake, Conan - How to ship and reuse our C++ projects”](https://www.youtube.com/watch?v=S4QSKLXdTtA)
+
+### Make
+
+* [Makefile tutorial](https://makefiletutorial.com/)
+
+### CMake
+
+* [Official docs](https://cmake.org/cmake/help/v3.22/)
+* [Learning CMake](https://github.com/Akagi201/learning-cmake)
+* [Modern CMake](https://cliutils.gitlab.io/modern-cmake/)
+* [It's Time To Do CMake Right](https://pabloariasal.github.io/2018/02/19/its-time-to-do-cmake-right/)
+* [C++Now 2017: Daniel Pfeifer “Effective CMake"](https://www.youtube.com/watch?v=bsXLMQ6WgIk)
+* [CGold: The Hitchhiker’s Guide to the CMake](https://cgold.readthedocs.io/en/latest/)
+
+### Conan
+
+* [CppCon 2016: Diego Rodriguez-Losada “Conan, a C and C++ package manager for developers"](https://www.youtube.com/watch?v=xvqH_ck-5Q8)
+
+### build2
+
+* [Official site](https://build2.org/)
+* [CppCon 2018: “C++ Dependency Management: from Package Consumption to Project Development”](https://www.youtube.com/watch?v=Nni2Qu2WitY)
