@@ -4,6 +4,7 @@
 // Better: namespace forest::details {
 
 // Not a template function -> definition can be extracted to `.cpp`
+//                            if we are not going with "header-only" way.
 void DoImplementationDetail(...) {
     // Implementation...
 }
