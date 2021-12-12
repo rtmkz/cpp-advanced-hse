@@ -1,33 +1,50 @@
-# Woodpecker
+# Dependencies via Conan example
 
-Logging library (not really).
-
-## Requirements
+## Требования
 
 - Conan
 
-Installation:
+Если есть `pipenv`, то можно установить вот так:
 
 ```shell
 pipenv shell
 pipenv install
 ```
 
-## Dependencies
+Или через `pip`:
+```shell
+python3 -m venv conan_env
+source conan_env/bin/activate
+pip install conan
+```
+
+## Зависимости
 
 - fmt
 - date
 
-Installation:
+Создаём свой профиль (конфигурацию для сборки):
 ```shell
-mkdir build && cd build
-conan install ..
+conan profile new ./conan-profiles/my-profile --detect
 ```
 
-## Examples
+Устанавливаем зависимости:
+```shell
+mkdir build && cd build
+conan install .. --profile=../conan-profiles/my-profile
+```
 
-Build and run example (in `build` directory):
+## Сборка
+
+Будучи в директории `build`:
 ```shell
 cmake ..
-make example && bin/example $USER
+make main && bin/main $USER
+```
+
+## Conan
+
+Искать пакеты можно при помощи CLI:
+```shell
+conan search --remote all imgui
 ```

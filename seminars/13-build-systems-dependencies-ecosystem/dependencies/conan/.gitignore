@@ -2,5 +2,8 @@
 ## Directories
 build
 cmake-build-*
+conan_env
+conan-profiles/*
+!conan-profiles/.gitkeep
 
 ## Files
