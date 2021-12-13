@@ -434,3 +434,8 @@ xmake поддерживает много платформ и языков.
 
 * [Official site](https://build2.org/)
 * [CppCon 2018: “C++ Dependency Management: from Package Consumption to Project Development”](https://www.youtube.com/watch?v=Nni2Qu2WitY)
+
+### xmake
+
+* [Official site](https://xmake.io/#/)
+* [Getting started](https://xmake.io/#/getting_started)
