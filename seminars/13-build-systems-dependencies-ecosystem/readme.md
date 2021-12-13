@@ -225,7 +225,13 @@ CMake попал в раздел "Пакетные менеджеры", откр
 * [`find_package()`](https://cmake.org/cmake/help/latest/command/find_package.html) 
   -- ищем в системе (и молимся, чтобы нашлось)
 * [`FetchContent()`](https://cmake.org/cmake/help/latest/module/FetchContent.html) 
-  -- подгружаем из репозитория / по ссылке + CMake автомагически всё настраивает
+  -- подгружаем из репозитория / по ссылке
+
+В последних двух опциях CMake автомагически всё настраивает.
+
+[Пример с `find_package` тут](./dependencies/cmake/find-package).
+
+[Пример с `FetchContent` тут](./dependencies/cmake/fetch-content).
 
 ### Conan
 
