@@ -356,6 +356,12 @@ test.target = $cxx.target
 * [Conan cheatsheet](https://docs.conan.io/en/latest/_images/conan-cheatsheet.png)
 * [CppCon 2016: Diego Rodriguez-Losada “Conan, a C and C++ package manager for developers"](https://www.youtube.com/watch?v=xvqH_ck-5Q8)
 
+### vcpkg
+
+* [Get started](https://vcpkg.io/en/getting-started.html)
+* [Docs](https://vcpkg.io/en/docs/README.html)
+* [Available packages](https://vcpkg.io/en/packages.html)
+
 ### build2
 
 * [Official site](https://build2.org/)
