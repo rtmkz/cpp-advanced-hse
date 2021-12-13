@@ -435,6 +435,7 @@ xmake поддерживает много платформ и языков.
 * [Getting started](https://docs.bazel.build/versions/4.2.2/getting-started.html)
 * [C++ Tutorial](https://docs.bazel.build/versions/4.2.2/tutorial/cpp.html)
 * [Core concepts and terminology](https://docs.bazel.build/versions/4.2.2/build-ref.html#concepts-and-terminology)
+* [Distributed build](https://docs.bazel.build/versions/main/remote-execution.html)
 
 ### Conan
 
