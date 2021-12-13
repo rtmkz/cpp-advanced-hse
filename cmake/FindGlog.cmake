@@ -6,6 +6,7 @@ option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
 FetchContent_Declare(
         Glog
         GIT_REPOSITORY https://github.com/google/glog.git
+        GIT_TAG        ee6faf13b20de9536f456bd84584f4ab4db1ceb4
         CMAKE_ARGS -DBUILD_TESTING=OFF
 )
 
