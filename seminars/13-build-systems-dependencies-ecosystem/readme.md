@@ -71,7 +71,7 @@ clang++ \
 зависит от используемого shell'а -- POSIX команды bash'а могут не работать
 на Windows).
 
-[Примеры сборки доступны тут.](./build-systems/make)
+[Примеры сборки доступны тут](./build-systems/make).
 
 ### Ninja
 
@@ -102,7 +102,7 @@ Ninja точно так же позволяет собирать проекты 
 
 По умолчанию, Ninja ищет файл `build.ninja` и собирает все устаревшие таргеты.
 
-[Примеры сборки доступны тут.](./build-systems/ninja)
+[Примеры сборки доступны тут](./build-systems/ninja).
 
 ### CMake
 
@@ -141,7 +141,7 @@ CMake можно (в какой-то степени) считать языком
 * Указать флаги компиляции: `target_compile_options(my_library ...)`
 * Прописать пути до include директорий: `target_include_directories(my_library ...)`
 
-[Примеры сборки доступны тут.](./build-systems/cmake)
+[Примеры сборки доступны тут](./build-systems/cmake).
 
 ### Meson
 
@@ -162,11 +162,26 @@ Meson -- альтернатива CMake со статической типиза
 На беглый взгляд довольно удобный (особенно по сравнению с CMake) 
 и шустрый инструмент с адекватным дизайном.
 
-[Примеры сборки доступны тут.](./build-systems/meson)
+[Примеры сборки доступны тут](./build-systems/meson).
 
 ### Bazel
 
 Bazel -- система сборки от Google (so, _opinionated_).
+
+Bazel написан на Java и дизайн рассчитан на распределённую сборку,
+поэтому маленькие проекты могут страдать от оверхэда.
+
+Отправная точка для сборки проекта при помощи Bazel -- файл `WORKSPACE`.
+Директория с этим файлом считается "репозиторием". 
+Внутри репозитория могут лежать пакеты -- папки с файлами `BUILD`,
+в которых описаны таргеты для сборки.
+
+Синтаксис опять напоминает Python (язык называется Starlark).
+Можно расширять своими модулями, это отдельные файлы с расширением `.bzl`.
+
+Совместимость с CMake даётся тяжело.
+
+[Примеры сборки доступны тут](./build-systems/bazel).
 
 ## Пакетные менеджеры
 
@@ -394,6 +409,12 @@ test.target = $cxx.target
 * [Quickstart](https://mesonbuild.com/Quick-guide.html)
 * [Simple tutorial](https://mesonbuild.com/Tutorial.html)
 * [Manual](https://mesonbuild.com/Manual.html)
+
+### Bazel
+
+* [Getting started](https://docs.bazel.build/versions/4.2.2/getting-started.html)
+* [C++ Tutorial](https://docs.bazel.build/versions/4.2.2/tutorial/cpp.html)
+* [Core concepts and terminology](https://docs.bazel.build/versions/4.2.2/build-ref.html#concepts-and-terminology)
 
 ### Conan
 
