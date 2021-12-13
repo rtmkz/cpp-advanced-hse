@@ -1,15 +1,15 @@
-# Dependencies-via-CMake-FetchContent example
+# Dependencies via CMake FetchContent example
 
-## Сборка
+* Сборка:
 
-```shell
-mkdir build && cd build
-cmake ..
-make main
-```
+  ```shell
+  mkdir build && cd build
+  cmake ..
+  make main
+  ```
 
-## Запуск
+* Запуск:
 
-```shell
-./main
-```
+  ```shell
+  ./main
+  ```

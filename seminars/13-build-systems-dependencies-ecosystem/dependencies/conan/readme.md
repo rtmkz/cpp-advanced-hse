@@ -34,7 +34,7 @@ mkdir build && cd build
 conan install .. --profile=../conan-profiles/my-profile
 ```
 
-## Сборка
+## Сборка и запуск
 
 Будучи в директории `build`:
 ```shell

@@ -1,36 +1,36 @@
-# Dependencies-via-CMake-find-package example
+# Dependencies via CMake find_package example
 
-## Зависимости
+* Установка зависимостей:
 
-Linux:
+  * Linux:
 
-```shell
-sudo apt-get install libboost-all-dev
-```
+    ```shell
+    sudo apt-get install libboost-all-dev
+    ```
 
-Mac OS:
+  * Mac OS:
 
-```shell
-brew install boost
-```
+    ```shell
+    brew install boost
+    ```
 
-## Сборка
+* Сборка:
 
-```shell
-mkdir build && cd build
-cmake ..
-make main
-```
+  ```shell
+  mkdir build && cd build
+  cmake ..
+  make main
+  ```
 
-## Запуск
+* Запуск
 
-В одном окне терминала запускаем сервер:
-```shell
-./main 8777
-```
+  * В одном окне терминала запускаем сервер:
+    ```shell
+    ./main 8777
+    ```
 
-В другом подключаемся к нему и пишем сообщения:
-```shell
-nc localhost 8777
-hello, world!
-```
+  * В другом подключаемся к нему и пишем сообщения:
+    ```shell
+    nc localhost 8777
+    hello, world!
+    ```

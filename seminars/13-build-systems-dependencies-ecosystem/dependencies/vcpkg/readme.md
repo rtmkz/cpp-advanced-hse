@@ -1,24 +1,21 @@
 # Dependencies via vcpkg example
 
-## Зависимости
+* Необходимые проекту зависимости описаны в файле [`vcpkg.json`](./vcpkg.json).
 
-Необходимые проекту зависимости описаны в файле [`vcpkg.json`](./vcpkg.json).
+* Собираем:
 
-## Сборка
+  ```shell
+  mkdir build && cd build
+  export VCPKG_ROOT=<FILL ME>
+  cmake .. -DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake
+  make main
+  ```
 
-```shell
-mkdir build && cd build
-export VCPKG_ROOT=<FILL ME>
-cmake .. -DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake
-make main
-```
+* Запускаем:
 
-## Запуск
+  ```shell
+  ./main
+  ```
 
-```shell
-./main
-```
-
-## Откуда код?
-
-[Отсюда](https://github.com/conan-io/examples/tree/master/libraries/dear-imgui/basic).
+* Откуда код? 
+  [Отсюда](https://github.com/conan-io/examples/tree/master/libraries/dear-imgui/basic).
