@@ -5,6 +5,6 @@ cc_library(
     hdrs = ["time.hpp"],
     visibility = [
         "//clocks:__pkg__",  # `chromo` is visible for all targets from `clocks`
-        "//tests:__pkg__",   # `chromo` is visible tests, also
+        "//tests:__pkg__",   # `chromo` is visible from tests, also
     ],
 )
