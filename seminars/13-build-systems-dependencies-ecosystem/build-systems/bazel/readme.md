@@ -14,4 +14,16 @@
   ```shell
   bazel-bin/clocks/main
   ```
+  
+* Тестируем:
 
+  ```shell
+  bazel test //tests:test_chromo
+  ```
+
+* Смотрим граф:
+
+  ```shell
+  sudo apt install graphviz xdot
+  xdot <(bazel query --notool_deps --noimplicit_deps "deps (//clocks:main)" --output graph)
+  ```
