@@ -308,35 +308,38 @@ Microsoft разрабатывали).
 
 [Пример использования.](./dependencies/vcpkg)
 
-## Гибриды
+## Гибриды: системы сборки и пакетные менеджеры
 
 ### build2
 
 build2 -- попытка создать `cargo` для C++.
-На первый взгляд, сборка выглядят довольно непривычно:
 
-```build2
-cxx.std = latest
+Глобально есть несколько составляющих:
 
-using cxx
+* build2 (b) -- система сборки
+* bpkg -- пакетный менеджер
+* bdep -- менеджер проекта
 
-hxx{*}: extension = hxx
-ixx{*}: extension = ixx
-txx{*}: extension = txx
-cxx{*}: extension = cxx
+Для небольших проектов build2 будет скорее оверкилл.
 
-if ($cxx.target.system == 'win32-msvc')
-  cxx.poptions += -D_CRT_SECURE_NO_WARNINGS -D_SCL_SECURE_NO_WARNINGS
+Синтаксис довольно арканный, надо его изучать и привыкать к нему.
 
-if ($cxx.class == 'msvc')
-  cxx.coptions += /wd4251 /wd4275 /wd4800
-
-# The test target for cross-testing (running tests under Wine, etc).
-#
-test.target = $cxx.target
-```
+[Пример тут](./hybrids/build2).
 
 ### xmake
+
+xmake -- кросс-платформенная система сборки вместе с менеджментом пакетов,
+написанная на Lua.
+
+xmake поддерживает много платформ и языков.
+Синтаксис немного похож на Bazel/Meson, можно писать свои скрипты, 
+есть REPL для дебага.
+
+[Hello world](./hybrids/xmake/hello-world).
+
+[Уже поддерживает модули!](./hybrids/xmake/modules) (build2, кстати, тоже)
+
+[Работа с зависимостями](./hybrids/xmake/packages).
 
 ## Примеры проектов
 
