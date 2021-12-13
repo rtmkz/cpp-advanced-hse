@@ -146,7 +146,23 @@ CMake можно (в какой-то степени) считать языком
 ### Meson
 
 Meson -- альтернатива CMake со статической типизацией, но без возможности
-писать собственные функции.
+писать собственные функции (не Тьюринг полный язык). 
+Синтаксис очень похож на Python, имплементирован тоже на нём.
+В качестве основной низкоуровневой системы сборки использует Ninja.
+
+Очень подробная документация в связке со строгой типизацией избавляет
+от бесконечных дебагов тривиальных вещей (переменная с пробелами раскрылась 
+в список вместо непрерывной строки).
+
+Позволяет [миксовать сборку с CMake](https://mesonbuild.com/CMake-module.html),
+хотя сходу не очень понятно, насколько это безопасно и error-prone.
+Имеет небольшой [репозиторий с зависимостями](https://mesonbuild.com/Wrapdb-projects.html), 
+которые можно подтянуть одной командой.
+
+На беглый взгляд довольно удобный (особенно по сравнению с CMake) 
+и шустрый инструмент с адекватным дизайном.
+
+[Примеры сборки доступны тут.](./build-systems/meson)
 
 ### Bazel
 
@@ -372,6 +388,12 @@ test.target = $cxx.target
 * [It's Time To Do CMake Right](https://pabloariasal.github.io/2018/02/19/its-time-to-do-cmake-right/)
 * [C++Now 2017: Daniel Pfeifer “Effective CMake"](https://www.youtube.com/watch?v=bsXLMQ6WgIk)
 * [CGold: The Hitchhiker’s Guide to the CMake](https://cgold.readthedocs.io/en/latest/)
+
+### Meson
+
+* [Quickstart](https://mesonbuild.com/Quick-guide.html)
+* [Simple tutorial](https://mesonbuild.com/Tutorial.html)
+* [Manual](https://mesonbuild.com/Manual.html)
 
 ### Conan
 
