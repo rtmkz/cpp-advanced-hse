@@ -20,7 +20,7 @@ public:
 
         google::InitGoogleLogging("");
 
-        google::InstallFailureSignalHandler();
+        // google::InstallFailureSignalHandler();
 
         DLOG(INFO) << "Hello from logging subsystem!";
     }
