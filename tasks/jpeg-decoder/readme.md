@@ -94,7 +94,9 @@ brew install libjpeg libpng fftw
 
 Таргеты для fuzzing называются `fuzz_huffman`, `fuzz_fft` и `fuzz_jpeg`. Обратите внимание, для локальной отладки вам потребуется clang (apple clang не подойдет). На Ubuntu его можно установить с помощью [скрипта](https://apt.llvm.org/), на OS X выполните `brew install llvm`.
 
-Чтобы собрать таргеты не дефолтным компилятором, создайте отдельную сборочную директорию и передайте `cmake` аргументы `-DCMAKE_C_COMPILER=PATH_TO_YOUR_CLANG -DCMAKE_CXX_COMPILER=PATH_TO_YOUR_CLANG++`. Проверьте, что компилятор в выводе `cmake` тот, который вы ожидаете.
+Чтобы собрать таргеты не дефолтным компилятором, создайте отдельную сборочную директорию и передайте `cmake` аргументы `-DCMAKE_C_COMPILER=PATH_TO_YOUR_CLANG -DCMAKE_CXX_COMPILER=PATH_TO_YOUR_CLANG++`.
+
+На Ubuntu, как правило, достаточно в качестве пути указать `clang-XX` / `clang++-XX`, где XX - версия. На OS X путь, куда установился LLVM, узнайте через `brew --prefix llvm`, к нему обычно нужно добавить `llvm/bin/clang` / `llvm/bin/clang++` соответственно. Проверьте, что компилятор в выводе `cmake` тот, который вы ожидаете.
 
 #### Запуск `fuzz_jpeg` c корпусом
 
