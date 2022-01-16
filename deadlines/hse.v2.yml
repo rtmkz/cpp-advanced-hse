@@ -32,6 +32,7 @@ scoring:
     policy: hard
 
   defaultGroup: weekly
+  finalDeadline: 27-12-2021 00:00
 
 
 assignments:
