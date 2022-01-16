@@ -33,6 +33,7 @@ scoring:
 
   defaultGroup: weekly
   finalDeadline: 27-12-2021 00:00
+  retakePenalty: 0.6
 
 
 assignments:
