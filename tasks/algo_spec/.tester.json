@@ -1,6 +1,0 @@
-{
-    "allow_change": "algo_spec.h",
-    "tests": "test_algo_spec",
-    "solutions": "private"
-}
-

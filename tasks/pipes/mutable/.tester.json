@@ -1,0 +1,7 @@
+{
+    "allow_change": "../pipes.h",
+    "tests": "test_pipes_mutable",
+    "solutions": "private",
+    "forbidden_containers": [ "tuple", "pair" ],
+    "forbidden_functions": [ "make_tuple", "make_pair" ]
+}
