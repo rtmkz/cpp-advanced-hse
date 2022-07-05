@@ -141,20 +141,22 @@ assignments:
     - task: scala-vector
       score: 150
 
-- title:     07-meta
-  start:    30-10-2021 13:00
+- title: 07-templates
+  start: 30-10-2021 13:00
   deadline: 12-11-2021 19:00
   tasks:
-    - task: algo_spec
-      score: 100
     - task: compile-eval
       score: 100
     - task: transform_tuple
       score: 100
     - task: constexpr-map
       score: 100
-    - task: pipes
+    - task: pipes/basic
       score: 100
+    - task: pipes/rvalue
+      score: 50
+    - task: pipes/mutable
+      score: 50
 
 - title:     08-baby-threads
   start:    06-11-2021 13:00
