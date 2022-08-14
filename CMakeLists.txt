@@ -46,9 +46,6 @@ add_subdirectory(tasks/list)
 add_subdirectory(tasks/string-view)
 
 # 3
-add_subdirectory(tasks/bind_front)
-add_subdirectory(tasks/curry)
-add_subdirectory(tasks/stdflib)
 add_subdirectory(tasks/dungeon)
 add_subdirectory(tasks/fold)
 
@@ -66,9 +63,7 @@ add_subdirectory(tasks/any)
 add_subdirectory(tasks/scala-vector)
 
 # 7
-add_subdirectory(tasks/transform_tuple)
 add_subdirectory(tasks/constexpr-map)
-add_subdirectory(tasks/pipes)
 add_subdirectory(tasks/compile-eval)
 
 # 8
