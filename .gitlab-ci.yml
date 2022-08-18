@@ -7,7 +7,7 @@ stages:
 
 .check:
   stage: test
-  image: eu.gcr.io/hse-ts/cpp-course-build
+  image: cr.yandex/crpoem3mqq83iobvune7/hse-cxx-build:latest
   allow_failure: true
   script:
     - cmake --version
@@ -44,7 +44,7 @@ deploy:
   - docker
   stage: release
   script:
-  - docker pull eu.gcr.io/hse-ts/cpp-course-build
+  - docker pull cr.yandex/crpoem3mqq83iobvune7/hse-cxx-build:latest
   - git checkout .
   - docker build -f testenv.docker -t eu.gcr.io/hse-ts/cpp-course .
   - docker push eu.gcr.io/hse-ts/cpp-course:latest
