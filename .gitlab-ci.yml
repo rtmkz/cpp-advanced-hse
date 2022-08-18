@@ -46,5 +46,5 @@ deploy:
   script:
   - docker pull cr.yandex/crpoem3mqq83iobvune7/hse-cxx-build:latest
   - git checkout .
-  - docker build -f testenv.docker -t eu.gcr.io/hse-ts/cpp-course .
-  - docker push eu.gcr.io/hse-ts/cpp-course:latest
+  - docker build -f testenv.docker -t cr.yandex/crpoem3mqq83iobvune7/hse-cxx-testenv .
+  - docker push cr.yandex/crpoem3mqq83iobvune7/hse-cxx-testenv:latest
