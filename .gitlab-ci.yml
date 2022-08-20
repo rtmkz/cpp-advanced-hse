@@ -7,7 +7,7 @@ stages:
 
 .check:
   stage: test
-  image: cr.yandex/crpoem3mqq83iobvune7/hse-cxx-testenv:latest
+  image: cr.yandex/crpoem3mqq83iobvune7/hse-cxx-build:latest
   allow_failure: true
   script:
     - cmake --version
