@@ -1,5 +1,5 @@
 grade:
-  image: eu.gcr.io/hse-ts/cpp-course
+  image: cr.yandex/crpoem3mqq83iobvune7/hse-cxx-testenv:latest
   only:
     - /^submits/.*$/
   script:
