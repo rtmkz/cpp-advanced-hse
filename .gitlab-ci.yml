@@ -44,6 +44,7 @@ deploy:
   - docker
   stage: release
   script:
+  - yc container registry configure-docker
   - docker pull cr.yandex/crpoem3mqq83iobvune7/hse-cxx-build:latest
   - git checkout .
   - docker build -f testenv.docker -t cr.yandex/crpoem3mqq83iobvune7/hse-cxx-testenv .
