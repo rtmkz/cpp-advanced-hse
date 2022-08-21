@@ -44,7 +44,7 @@ deploy:
   - docker
   stage: release
   script:
-  - docker pull cr.yandex/crpoem3mqq83iobvune7/hse-cxx-build:latest
+  - docker pull cr.yandex/crpi3u88u344uak6pq2t/hse-cxx-build:latest
   - git checkout .
-  - docker build -f testenv.docker -t cr.yandex/crpoem3mqq83iobvune7/hse-cxx-testenv .
-  - docker push cr.yandex/crpoem3mqq83iobvune7/hse-cxx-testenv:latest
+  - docker build -f testenv.docker -t cr.yandex/crpi3u88u344uak6pq2t/hse-cxx-testenv .
+  - docker push cr.yandex/crpi3u88u344uak6pq2t/hse-cxx-testenv:latest

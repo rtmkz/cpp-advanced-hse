@@ -1,5 +1,5 @@
 grade:
-  image: cr.yandex/crpoem3mqq83iobvune7/hse-cxx-testenv:latest
+  image: cr.yandex/crpi3u88u344uak6pq2t/hse-cxx-testenv:latest
   only:
     - /^submits/.*$/
   script:
