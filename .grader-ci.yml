@@ -1,5 +1,7 @@
 grade:
   image: cr.yandex/crpoem3mqq83iobvune7/hse-cxx-testenv:latest
+  variables:
+    SKIP_REPORT: 1
   only:
     - /^submits/.*$/
   script:
