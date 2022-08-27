@@ -36,7 +36,7 @@ function(add_hse_executable NAME)
   endif()
 
   if (TEST_SOLUTION)
-    file(COPY "${CMAKE_SOURCE_DIR}/private/${TASK_NAME}" DESTINATION "${CMAKE_SOURCE_DIR}/tasks")
+    file(COPY "${CMAKE_SOURCE_DIR}/private/${TASK_NAME}" DESTINATION "${CMAKE_CURRENT_SOURCE_DIR}/../")
   endif()
 
   add_executable(${NAME}
