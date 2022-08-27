@@ -1,6 +1,0 @@
-{
-    "allow_change": "curry.h",
-    "tests": "test_curry",
-    "solutions": "private"
-}
-

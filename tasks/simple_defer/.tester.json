@@ -1,5 +1,0 @@
-{
-  "allow_change": "simple_defer.h",
-  "tests": "test_simple_defer",
-  "solutions": "private"
-}

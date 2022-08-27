@@ -1,6 +1,0 @@
-{
-    "allow_change": "transform_tuple.h",
-    "tests": "test_transform_tuple",
-    "solutions": "private"
-}
-
