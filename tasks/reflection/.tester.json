@@ -1,5 +1,0 @@
-{
-    "allow_change": "reflection.h",
-    "tests": "test_reflection",
-    "solutions": "private"
-}
