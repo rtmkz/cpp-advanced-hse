@@ -1,6 +1,6 @@
 #include "../utils/init.h"
 
-#include "../fft.h"
+#include "fft.h"
 
 TEST_CASE("Dimensions check") {
     std::vector<double> input;

@@ -1,6 +1,6 @@
 #include "../utils/init.h"
 
-#include "../huffman.h"
+#include "huffman.h"
 
 #include <cstdint>
 #include <stdexcept>

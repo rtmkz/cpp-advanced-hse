@@ -1,7 +1,11 @@
 {
   "allow_change": [
-    "../*.cpp",
-    "../*.h"
+    "error.h",
+    "tokenizer.h",
+    "tokenizer.cpp",
+    "parser.h",
+    "parser.cpp",
+    "object.h"
   ],
   "tests": "test_scheme_parser",
   "solutions": "private",

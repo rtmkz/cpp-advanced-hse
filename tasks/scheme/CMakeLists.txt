@@ -32,26 +32,21 @@ add_catch(test_scheme_parser
         ${PARSER_TESTS}
         ${PARSER_FUZZING_TEST})
 
-
 add_catch(test_scheme_basic
         ${TOKENIZER_TESTS}
         ${PARSER_TESTS}
         ${BASIC_TESTS}
         ${TEST_ENV})
 
-
 add_catch(test_scheme_advanced
         ${BASIC_TESTS}
         ${ADVANCED_TESTS}
         ${TEST_ENV})
 
-file(GLOB SOURCES "*.cpp")
-add_library(scheme ${SOURCES})
+add_subdirectory(tokenizer)
+add_subdirectory(parser)
+add_subdirectory(basic)
+add_subdirectory(advanced)
 
-target_link_libraries(test_scheme_tokenizer scheme)
-target_link_libraries(test_scheme_parser scheme)
-target_link_libraries(test_scheme_basic scheme allocations_checker)
-target_link_libraries(test_scheme_advanced scheme allocations_checker)
-
-add_executable(scheme-repl repl/main.cpp)
-target_link_libraries(scheme-repl scheme)
+target_link_libraries(test_scheme_basic allocations_checker)
+target_link_libraries(test_scheme_advanced allocations_checker)

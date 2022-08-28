@@ -1,0 +1,2 @@
+add_library(scheme_tokenizer tokenizer.cpp)
+target_link_libraries(test_scheme_tokenizer scheme_tokenizer)

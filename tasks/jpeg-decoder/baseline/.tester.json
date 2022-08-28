@@ -1,8 +1,8 @@
 {
   "allow_change": [
-    "../*.cpp",
-    "../*.h",
-    "../CMakeLists.txt"
+    "*.cpp",
+    "*.h",
+    "CMakeLists.txt"
   ],
   "tests": [
     "test_baseline",

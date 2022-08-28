@@ -1,7 +1,7 @@
 {
   "allow_change": [
-    "../unique.h",
-    "../compressed_pair.h"
+    "unique.h",
+    "compressed_pair.h"
   ],
   "tests": "test_unique_advanced",
   "solutions": "private",

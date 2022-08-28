@@ -1,5 +1,5 @@
-#include "../shared.h"
-#include "../weak.h"
+#include "shared.h"
+#include "weak.h"
 
 #include <catch.hpp>
 

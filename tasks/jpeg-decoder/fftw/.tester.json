@@ -1,8 +1,7 @@
 {
   "allow_change": [
-    "../*.cpp",
-    "../*.h",
-    "../CMakeLists.txt"
+    "fft.cpp",
+    "fft.h"
   ],
   "tests": "test_fft",
   "solutions": "private",

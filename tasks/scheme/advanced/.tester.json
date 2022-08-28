@@ -1,7 +1,8 @@
 {
   "allow_change": [
-    "../*.cpp",
-    "../*.h"
+    "*.cpp",
+    "*.h",
+    "CMakeLists.txt"
   ],
   "tests": "test_scheme_advanced",
   "solutions": "private",

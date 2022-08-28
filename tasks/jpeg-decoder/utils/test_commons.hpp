@@ -11,7 +11,7 @@
 #include <fstream>
 #include <optional>
 
-#include "../decoder.h"
+#include <decoder.h>
 
 int artifact_index = 0;
 #ifdef HSE_ARTIFACTS_DIR

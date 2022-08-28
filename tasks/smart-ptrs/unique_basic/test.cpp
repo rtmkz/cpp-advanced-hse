@@ -1,4 +1,4 @@
-#include "../unique.h"
+#include "unique.h"
 #include "../my_int.h"
 
 #include <catch.hpp>

@@ -1,7 +1,7 @@
 {
   "allow_change": [
-    "../shared.h",
-    "../sw_fwd.h"
+    "shared.h",
+    "sw_fwd.h"
   ],
   "tests": "test_shared_basic",
   "solutions": "private",
