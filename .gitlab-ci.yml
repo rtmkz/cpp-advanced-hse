@@ -11,9 +11,11 @@ stages:
   allow_failure: true
   script:
     - cmake --version
+    - python3 --version
+    - ./infra/patch-from-private.py
     - mkdir -p build/solutions
     - cd build/solutions
-    - cmake ../../ -G Ninja -DTEST_SOLUTION=ON -DENABLE_PRIVATE_TESTS=ON -DCMAKE_BUILD_TYPE=$BUILD_TYPE
+    - cmake ../../ -G Ninja -DTEST_SOLUTION=ON -DCMAKE_BUILD_TYPE=$BUILD_TYPE
     - ninja test-all
 
 check-solutions-gcc-10-debug:
@@ -46,5 +48,5 @@ deploy:
   script:
   - docker pull cr.yandex/crpoem3mqq83iobvune7/hse-cxx-build:latest
   - git checkout .
-  - docker build -f testenv.docker -t cr.yandex/crpoem3mqq83iobvune7/hse-cxx-testenv .
+  - docker build -f infra/testenv.docker -t cr.yandex/crpoem3mqq83iobvune7/hse-cxx-testenv .
   - docker push cr.yandex/crpoem3mqq83iobvune7/hse-cxx-testenv:latest
