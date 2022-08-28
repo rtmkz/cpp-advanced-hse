@@ -1,4 +1,4 @@
-#include "scheme.h"
+#include <scheme.h>
 
 #include <test/scheme_test.h>
 #include <test/fuzzer.h>
