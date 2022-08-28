@@ -7,10 +7,12 @@ function(patch_include_directories TARGET)
     get_filename_component(TASK_NAME ${CMAKE_CURRENT_SOURCE_DIR} NAME)
     target_include_directories(${TARGET}
       PRIVATE ${CMAKE_SOURCE_DIR}/private/${TASK_NAME})
+    message(STATUS "Including directory ${CMAKE_SOURCE_DIR}/private/${TASK_NAME} for target ${TARGET}")
   endif()
 
   target_include_directories(${TARGET}
     PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+  message(STATUS "Including directory ${CMAKE_CURRENT_SOURCE_DIR} for target ${TARGET}")
 endfunction()
 
 function(prepend VAR PREFIX)
@@ -35,9 +37,15 @@ function(add_hse_executable NAME)
     prepend(SHAD_LIBRARY_PRIVATE_TESTS "${CMAKE_SOURCE_DIR}/private/${TASK_NAME}" ${SHAD_LIBRARY_PRIVATE_TESTS})
   endif()
 
-  # if (TEST_SOLUTION)
-  #   file(COPY "${CMAKE_SOURCE_DIR}/private/${TASK_NAME}" DESTINATION "${CMAKE_CURRENT_SOURCE_DIR}/../")
-  # endif()
+  if (TEST_SOLUTION)
+    file(COPY "${CMAKE_SOURCE_DIR}/private/${TASK_NAME}" DESTINATION "${CMAKE_CURRENT_SOURCE_DIR}/../")
+  endif()
+
+  message(STATUS "Calling add_executable with args:")
+  message(STATUS "NAME=${NAME}")
+  message(STATUS "SHAD_LIBRARY_UNPARSED_ARGUMENTS=${SHAD_LIBRARY_UNPARSED_ARGUMENTS}")
+  message(STATUS "SHAD_LIBRARY_SOLUTION_SRCS=${SHAD_LIBRARY_SOLUTION_SRCS}")
+  message(STATUS "SHAD_LIBRARY_PRIVATE_TESTS=${SHAD_LIBRARY_PRIVATE_TESTS}")
 
   add_executable(${NAME}
     ${SHAD_LIBRARY_UNPARSED_ARGUMENTS}
