@@ -1,2 +1,3 @@
 add_library(scheme_tokenizer tokenizer.cpp)
+target_include_directories(scheme_tokenizer PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(test_scheme_tokenizer scheme_tokenizer)

@@ -1,4 +1,4 @@
-#include "../test/scheme_test.h"
+#include <test/scheme_test.h>
 
 TEST_CASE_METHOD(SchemeTest, "PairMutations") {
     ExpectNoError("(define x '(1 . 2))");

@@ -1,8 +1,10 @@
 #include <string>
 #include <iostream>
 
-#include "../test/scheme_test.h"
-#include "catch.hpp"
+#include <test/scheme_test.h>
+
+#include <catch.hpp>
+
 #include "allocations_checker.h"
 
 TEST_CASE_METHOD(SchemeTest, "SimpleLambda") {

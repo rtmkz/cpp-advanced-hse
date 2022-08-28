@@ -2,8 +2,8 @@
 
 #include <sstream>
 
-#include "../error.h"
-#include "../parser.h"
+#include "error.h"
+#include "parser.h"
 
 auto ReadFull(const std::string& str) {
     std::stringstream ss{str};

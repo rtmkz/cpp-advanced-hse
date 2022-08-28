@@ -1,6 +1,8 @@
-#include "../scheme.h"
-#include "../test/scheme_test.h"
-#include "../test/fuzzer.h"
+#include "scheme.h"
+
+#include <test/scheme_test.h>
+#include <test/fuzzer.h>
+
 #include "allocations_checker.h"
 
 #include <iostream>

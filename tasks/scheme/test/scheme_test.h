@@ -2,8 +2,8 @@
 
 #include <catch.hpp>
 
-#include "../error.h"
-#include "../scheme.h"
+#include <error.h>
+#include <scheme.h>
 
 class SchemeTest {
 public:
