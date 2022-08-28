@@ -1,11 +1,8 @@
 {
   "allow_change": [
-    "error.h",
-    "tokenizer.h",
-    "tokenizer.cpp",
-    "parser.h",
-    "parser.cpp",
-    "object.h"
+    "*.cpp",
+    "*.h",
+    "CMakeLists.txt"
   ],
   "tests": "test_scheme_parser",
   "solutions": "private",
