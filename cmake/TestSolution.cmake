@@ -27,24 +27,24 @@ function(add_hse_executable NAME)
 
   get_filename_component(TASK_NAME ${CMAKE_CURRENT_SOURCE_DIR} NAME)
 
-  # if (TEST_SOLUTION)
-  #   prepend(SHAD_LIBRARY_SOLUTION_SRCS "${CMAKE_SOURCE_DIR}/private/${TASK_NAME}" ${SHAD_LIBRARY_SOLUTION_SRCS})
-  # endif()
+  if (TEST_SOLUTION)
+    prepend(SHAD_LIBRARY_SOLUTION_SRCS "${CMAKE_SOURCE_DIR}/private/${TASK_NAME}" ${SHAD_LIBRARY_SOLUTION_SRCS})
+  endif()
 
   if (ENABLE_PRIVATE_TESTS)
     prepend(SHAD_LIBRARY_PRIVATE_TESTS "${CMAKE_SOURCE_DIR}/private/${TASK_NAME}" ${SHAD_LIBRARY_PRIVATE_TESTS})
   endif()
 
-  if (TEST_SOLUTION)
-    file(COPY "${CMAKE_SOURCE_DIR}/private/${TASK_NAME}" DESTINATION "${CMAKE_CURRENT_SOURCE_DIR}/../")
-  endif()
+  # if (TEST_SOLUTION)
+  #   file(COPY "${CMAKE_SOURCE_DIR}/private/${TASK_NAME}" DESTINATION "${CMAKE_CURRENT_SOURCE_DIR}/../")
+  # endif()
 
   add_executable(${NAME}
     ${SHAD_LIBRARY_UNPARSED_ARGUMENTS}
     ${SHAD_LIBRARY_SOLUTION_SRCS}
     ${SHAD_LIBRARY_PRIVATE_TESTS})
 
-  # patch_include_directories(${NAME})
+  patch_include_directories(${NAME})
 endfunction()
 
 function(add_hse_python_module NAME)
