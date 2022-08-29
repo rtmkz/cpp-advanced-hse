@@ -129,10 +129,10 @@ if __name__ == "__main__":
     VERBOSE = args.verbose
 
     task_name = args.task_path
-    if task_name is None:
+    if task_name == '':
         real_current_path = os.path.realpath(".")
         task_group_name = os.path.basename(os.path.dirname(real_current_path))
-        task_name = task_group_name + os.path.basename(real_current_path)
+        task_name = task_group_name + "/" + os.path.basename(real_current_path)
 
     task_config = None
     try:

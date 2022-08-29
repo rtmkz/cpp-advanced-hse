@@ -2,7 +2,6 @@ option(TEST_SOLUTION "Build solution" OFF)
 option(GRADER "Building on CI" OFF)
 
 function(add_hse_executable NAME)
-    message(STATUS ${NAME} ${ARGN})
     add_executable(${NAME} ${ARGN})
     target_include_directories(${NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 endfunction()
