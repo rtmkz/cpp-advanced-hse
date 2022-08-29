@@ -5,7 +5,7 @@ add_subdirectory(dedup)
 add_subdirectory(cow-vector)
 
 # 2
-add_subdirectory(compressed_pair)
+add_subdirectory(compressed-pair)
 add_subdirectory(lru-cache)
 add_subdirectory(string-operations)
 add_subdirectory(intrusive-list)
@@ -57,7 +57,7 @@ add_subdirectory(coroutine)
 add_subdirectory(generator)
 
 # Bonuses
-add_subdirectory(solve_or_die)
+add_subdirectory(solve-or-die)
 add_subdirectory(matrix-2.0)
 add_subdirectory(concepts)
 add_subdirectory(executors)
