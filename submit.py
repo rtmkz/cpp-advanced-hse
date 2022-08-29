@@ -127,41 +127,16 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     VERBOSE = args.verbose
-    task_name = args.task_path or os.path.basename(os.path.realpath("."))
 
-    allowed_smart_ptrs_dirs = [
-        "unique_basic",
-        "unique_advanced",
-        "shared_basic",
-        "shared_weak",
-        "shared_from_this",
-    ]
+    task_name = args.task_path
+    if task_name is None:
+        real_current_path = os.path.realpath(".")
+        task_group_name = os.path.basename(os.path.dirname(real_current_path))
+        task_name = task_group_name + os.path.basename(real_current_path)
 
-    allowed_scheme_dirs = [
-        "tokenizer",
-        "parser",
-        "basic",
-        "advanced",
-    ]
-
-    allowed_jpeg_dirs = [
-        "huffman",
-        "fftw",
-        "baseline",
-        "faster",
-        "progressive"
-    ]
-
-    subtask_name = task_name
-    if task_name in allowed_smart_ptrs_dirs:
-        task_name = 'smart-ptrs/' + task_name
-    elif task_name in allowed_scheme_dirs:
-        task_name = 'scheme/' + task_name
-    elif task_name in allowed_jpeg_dirs:
-        task_name = 'jpeg-decoder/' + task_name
-
+    task_config = None
     try:
-        task_config = json.load(open(os.path.join(os.pardir, subtask_name, ".tester.json")))
+        task_config = json.load(open(".tester.json"))
     except FileNotFoundError:
         print("error: Task config not found. Are you running tool from correct directory?")
         exit(1)
