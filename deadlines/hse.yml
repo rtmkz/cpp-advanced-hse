@@ -39,11 +39,13 @@ assignments:
   tasks:
   - task: intro/multiplication
     score: 100
+  - task: intro/gcd
+    score: 100
 
 - title:    bonus
   start:    31-08-2022 18:00
   deadline: 31-12-2022 23:59
   group:    bonus
   tasks:
-  - task: bonus/gcd
+  - task: bonus/bad-hash
     score: 100
