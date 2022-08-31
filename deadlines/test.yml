@@ -1,217 +1,76 @@
-- group:    00-setup
-  start:    17-07-2021 18:00
-  deadline: 21-09-2022 18:00
-  tasks:
-    - task: multiplication
-      score: 100
+# Add new groups at the bottom
 
-- group:    00-setup-bonus
-  start:    17-07-2021 18:00
-  deadline: 21-09-2022 18:00
-  tasks:
-    - task: gcd
-      score: 100
+scoring:
+  policies:
+  - name: hard
+    kind: linear
+    spec:
+      after: 1h
+      multiplier: 0
+  - name: notsohard
+    kind: exp
+    spec:
+      multiplier: 120h
+      threshold: 0.3
 
-- group:    01-move
-  start:    17-07-2021 18:00
-  deadline: 21-09-2022 18:00
-  tasks:
-    - task: dedup
-      score: 100
-    - task: harakiri
-      score: 100
-    - task: cow-vector
-      score: 200
-    - task: deque
-      score: 400
-    - task: rule-of-5
-      score: 100
+  groups:
+  - name: weekly
+    weight: 4.0
+    policy: notsohard
 
-- group:    02-memory
-  start:    11-09-2021 13:00
-  deadline: 24-09-2021 19:00
-  tasks:
-    - task: string-view
-      score: 100
-    - task: lru-cache
-      score: 100
-    - task: intrusive-list
-      score: 100
-    - task: reallol
-      score: 100
-    - task: string-operations
-      score: 150
-    - task: compressed_pair
-      score: 150
+  - name: large
+    weight: 6.0
+    policy: hard
+    maxScore: 300
 
-- group:    03-types
-  start:    18-09-2021 13:00
-  deadline: 08-10-2021 19:00
-  tasks:
-    - task: dungeon
-      score: 100
-    - task: fold
-      score: 100
-    - task: bind_front
-      score: 100
-    - task: curry
-      score: 100
-    - task: stdflib
-      score: 100
+  - name: bonus
+    weight: 1.0
+    policy: hard
 
-- group:    03-smart-ptrs
-  start:    17-07-2021 18:00
-  deadline: 21-09-2022 18:00
-  tasks:
-    - task:  smart-ptrs/unique_basic
-      score: 0
-    - task: smart-ptrs/unique_advanced
-      score: 0
-    - task:  smart-ptrs/shared_basic
-      score: 0
-    - task: smart-ptrs/shared_weak
-      score: 0
-    - task: smart-ptrs/shared_from_this
-      score: 0
+  defaultGroup: weekly
+  finalDeadline: 31-12-2022 00:00
+  retakePenalty: 0.6
 
-- group:    05-errors
-  start:    17-07-2021 18:00
-  deadline: 21-09-2022 18:00
-  tasks:
-    - task: safe-transform
-      score: 100
-    - task: defer
-      score: 100
-    - task: tryhard
-      score: 100
-    - task: grep
-      score: 100
 
-- group:    06-patterns
-  start:    17-07-2021 18:00
-  deadline: 21-09-2022 18:00
+assignments:
+- title:    00-setup
+  start:    31-08-2022 18:00
+  deadline: 31-12-2022 23:59
   tasks:
-    - task: pimpl
-      score: 100
-    - task: any
-      score: 100
-    - task: editor
-      score: 100
-    - task: small-test-framework
-      score: 150
-    - task: scala-vector
-      score: 150
+  - task: multiplication
+    score: 100
 
-- group:    07-meta
-  start:    17-07-2021 18:00
-  deadline: 21-09-2022 18:00
+- title:    01-memory
+  start:    02-09-2022 15:00
+  deadline: 31-09-2022 19:00
   tasks:
-    - task: algo_spec
-      score: 100
-    - task: compile-eval
-      score: 100
-    - task: transform_tuple
-      score: 100
-    - task: constexpr-map
-      score: 100
-    - task: pipes
-      score: 100
+  - task: dedup
+    score: 100
+  - task: harakiri
+    score: 100
+  - task: rule-of-5
+    score: 100
+  - task: cow-vector
+    score: 150
+  - task: deque
+    score: 250
 
-- group:    08-baby-threads
-  start:    17-07-2021 18:00
-  deadline: 21-09-2022 18:00
+- title:    bonus
+  start:    31-08-2022 18:00
+  deadline: 31-12-2022 23:59
+  group:    bonus
   tasks:
-    - task: is-prime
-      score: 100
-    - task: reduce
-      score: 100
-    - task: subset-sum
-      score: 100
-    - task: hash-table
-      score: 100
-
-- group:    09-condition-variables
-  start:    13-11-2021 13:00
-  deadline: 26-11-2021 19:00
-  tasks:
-    - task: timerqueue
-      score: 100
-    - task: semaphore
-      score: 100
-    - task: rw-lock
-      score: 100
-    - task: buffered-channel
-      score: 100
-    - task: unbuffered-channel
-      score: 100
-
-- group:    10-advanced-threads
-  start:    20-11-2021 13:00
-  deadline: 03-12-2021 19:00
-  tasks:
-    - task: futex
-      score: 100
-    - task: fast-queue
-      score: 100
-    - task: mpsc-stack
-      score: 100
-    - task: rw-spinlock
-      score: 100
-
-- group:    11-threading-ending
-  start:    17-07-2021 18:00
-  deadline: 21-09-2022 18:00
-  tasks:
-    - task: coroutine
-      score: 100
-    - task: generator
-      score: 100
-
-- group:    scheme
-  start:    26-10-2021 00:00
-  deadline: 15-11-2021 23:59
-  tasks:
-    - task: scheme/tokenizer
-      score: 1
-    - task: scheme/parser
-      score: 2
-    - task: scheme/basic
-      score: 3
-    - task: scheme/advanced
-      score: 4
-
-- group:    jpeg-decoder
-  start:    30-10-2021 00:00
-  deadline: 21-09-2022 18:00
-  tasks:
-    - task: jpeg-decoder/huffman
-      score: 20
-    - task: jpeg-decoder/fftw
-      score: 15
-    - task: jpeg-decoder/baseline
-      score: 25
-    - task: jpeg-decoder/faster
-      score: 15
-    - task: jpeg-decoder/fuzzing
-      score: 25
-    - task: jpeg-decoder/progressive
-      score: 25
-
-- group:    bonus
-  start:    17-07-2021 18:00
-  deadline: 21-09-2022 18:00
-  tasks:
-    - task: bad-hash
-      score: 100
-    - task: solve_or_die
-      score: 100
-    - task: brainfuck
-      score: 100
-    - task: matrix-2.0
-      score: 100
-    - task: concepts
-      score: 100
-    - task: simple_defer
-      score: 100
-    - task: executors
-      score: 200
+  - task: gcd
+    score: 100
+  - task: bad-hash
+    score: 100
+  - task: solve_or_die
+    score: 100
+  - task: brainfuck
+    score: 100
+  - task: matrix-2.0
+    score: 100
+  - task: concepts
+    score: 100
+  - task: simple_defer
+    score: 100
