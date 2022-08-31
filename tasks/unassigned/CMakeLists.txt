@@ -1,16 +1,9 @@
 # 1
 add_subdirectory(harakiri)
-add_subdirectory(deque)
-add_subdirectory(dedup)
-add_subdirectory(cow-vector)
 
 # 2
 add_subdirectory(compressed-pair)
-add_subdirectory(lru-cache)
-add_subdirectory(string-operations)
-add_subdirectory(intrusive-list)
 add_subdirectory(list)
-add_subdirectory(string-view)
 
 # 3
 add_subdirectory(dungeon)

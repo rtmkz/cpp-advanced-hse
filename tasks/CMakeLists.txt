@@ -3,6 +3,7 @@ add_subdirectory(unassigned)
 
 # Weekly homeworks
 add_subdirectory(intro)
+add_subdirectory(memory)
 
 # Big homeworks
 add_subdirectory(smart-ptrs)
