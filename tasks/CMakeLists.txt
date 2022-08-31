@@ -8,3 +8,6 @@ add_subdirectory(intro)
 add_subdirectory(smart-ptrs)
 add_subdirectory(scheme)
 add_subdirectory(jpeg-decoder)
+
+# Bonus
+add_subdirectory(bonus)
