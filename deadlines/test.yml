@@ -50,7 +50,7 @@ assignments:
     score: 100
   - task: memory/reallol
     score: 100
-  - task: memory/dedup
+  - task: memory/string-view
     score: 100
   - task: memory/cow-vector
     score: 100
