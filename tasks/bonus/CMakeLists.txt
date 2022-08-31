@@ -1,1 +1,1 @@
-add_subdirectory(gcd)
+add_subdirectory(bad-hash)

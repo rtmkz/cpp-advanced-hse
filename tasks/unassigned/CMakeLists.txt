@@ -58,4 +58,3 @@ add_subdirectory(executors)
 # ctf
 add_subdirectory(rule-of-5)
 add_subdirectory(reallol)
-add_subdirectory(bad-hash)
