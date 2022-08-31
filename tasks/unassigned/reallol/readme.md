@@ -15,6 +15,6 @@ clang++-11 main.cpp -o reallol -std=c++11 -fsanitize=address
 
 Послать ввод из файла на сервер можно [командой](https://gitlab.com/danlark/cpp-advanced-hse/-/blob/main/docs/crashme.md#подготовленный-ввод):
 ```shell
-{echo reallol; cat input.txt} | nc -N crashme.cpp-hse.org 9090
+{echo reallol; cat input.txt} | nc -N crashme.cpp-hse.net 9090
 ```
 

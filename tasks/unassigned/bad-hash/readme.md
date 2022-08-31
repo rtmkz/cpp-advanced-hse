@@ -17,7 +17,7 @@ clang++-11 main.cpp -o bad_hash -std=c++20
 
 Послать ввод из файла на сервер можно [командой](https://gitlab.com/danlark/cpp-advanced-hse/-/blob/main/docs/crashme.md#подготовленный-ввод):
 ```shell
-(echo bad-hash; cat input.txt) | nc crashme.cpp-hse.org 9090
+(echo bad-hash; cat input.txt) | nc crashme.cpp-hse.net 9090
 ```
 
 ### Генератор
