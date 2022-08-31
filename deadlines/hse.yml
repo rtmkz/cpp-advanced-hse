@@ -37,7 +37,7 @@ assignments:
   start:    31-08-2022 18:00
   deadline: 31-12-2022 23:59
   tasks:
-  - task: multiplication
+  - task: intro/multiplication
     score: 100
 
 - title:    bonus
@@ -45,17 +45,5 @@ assignments:
   deadline: 31-12-2022 23:59
   group:    bonus
   tasks:
-  - task: gcd
-    score: 100
-  - task: bad-hash
-    score: 100
-  - task: solve_or_die
-    score: 100
-  - task: brainfuck
-    score: 100
-  - task: matrix-2.0
-    score: 100
-  - task: concepts
-    score: 100
-  - task: simple_defer
+  - task: bonus/gcd
     score: 100
