@@ -42,7 +42,7 @@ assignments:
 
 - title:    01-memory
   start:    02-09-2022 15:00
-  deadline: 31-09-2022 19:00
+  deadline: 15-09-2022 19:00
   tasks:
   - task: dedup
     score: 100
