@@ -57,23 +57,6 @@ assignments:
   - task: memory/deque
     score: 100
 
-- title:    02-move
-  start:    09-09-2022 15:00
-  deadline: 22-09-2022 23:59
-  tasks:
-  - task: move/harakiri
-    score: 100
-  - task: move/reallol
-    score: 100
-  - task: move/rule-of-5
-    score: 100
-  - task: move/cow-vector
-    score: 100
-  - task: move/compressed-pair
-    score: 100
-  - task: move/string-operations
-    score: 100
-
 - title:    bonus
   start:    31-08-2022 18:00
   deadline: 31-12-2022 23:59

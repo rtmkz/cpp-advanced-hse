@@ -34,8 +34,8 @@ scoring:
 
 assignments:
 - title:    00-setup
-  start:    31-08-2022 18:00
-  deadline: 31-12-2022 23:59
+  start:    02-09-2022 15:00
+  deadline: 15-09-2022 23:59
   tasks:
   - task: intro/multiplication
     score: 100
@@ -43,8 +43,8 @@ assignments:
     score: 100
 
 - title:    01-memory
-  start:    31-08-2022 18:00
-  deadline: 31-12-2022 23:59
+  start:    02-09-2022 15:00
+  deadline: 15-09-2022 23:59
   tasks:
   - task: memory/dedup
     score: 100
@@ -58,8 +58,8 @@ assignments:
     score: 100
 
 - title:    02-move
-  start:    31-08-2022 18:00
-  deadline: 31-12-2022 23:59
+  start:    09-09-2022 15:00
+  deadline: 22-09-2022 23:59
   tasks:
   - task: move/harakiri
     score: 100
