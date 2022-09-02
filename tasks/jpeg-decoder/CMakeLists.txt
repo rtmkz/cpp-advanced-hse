@@ -1,3 +1,7 @@
+find_package(PNG)
+find_package(JPEG)
+find_package(FFTW)
+
 add_catch(test_huffman huffman/test_huffman.cpp)
 add_catch(test_fft fftw/test_fft.cpp)
 add_catch(test_baseline baseline/test_baseline.cpp)

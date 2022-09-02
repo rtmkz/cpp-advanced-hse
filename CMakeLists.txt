@@ -16,10 +16,6 @@ include(cmake/SeminarUtils.cmake)
 include(FetchContent)
 include(cmake/FindGlog.cmake)
 
-find_package(PNG)
-find_package(JPEG)
-find_package(FFTW)
-
 find_package(Catch REQUIRED)
 find_package(Benchmark REQUIRED)
 find_package(GTest REQUIRED)
