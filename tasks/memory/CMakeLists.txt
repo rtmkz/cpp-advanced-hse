@@ -1,7 +1,5 @@
 add_subdirectory(deque)
 add_subdirectory(dedup)
-add_subdirectory(cow-vector)
 add_subdirectory(lru-cache)
 add_subdirectory(intrusive-list)
 add_subdirectory(string-view)
-add_subdirectory(reallol)

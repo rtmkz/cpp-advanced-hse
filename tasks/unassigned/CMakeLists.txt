@@ -1,8 +1,4 @@
-# 1
-add_subdirectory(harakiri)
-
 # 2
-add_subdirectory(compressed-pair)
 add_subdirectory(list)
 
 # 3
@@ -54,6 +50,3 @@ add_subdirectory(solve-or-die)
 add_subdirectory(matrix-2.0)
 add_subdirectory(concepts)
 add_subdirectory(executors)
-
-# ctf
-add_subdirectory(rule-of-5)

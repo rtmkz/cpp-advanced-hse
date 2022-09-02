@@ -43,22 +43,35 @@ assignments:
     score: 100
 
 - title:    01-memory
-  start:    02-09-2022 15:00
-  deadline: 15-09-2022 19:00
+  start:    31-08-2022 18:00
+  deadline: 31-12-2022 23:59
   tasks:
   - task: memory/dedup
     score: 100
-  - task: memory/reallol
-    score: 100
   - task: memory/string-view
-    score: 100
-  - task: memory/cow-vector
     score: 100
   - task: memory/lru-cache
     score: 100
   - task: memory/intrusive-list
     score: 100
   - task: memory/deque
+    score: 100
+
+- title:    02-move
+  start:    31-08-2022 18:00
+  deadline: 31-12-2022 23:59
+  tasks:
+  - task: move/harakiri
+    score: 100
+  - task: move/reallol
+    score: 100
+  - task: move/rule-of-5
+    score: 100
+  - task: move/cow-vector
+    score: 100
+  - task: move/compressed-pair
+    score: 100
+  - task: move/string-operations
     score: 100
 
 - title:    bonus
