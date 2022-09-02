@@ -8,5 +8,6 @@
     ],
     "forbidden_containers" : [
         "string_view"
-    ]
+    ],
+    "disable_tsan": true
 }

@@ -17,5 +17,6 @@
     "unordered_map",
     "vector",
     "deque"
-  ]
+  ],
+  "disable_tsan": true
 }

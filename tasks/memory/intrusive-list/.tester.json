@@ -1,6 +1,7 @@
 {
     "allow_change": "intrusive_list.h",
     "tests": "test_intrusive_list",
-    "solutions": "private"
+    "solutions": "private",
+    "disable_tsan": true
 }
 
