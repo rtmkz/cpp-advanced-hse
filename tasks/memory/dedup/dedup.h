@@ -6,6 +6,14 @@
 
 using std::string;
 
-std::vector<std::unique_ptr<string>> Duplicate(const std::vector<std::shared_ptr<string>>& items);
+std::vector<std::unique_ptr<string>> Duplicate(const std::vector<std::shared_ptr<string>>& items) {
+    // Your code here
 
-std::vector<std::shared_ptr<string>> DeDuplicate(const std::vector<std::unique_ptr<string>>& items);
+    return {};
+}
+
+std::vector<std::shared_ptr<string>> DeDuplicate(const std::vector<std::unique_ptr<string>>& items) {
+    // Your code here
+
+    return {};
+}
