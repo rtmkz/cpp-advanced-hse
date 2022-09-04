@@ -57,7 +57,8 @@ std::vector<std::string> GetUsers(size_t max_count) {
 
 int main() {
     std::ios_base::sync_with_stdio(false);
-    std::mt19937 gen(time(nullptr));
+
+    std::mt19937 gen{std::random_device{}()};
     std::uniform_int_distribution<int> dist(30000, 1000000);
     size_t init_size = dist(gen);
     std::unordered_set<string> users(init_size);
@@ -72,7 +73,7 @@ int main() {
     auto end_time = std::clock();
     double spent = static_cast<double>(end_time - start_time) / CLOCKS_PER_SEC;
     std::cout << "Spent " << spent << " seconds of CPU time" << std::endl;
-    if (spent > 1.5) {
+    if (spent > 0.8) {
         std::cout << "Shit happens\n";
         return 1;
     }
