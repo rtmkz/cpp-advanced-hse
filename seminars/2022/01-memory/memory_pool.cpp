@@ -11,5 +11,5 @@
 // https://www.youtube.com/watch?v=CFzuFNSpycI.
 
 int main() {
-  // Your code snippet could be here.
+    // Your code snippet could be here.
 }
