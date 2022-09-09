@@ -1,5 +1,9 @@
 #pragma once
 
+#include <cstdint>
+#include <string>
+
+
 class COWVector {
 public:
     COWVector();
@@ -7,6 +11,8 @@ public:
 
     COWVector(const COWVector& other);
     COWVector& operator=(const COWVector& other);
+
+    // Rule of 5?
 
     size_t Size() const;
 
