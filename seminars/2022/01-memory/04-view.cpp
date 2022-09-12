@@ -23,5 +23,5 @@ int main() {
     PrintFirstTwoChars(sv);
 
     // Be careful about lifetimes, the underlying object has to outlive the view!
-    BigNoNo bad = {"hello"};
+    BigNoNo bad = {std::string{"hello"}};
 }
