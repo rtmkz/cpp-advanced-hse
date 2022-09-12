@@ -4,6 +4,7 @@
 #include <vector>
 #include <mutex>
 #include <deque>
+#include <memory>
 
 int main() {
   std::vector<VerboseTest> kek;
