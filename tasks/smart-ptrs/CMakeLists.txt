@@ -1,8 +1,7 @@
 # ------------------------------------------------------------------------------
 # UniquePtr
 
-add_catch(test_unique_basic unique-basic/test.cpp)
-add_catch(test_unique_advanced unique-advanced/test.cpp unique-basic/test.cpp)
+add_catch(test_unique unique/test.cpp)
 
 # ------------------------------------------------------------------------------
 # SharedPtr + WeakPtr
