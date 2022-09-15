@@ -1,7 +1,8 @@
 #include "unique.h"
 
 #include "deleters.h"
-#include "../my_int.h"
+
+#include <common/my_int.h>
 
 #include <catch.hpp>
 #include <vector>
