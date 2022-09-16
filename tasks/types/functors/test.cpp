@@ -35,27 +35,3 @@ TEST_CASE("Unary") {
     std::vector<int> expected{2, 0, 4};
     REQUIRE(expected == a);
 }
-
-TEST_CASE("ComparisonsCount Int") {
-    std::vector<int> a{1, 3};
-    auto res = ComparisonsCount(a.begin(), a.end());
-
-    REQUIRE(res == 1);
-}
-
-TEST_CASE("ComparisonsCount Strings") {
-    std::vector<std::string> a{"aba", "caba"};
-    auto res = ComparisonsCount(a.begin(), a.end());
-
-    REQUIRE(res == 1);
-}
-
-TEST_CASE("ComparisonsCount Pointers") {
-    auto a = std::make_shared<int>(1);
-    auto b = std::make_shared<int>(2);
-
-    std::vector<std::shared_ptr<int>> c = {a, b};
-    auto res = ComparisonsCount(c.begin(), c.end());
-
-    REQUIRE(res == 1);
-}

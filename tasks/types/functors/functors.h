@@ -17,6 +17,3 @@ template <class Functor>
 ReverseBinaryFunctor<Functor> MakeReverseBinaryFunctor(Functor functor) {
     return ReverseBinaryFunctor<Functor>(functor);
 }
-
-template <class Iterator>
-int ComparisonsCount(Iterator first, Iterator last);
