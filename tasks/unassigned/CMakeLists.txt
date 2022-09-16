@@ -2,8 +2,6 @@
 add_subdirectory(list)
 
 # 3
-add_subdirectory(dungeon)
-add_subdirectory(fold)
 
 # 5
 add_subdirectory(grep)
