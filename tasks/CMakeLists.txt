@@ -5,6 +5,7 @@ add_subdirectory(unassigned)
 add_subdirectory(intro)
 add_subdirectory(memory)
 add_subdirectory(move)
+add_subdirectory(types)
 
 # Big homeworks
 add_subdirectory(smart-ptrs)
