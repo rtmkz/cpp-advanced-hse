@@ -74,6 +74,19 @@ assignments:
   - task: move/string-operations
     score: 100
 
+- title:    03-types
+  start:    16-09-2022 19:00
+  deadline: 30-09-2022 23:59
+  tasks:
+  - task: types/dungeon
+    score: 100
+  - task: types/fold
+    score: 100
+  - task: types/functors
+    score: 100
+  - task: types/itertools
+    score: 100
+
 - title:    bonus
   start:    31-08-2022 18:00
   deadline: 31-12-2022 23:59
