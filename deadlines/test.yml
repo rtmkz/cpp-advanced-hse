@@ -94,3 +94,19 @@ assignments:
   tasks:
   - task: bonus/bad-hash
     score: 100
+
+- title:    03-smart-ptrs
+  start:    18-09-2022 22:00
+  deadline: 09-10-2022 23:59
+  group:    large
+  tasks:
+    - task:  smart-ptrs/unique
+      score: 20
+    - task:  smart-ptrs/shared_basic
+      score: 30
+    - task:  smart-ptrs/shared_weak
+      score: 20
+    - task:  smart-ptrs/shared_from_this
+      score: 20
+    - task:  smart-ptrs/intrusive
+      score: 10
