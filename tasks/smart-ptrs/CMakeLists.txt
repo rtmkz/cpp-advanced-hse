@@ -13,3 +13,9 @@ add_catch(test_shared_from_this shared-basic/test.cpp shared-weak/test.cpp share
 target_link_libraries(test_shared_basic allocations_checker)
 target_link_libraries(test_shared_weak allocations_checker)
 target_link_libraries(test_shared_from_this allocations_checker)
+
+# ------------------------------------------------------------------------------
+# IntrusivePtr
+
+add_catch(test_intrusive intrusive/test.cpp)
+target_link_libraries(test_intrusive allocations_checker)
