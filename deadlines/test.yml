@@ -102,11 +102,11 @@ assignments:
   tasks:
     - task:  smart-ptrs/unique
       score: 20
-    - task:  smart-ptrs/shared_basic
+    - task:  smart-ptrs/shared
       score: 30
-    - task:  smart-ptrs/shared_weak
+    - task:  smart-ptrs/weak
       score: 20
-    - task:  smart-ptrs/shared_from_this
+    - task:  smart-ptrs/shared-from-this
       score: 20
     - task:  smart-ptrs/intrusive
       score: 10
