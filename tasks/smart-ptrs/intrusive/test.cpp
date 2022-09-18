@@ -230,6 +230,15 @@ TEST_CASE("Observers") {
     }
 }
 
+TEST_CASE("From raw pointer") {
+    MyString* str = new MyString{"Molodoy Krakodil khochet zavesti sebe druzey"};
+    IntrusivePtr<MyString> a{str};
+    IntrusivePtr<MyString> b{str};
+    IntrusivePtr<MyString> c{a};
+    IntrusivePtr<MyString> d{c.Get()};
+    REQUIRE(str->RefCount() == 4);
+}
+
 struct Pinned : SimpleRefCounted<Pinned> {
     Pinned(int tag) : tag_(tag) {
     }
