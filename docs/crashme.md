@@ -25,3 +25,9 @@ nc crashme.cpp-hse.net 9090
 {echo 'task-name'; cat prepared-input.txt} | nc -N crashme.cpp-hse.net 9090
 ```
 Флаг `-N` не обязателен. Однако, без него при вводе, при котором программа не завершается, `nc` зависнет (сервер не сможет определить, что вы закончили ввод). Если ваша версия `netcat` не поддерживает `-N`, почитайте документацию (`man 1 nc`).
+
+Если у вас не работает этот вариант, можно попробовать:
+```
+{ echo "topic/task-name"; cat prepared-input.txt; } | nc -N crashme.cpp-hse.net 9090
+```
+При условии, что задача находится в `cpp-advanced-hse/tasks/topic/task-name/`.
