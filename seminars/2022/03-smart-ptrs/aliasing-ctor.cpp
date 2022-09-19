@@ -103,6 +103,6 @@ int main() {
         // `message` is still needed
         UpdateLastMessageTime(message->sent_time);
 
-        // `message` is dropped, by inner object should stay alive until bufferer drops it
+        // `message` is dropped, but inner object should stay alive until bufferer drops it
     }
 }
