@@ -153,7 +153,7 @@ friend class SharedPtr;
 
 ## `WeakPtr`
 
-Рассматриваем циклических ссылок на `SharedPtr`-ы.
+Рассматриваем простейший пример с созданием циклических ссылок между `SharedPtr`-ами.
 
 ```cpp
 #include <memory>
