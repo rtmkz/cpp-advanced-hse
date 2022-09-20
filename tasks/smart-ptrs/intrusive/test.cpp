@@ -15,7 +15,7 @@ struct MyInt : public SimpleRefCounted<MyInt> {
     int value = 0;
 };
 
-struct MyString : public SimpleRefCounted<MyInt>, public std::string {
+struct MyString : public SimpleRefCounted<MyString>, public std::string {
     using std::string::basic_string;
 };
 
