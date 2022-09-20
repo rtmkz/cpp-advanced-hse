@@ -61,12 +61,34 @@ void* operator new(size_t size, const std::nothrow_t&) noexcept {
     return p;
 }
 
+void* operator new[] (size_t size) {
+    void* p = malloc(size);
+    MallocHook(p, size);
+    return p;
+}
+
+void* operator new[] (size_t size, const std::nothrow_t&) noexcept {
+    void* p = malloc(size);
+    MallocHook(p, size);
+    return p;
+}
+
 void operator delete(void* p) noexcept {
     FreeHook(p);
     free(p);
 }
 
 void operator delete(void* p, size_t) noexcept {
+    FreeHook(p);
+    free(p);
+}
+
+void operator delete[] (void* p) noexcept {
+    FreeHook(p);
+    free(p);
+}
+
+void operator delete[] (void* p, size_t) noexcept {
     FreeHook(p);
     free(p);
 }
