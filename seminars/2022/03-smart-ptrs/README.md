@@ -216,7 +216,7 @@ int main() {
 
 * Что делать, если тип `T` имеет свое поле под названием `weak_this`? Чтобы совсем корректно обработать такое, нужно вызывать присваивание `ptr->weak_this = *this` у `ptr` типа `ESFT<Y>` (`Y` не обязательно имеет тип `T`!). Здесь тоже шаблонная магия:
 
-```
+```cpp
 template <typename Y>
 void InitWeakThis(EnableSharedFromThis<Y>* e) {
     e->weak_this = *this;
