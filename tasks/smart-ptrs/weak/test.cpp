@@ -140,15 +140,26 @@ TEST_CASE("Constness") {
     WeakPtr<const int> wp(sp);
 }
 
-TEST_CASE("Destructor is called in time") {
-    WeakPtr<MyInt>* wp;
-    {
-        auto sp = MakeShared<MyInt>();
+TEST_CASE("Lifetimes") {
+    SECTION("Destructor is called in time") {
+        WeakPtr<MyInt>* wp;
+        {
+            auto sp = MakeShared<MyInt>();
 
-        REQUIRE(MyInt::AliveCount() == 1);
+            REQUIRE(MyInt::AliveCount() == 1);
 
-        wp = new WeakPtr<MyInt>(sp);
+            wp = new WeakPtr<MyInt>(sp);
+        }
+        REQUIRE(MyInt::AliveCount() == 0);
+        delete wp;
     }
-    REQUIRE(MyInt::AliveCount() == 0);
-    delete wp;
+
+    SECTION("Destructor is called once") {
+        WeakPtr<std::string>* wp;
+        {
+            auto sp = MakeShared<std::string>("looooooooooooooooooooooooooong");
+            wp = new WeakPtr<std::string>(sp);
+        }
+        delete wp;
+    }
 }
