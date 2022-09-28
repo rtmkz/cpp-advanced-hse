@@ -1,13 +1,5 @@
-# 2
 add_subdirectory(list)
-
-# 3
-
-# 5
 add_subdirectory(grep)
-add_subdirectory(safe-transform)
-add_subdirectory(tryhard)
-add_subdirectory(defer)
 
 # 6
 add_subdirectory(pimpl)
