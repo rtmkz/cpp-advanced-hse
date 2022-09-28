@@ -87,6 +87,19 @@ assignments:
   - task: types/itertools
     score: 100
 
+- title:    05-errors
+  start:    30-09-2022 19:00
+  deadline: 13-10-2022 23:59
+  tasks:
+  - task: errors/defer
+    score: 100
+  - task: errors/safe-transform
+    score: 100
+  - task: errors/tryhard
+    score: 100
+  - task: errors/grep
+    score: 100
+
 - title:    bonus
   start:    31-08-2022 18:00
   deadline: 31-12-2022 23:59
