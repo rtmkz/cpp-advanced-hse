@@ -1,5 +1,4 @@
 add_subdirectory(list)
-add_subdirectory(grep)
 
 # 6
 add_subdirectory(pimpl)
