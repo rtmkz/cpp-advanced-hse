@@ -5,6 +5,7 @@
 #include <list>
 #include <iostream>
 #include <deque>
+#include <memory>
 
 TEST_CASE("Range 1") {
     int i = 0;
@@ -147,4 +148,23 @@ TEST_CASE("Temporary iterator") {
     auto zip = Zip(vec, range);
     auto val = *zip.begin();
     REQUIRE(val.first == val.second);
+}
+
+TEST_CASE("No copying containers") {
+    std::shared_ptr<int> common_item = std::make_shared<int>(42);
+    std::vector<std::shared_ptr<int>> vec(100, common_item);
+    std::list<std::shared_ptr<int>> list(100, common_item);
+
+    for (const auto& val : Zip(vec, list)) {
+        REQUIRE(val.first.get() == common_item.get());
+        REQUIRE(val.second.get() == common_item.get());
+        REQUIRE(common_item.use_count() < 220);
+    }
+
+    for (const auto& group : Group(vec)) {
+        for (const auto& item : group) {
+            REQUIRE(item == common_item);
+            REQUIRE(common_item.use_count() < 220);
+        }
+    }
 }
