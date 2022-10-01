@@ -26,13 +26,13 @@ struct Holder {
     }
 
     Holder& operator=(const Holder& h) {
-        std::cout << "Copy assignment operator\n";
+        std::cout << "Holder copy assignment operator\n";
         value = h.value;
         return *this;
     }
 
     Holder& operator=(Holder&& h) noexcept {
-        std::cout << "Move assignment operator\n";
+        std::cout << "Holder move assignment operator\n";
         value = std::move(h.value);
         return *this;
     }
@@ -59,14 +59,14 @@ struct ThrowHolder {
         ++x;
     }
 
-    ThrowHolder& operator=(const Holder& h) {
-        std::cout << "Copy assignment operator\n";
+    ThrowHolder& operator=(const ThrowHolder& h) {
+        std::cout << "ThrowHolder copy assignment operator\n";
         value = h.value;
         return *this;
     }
 
-    ThrowHolder& operator=(Holder&& h) {
-        std::cout << "Move assignment operator\n";
+    ThrowHolder& operator=(ThrowHolder&& h) {
+        std::cout << "ThrowHolder move assignment operator\n";
         value = std::move(h.value);
         return *this;
     }
@@ -81,6 +81,7 @@ int main()
     data.emplace_back("1");
 
     try {
+        // Call the noexcept constructor if possible.
         data.resize(10);
     } catch (std::exception& e) {
         std::cout << e.what() << '\n';
@@ -91,8 +92,10 @@ int main()
     throw_data.emplace_back("1");
 
     try {
+        // Otherwise, call the copy constructor.
         throw_data.resize(10);
     } catch (std::exception& e) {
+        // Here we will catch the exception.
         std::cout << e.what() << '\n';
     }
 }
