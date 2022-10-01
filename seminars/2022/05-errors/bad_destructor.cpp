@@ -5,12 +5,12 @@
 class Holder {
  public:
     Holder(std::string value_) : value(std::move(value_)) {
-        std::cout << "Holder( " << value << " )\n";
+        std::cerr << "Holder( " << value << " )\n";
     }
 
-    ~Holder()  // noexcept(false) // uncomment and try again, it will catch it
+    ~Holder() noexcept(false) // uncomment and try again, it will catch it
     {
-        std::cout << "~Holder( " << value << " )\n";
+        std::cerr << "~Holder( " << value << " )\n";
         throw std::runtime_error("Try to catch me");
     }
 
@@ -37,16 +37,24 @@ int main()
     try {
         Foo();
     } catch (std::runtime_error& e) {
-        std::cout << "Caught!\n";
+        // Catches a destructor exception if it is marked noexcept(false).
+        std::cerr << "Caught!\n";
     }
 
     try{
         try {
             Hopelessness();
         } catch (std::runtime_error& e) {
-            std::cout << "Caught " << e.what() << "!\n";
+            // Tried to catch the expected "first exception", but due to
+            // an exception inside ~Holder, it will again throw
+            // an exception during stack unwinding.
+
+            // In this case, the C++ language guarantees that
+            // if it gets an exception during stack unwinding,
+            // it will call the terminate() method right now.
+            std::cerr << "Caught " << e.what() << "!\n";
         }
     } catch (std::runtime_error& e) {
-        std::cout << "Caught " << e.what() << "!\n";
+        std::cerr << "Caught " << e.what() << "!\n";
     }
 }
