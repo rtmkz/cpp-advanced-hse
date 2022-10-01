@@ -17,10 +17,11 @@ int main()
         // rethrow exception. What will happen next?
         throw;
     } catch (...) {
-        // will never be here
+        // Will never be here because the exception has already matched runtime_error.
         std::cout << "Catch exception\n";
     }
 
     std::cout << "Normal exit\n";
     return 0;
 }
+
