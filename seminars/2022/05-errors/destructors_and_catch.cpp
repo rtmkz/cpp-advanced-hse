@@ -34,17 +34,17 @@ int main()
     try {
         MakeHolder(input);
     } catch (std::logic_error& e) {
-        // another exception type
+        // The destructor will only be called if an error is caught.
+        // In that case it will just terminates right now.
     }
-    // no destructor call without catching an exception, just terminates right now
-    // memory leaks
-
     // uncomment the lines below to show the destructor call
-//    catch (std::runtime_error& r) {
-//        std::cerr << "caught the runtime_error\n";
-//    }
+    catch (std::runtime_error& e) {
+       // There will be no leaks because ~IntHolder will be called.
+    }
 
-    // nested catch
+
+    // Nested catch.
+    // bad_exception not suitable so it will be ignored.
     try {
         wrapper();
     } catch (std::runtime_error& e) {
