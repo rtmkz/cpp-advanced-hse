@@ -26,14 +26,20 @@ perf 1  15.58s user 0.00s system 99% cpu 15.587 total
 Very simple try-catch block to [asm](https://godbolt.org/z/4f93nMcaP)
 
 6. **Throw by value, catch by reference** [catch_reference_of_value.cpp](catch_reference_of_value.cpp), [some text](http://ptgmedia.pearsoncmg.com/images/0321113586/items/sutter_item73.pdf)
-7. Exceptions: where they live (heap or some memory for a small amount of std::bad_alloc)
-8. Don't use **setjmp** and **longjmp** with С++
-9. [**exception** header](https://en.cppreference.com/w/cpp/header/exception)
+7. [Проблемы исключений](https://gitlab.com/danlark/cpp-advanced-hse/-/blob/main/lectures/2022/05-errors/lecture.md#проблемы-исключений)
+8. [Другие способы работы с ошибками](https://gitlab.com/danlark/cpp-advanced-hse/-/blob/main/lectures/2022/05-errors/lecture.md#типы-суммы)
+9. [Ошибки в других ЯП](https://gitlab.com/danlark/cpp-advanced-hse/-/blob/main/lectures/2022/05-errors/lecture.md#c-experience)
+
+_optional_
+
+10. Exceptions: where they live (heap or some memory for a small amount of std::bad_alloc)
+11. Don't use **setjmp** and **longjmp** with С++
+12. [**exception** header](https://en.cppreference.com/w/cpp/header/exception)
 * rethrow_exception
 * current_exception
 * exception_ptr
 * uncaught_exceptions [cppreference example](https://en.cppreference.com/w/cpp/error/uncaught_exception), seems to be enough
 * terminate handler [cppreference](https://en.cppreference.com/w/cpp/error/terminate_handler)
   * set_terminate instead of std::abort, [cppreference](https://en.cppreference.com/w/cpp/error/set_terminate), [ibm](https://www.ibm.com/docs/en/zos/2.3.0?topic=only-terminate-function-c)
-10. might be interesting [link](https://stackoverflow.com/questions/307610/how-do-exceptions-work-behind-the-scenes-in-c#307716)
-11. [The true cost of zero-cost exceptions](https://mortoray.com/2013/09/12/the-true-cost-of-zero-cost-exceptions/)
+13. might be interesting [link](https://stackoverflow.com/questions/307610/how-do-exceptions-work-behind-the-scenes-in-c#307716)
+14. [The true cost of zero-cost exceptions](https://mortoray.com/2013/09/12/the-true-cost-of-zero-cost-exceptions/)
