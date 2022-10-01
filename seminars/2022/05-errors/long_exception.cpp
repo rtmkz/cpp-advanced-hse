@@ -32,6 +32,8 @@ void Bar()
 void Invisible()
 {
     Bar();
+
+    // Will never be constructed.
     Holder invisible{"invisible"};
 }
 
@@ -39,8 +41,7 @@ int main()
 {
     try {
         Invisible();
-    } catch (std::bad_alloc& e) { }
-    catch (...) {
+    } catch (...) {
         std::cout << "Caught something\n";
     }
 }
