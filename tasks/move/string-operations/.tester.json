@@ -3,6 +3,8 @@
     "tests": "test_string_operations",
     "solutions": "private",
     "forbidden_functions": [
-        "to_string"
+        "to_string",
+        "starts_with",
+        "ends_with"
     ]
 }
