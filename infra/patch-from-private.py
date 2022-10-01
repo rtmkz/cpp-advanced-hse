@@ -11,7 +11,7 @@ PRIVATE_FOLDER_NAME = './private'
 
 def patch():
     for (path, _, filenames) in os.walk(TASKS_FOLDER_NAME):
-        if TASK_CONFIG_NAME in filenames:
+        if TASK_CONFIG_NAME in set(filenames):
             task_group_name = os.path.basename(os.path.dirname(path))
             task_name = os.path.basename(path)
             private_solution_path = os.path.join(PRIVATE_FOLDER_NAME, task_group_name, task_name)
