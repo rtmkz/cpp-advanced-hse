@@ -5,11 +5,11 @@
 class Holder {
  public:
     Holder(std::string value_) : value(std::move(value_)) {
-        std::cout << "Holder( " << value << " )\n";
+        std::cerr << "Holder( " << value << " )\n";
     }
 
     ~Holder() {
-        std::cout << "~Holder( " << value << " )\n";
+        std::cerr << "~Holder( " << value << " )\n";
     }
 
  private:
@@ -19,12 +19,12 @@ class Holder {
 class ThrowHolder {
  public:
     ThrowHolder(std::string value_) : value(std::move(value_)) {
-        std::cout << "ThrowHolder( " << value << " )\n";
+        std::cerr << "ThrowHolder( " << value << " )\n";
         throw std::runtime_error("Bad constructor");
     }
 
     ~ThrowHolder() {
-        std::cout << "~ThrowHolder( " << value << " )\n";
+        std::cerr << "~ThrowHolder( " << value << " )\n";
     }
 
  private:
@@ -34,11 +34,11 @@ class ThrowHolder {
 class Pair {
  public:
     Pair(std::string value) : h(value), th(value) {
-        std::cout << "Pair()\n";
+        std::cerr << "Pair()\n";
     }
 
     ~Pair() {
-        std::cout << "~Pair()\n";
+        std::cerr << "~Pair()\n";
     }
 
  private:
@@ -51,7 +51,6 @@ int main()
     try {
         Pair summer{"summer"};
     } catch (std::runtime_error& e) {
-        std::cout << "Caught!\n";
+        std::cerr << "Caught!\n";
     }
 }
-
