@@ -16,9 +16,9 @@ void Foo()
 {
     try {
         throw SpecialException();
-        // When you catch by value, the what() method of the caught type is called.
-        // Although the original exception will be re-thrown.
-        } catch (std::exception e) {  // catch by value
+    // When you catch by value, the what() method of the caught type is called.
+    // Although the original exception will be re-thrown.
+    } catch (std::exception e) {  // catch by value
         std::cerr << "exception caught in a(): " << e.what() << std::endl;
         throw;  // rethrow
     }
