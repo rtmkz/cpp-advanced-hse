@@ -16,8 +16,10 @@ void Foo()
 {
     try {
         throw SpecialException();
-    } catch (std::exception e) {  // catch by value
-        std::cout << "exception caught in a(): " << e.what() << std::endl;
+        // When you catch by value, the what() method of the caught type is called.
+        // Although the original exception will be re-thrown.
+        } catch (std::exception e) {  // catch by value
+        std::cerr << "exception caught in a(): " << e.what() << std::endl;
         throw;  // rethrow
     }
 }
@@ -26,7 +28,8 @@ int main ()
 {
     try {
         Foo();
-    } catch (const SpecialException& e) {  // catch by ref
-        std::cout << "exception caught in main(): " << e.what() << std::endl;
+    // Therefore, it is better to catch by reference.
+    } catch (const std::exception& e) {
+        std::cerr << "exception caught in main(): " << e.what() << std::endl;
     }
 }
