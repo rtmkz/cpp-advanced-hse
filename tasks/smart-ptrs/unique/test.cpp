@@ -96,18 +96,6 @@ TEST_CASE("Basic") {
         REQUIRE(MyInt::AliveCount() == 0);
         REQUIRE(s.Get() == nullptr);
     }
-
-    SECTION("Upcasts") {
-        std::vector<UniquePtr<Person>> v;
-        UniquePtr<Alice> alice(new Alice);
-        v.push_back(std::move(alice));
-        v.emplace_back(new Bob);
-        std::vector<int> res;
-        for (const auto& ptr : v) {
-            res.push_back(ptr->GetFavoriteNumber());
-        }
-        REQUIRE(res == std::vector<int>{37, 43});
-    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -473,12 +461,35 @@ template <typename T>
 class DerivedDeleter : public Deleter<T> {};
 
 TEST_CASE("Upcasts") {
-    SECTION("Upcast in move constructor") {
+    SECTION("Upcast ptr in move constructor") {
+        std::vector<UniquePtr<Person>> v;
+        UniquePtr<Alice> alice(new Alice);
+        v.push_back(std::move(alice));
+        v.emplace_back(new Bob);
+        std::vector<int> res;
+        for (const auto& ptr : v) {
+            res.push_back(ptr->GetFavoriteNumber());
+        }
+        REQUIRE(res == std::vector<int>{37, 43});
+    }
+
+    SECTION("Upcast ptr in move assignment") {
+        UniquePtr<Alice> alice(new Alice);
+
+        UniquePtr<Person> person;
+        person = std::move(alice);
+
+        REQUIRE(alice.Get() == nullptr);
+        REQUIRE(person.Get() != nullptr);
+        REQUIRE(person->GetFavoriteNumber() == 37);
+    }
+
+    SECTION("Upcast deleter in move constructor") {
         UniquePtr<MyInt, DerivedDeleter<MyInt>> s(new MyInt);
         UniquePtr<MyInt, Deleter<MyInt>> s2(std::move(s));
     }
 
-    SECTION("Upcast in move assignment") {
+    SECTION("Upcast deleter in move assignment") {
         UniquePtr<MyInt, DerivedDeleter<MyInt>> s(new MyInt);
         UniquePtr<MyInt, Deleter<MyInt>> s2(new MyInt);
         s2 = std::move(s);
