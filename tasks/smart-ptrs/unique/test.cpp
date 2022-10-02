@@ -295,6 +295,15 @@ TEST_CASE("Construction with deleters") {
     SECTION("From temporary") {
         UniquePtr<MyInt, Deleter<MyInt>> s(new MyInt, Deleter<MyInt>{});
     }
+
+    SECTION("Default deleter should support upcasts") {
+        using AliceDefaultDelete = std::decay_t<decltype(UniquePtr<Alice>{}.GetDeleter())>;
+        using PersonDefaultDelete = std::decay_t<decltype(UniquePtr<Person>{}.GetDeleter())>; 
+        
+        AliceDefaultDelete d1, d3;
+        PersonDefaultDelete d2(std::move(d1));
+        d2 = std::move(d3);
+    }
 }
 
 TEST_CASE("Swap with deleters") {
@@ -426,7 +435,6 @@ TEST_CASE("Compressed pair usage") {
 
     SECTION("Stateless struct deleter") {
         static_assert(sizeof(UniquePtr<int>) == sizeof(void*));
-        static_assert(sizeof(UniquePtr<int, std::default_delete<int>>) == sizeof(int*));
     }
 
     SECTION("Stateful struct deleter") {
