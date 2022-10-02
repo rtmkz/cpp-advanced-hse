@@ -10,7 +10,8 @@
     "shared_ptr",
     "weak_ptr",
     "enable_shared_from_this",
-    "tuple"
+    "tuple",
+    "default_delete"
   ],
   "forbidden_functions": [
     "make_unique",
