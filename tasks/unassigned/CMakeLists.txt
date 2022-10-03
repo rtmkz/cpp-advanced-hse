@@ -35,7 +35,4 @@ add_subdirectory(rw-spinlock)
 # add_subdirectory(generator)
 
 # Bonuses
-add_subdirectory(solve-or-die)
-add_subdirectory(matrix-2.0)
-add_subdirectory(concepts)
 add_subdirectory(executors)
