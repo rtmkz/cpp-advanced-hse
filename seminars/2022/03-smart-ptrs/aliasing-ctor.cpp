@@ -1,7 +1,8 @@
 /*
     Example of aliasing constructor usage.
-    Some structs (`Message`) are received from somewhere using `GetMessage()`, then passed to buffered printer.
-    The printer accepts text lines, not messages - so aliasing ctor is helpful here.
+    Some structs (`Message`) are received from somewhere using `GetMessage()`, then passed to
+   buffered printer. The printer accepts text lines, not messages - so aliasing ctor is helpful
+   here.
 */
 
 #include <memory>

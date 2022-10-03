@@ -9,10 +9,10 @@ class Any {
         virtual ~AnyBase() = default;
     };
 
-    template<typename T>
+    template <typename T>
     class AnyDerived : public AnyBase {
     public:
-        template<typename ...Args>
+        template <typename... Args>
         AnyDerived(Args&&... args) : t_(std::forward<Args>(args)...) {
         }
 
@@ -31,12 +31,13 @@ public:
         Type `T` is available only in the scope of this ctor.
         But we can create templated `AnyDerived<T>` class and it will know how to destruct.
     */
-    template<typename T>
+    template <typename T>
     Any(T&& t) : storage_(new AnyDerived<std::decay_t<T>>(std::forward<T>(t))) {
     }
 
     ~Any() {
-        // storage_ will be deleted -> virtual dtor of AnyBase will be called -> AnyDerived<T> will be destructed
+        // storage_ will be deleted -> virtual dtor of AnyBase will be called -> AnyDerived<T> will
+        // be destructed
     }
 
 private:
