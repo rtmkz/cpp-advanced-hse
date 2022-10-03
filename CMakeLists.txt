@@ -28,5 +28,7 @@ add_subdirectory(tasks)
 
 # Seminars
 if (${ENABLE_SEMINARS})
+  set(ALL_SEMINARS_TARGET_NAME "seminars-examples-all")
+  add_custom_target(${ALL_SEMINARS_TARGET_NAME})
   add_subdirectory(seminars)
 endif()
