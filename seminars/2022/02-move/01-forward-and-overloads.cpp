@@ -4,7 +4,7 @@ void F(int& x) {
     std::cout << "lvalue reference overload f(" << x << ")\n";
 }
 
-void f(int&& x) {
+void F(int&& x) {
     std::cout << "rvalue reference overload f(" << x << ")\n";
 }
 
@@ -40,7 +40,7 @@ int main() {
     // Rvalue reference variables are lvalues when used in expressions.
     int&& x = 1;
     F(x);             // calls f(int& x)
-    f(std::move(x));  // calls f(int&& x)
+    F(std::move(x));  // calls f(int&& x)
     puts("");
 
     int&& y = 2;
