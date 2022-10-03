@@ -1,18 +1,15 @@
 #include <iostream>
 #include <stdexcept>
 
-void Foo()
-{
+void Foo() {
     throw std::runtime_error("Catch me");
 }
 
-void Bar()
-{
+void Bar() {
     throw std::range_error("Catch me");
 }
 
-int main()
-{
+int main() {
     try {
         Foo();
     } catch (std::exception&) {
@@ -31,7 +28,6 @@ int main()
     } catch (...) {
         // '...' handler must be the last handler for its try block.
     }
-
 
     try {
         Bar();

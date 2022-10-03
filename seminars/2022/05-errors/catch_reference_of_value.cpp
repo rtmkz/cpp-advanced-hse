@@ -4,31 +4,28 @@
 #include <iostream>
 #include <string>
 
-
 class SpecialException : public std::exception {
 public:
     const char* what() const noexcept {
-       return "SpecialException";
+        return "SpecialException";
     }
 };
 
-void Foo()
-{
+void Foo() {
     try {
         throw SpecialException();
-    // When you catch by value, the what() method of the caught type is called.
-    // Although the original exception will be re-thrown.
+        // When you catch by value, the what() method of the caught type is called.
+        // Although the original exception will be re-thrown.
     } catch (std::exception e) {  // catch by value
         std::cerr << "exception caught in a(): " << e.what() << std::endl;
         throw;  // rethrow
     }
 }
 
-int main ()
-{
+int main() {
     try {
         Foo();
-    // Therefore, it is better to catch by reference.
+        // Therefore, it is better to catch by reference.
     } catch (const std::exception& e) {
         std::cerr << "exception caught in main(): " << e.what() << std::endl;
     }

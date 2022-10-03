@@ -1,25 +1,22 @@
 #include <iostream>
 #include <stdexcept>
 
-void Thrower()
-{
+void Thrower() {
     throw std::runtime_error("All Bad");
 }
 
-int ExitCode()
-{
+int ExitCode() {
     return -1;
 }
 
-void Catcher()
-{
+void Catcher() {
     try {
         Thrower();
-    } catch (...) { }
+    } catch (...) {
+    }
 }
 
-int Checker()
-{
+int Checker() {
     if (ExitCode() < 0) {
         std::cout << "";  // to make it a little bit slower
         return -1;
@@ -43,8 +40,7 @@ time ./perf 0
 or
 time ./perf 1
 */
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv) {
     if (argc < 2) {
         std::cout << "test number expected\n";
         return 0;

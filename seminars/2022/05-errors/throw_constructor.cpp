@@ -3,7 +3,7 @@
 #include <stdexcept>
 
 class Holder {
- public:
+public:
     Holder(std::string value_) : value(std::move(value_)) {
         std::cerr << "Holder( " << value << " )\n";
     }
@@ -12,12 +12,12 @@ class Holder {
         std::cerr << "~Holder( " << value << " )\n";
     }
 
- private:
+private:
     std::string value;
 };
 
 class ThrowHolder {
- public:
+public:
     ThrowHolder(std::string value_) : value(std::move(value_)) {
         std::cerr << "ThrowHolder( " << value << " )\n";
         throw std::runtime_error("Bad constructor");
@@ -27,12 +27,12 @@ class ThrowHolder {
         std::cerr << "~ThrowHolder( " << value << " )\n";
     }
 
- private:
+private:
     std::string value;
 };
 
 class Pair {
- public:
+public:
     Pair(std::string value) : h(value), th(value) {
         std::cerr << "Pair()\n";
     }
@@ -41,13 +41,12 @@ class Pair {
         std::cerr << "~Pair()\n";
     }
 
- private:
+private:
     Holder h;
     ThrowHolder th;
 };
 
-int main()
-{
+int main() {
     try {
         Pair summer{"summer"};
     } catch (std::runtime_error& e) {

@@ -1,13 +1,11 @@
 #include <iostream>
 #include <stdexcept>
 
-void Foo() noexcept
-{
+void Foo() noexcept {
     throw std::runtime_error("Ha-ha!");
 }
 
-int main()
-{
+int main() {
     try {
         Foo();
     } catch (...) {

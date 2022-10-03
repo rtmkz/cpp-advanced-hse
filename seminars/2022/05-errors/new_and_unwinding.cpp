@@ -2,8 +2,7 @@
 #include <memory>
 #include <stdexcept>
 
-void Foo(bool crash_me)
-{
+void Foo(bool crash_me) {
     // memory will leak
     int* ptr = new int{1};
 
@@ -18,8 +17,7 @@ void Foo(bool crash_me)
     delete ptr;
 }
 
-int main()
-{
+int main() {
     bool flag;
     std::cin >> flag;
 

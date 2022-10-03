@@ -3,7 +3,7 @@
 #include <stdexcept>
 
 class Holder {
- public:
+public:
     Holder(std::string value_) : value(std::move(value_)) {
         std::cout << "Holder( " << value << " )\n";
     }
@@ -12,33 +12,28 @@ class Holder {
         std::cout << "~IntHolder( " << value << " )\n";
     }
 
- private:
+private:
     std::string value;
 };
 
-void Foo()
-{
+void Foo() {
     Holder foo{"Foo"};
     throw std::runtime_error("Catch me");
 }
 
-
-void Bar()
-{
+void Bar() {
     Holder bar{"Bar"};
     Foo();
 }
 
-void Invisible()
-{
+void Invisible() {
     Bar();
 
     // Will never be constructed.
     Holder invisible{"invisible"};
 }
 
-int main()
-{
+int main() {
     try {
         Invisible();
     } catch (...) {
