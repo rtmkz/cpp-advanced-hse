@@ -107,6 +107,12 @@ assignments:
   tasks:
   - task: bonus/bad-hash
     score: 100
+  - task: bonus/bad-rand
+    score: 100
+  - task: bonus/solve-or-die
+    score: 100
+  - task: bonus/matrix-2.0
+    score: 100 
 
 - title:    03-smart-ptrs
   start:    18-09-2022 22:00
