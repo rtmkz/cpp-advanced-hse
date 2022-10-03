@@ -4,36 +4,36 @@
 
 class Holder {
 public:
-    Holder(std::string value_) : value(std::move(value_)) {
-        std::cerr << "Holder( " << value << " )\n";
+    Holder(std::string value) : value_(std::move(value)) {
+        std::cerr << "Holder( " << value_ << " )\n";
     }
 
     ~Holder() {
-        std::cerr << "~Holder( " << value << " )\n";
+        std::cerr << "~Holder( " << value_ << " )\n";
     }
 
 private:
-    std::string value;
+    std::string value_;
 };
 
 class ThrowHolder {
 public:
-    ThrowHolder(std::string value_) : value(std::move(value_)) {
-        std::cerr << "ThrowHolder( " << value << " )\n";
+    ThrowHolder(std::string value) : value_(std::move(value)) {
+        std::cerr << "ThrowHolder( " << value_ << " )\n";
         throw std::runtime_error("Bad constructor");
     }
 
     ~ThrowHolder() {
-        std::cerr << "~ThrowHolder( " << value << " )\n";
+        std::cerr << "~ThrowHolder( " << value_ << " )\n";
     }
 
 private:
-    std::string value;
+    std::string value_;
 };
 
 class Pair {
 public:
-    Pair(std::string value) : h(value), th(value) {
+    Pair(std::string value) : h_(value), th_(value) {
         std::cerr << "Pair()\n";
     }
 
@@ -42,8 +42,8 @@ public:
     }
 
 private:
-    Holder h;
-    ThrowHolder th;
+    Holder h_;
+    ThrowHolder th_;
 };
 
 int main() {

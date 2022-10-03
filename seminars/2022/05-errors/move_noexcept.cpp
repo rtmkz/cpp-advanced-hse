@@ -11,7 +11,7 @@ struct Holder {
 
     Holder() {
     }
-    Holder(std::string value_) : value(std::move(value_)) {
+    Holder(std::string value) : value(std::move(value)) {
         ++x;
     }
     Holder(const Holder& h) : value(h.value) {
@@ -47,7 +47,7 @@ struct ThrowHolder {
 
     ThrowHolder() {
     }
-    ThrowHolder(std::string value_) : value(std::move(value_)) {
+    ThrowHolder(std::string value) : value(std::move(value)) {
         ++x;
     }
     ThrowHolder(const ThrowHolder& h) : value(h.value) {

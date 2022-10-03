@@ -3,16 +3,16 @@
 
 class IntHolder {
 public:
-    IntHolder(int value) : ptr(new int{value}) {
+    IntHolder(int value) : ptr_(new int{value}) {
         std::cerr << "IntHolder(" << value << ")\n";
     }
     ~IntHolder() {
         std::cerr << "~IntHolder()\n";
-        delete ptr;
+        delete ptr_;
     }
 
 private:
-    int* ptr;
+    int* ptr_;
 };
 
 void MakeHolder(int input) {
@@ -20,7 +20,7 @@ void MakeHolder(int input) {
     throw std::runtime_error("Let's try memory leaks");
 }
 
-void wrapper() {
+void Wrapper() {
     try {
         MakeHolder(42);
     } catch (std::bad_exception& e) {
@@ -43,7 +43,7 @@ int main() {
     // Nested catch.
     // bad_exception not suitable so it will be ignored.
     try {
-        wrapper();
+        Wrapper();
     } catch (std::runtime_error& e) {
         std::cerr << "Caught!\n";
     }

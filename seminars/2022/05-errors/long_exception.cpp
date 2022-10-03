@@ -4,16 +4,16 @@
 
 class Holder {
 public:
-    Holder(std::string value_) : value(std::move(value_)) {
-        std::cout << "Holder( " << value << " )\n";
+    Holder(std::string value) : value_(std::move(value)) {
+        std::cout << "Holder( " << value_ << " )\n";
     }
 
     ~Holder() {
-        std::cout << "~IntHolder( " << value << " )\n";
+        std::cout << "~IntHolder( " << value_ << " )\n";
     }
 
 private:
-    std::string value;
+    std::string value_;
 };
 
 void Foo() {

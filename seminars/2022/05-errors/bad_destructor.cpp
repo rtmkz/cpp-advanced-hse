@@ -4,18 +4,18 @@
 
 class Holder {
 public:
-    Holder(std::string value_) : value(std::move(value_)) {
-        std::cerr << "Holder( " << value << " )\n";
+    Holder(std::string value) : value_(std::move(value)) {
+        std::cerr << "Holder( " << value_ << " )\n";
     }
 
     ~Holder() noexcept(false)  // uncomment and try again, it will catch it
     {
-        std::cerr << "~Holder( " << value << " )\n";
+        std::cerr << "~Holder( " << value_ << " )\n";
         throw std::runtime_error("Try to catch me");
     }
 
 private:
-    std::string value;
+    std::string value_;
 };
 
 void Foo() {
