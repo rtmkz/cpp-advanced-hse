@@ -322,6 +322,12 @@ private:
     Pinned& pinned_;
 };
 
+struct Throwing {
+    Throwing() {
+        throw 42;
+    }
+};
+
 TEST_CASE("MakeShared") {
     SECTION("One allocation") {
         EXPECT_ONE_ALLOCATION(REQUIRE(*MakeShared<int>(42) == 42));
@@ -338,6 +344,13 @@ TEST_CASE("MakeShared") {
 
     SECTION("Constructed only once") {
         auto sp = MakeShared<Pinned>(1);
+    }
+
+    SECTION("Faulty constructor") {
+        try {
+            auto sp = MakeShared<Throwing>();
+        } catch(...) {
+        }
     }
 }
 
