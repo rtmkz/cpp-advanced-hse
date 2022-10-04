@@ -349,7 +349,7 @@ TEST_CASE("MakeShared") {
     SECTION("Faulty constructor") {
         try {
             auto sp = MakeShared<Throwing>();
-        } catch(...) {
+        } catch (...) {
         }
     }
 }
