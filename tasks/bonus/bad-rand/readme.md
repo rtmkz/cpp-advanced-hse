@@ -1,6 +1,6 @@
 # Bad Rand
 
-Это задача типа [crashme](https://gitlab.com/slon/shad-cpp0/blob/master/crash_readme.md).
+Это задача типа [crashme](https://gitlab.com/danlark/cpp-advanced-hse/-/blob/main/docs/crashme.md).
 
 Исходный код находится в файле run.cpp. Исполняемый файл получен командой
 ```
