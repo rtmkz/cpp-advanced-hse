@@ -7,6 +7,7 @@ add_subdirectory(memory)
 add_subdirectory(move)
 add_subdirectory(types)
 add_subdirectory(errors)
+add_subdirectory(patterns)
 
 # Big homeworks
 add_subdirectory(smart-ptrs)
