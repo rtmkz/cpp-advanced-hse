@@ -73,7 +73,7 @@
     
   - sidecast и cast к произвольному дочернему в иерархии дорогие, делаются обходом некоего inheritance graph
 
-* _(Опционально)_ `any` без RTTI ([fast dynamic cast](05-fast-dynamic-cast.cpp), [any without RTTI](06-any-no-rtti.cpp))
+* _(Опционально)_ `any` без RTTI ([fast dynamic cast](06-fast-dynamic-cast.cpp), [any without RTTI](07-any-no-rtti.cpp))
 
   - На самом деле, в `any` всегда делается каст к most-derived объекту.
   
@@ -83,7 +83,7 @@
 
 ### 2.4. `typeid`, `std::type_info`.
 
-* тоже не всегда требует RTTI. Для неполиморфных типов [эквивалентен](07-typeid-no-rtti.cpp) `typeid(decltype(expression))`.
+* тоже не всегда требует RTTI. Для неполиморфных типов [эквивалентен](08-typeid-no-rtti.cpp) `typeid(decltype(expression))`.
 
 * возвращает `const std::type_info&`.
 
