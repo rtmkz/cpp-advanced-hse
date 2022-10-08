@@ -47,8 +47,6 @@
   
 ### 2.3. Ключевое слово `dynamic_cast`. Паттерн Visitor.
 
-Примеры кода в [dynamic](./dynamic).
-
 * Сначала показать базовый пример работы с `dynamic_cast` [тут](01-event-dispatcher-dynamic-cast.cpp)
 
 * Объяснить, почему конкретно эту задачу лучше решать через виртуальные функции (переписанный код [здесь](02-event-dispatcher-virtual-functions.cpp)).
