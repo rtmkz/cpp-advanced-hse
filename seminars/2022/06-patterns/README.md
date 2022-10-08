@@ -28,7 +28,7 @@
 | 2  | [pimpl/02-unique-ptr](pimpl/02-unique-ptr) | pimpl на `std::unique_ptr`, в комментариях еще см. про `std::shared_ptr`                            |
 | 3  | [pimpl/03-fast-pimpl](pimpl/03-fast-pimpl) | fast pimpl (не аллоцируем в куче), валидация `sizeof` и `alignof` в compile-time (см. деструктор)   |
 
-## Таблицы виртуальных функций
+## Динамическая диспетчеризация
 
 ### 2.1. Механизм виртуальных функций
 
