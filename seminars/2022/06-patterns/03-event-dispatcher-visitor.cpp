@@ -71,20 +71,20 @@ void Process(IEvent* event, IEventHandler* handler) {
     event->AcceptHandling(handler);
 }
 
-StartEvent* GetStartEvent() {
-    auto se = new StartEvent;
+auto GetStartEvent() {
+    auto se = std::make_unique<StartEvent>();
     se->start_timestamp = 1;
     return se;
 }
 
-ErrorEvent* GetErrorEvent() {
-    auto ee = new ErrorEvent;
+auto GetErrorEvent() {
+    auto ee = std::make_unique<ErrorEvent>();
     ee->what_happened = "i don't know";
     return ee;
 }
 
-CommandEvent* GetCommandEvent() {
-    auto ce = new CommandEvent;
+auto GetCommandEvent() {
+    auto ce = std::make_unique<CommandEvent>();
     ce->command = CommandEvent::CommandCode::DO_THAT;
     return ce;
 }
@@ -92,9 +92,9 @@ CommandEvent* GetCommandEvent() {
 int main() {
     std::vector<std::unique_ptr<IEvent>> events;
 
-    events.emplace_back(GetStartEvent());
-    events.emplace_back(GetCommandEvent());
-    events.emplace_back(GetErrorEvent());
+    events.push_back(GetStartEvent());
+    events.push_back(GetCommandEvent());
+    events.push_back(GetErrorEvent());
 
     EventLogger logger;
 
