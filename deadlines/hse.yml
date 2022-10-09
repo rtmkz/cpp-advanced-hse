@@ -21,7 +21,7 @@ scoring:
   - name: large
     weight: 6.0
     policy: hard
-    maxScore: 300
+    maxScore: 3000
 
   - name: bonus
     weight: 1.0
