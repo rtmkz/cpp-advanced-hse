@@ -93,15 +93,15 @@ assignments:
   group:    large
   tasks:
     - task:  smart-ptrs/unique
-      score: 20
+      score: 200
     - task:  smart-ptrs/shared
-      score: 30
+      score: 300
     - task:  smart-ptrs/weak
-      score: 20
+      score: 200
     - task:  smart-ptrs/shared-from-this
-      score: 20
+      score: 200
     - task:  smart-ptrs/intrusive
-      score: 10
+      score: 100
 
 - title:    05-errors
   start:    30-09-2022 18:00
