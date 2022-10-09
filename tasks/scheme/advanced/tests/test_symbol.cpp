@@ -1,4 +1,4 @@
-#include <test/scheme_test.h>
+#include "scheme_test.h"
 
 TEST_CASE_METHOD(SchemeTest, "SymbolsAreNotSelfEvaluating") {
     ExpectNameError("x");

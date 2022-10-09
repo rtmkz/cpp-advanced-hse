@@ -1,7 +1,7 @@
 #include <catch.hpp>
 
-#include "error.h"
-#include "tokenizer.h"
+#include <error.h>
+#include <tokenizer.h>
 
 #include <sstream>
 

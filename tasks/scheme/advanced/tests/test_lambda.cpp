@@ -1,7 +1,7 @@
 #include <string>
 #include <iostream>
 
-#include <test/scheme_test.h>
+#include "scheme_test.h"
 
 #include <catch.hpp>
 

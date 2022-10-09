@@ -1,4 +1,4 @@
-set(ADVANCED_TESTS
+set(GC_TESTS
     # from tokenizer
     tests/test_tokenizer.cpp
 
@@ -17,21 +17,21 @@ set(ADVANCED_TESTS
     tests/test_control_flow.cpp
     tests/test_lambda.cpp)
 
-add_catch(test_scheme_advanced
-    ${ADVANCED_TESTS})
+add_catch(test_scheme_gc
+    ${GC_TESTS})
 
-add_library(scheme_advanced
+add_library(scheme_gc 
     tokenizer.cpp
     parser.cpp
     scheme.cpp)
 
-target_include_directories(scheme_advanced PUBLIC
+target_include_directories(scheme_gc PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${SCHEME_COMMON_DIR})
 
-target_link_libraries(test_scheme_advanced
-    scheme_advanced
+target_link_libraries(test_scheme_gc
+    scheme_gc
     allocations_checker)
 
-add_executable(scheme_advanced_repl repl/main.cpp)
-target_link_libraries(scheme_advanced_repl scheme_advanced)
+add_executable(scheme_gc_repl repl/main.cpp)
+target_link_libraries(scheme_gc_repl scheme_gc)
