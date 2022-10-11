@@ -1,9 +1,5 @@
 add_subdirectory(list)
 
-# 7
-add_subdirectory(constexpr-map)
-add_subdirectory(compile-eval)
-
 # 8
 add_subdirectory(is-prime)
 add_subdirectory(reduce)
