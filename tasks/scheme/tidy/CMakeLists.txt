@@ -20,10 +20,7 @@ set(GC_TESTS
 add_catch(test_scheme_tidy
     ${GC_TESTS})
 
-add_library(scheme_tidy 
-    tokenizer.cpp
-    parser.cpp
-    scheme.cpp)
+include(sources.cmake)
 
 target_include_directories(scheme_tidy PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}

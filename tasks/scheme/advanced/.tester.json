@@ -2,7 +2,7 @@
   "allow_change": [
     "*.cpp",
     "*.h",
-    "CMakeLists.txt"
+    "sources.cmake"
   ],
   "tests": "test_scheme_advanced",
   "solutions": "private",

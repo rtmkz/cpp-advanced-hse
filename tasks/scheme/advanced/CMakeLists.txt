@@ -20,10 +20,7 @@ set(ADVANCED_TESTS
 add_catch(test_scheme_advanced
     ${ADVANCED_TESTS})
 
-add_library(scheme_advanced
-    tokenizer.cpp
-    parser.cpp
-    scheme.cpp)
+include(sources.cmake)
 
 target_include_directories(scheme_advanced PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}

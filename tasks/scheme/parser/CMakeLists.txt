@@ -8,9 +8,7 @@ set(PARSER_TESTS
 add_catch(test_scheme_parser
     ${PARSER_TESTS})
 
-add_library(scheme_parser
-    tokenizer.cpp
-    parser.cpp)
+include(sources.cmake)
 
 target_include_directories(scheme_parser PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}

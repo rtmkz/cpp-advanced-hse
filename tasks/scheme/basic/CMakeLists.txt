@@ -14,10 +14,7 @@ set(BASIC_TESTS
 add_catch(test_scheme_basic
     ${BASIC_TESTS})
 
-add_library(scheme_basic
-    tokenizer.cpp
-    parser.cpp
-    scheme.cpp)
+include(sources.cmake)
 
 target_include_directories(scheme_basic PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}

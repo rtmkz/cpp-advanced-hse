@@ -4,7 +4,7 @@
     "*.h",
     "sources.cmake"
   ],
-  "tests": "test_scheme_basic",
+  "tests": "test_scheme_tidy",
   "solutions": "private",
   "disable_tsan" : true
 }
