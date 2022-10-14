@@ -12,7 +12,7 @@ add_subdirectory(meta)
 
 # Big homeworks
 add_subdirectory(smart-ptrs)
-# add_subdirectory(scheme)
+add_subdirectory(scheme)
 # add_subdirectory(jpeg-decoder)
 
 # Bonus
