@@ -3,8 +3,7 @@ set(TOKENIZER_TESTS
 
 add_catch(test_scheme_tokenizer ${TOKENIZER_TESTS})
     
-add_library(scheme_tokenizer
-    tokenizer.cpp)
+include(sources.cmake)
 
 target_include_directories(scheme_tokenizer PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
