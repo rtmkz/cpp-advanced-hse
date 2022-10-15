@@ -142,7 +142,7 @@ struct HasKekImpl<T, std::void_t<decltype(std::declval<T>().kek())>> {
 };
 
 template <typename T>
-using HasKek = detector<T, void>;
+using HasKek = HasKekImpl<T, void>;
 ```
 
 ---
