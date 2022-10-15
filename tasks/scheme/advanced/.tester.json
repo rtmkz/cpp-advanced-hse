@@ -6,5 +6,6 @@
   ],
   "tests": "test_scheme_advanced",
   "solutions": "private",
-  "disable_tsan" : true
+  "disable_tsan": true,
+  "custom_asan_options": "detect_leaks=0"
 }

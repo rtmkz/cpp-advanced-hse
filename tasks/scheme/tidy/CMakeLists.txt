@@ -1,4 +1,4 @@
-set(GC_TESTS
+set(TIDY_TESTS
     # from tokenizer
     tests/test_tokenizer.cpp
 
@@ -18,7 +18,7 @@ set(GC_TESTS
     tests/test_lambda.cpp)
 
 add_catch(test_scheme_tidy
-    ${GC_TESTS})
+    ${TIDY_TESTS})
 
 include(sources.cmake)
 
