@@ -1,6 +1,6 @@
 # scheme-tokenizer
 
-Это первая часть [scheme](../readme.md).
+Это первая часть [scheme](..).
 
 ## Что нужно сделать?
 
