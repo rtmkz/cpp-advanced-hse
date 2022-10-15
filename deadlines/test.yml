@@ -154,6 +154,17 @@ assignments:
     - task:  smart-ptrs/intrusive
       score: 100
 
+- title:    07-meta
+  start:    15-10-2022 15:00
+  deadline: 29-10-2022 23:59
+  tasks:
+  - task: meta/compile-eval
+    score: 100
+  - task: meta/constexpr-map
+    score: 100
+  - task: meta/function-ref
+    score: 100
+
 - title:    08-scheme
   start:    17-10-2022 00:00
   deadline: 06-11-2022 23:59
