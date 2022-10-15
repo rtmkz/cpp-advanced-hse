@@ -33,8 +33,6 @@ TEST_CASE("Fuzzing") {
     std::cerr << "Allocations: " << alloc_count << "\n";
     std::cerr << "Deallocations: " << dealloc_count << "\n\n";
 
-    // If falling here:
-    // - if it happens on advanced task, check that you invoke GC after each command
-    // - if it happens on basic task, contact us
+    // If falling here, check that you invoke GC after each command
     REQUIRE(alloc_count - dealloc_count <= 10'000);
 }

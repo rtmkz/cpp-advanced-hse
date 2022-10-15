@@ -25,16 +25,4 @@ TEST_CASE("Fuzzing") {
         } catch (const NameError&) {
         }
     }
-
-    int64_t alloc_count = alloc_checker::AllocCount(),
-            dealloc_count = alloc_checker::DeallocCount();
-
-    std::cerr << "Fuzzer:\n";
-    std::cerr << "Allocations: " << alloc_count << "\n";
-    std::cerr << "Deallocations: " << dealloc_count << "\n\n";
-
-    // If falling here:
-    // - if it happens on advanced task, check that you invoke GC after each command
-    // - if it happens on basic task, contact us
-    REQUIRE(alloc_count - dealloc_count <= 10'000);
 }
