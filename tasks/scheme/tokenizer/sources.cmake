@@ -1,2 +1,5 @@
 add_library(scheme_tokenizer
-    tokenizer.cpp)
+    tokenizer.cpp
+    
+    # maybe more .cpp files here
+)
