@@ -107,7 +107,7 @@ TEST_CASE_METHOD(SchemeTest, "CyclicLocalContextDependencies") {
     ExpectEq("(my-foo)", "42");
 }
 
-TEST_CASE_METHOD(SchemeTest, "LambdaScopePrune") {
+TEST_CASE_METHOD(SchemeTest, "Deep recursion") {
     alloc_checker::ResetCounters();
 
     for (uint32_t i = 0; i < 100; ++i) {
@@ -119,7 +119,7 @@ TEST_CASE_METHOD(SchemeTest, "LambdaScopePrune") {
     int64_t alloc_count = alloc_checker::AllocCount(),
             dealloc_count = alloc_checker::DeallocCount();
 
-    std::cerr << "LambdaScopePrune:\n";
+    std::cerr << "Deep recursion:\n";
     std::cerr << "Allocations: " << alloc_count << "\n";
     std::cerr << "Deallocations: " << dealloc_count << "\n\n";
 

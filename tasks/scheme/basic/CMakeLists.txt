@@ -20,9 +20,7 @@ target_include_directories(scheme_basic PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${SCHEME_COMMON_DIR})
 
-target_link_libraries(test_scheme_basic
-    scheme_basic
-    allocations_checker)
+target_link_libraries(test_scheme_basic scheme_basic)
 
 add_executable(scheme_basic_repl repl/main.cpp)
 target_link_libraries(scheme_basic_repl scheme_basic)

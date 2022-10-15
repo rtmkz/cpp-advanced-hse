@@ -5,8 +5,6 @@
 
 #include <catch.hpp>
 
-#include "allocations_checker.h"
-
 TEST_CASE_METHOD(SchemeTest, "SimpleLambda") {
     ExpectEq("((lambda (x) (+ 1 x)) 5)", "6");
 }
@@ -108,9 +106,7 @@ TEST_CASE_METHOD(SchemeTest, "CyclicLocalContextDependencies") {
     ExpectEq("(my-foo)", "42");
 }
 
-TEST_CASE_METHOD(SchemeTest, "LambdaScopePrune") {
-    alloc_checker::ResetCounters();
-
+TEST_CASE_METHOD(SchemeTest, "Deep recursion") {
     for (uint32_t i = 0; i < 100; ++i) {
         std::string fn = "ahaha" + std::to_string(i);
         ExpectNoError("(define (" + fn + " x) (if (= x 0) 0 (+ 1 (" + fn + " (- x 1)))))");
