@@ -115,15 +115,6 @@ assignments:
   - task: patterns/scala-vector
     score: 100
 
-- title:    07-meta
-  start:    14-10-2022 15:00
-  deadline: 27-10-2022 23:59
-  tasks:
-  - task: meta/compile-eval
-    score: 100
-  - task: meta/constexpr-map
-    score: 100
-
 - title:    bonus
   start:    31-08-2022 18:00
   deadline: 31-12-2022 23:59
