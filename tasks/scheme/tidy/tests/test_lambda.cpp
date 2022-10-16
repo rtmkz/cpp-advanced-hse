@@ -110,7 +110,7 @@ TEST_CASE_METHOD(SchemeTest, "CyclicLocalContextDependencies") {
 TEST_CASE_METHOD(SchemeTest, "Deep recursion") {
     alloc_checker::ResetCounters();
 
-    for (uint32_t i = 0; i < 100; ++i) {
+    for (uint32_t i = 0; i < 1000; ++i) {
         std::string fn = "ahaha" + std::to_string(i);
         ExpectNoError("(define (" + fn + " x) (if (= x 0) 0 (+ 1 (" + fn + " (- x 1)))))");
         ExpectEq("(" + fn + " 100)", "100");
@@ -123,5 +123,5 @@ TEST_CASE_METHOD(SchemeTest, "Deep recursion") {
     std::cerr << "Allocations: " << alloc_count << "\n";
     std::cerr << "Deallocations: " << dealloc_count << "\n\n";
 
-    REQUIRE(alloc_count - dealloc_count <= 15'000);
+    REQUIRE(alloc_count - dealloc_count <= 10'000);
 }
