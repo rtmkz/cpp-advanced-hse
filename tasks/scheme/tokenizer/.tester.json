@@ -1,8 +1,8 @@
 {
   "allow_change": [
-    "error.h",
-    "tokenizer.h",
-    "tokenizer.cpp"
+    "*.cpp",
+    "*.h",
+    "sources.cmake"
   ],
   "tests": "test_scheme_tokenizer",
   "solutions": "private",
