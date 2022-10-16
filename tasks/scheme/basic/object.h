@@ -25,7 +25,7 @@ public:
 
 ///////////////////////////////////////////////////////////////////////////////
 
-// Runtime type checking.
+// Runtime type checking and convertion.
 // This can be helpful: https://en.cppreference.com/w/cpp/memory/shared_ptr/pointer_cast
 
 template <class T>
