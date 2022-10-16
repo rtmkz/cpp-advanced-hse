@@ -107,7 +107,7 @@ TEST_CASE_METHOD(SchemeTest, "CyclicLocalContextDependencies") {
 }
 
 TEST_CASE_METHOD(SchemeTest, "Deep recursion") {
-    for (uint32_t i = 0; i < 1000; ++i) {
+    for (uint32_t i = 0; i < 100; ++i) {
         std::string fn = "ahaha" + std::to_string(i);
         ExpectNoError("(define (" + fn + " x) (if (= x 0) 0 (+ 1 (" + fn + " (- x 1)))))");
         ExpectEq("(" + fn + " 100)", "100");
