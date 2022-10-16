@@ -27,11 +27,12 @@ TEST_CASE("Fuzzing-2") {
     }
 
     int64_t alloc_count = alloc_checker::AllocCount(),
-            dealloc_count = alloc_checker::DeallocCount();
+            dealloc_count = alloc_checker::DeallocCount(), diff = alloc_count - dealloc_count;
 
     std::cerr << "Fuzzer:\n";
     std::cerr << "Allocations: " << alloc_count << "\n";
-    std::cerr << "Deallocations: " << dealloc_count << "\n\n";
+    std::cerr << "Deallocations: " << dealloc_count << "\n";
+    std::cerr << "Difference: " << diff << "\n\n";
 
     // If falling here, check that you invoke GC after each command
     REQUIRE(alloc_count - dealloc_count <= 10'000);
