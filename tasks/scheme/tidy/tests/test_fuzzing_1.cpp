@@ -10,7 +10,7 @@
 
 constexpr uint32_t kShotsCount = 100000;
 
-TEST_CASE("Fuzzzzzzing") {
+TEST_CASE("Fuzzing-1") {
     Fuzzer fuzzer;
 
     for (uint32_t i = 0; i < kShotsCount; ++i) {
