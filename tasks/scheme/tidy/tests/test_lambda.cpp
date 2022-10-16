@@ -104,7 +104,20 @@ TEST_CASE_METHOD(SchemeTest, "CyclicLocalContextDependencies") {
     )EOF");
     ExpectNoError("(define my-foo (foo 20))");
     ExpectNoError("(define foo 1543)");
+
+    alloc_checker::ResetCounters();
+
     ExpectEq("(my-foo)", "42");
+
+    int64_t alloc_count = alloc_checker::AllocCount(),
+            dealloc_count = alloc_checker::DeallocCount(), diff = alloc_count - dealloc_count;
+
+    std::cerr << "CyclicLocalContextDependencies:\n";
+    std::cerr << "Allocations: " << alloc_count << "\n";
+    std::cerr << "Deallocations: " << dealloc_count << "\n";
+    std::cerr << "Difference: " << diff << "\n\n";
+
+    REQUIRE(diff == 0);
 }
 
 TEST_CASE_METHOD(SchemeTest, "Deep recursion") {
