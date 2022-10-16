@@ -1,6 +1,6 @@
 # scheme-tokenizer
 
-Это первая часть [scheme](../../scheme).
+Это первая часть scheme. Сначала прочитайте введение к задаче [здесь](../../scheme).
 
 - [scheme-tokenizer](#scheme-tokenizer)
   - [Что нужно сделать?](#что-нужно-сделать)
