@@ -23,6 +23,11 @@ public:
     std::shared_ptr<Object> GetSecond() const;
 };
 
+///////////////////////////////////////////////////////////////////////////////
+
+// Runtime type checking.
+// This can be helpful: https://en.cppreference.com/w/cpp/memory/shared_ptr/pointer_cast
+
 template <class T>
 std::shared_ptr<T> As(const std::shared_ptr<Object>& obj);
 
