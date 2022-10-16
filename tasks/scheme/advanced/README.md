@@ -121,3 +121,5 @@ $ (my-range)
 ASAN_OPTIONS=detect_leaks=0 ./test_scheme_advanced
 ```
 В CLion нужно поменять значение `detect_leaks` на 0 в параметрах address-санитайзера (раздел `Build, Execution, Deployment -> Dynamic Analysis Tools -> Sanitizers` настроек).
+
+Также можно тестировать ваше решение на MacOS, используя дефолтный компилятор Apple Clang - так утечки тоже не будут ловиться.
