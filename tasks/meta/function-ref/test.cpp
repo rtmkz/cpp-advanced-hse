@@ -1,5 +1,6 @@
 #include "function_ref.h"
 
+#include <allocations_checker.h>
 #include <catch.hpp>
 
 #include <algorithm>
@@ -20,6 +21,10 @@ struct TTestFunction<Ret(Args...)> {
 TEST_CASE("Default constructible") {
     static_assert(!std::is_default_constructible_v<FunctionRef<void()>>);
     static_assert(!std::is_default_constructible_v<FunctionRef<int(double, void********* megaptr, TTestFunction<void(int)>)>>);
+}
+
+TEST_CASE("Sizeof") {
+    static_assert(sizeof(FunctionRef<int(int)>) == sizeof(void*) * 2);
 }
 
 void Iterate(int from, int to, FunctionRef<void(int)> callback) {
@@ -45,6 +50,27 @@ TEST_CASE("AsArgument") {
     FunctionRef<void(int)> ref = summer;
     Iterate(0, 10, ref);
     REQUIRE(sum == 270);
+}
+
+TEST_CASE("Allocations") {
+    EXPECT_ZERO_ALLOCATIONS(
+        int sum = 0;
+        Iterate(0, 10, [&](int x) { sum += x; });
+        REQUIRE(sum == 45);
+
+        Iterate(0, 10, [&](int x) noexcept { sum += x; });
+        REQUIRE(sum == 90);
+
+        auto summer = [&](int x) { sum += x; };
+        Iterate(0, 10, summer);
+        Iterate(0, 10, summer);
+        Iterate(0, 10, summer);
+        REQUIRE(sum == 225);
+
+        FunctionRef<void(int)> ref = summer;
+        Iterate(0, 10, ref);
+        REQUIRE(sum == 270);
+    );
 }
 
 int global_sum = 0;
