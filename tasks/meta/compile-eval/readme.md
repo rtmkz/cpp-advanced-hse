@@ -64,7 +64,7 @@ h = \sum\limits_{i = 0}^{|s| - 1} s_i * p^{i} (mod \; m)
 
 Так как `T& std::array<T, N>::operator[]` является `constexpr` только [начиная с C++17](https://en.cppreference.com/w/cpp/container/array/operator_at), а мы используем C++14, вам придется присваивать значения через мутабельную ссылку, полученную с помощью `std::get`. Можете использовать такой хелпер:
 
-```
+```cpp
 template <int N, int I, int J>
 constexpr int& GetElement(std::array<std::array<int, N>, N>& a) {
     return std::get<J>(std::get<I>(a));
