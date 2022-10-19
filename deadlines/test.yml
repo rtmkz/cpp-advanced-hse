@@ -158,7 +158,7 @@ assignments:
 
 - title:    08-scheme
   start:    17-10-2022 00:00
-  deadline: 06-11-2022 23:59
+  deadline: 13-11-2022 23:59
   group:    large
   tasks:
     - task:  scheme/tokenizer
