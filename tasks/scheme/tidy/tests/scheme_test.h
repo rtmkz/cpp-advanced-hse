@@ -4,6 +4,7 @@
 
 #include <error.h>
 #include <scheme.h>
+#include <allocations_checker.h>
 
 class SchemeTest {
 public:
@@ -30,3 +31,20 @@ public:
 private:
     Interpreter interpreter_;
 };
+
+#define WITH_ALLOCATION_DIFFERENCE_CHECK(max_expected_diff, expression)                            \
+    do {                                                                                           \
+        alloc_checker::ResetCounters();                                                            \
+                                                                                                   \
+        expression;                                                                                \
+                                                                                                   \
+        int64_t alloc_count = alloc_checker::AllocCount(),                                         \
+                dealloc_count = alloc_checker::DeallocCount(), diff = alloc_count - dealloc_count; \
+                                                                                                   \
+        std::cerr << "Allocations: " << alloc_count << "\n";                                       \
+        std::cerr << "Deallocations: " << dealloc_count << "\n";                                   \
+        std::cerr << "Difference: " << diff << "\n\n";                                             \
+                                                                                                   \
+        REQUIRE(diff >= 0);                                                                        \
+        REQUIRE(diff <= max_expected_diff);                                                        \
+    } while (false);

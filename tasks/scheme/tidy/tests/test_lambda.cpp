@@ -2,7 +2,6 @@
 #include <iostream>
 
 #include "scheme_test.h"
-#include "allocations_checker.h"
 
 #include <catch.hpp>
 
@@ -17,8 +16,10 @@ TEST_CASE_METHOD(SchemeTest, "LambdaBodyHasImplicitBegin") {
 
 TEST_CASE_METHOD(SchemeTest, "SlowSum") {
     ExpectNoError("(define slow-add (lambda (x y) (if (= x 0) y (slow-add (- x 1) (+ y 1)))))");
-    ExpectEq("(slow-add 3 3)", "6");
-    ExpectEq("(slow-add 100 100)", "200");
+    WITH_ALLOCATION_DIFFERENCE_CHECK(0, {
+        ExpectEq("(slow-add 3 3)", "6");
+        ExpectEq("(slow-add 100 100)", "200");
+    });
 }
 
 TEST_CASE_METHOD(SchemeTest, "LambdaClosure") {
@@ -37,9 +38,12 @@ TEST_CASE_METHOD(SchemeTest, "LambdaClosure") {
     // (define range (lambda (x) (lambda () (set! x (+ x 1)) x)))
 
     ExpectNoError("(define my-range (range 10))");
-    ExpectEq("(my-range)", "11");
-    ExpectEq("(my-range)", "12");
-    ExpectEq("(my-range)", "13");
+
+    WITH_ALLOCATION_DIFFERENCE_CHECK(0, {
+        ExpectEq("(my-range)", "11");
+        ExpectEq("(my-range)", "12");
+        ExpectEq("(my-range)", "13");
+    });
 
     ExpectEq("x", "1");
 }
@@ -63,20 +67,26 @@ TEST_CASE_METHOD(SchemeTest, "DefineLambdaSugar") {
 
 TEST_CASE_METHOD(SchemeTest, "LambdaMultipleRecurseCalls") {
     ExpectNoError("(define (fib x) (if (< x 3) 1 (+ (fib (- x 1)) (fib (- x 2)) )))");
-    ExpectEq("(fib 1)", "1");
-    ExpectEq("(fib 2)", "1");
-    ExpectEq("(fib 3)", "2");
-    ExpectEq("(fib 7)", "13");
-    ExpectEq("(fib 8)", "21");
+
+    WITH_ALLOCATION_DIFFERENCE_CHECK(0, {
+        ExpectEq("(fib 1)", "1");
+        ExpectEq("(fib 2)", "1");
+        ExpectEq("(fib 3)", "2");
+        ExpectEq("(fib 7)", "13");
+        ExpectEq("(fib 8)", "21");
+    });
 }
 
 TEST_CASE_METHOD(SchemeTest, "MutualCalls") {
     ExpectNoError("(define (foo x) (if (< x 2) 42 (bar (- x 1))))");
     ExpectNoError("(define (bar x) (if (< x 2) 24 (foo (/ x 2))))");
-    ExpectEq("(foo 3)", "42");
-    ExpectEq("(foo 6)", "24");
-    ExpectEq("(bar 7)", "42");
-    ExpectEq("(bar 13)", "24");
+
+    WITH_ALLOCATION_DIFFERENCE_CHECK(0, {
+        ExpectEq("(foo 3)", "42");
+        ExpectEq("(foo 6)", "24");
+        ExpectEq("(bar 7)", "42");
+        ExpectEq("(bar 13)", "24");
+    });
 }
 
 TEST_CASE_METHOD(SchemeTest, "LambdasShareContext") {
@@ -89,10 +99,13 @@ TEST_CASE_METHOD(SchemeTest, "LambdasShareContext") {
         )
     )EOF");
     ExpectNoError("(define my-foo (foo 15))");
-    ExpectEq("((cdr my-foo))", "30");
-    ExpectEq("((car my-foo))", "31");
-    ExpectEq("((car my-foo))", "32");
-    ExpectEq("((cdr my-foo))", "64");
+
+    WITH_ALLOCATION_DIFFERENCE_CHECK(0, {
+        ExpectEq("((cdr my-foo))", "30");
+        ExpectEq("((car my-foo))", "31");
+        ExpectEq("((car my-foo))", "32");
+        ExpectEq("((cdr my-foo))", "64");
+    });
 }
 
 TEST_CASE_METHOD(SchemeTest, "CyclicLocalContextDependencies") {
@@ -105,37 +118,15 @@ TEST_CASE_METHOD(SchemeTest, "CyclicLocalContextDependencies") {
     ExpectNoError("(define my-foo (foo 20))");
     ExpectNoError("(define foo 1543)");
 
-    alloc_checker::ResetCounters();
-
-    ExpectEq("(my-foo)", "42");
-
-    int64_t alloc_count = alloc_checker::AllocCount(),
-            dealloc_count = alloc_checker::DeallocCount(), diff = alloc_count - dealloc_count;
-
-    std::cerr << "CyclicLocalContextDependencies:\n";
-    std::cerr << "Allocations: " << alloc_count << "\n";
-    std::cerr << "Deallocations: " << dealloc_count << "\n";
-    std::cerr << "Difference: " << diff << "\n\n";
-
-    REQUIRE(diff == 0);
+    WITH_ALLOCATION_DIFFERENCE_CHECK(0, { ExpectEq("(my-foo)", "42"); });
 }
 
 TEST_CASE_METHOD(SchemeTest, "Deep recursion") {
-    alloc_checker::ResetCounters();
-
-    for (uint32_t i = 0; i < 100; ++i) {
-        std::string fn = "ahaha" + std::to_string(i);
-        ExpectNoError("(define (" + fn + " x) (if (= x 0) 0 (+ 1 (" + fn + " (- x 1)))))");
-        ExpectEq("(" + fn + " 100)", "100");
-    }
-
-    int64_t alloc_count = alloc_checker::AllocCount(),
-            dealloc_count = alloc_checker::DeallocCount(), diff = alloc_count - dealloc_count;
-
-    std::cerr << "Deep recursion:\n";
-    std::cerr << "Allocations: " << alloc_count << "\n";
-    std::cerr << "Deallocations: " << dealloc_count << "\n";
-    std::cerr << "Difference: " << diff << "\n\n";
-
-    REQUIRE(diff <= 10'000);
+    WITH_ALLOCATION_DIFFERENCE_CHECK(10'000, {
+        for (uint32_t i = 0; i < 100; ++i) {
+            std::string fn = "ahaha" + std::to_string(i);
+            ExpectNoError("(define (" + fn + " x) (if (= x 0) 0 (+ 1 (" + fn + " (- x 1)))))");
+            ExpectEq("(" + fn + " 100)", "100");
+        }
+    });
 }
