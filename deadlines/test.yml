@@ -171,3 +171,16 @@ assignments:
       score: 200
     - task:  scheme/tidy
       score: 100
+
+- title:    09-baby-threads
+  start:    05-11-2021 13:00
+  deadline: 19-11-2021 23:59
+  tasks:
+    - task: is-prime
+      score: 100
+    - task: reduce
+      score: 100
+    - task: hash-table
+      score: 100
+    - task: subset-sum
+      score: 100
