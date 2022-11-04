@@ -176,11 +176,11 @@ assignments:
   start:    05-11-2021 13:00
   deadline: 19-11-2021 23:59
   tasks:
-    - task: is-prime
+    - task: baby-threads/is-prime
       score: 100
-    - task: reduce
+    - task: baby-threads/reduce
       score: 100
-    - task: hash-table
+    - task: baby-threads/hash-table
       score: 100
-    - task: subset-sum
+    - task: baby-threads/subset-sum
       score: 100
