@@ -39,6 +39,13 @@ check-solutions-clang-11-asan:
     CXX: clang++-11
     BUILD_TYPE: ASAN
 
+check-solutions-clang-11-tsan:
+  extends: .check
+  variables:
+    CC: clang-11
+    CXX: clang++-11
+    BUILD_TYPE: TSAN
+
 deploy:
   only:
   - main
