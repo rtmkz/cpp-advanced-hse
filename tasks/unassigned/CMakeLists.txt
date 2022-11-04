@@ -1,11 +1,5 @@
 add_subdirectory(list)
 
-# 8
-add_subdirectory(is-prime)
-add_subdirectory(reduce)
-add_subdirectory(subset-sum)
-add_subdirectory(hash-table)
-
 # 9
 add_subdirectory(timerqueue)
 add_subdirectory(semaphore)
