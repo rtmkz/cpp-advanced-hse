@@ -158,6 +158,19 @@ assignments:
     - task:  scheme/tidy
       score: 100
 
+- title:    09-baby-threads
+  start:    05-11-2022 23:00
+  deadline: 19-11-2022 23:59
+  tasks:
+    - task: baby-threads/is-prime
+      score: 100
+    - task: baby-threads/reduce
+      score: 100
+    - task: baby-threads/hash-table
+      score: 100
+    - task: baby-threads/subset-sum
+      score: 100
+
 - title:    bonus
   start:    31-08-2022 18:00
   deadline: 31-12-2022 23:59
