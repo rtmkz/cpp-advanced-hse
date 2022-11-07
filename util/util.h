@@ -21,7 +21,7 @@ public:
     }
 
     std::string GenString(size_t count, char from = 'a', char to = 'z') {
-        std::uniform_int_distribution<char> dist(from, to);
+        std::uniform_int_distribution<int> dist(from, to);
         std::string result(count, from);
         for (char& x : result) {
             x = dist(gen_);
