@@ -50,7 +50,7 @@ TEST_CASE("Big") {
 
     for (int i = 0; i < count; ++i) {
         int ind = rnd.GenInt(1, count - 1);
-        a[ind] = rnd.GenInt('a', 'z');
+        a[ind] = rnd.GenInt<int>('a', 'z');
         REQUIRE(a[ind] == s[ind - 1]);
     }
 
