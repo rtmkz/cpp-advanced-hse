@@ -54,7 +54,7 @@ TEST_CASE("Read symbol") {
 TEST_CASE("Lists") {
     SECTION("Empty list") {
         auto output = ReadFull("()");
-        REQUIRE(output.get() == nullptr);
+        REQUIRE(!output);
     }
 
     SECTION("Pair") {
