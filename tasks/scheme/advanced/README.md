@@ -45,7 +45,7 @@ $ (define x 1)
 $ (set! x 2)
 $ x
 > 2
-$ (set1 y 1)
+$ (set! y 1)
 > NameError
 ```
 
@@ -117,7 +117,7 @@ $ (my-range)
 Устроено аналогично scheme-basic. Таргет для REPL называется `scheme_advanced_repl`. Естественно, в этой подзадаче запускаются и тесты на весь предыдущий функционал.
 
 Отключить детектор утечек локально можно, если запускать вашу программу с переменной окружения `ASAN_OPTIONS=detect_leaks=0`. Из командной строки запуск будет выглядеть так:
-```
+```bash
 ASAN_OPTIONS=detect_leaks=0 ./test_scheme_advanced
 ```
 В CLion нужно поменять значение `detect_leaks` на 0 в параметрах address-санитайзера (раздел `Build, Execution, Deployment -> Dynamic Analysis Tools -> Sanitizers` настроек).
