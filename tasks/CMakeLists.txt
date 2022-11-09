@@ -10,6 +10,7 @@ add_subdirectory(errors)
 add_subdirectory(patterns)
 add_subdirectory(meta)
 add_subdirectory(baby-threads)
+add_subdirectory(condvars)
 
 # Big homeworks
 add_subdirectory(smart-ptrs)
