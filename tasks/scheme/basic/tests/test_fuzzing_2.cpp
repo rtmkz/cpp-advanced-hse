@@ -15,7 +15,7 @@ TEST_CASE("Fuzzing-2") {
         try {
             auto req = fuzzer.Next();
 #ifdef SCHEME_FUZZING_2_PRINT_REQUESTS
-            std::cerr << req << std::endl;
+            std::cerr << "[ " << i << " ] " << req << std::endl;
 #endif
             interpreter.Run(req);
         } catch (const SyntaxError&) {

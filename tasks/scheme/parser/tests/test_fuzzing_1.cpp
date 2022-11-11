@@ -17,7 +17,7 @@ TEST_CASE("Fuzzing-1") {
         try {
             auto req = fuzzer.Next();
 #ifdef SCHEME_FUZZING_1_PRINT_REQUESTS
-            std::cerr << req << std::endl;
+            std::cerr << "[ " << i << " ] " << req << std::endl;
 #endif
             std::stringstream ss{req};
             Tokenizer tokenizer{&ss};
