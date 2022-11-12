@@ -130,3 +130,25 @@ TEST_CASE_METHOD(SchemeTest, "Deep recursion") {
         }
     });
 }
+
+TEST_CASE_METHOD(SchemeTest, "Redefinition") {
+    ExpectEq("(+ 1 2 -3)", "0");
+    ExpectNoError("(define plus +)");
+    ExpectEq("(plus 1 2 -3)", "0");
+    ExpectNoError("(define (+ x) (if (= x 0) 0 (plus 1 (+ (- x 1)))))");
+    ExpectEq("(+ 8)", "8");
+    ExpectRuntimeError("(+)");
+    ExpectRuntimeError("(+ 1 2 3)");
+}
+
+TEST_CASE_METHOD(SchemeTest, "Redefinition and scoping") {
+    ExpectNoError("(define / -)");
+    ExpectEq("(+ 1 2 -3)", "0");
+    ExpectNoError("(define (foo) (define (+ x y) (* x y)) (lambda (x y) (+ x y)))");
+    ExpectNoError("(define (bar) (define (+ x y) (/ x y)) (lambda (x y) (+ x y)))");
+    ExpectNoError("(define (foobar) (lambda (x y) (+ x y)))");
+    ExpectEq("((foo) 1 2)", "2");
+    ExpectEq("((bar) 1 2)", "-1");
+    ExpectEq("((foobar) 1 2)", "3");
+    ExpectEq("(+ 1 2 -3)", "0");
+}
