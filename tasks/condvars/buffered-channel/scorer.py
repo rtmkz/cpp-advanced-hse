@@ -16,12 +16,12 @@ def get_score(results):
             'cpu_time': result['cpu_time']
         }
         if times['real_time'] > 8000:
-            print('Run', times, 'is too slow ¯\_(ツ)_/¯')
+            print('Median value', times, 'is too high ¯\_(ツ)_/¯')
             sys.exit(1)
         print('Ok:', times)
 
 
 if __name__ == '__main__':
-    print('Checking benchmark results...')
+    print('Checking benchmark medians results...')
     get_score(get_benchmarks(sys.argv[1]))
     print('Passed benchmark validation 🎉🎉🎉')
