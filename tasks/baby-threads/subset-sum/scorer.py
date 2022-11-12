@@ -9,7 +9,7 @@ def get_benchmarks(filename):
 
 def get_score(results):
     for result in results:
-        if result['run_type'] != 'iteration':
+        if result['run_type'] != 'aggregate' or result['aggregate_name'] != 'median':
             continue
         times = {
             'real_time': result['real_time'],
