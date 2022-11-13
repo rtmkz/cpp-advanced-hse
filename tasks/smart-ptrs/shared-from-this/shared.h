@@ -62,7 +62,7 @@ inline bool operator==(const SharedPtr<T>& left, const SharedPtr<U>& right);
 template <typename T, typename... Args>
 SharedPtr<T> MakeShared(Args&&... args);
 
-// Look for usage examples in tests
+// Look for usage examples in tests and seminar
 template <typename T>
 class EnableSharedFromThis {
 public:
