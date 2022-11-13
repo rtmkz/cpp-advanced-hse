@@ -14,9 +14,7 @@ void SlowSum() {
 
     double sum = 0;
     for (int i = 0; i < kLimit; ++i) {
-        std::thread t{[i, &sum] {
-            sum += std::sqrt(i);
-        }};
+        std::thread t{[i, &sum] { sum += std::sqrt(i); }};
         t.join();
         if (i % 10000 == 0) {
             std::cerr << "iteration #" << i << std::endl;

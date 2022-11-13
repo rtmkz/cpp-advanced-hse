@@ -2,8 +2,7 @@
     return 8;
 }
 
-class [[nodiscard]] ImportantClass {
-};
+class [[nodiscard]] ImportantClass{};
 
 ImportantClass get_important_class() {
     return ImportantClass();

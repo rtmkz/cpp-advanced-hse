@@ -13,9 +13,7 @@ int main() {
 
     std::vector<std::future<double>> futures;
     for (int i = 0; i < kLimit; ++i) {
-        futures.emplace_back(std::async([i] {
-            return std::sqrt(i);
-        }));
+        futures.emplace_back(std::async([i] { return std::sqrt(i); }));
     }
 
     double sum = 0;

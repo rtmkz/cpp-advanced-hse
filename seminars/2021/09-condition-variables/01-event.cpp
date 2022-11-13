@@ -4,7 +4,6 @@
 #include <mutex>
 #include <thread>
 
-
 class Event {
 public:
     void Signal() {
@@ -18,9 +17,7 @@ public:
 
     void Wait() {
         std::unique_lock lock{mtx_};
-        cv_.wait(lock, [this] {
-            return ready_;
-        });
+        cv_.wait(lock, [this] { return ready_; });
     }
 
     bool Ready() {

@@ -27,6 +27,7 @@ auto main(const int argc, const char* argv[]) -> int {
     const auto* name = argc <= 1 ? "World" : argv[1];
     std::cout << fmt::format("Hello, {}!\n", name);
 
-    const auto today = date::year_month_day{date::floor<date::days>(std::chrono::system_clock::now())};
+    const auto today =
+        date::year_month_day{date::floor<date::days>(std::chrono::system_clock::now())};
     std::cout << fmt::format("Auditing your visit at {}", today);
 }

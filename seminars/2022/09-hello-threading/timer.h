@@ -5,7 +5,6 @@
 #include <ostream>
 #include <cstdlib>
 
-
 namespace timer {
 
 using WallClock = std::chrono::high_resolution_clock;
@@ -28,11 +27,8 @@ struct Duration {
 };
 
 inline std::ostream& operator<<(std::ostream& os, const Duration& d) {
-    return os
-        << "{cpu_time: " << ToSeconds(d.CpuTime)
-        << "s, wall_time: " << ToSeconds(d.WallTime)
-        << "s, ratio: " << ToSeconds(d.CpuTime) / ToSeconds(d.WallTime)
-        << "x}";
+    return os << "{cpu_time: " << ToSeconds(d.CpuTime) << "s, wall_time: " << ToSeconds(d.WallTime)
+              << "s, ratio: " << ToSeconds(d.CpuTime) / ToSeconds(d.WallTime) << "x}";
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -50,7 +46,8 @@ class Timer {
         }
 
         Duration operator-(const Instant& rhs) const {
-            double cpu_seconds = static_cast<double>(CpuTimePoint - rhs.CpuTimePoint) / CLOCKS_PER_SEC;
+            double cpu_seconds =
+                static_cast<double>(CpuTimePoint - rhs.CpuTimePoint) / CLOCKS_PER_SEC;
             return {
                 .WallTime = WallTimePoint - rhs.WallTimePoint,
                 .CpuTime = FromSeconds<WallClock::duration>(cpu_seconds),
@@ -59,9 +56,8 @@ class Timer {
     };
 
 public:
-    Timer()
-        : start_{Instant::Now()}
-    {}
+    Timer() : start_{Instant::Now()} {
+    }
 
     Duration Elapsed() const {
         return Instant::Now() - start_;
@@ -71,4 +67,4 @@ private:
     Instant start_;
 };
 
-} // namespace timer
+}  // namespace timer

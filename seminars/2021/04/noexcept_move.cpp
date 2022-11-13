@@ -6,12 +6,14 @@
 
 static int x;
 
-
 struct Holder {
     std::string value;
 
-    Holder() { }
-    Holder(std::string value_) : value(std::move(value_)) { ++x; }
+    Holder() {
+    }
+    Holder(std::string value_) : value(std::move(value_)) {
+        ++x;
+    }
     Holder(const Holder& h) : value(h.value) {
         std::cout << "Holder(const Holder& h)\n";
         ++x;
@@ -40,12 +42,14 @@ struct Holder {
     ~Holder() = default;
 };
 
-
 struct ThrowHolder {
     std::string value;
 
-    ThrowHolder() { }
-    ThrowHolder(std::string value_) : value(std::move(value_)) { ++x; }
+    ThrowHolder() {
+    }
+    ThrowHolder(std::string value_) : value(std::move(value_)) {
+        ++x;
+    }
     ThrowHolder(const ThrowHolder& h) : value(h.value) {
         std::cout << "ThrowHolder(const ThrowHolder& h)\n";
         ++x;
@@ -74,8 +78,7 @@ struct ThrowHolder {
     ~ThrowHolder() = default;
 };
 
-int main()
-{
+int main() {
     x = 0;
     std::vector<Holder> data;
     data.emplace_back("1");

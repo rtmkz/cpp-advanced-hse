@@ -6,19 +6,15 @@
 #include <thread>
 #include <vector>
 
-
 class Semaphore {
 public:
-    Semaphore(int initial)
-        : counter_{initial}
-    {}
+    Semaphore(int initial) : counter_{initial} {
+    }
 
     // NOLINTNEXTLINE
     void lock() {
         std::unique_lock lock{mutex_};
-        not_empty_.wait(lock, [this] {
-            return counter_ > 0;
-        });
+        not_empty_.wait(lock, [this] { return counter_ > 0; });
         --counter_;
     }
 

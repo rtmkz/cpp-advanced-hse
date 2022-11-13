@@ -2,8 +2,7 @@
 #include <iostream>
 #include <cstdlib>
 
-[[deprecated("stop doing this")]]
-void old_function() {
+[[deprecated("stop doing this")]] void old_function() {
 }
 
 int main() {

@@ -2,7 +2,7 @@
 struct B {};
 struct D : B {};
 
-int main(){
+int main() {
     // Will not compile, no polymorphism -> no RTTI -> no downcast
     {
         B* ptr = new D;

@@ -52,5 +52,4 @@ private:
     ConditionVariable queue_;
 };
 
-} // namespace nanofibers
-
+}  // namespace nanofibers

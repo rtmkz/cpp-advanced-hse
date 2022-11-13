@@ -6,12 +6,10 @@
 #include <thread>
 #include <vector>
 
-
 class Latch {
 public:
-    Latch(int initial_value)
-        : value_{initial_value}
-    {}
+    Latch(int initial_value) : value_{initial_value} {
+    }
 
     void Arrive() {
         if (value_.fetch_sub(1) == 1) {
@@ -21,9 +19,7 @@ public:
 
     void Wait() {
         std::unique_lock lock{mtx_};
-        cv_.wait(lock, [this] {
-            return value_ == 0;
-        });
+        cv_.wait(lock, [this] { return value_ == 0; });
     }
 
 private:

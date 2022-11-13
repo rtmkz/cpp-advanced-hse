@@ -13,11 +13,11 @@ struct S {
 auto main() -> int {
     // Capture by value
     auto foo = 0;
-    auto increment = [=] { foo++; }; // Does not compile
+    auto increment = [=] { foo++; };  // Does not compile
 
     // Capture by reference
     auto bar = 0;
-    auto decrement = [&, v = S{}.GetData()] (const auto& arg) {
+    auto decrement = [&, v = S{}.GetData()](const auto& arg) {
         bar--;
         v.size();
     };

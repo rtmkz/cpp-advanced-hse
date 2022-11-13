@@ -10,7 +10,6 @@
 #include <optional>
 #include <thread>
 
-
 template <typename T>
 class UnboundedBlockingQueue {
 public:
@@ -26,9 +25,7 @@ public:
 
     std::optional<T> Take() {
         auto guard = std::unique_lock{mutex_};
-        not_empty_.wait(guard, [this] {
-            return stopped_ || !buffer_.empty();
-        });
+        not_empty_.wait(guard, [this] { return stopped_ || !buffer_.empty(); });
         if (stopped_ && buffer_.empty()) {
             return std::nullopt;
         }
@@ -72,10 +69,8 @@ public:
 public:
     ThreadPool(size_t num_threads) {
         workers_.reserve(num_threads);
-        while (num_threads --> 0) {
-            workers_.emplace_back([this] {
-                Run();
-            });
+        while (num_threads-- > 0) {
+            workers_.emplace_back([this] { Run(); });
         }
     }
 
@@ -113,9 +108,7 @@ private:
 int main() {
     ThreadPool pool{/*num_threads=*/4};
     for (int i = 0; i < 4000; ++i) {
-        pool.Submit([] {
-            BurnCpuFor(std::chrono::milliseconds(10));
-        });
+        pool.Submit([] { BurnCpuFor(std::chrono::milliseconds(10)); });
     }
     pool.Join();
 }

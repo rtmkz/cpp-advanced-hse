@@ -16,23 +16,22 @@
 // What you need to watch out for: when a short string is moved the address of the underlying
 // string changes!
 
-
 int main() {
-  std::string kek = "hello world!!!!!!!!!!!";
-  char data[24];
-  std::memcpy(data, &kek, sizeof(kek));
-  printf("is_long: %d\n", data[0] & 1);
-  printf("size: %d\n", data[0] >> 1);  // Not completely relevant for long strings anymore.
-  for (int i = 1; i < 24; ++i) {
-    printf("%c", data[i]);
-  }
-  puts("");
+    std::string kek = "hello world!!!!!!!!!!!";
+    char data[24];
+    std::memcpy(data, &kek, sizeof(kek));
+    printf("is_long: %d\n", data[0] & 1);
+    printf("size: %d\n", data[0] >> 1);  // Not completely relevant for long strings anymore.
+    for (int i = 1; i < 24; ++i) {
+        printf("%c", data[i]);
+    }
+    puts("");
 
-  // IMPORTANT: Delete the code below if we end up making a crash-me problem about this.
-  std::vector<std::string> s{{"kek"}};
-  std::string_view sw(s[0]);
-  for (int i = 0; i < 30; ++i) {
-    s.emplace_back("bye-bye-bye");
-  }
-  std::cout << sw << "\n";
+    // IMPORTANT: Delete the code below if we end up making a crash-me problem about this.
+    std::vector<std::string> s{{"kek"}};
+    std::string_view sw(s[0]);
+    for (int i = 0; i < 30; ++i) {
+        s.emplace_back("bye-bye-bye");
+    }
+    std::cout << sw << "\n";
 }

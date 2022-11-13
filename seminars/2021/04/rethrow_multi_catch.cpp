@@ -1,13 +1,11 @@
 #include <iostream>
 #include <stdexcept>
 
-void Foo()
-{
+void Foo() {
     throw std::runtime_error("Catch me and throw me again");
 }
 
-int main()
-{
+int main() {
     try {
         Foo();
     } catch (std::runtime_error& e) {

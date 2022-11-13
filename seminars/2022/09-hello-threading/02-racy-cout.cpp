@@ -10,8 +10,8 @@ void RacyWorker(int idx) {
 }
 
 void SyncedWorker(int idx) {
-    std::osyncstream{std::cerr}
-        << "Thread " << idx << " (id=" << std::this_thread::get_id() << ")" << std::endl;
+    std::osyncstream{std::cerr} << "Thread " << idx << " (id=" << std::this_thread::get_id() << ")"
+                                << std::endl;
 }
 
 int main() {

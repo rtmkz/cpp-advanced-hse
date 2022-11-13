@@ -9,17 +9,14 @@ void fizzbuzz() {
             pattern(0, 0) = [] { std::cout << "fizzbuzz" << std::endl; },
             pattern(0, _) = [] { std::cout << "fiz" << std::endl; },
             pattern(_, 0) = [] { std::cout << "baz" << std::endl; },
-            pattern(_, _) = [i] { std::cout << i << std::endl; }
-        );
+            pattern(_, _) = [i] { std::cout << i << std::endl; });
     }
 }
 
 int factorial(int n) {
     using namespace mpark::patterns;
     return match(n)(
-        pattern(0) = [] { return 1; },
-        pattern(_) = [n] { return n * factorial(n - 1); }
-    );
+        pattern(0) = [] { return 1; }, pattern(_) = [n] { return n * factorial(n - 1); });
 }
 
 int main() {

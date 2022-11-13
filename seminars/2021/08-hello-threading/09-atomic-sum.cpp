@@ -51,11 +51,8 @@ void RacySum() {
         std::jthread th1{Summator<RacyCounter>, std::ref(sum), 0, kLimit / 2};
         std::jthread th2{Summator<RacyCounter>, std::ref(sum), kLimit / 2, kLimit};
     }
-    std::cout
-        << "sum: " << sum.Get()
-        << ", expected: " << (kLimit * (kLimit - 1)) / 2
-        << ", elapsed: " << timer.Elapsed()
-        << std::endl;
+    std::cout << "sum: " << sum.Get() << ", expected: " << (kLimit * (kLimit - 1)) / 2
+              << ", elapsed: " << timer.Elapsed() << std::endl;
 }
 
 void AtomicSum() {
@@ -65,11 +62,8 @@ void AtomicSum() {
         std::jthread th1{Summator<AtomicCounter>, std::ref(sum), 0, kLimit / 2};
         std::jthread th2{Summator<AtomicCounter>, std::ref(sum), kLimit / 2, kLimit};
     }
-    std::cout
-        << "sum: " << sum.Get()
-        << ", expected: " << (kLimit * (kLimit - 1)) / 2
-        << ", elapsed: " << timer.Elapsed()
-        << std::endl;
+    std::cout << "sum: " << sum.Get() << ", expected: " << (kLimit * (kLimit - 1)) / 2
+              << ", elapsed: " << timer.Elapsed() << std::endl;
 }
 
 int main() {

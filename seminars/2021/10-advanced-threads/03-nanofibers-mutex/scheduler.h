@@ -52,15 +52,15 @@ public:
             Switch(&main_context_, fiber->GetContext());
 
             switch (fiber->GetState()) {
-            case EFiberState::Runnable:
-                Schedule(fiber);
-                break;
-            case EFiberState::Suspended:
-                // 02-mutex: do nothing
-                break;
-            case EFiberState::Finished:
-                delete fiber;
-                break;
+                case EFiberState::Runnable:
+                    Schedule(fiber);
+                    break;
+                case EFiberState::Suspended:
+                    // 02-mutex: do nothing
+                    break;
+                case EFiberState::Finished:
+                    delete fiber;
+                    break;
             }
         }
     }
@@ -103,4 +103,4 @@ inline void Yield() {
     Scheduler::GetCurrentScheduler()->Yield();
 }
 
-} // namespace nanofibers
+}  // namespace nanofibers

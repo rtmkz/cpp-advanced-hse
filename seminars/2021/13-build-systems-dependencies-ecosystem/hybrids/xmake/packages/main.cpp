@@ -15,10 +15,10 @@ auto main() -> int {
     std::cout << "array = [";
     const auto array = parsed->getArray("array");
     for (auto it = array->begin(); it != array->end(); ++it) {
-         std::cout << it->convert<std::string>();
-         if (it + 1 != array->end()) {
-             std::cout << ", ";
-         }
+        std::cout << it->convert<std::string>();
+        if (it + 1 != array->end()) {
+            std::cout << ", ";
+        }
     }
     std::cout << "]" << std::endl;
 }

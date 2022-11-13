@@ -3,7 +3,7 @@
 #include <stdexcept>
 
 class Holder {
- public:
+public:
     Holder(std::string value_) : value(std::move(value_)) {
         std::cout << "Holder( " << value << " )\n";
     }
@@ -14,33 +14,27 @@ class Holder {
         throw std::runtime_error("Try to catch me");
     }
 
- private:
+private:
     std::string value;
 };
 
-
-void Foo()
-{
+void Foo() {
     Holder foo{"Foo"};
 }
 
-
-void Hopelessness()
-{
+void Hopelessness() {
     Holder hope{"hopelessness"};
     throw std::runtime_error("First exception");
 }
 
-
-int main()
-{
+int main() {
     try {
         Foo();
     } catch (std::runtime_error& e) {
         std::cout << "Caught!\n";
     }
 
-    try{
+    try {
         try {
             Hopelessness();
         } catch (std::runtime_error& e) {

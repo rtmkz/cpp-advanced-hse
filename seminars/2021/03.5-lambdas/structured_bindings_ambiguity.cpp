@@ -24,7 +24,6 @@ auto main() -> int {
     // Rust
     // let now = tt.Now();
 
-
     // Structured binding
     const auto [earliest, latest] = tt.Now();
 }

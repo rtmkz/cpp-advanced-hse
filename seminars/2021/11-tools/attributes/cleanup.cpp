@@ -1,6 +1,6 @@
-#include<stdlib.h>
-#include<stdio.h>
-#include<iostream>
+#include <stdlib.h>
+#include <stdio.h>
+#include <iostream>
 
 static void free_int(int **ptr) {
     free(*ptr);

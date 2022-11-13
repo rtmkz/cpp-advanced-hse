@@ -7,7 +7,6 @@
 #include <thread>
 #include <vector>
 
-
 class NotEnoughMoney : public std::exception {};
 
 class Account {
@@ -39,9 +38,8 @@ using ClientIndex = size_t;
 
 class Bank {
 public:
-    Bank(size_t num_clients)
-        : accounts_(num_clients)
-    {}
+    Bank(size_t num_clients) : accounts_(num_clients) {
+    }
 
     size_t NumClients() const {
         return accounts_.size();
@@ -107,7 +105,8 @@ int main() {
         if (success[0] && success[1]) {
             std::cerr << "BOOM!" << std::endl;
             for (Clients client : {kBob, kAlice}) {
-                std::cout << "Client " << client << " balance: " << bank.Balance(client) << std::endl;
+                std::cout << "Client " << client << " balance: " << bank.Balance(client)
+                          << std::endl;
             }
             return 1;
         }

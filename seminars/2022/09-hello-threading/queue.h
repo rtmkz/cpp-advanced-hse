@@ -20,9 +20,7 @@ public:
 
     std::optional<T> Take() {
         auto guard = std::unique_lock{mutex_};
-        not_empty_.wait(guard, [this] {
-            return stopped_ || !buffer_.empty();
-        });
+        not_empty_.wait(guard, [this] { return stopped_ || !buffer_.empty(); });
         if (stopped_ && buffer_.empty()) {
             return std::nullopt;
         }

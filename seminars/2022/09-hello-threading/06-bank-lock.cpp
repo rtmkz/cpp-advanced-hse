@@ -7,7 +7,6 @@
 #include <thread>
 #include <vector>
 
-
 class NotEnoughMoney : public std::exception {};
 
 class Account {
@@ -36,10 +35,8 @@ using ClientIndex = size_t;
 
 class Bank {
 public:
-    Bank(size_t num_clients)
-        : accounts_(num_clients)
-        , mutexes_(num_clients)
-    {}
+    Bank(size_t num_clients) : accounts_(num_clients), mutexes_(num_clients) {
+    }
 
     size_t NumClients() const {
         return accounts_.size();
@@ -78,7 +75,7 @@ public:
         // size_t secondLockIndex = std::max(from, to);
         // std::lock_guard guard1{mutexes_[firstLockIndex]};
         // std::lock_guard guard1{mutexes_[secondLockIndex]};
-    
+
         std::scoped_lock lock{mutexes_[from], mutexes_[to]};
         accounts_[from].Withdraw(amount);
         accounts_[to].Deposit(amount);

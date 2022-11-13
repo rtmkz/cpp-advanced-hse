@@ -6,9 +6,7 @@
 auto main() -> int {
     auto interpreter = racket::Interpreter{};
 
-    {
-        assert(interpreter.Run("Expression") == "");
-    }
+    { assert(interpreter.Run("Expression") == ""); }
 
     std::cout << "Tests passed" << std::endl;
 }

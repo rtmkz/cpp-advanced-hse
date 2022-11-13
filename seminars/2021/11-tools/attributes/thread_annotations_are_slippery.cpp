@@ -19,7 +19,8 @@ public:
 
 int main() {
     std::vector<Mutex> mutexes(10);
-    for (int i = 0; i < 10; ++i) mutexes[i].Lock();
-    for (int i = 0; i < 10; ++i) mutexes[i].Unlock();
+    for (int i = 0; i < 10; ++i)
+        mutexes[i].Lock();
+    for (int i = 0; i < 10; ++i)
+        mutexes[i].Unlock();
 }
-

@@ -7,7 +7,6 @@
 #include <thread>
 #include <vector>
 
-
 class NotEnoughMoney : public std::exception {};
 
 class Account {
@@ -36,10 +35,8 @@ using ClientIndex = size_t;
 
 class Bank {
 public:
-    Bank(size_t num_clients)
-        : accounts_(num_clients)
-        , mutexes_(num_clients)
-    {}
+    Bank(size_t num_clients) : accounts_(num_clients), mutexes_(num_clients) {
+    }
 
     size_t NumClients() const {
         return accounts_.size();

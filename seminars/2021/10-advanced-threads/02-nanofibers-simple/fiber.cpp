@@ -13,4 +13,4 @@ void Fiber::Run() {
     GetCurrentScheduler()->Terminate();
 }
 
-} // namespace nanofibers
+}  // namespace nanofibers

@@ -13,7 +13,7 @@ auto main() -> int {
     // IILE
     const auto s1 = is_prime ? prime : "not prime";
 
-    const auto s = [&] () {
+    const auto s = [&]() {
         auto something = IsPrime();
 
         if (is_prime) {

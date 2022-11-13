@@ -32,14 +32,15 @@ private:
     std::atomic<EState> locked_ = Unlocked;
 };
 
-
 #include <iostream>
 
 int main() {
     SpinLock lock;
     auto greeter = [&lock](int tid) {
         std::lock_guard guard{lock};
-        std::cout << "Hello " << "from " << "thread " << tid << std::endl;
+        std::cout << "Hello "
+                  << "from "
+                  << "thread " << tid << std::endl;
     };
 
     std::jthread th[4]{

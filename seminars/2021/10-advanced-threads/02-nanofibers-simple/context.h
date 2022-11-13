@@ -19,5 +19,5 @@ enum class ESaveContextResult : int {
 };
 
 // Implemented in context.S
-extern "C" ESaveContextResult SaveContext(Context* ctx)__attribute__((returns_twice));
+extern "C" ESaveContextResult SaveContext(Context* ctx) __attribute__((returns_twice));
 extern "C" void JumpContext(Context* ctx) __attribute__((noreturn));

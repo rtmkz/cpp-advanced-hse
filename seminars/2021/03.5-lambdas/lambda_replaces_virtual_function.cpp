@@ -9,9 +9,7 @@ public:
 };
 
 auto main() -> int {
-    auto lambda = [] {
-        std::cout << "Lambda!" << '\n';
-    };
+    auto lambda = [] { std::cout << "Lambda!" << '\n'; };
     Foo f(std::move(lambda));
 
     // What for?

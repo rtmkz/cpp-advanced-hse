@@ -23,16 +23,15 @@ public:
     int *b __attribute__((pt_guarded_by(Mu)));
 };
 void foo(MyObject &Obj) {
-//    Obj.Mu.Lock();
-    Obj.a = 0; // Warning: requires lock Obj.Mu
-//    Obj.Mu.Unlock();
+    //    Obj.Mu.Lock();
+    Obj.a = 0;  // Warning: requires lock Obj.Mu
+                //    Obj.Mu.Unlock();
 
-    Obj.b = &Obj.a; // OK
-    *Obj.b = 1; // Warning: requires lock Obj.Mu
+    Obj.b = &Obj.a;  // OK
+    *Obj.b = 1;      // Warning: requires lock Obj.Mu
 }
 
 int main() {
     MyObject obj;
     foo(obj);
 }
-

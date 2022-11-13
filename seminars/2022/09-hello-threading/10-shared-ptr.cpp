@@ -11,24 +11,23 @@
 #include <iostream>
 #include <syncstream>
 
-#define LOG std::osyncstream{std::cerr}
-
+#define LOG            \
+    std::osyncstream { \
+        std::cerr      \
+    }
 
 class SharedResource {
 public:
-    SharedResource(size_t gen)
-        : generation_{gen}
-    {}
+    SharedResource(size_t gen) : generation_{gen} {
+    }
 
     size_t Generation() const {
         return generation_;
     }
 
     ~SharedResource() {
-        LOG
-            << "Destroying resource " << Generation()
-            << " from thread " << std::this_thread::get_id()
-            << std::endl;
+        LOG << "Destroying resource " << Generation() << " from thread "
+            << std::this_thread::get_id() << std::endl;
     }
 
 private:
@@ -45,7 +44,7 @@ public:
     }
 
     SharedResourcePtr Load() {
-        std::shared_lock guard{lock_}; // Required
+        std::shared_lock guard{lock_};  // Required
         return current_;
     }
 

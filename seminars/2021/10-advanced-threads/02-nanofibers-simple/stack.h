@@ -8,9 +8,8 @@ namespace nanofibers {
 class Stack {
 public:
     explicit Stack(size_t size)
-        : stack_{std::make_unique<char[]>(size)}
-        , top_{stack_.get() + size}
-    {}
+        : stack_{std::make_unique<char[]>(size)}, top_{stack_.get() + size} {
+    }
 
     void* Top() const {
         return top_;
@@ -21,5 +20,4 @@ private:
     char* top_;
 };
 
-} // namespace nanofibers
-
+}  // namespace nanofibers

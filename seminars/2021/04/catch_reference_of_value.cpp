@@ -4,16 +4,14 @@
 #include <iostream>
 #include <string>
 
-
 class SpecialException : public std::exception {
 public:
     const char* what() const noexcept {
-       return "SpecialException";
+        return "SpecialException";
     }
 };
 
-void Foo()
-{
+void Foo() {
     try {
         throw SpecialException();
     } catch (std::exception e) {  // catch by value
@@ -22,8 +20,7 @@ void Foo()
     }
 }
 
-int main ()
-{
+int main() {
     try {
         Foo();
     } catch (const SpecialException& e) {  // catch by ref

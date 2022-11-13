@@ -23,9 +23,7 @@ class Fiber : public IntrusiveListItem<Fiber> {
 
 public:
     explicit Fiber(std::function<void()> routine)
-        : stack_{kDefaultStackSize}
-        , routine_{std::move(routine)}
-    {
+        : stack_{kDefaultStackSize}, routine_{std::move(routine)} {
         context_.rsp = stack_.Top();
         context_.rip = reinterpret_cast<void*>(Trampoline);
     }
@@ -54,4 +52,4 @@ private:
     std::function<void()> routine_;
 };
 
-} // namespace nanofibers
+}  // namespace nanofibers

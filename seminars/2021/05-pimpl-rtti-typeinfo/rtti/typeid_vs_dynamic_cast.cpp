@@ -15,10 +15,9 @@ struct A {
 struct B : A {};
 struct C : B {};
 
-
 int main() {
     A* a = new B;
-    fast_dynamic_cast<B>(a); // ok
+    fast_dynamic_cast<B>(a);  // ok
 
     try {
         A* a2 = new C;             // now we create the C object

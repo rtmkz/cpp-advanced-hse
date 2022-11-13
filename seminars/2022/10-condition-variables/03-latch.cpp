@@ -10,12 +10,10 @@
 #include <vector>
 #include <deque>
 
-
 class Latch {
 public:
-    Latch(int initial_value)
-        : value_{initial_value}
-    {}
+    Latch(int initial_value) : value_{initial_value} {
+    }
 
     void Arrive() {
         std::lock_guard lock{mtx_};
@@ -27,9 +25,7 @@ public:
 
     void Wait() {
         std::unique_lock lock{mtx_};
-        cv_.wait(lock, [this] {
-            return value_ == 0;
-        });
+        cv_.wait(lock, [this] { return value_ == 0; });
     }
 
 private:
@@ -41,10 +37,7 @@ private:
 ////////////////////////////////////////////////////////////////////////////////
 
 struct Bucket {
-    Bucket(size_t num_threads)
-        : sum_by_thread(num_threads, 0.0)
-        , latch(num_threads)
-    {
+    Bucket(size_t num_threads) : sum_by_thread(num_threads, 0.0), latch(num_threads) {
     }
 
     std::vector<double> sum_by_thread;
@@ -52,9 +45,7 @@ struct Bucket {
 };
 
 struct State {
-    State(size_t num_threads)
-        : num_threads{num_threads}
-    {
+    State(size_t num_threads) : num_threads{num_threads} {
         size_t num_buckets = limit / bucket_size;
         for (size_t i = 0; i < num_buckets; ++i) {
             buckets.emplace_back(num_threads);
@@ -90,7 +81,8 @@ int main() {
     double sum = 0.0;
     for (auto&& bucket : state.buckets) {
         bucket.latch.Wait();
-        double delta = std::accumulate(bucket.sum_by_thread.begin(), bucket.sum_by_thread.end(), 0.0);
+        double delta =
+            std::accumulate(bucket.sum_by_thread.begin(), bucket.sum_by_thread.end(), 0.0);
         sum += delta;
         std::cout << "Current sum: " << sum << ", delta: " << delta << std::endl;
     }

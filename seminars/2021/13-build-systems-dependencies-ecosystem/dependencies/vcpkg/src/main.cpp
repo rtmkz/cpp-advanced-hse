@@ -15,7 +15,6 @@
 #include <iostream>
 #include <vector>
 
-
 #define PI 3.14159265358979323846
 
 static void glfw_error_callback(int error, const char *description) {
