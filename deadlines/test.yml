@@ -187,7 +187,7 @@ assignments:
 
 - title:    10-condition-variables
   start:    11-11-2022 15:00
-  deadline: 24-11-2022 23:59
+  deadline: 01-12-2022 23:59
   tasks:
     - task: condvars/timerqueue
       score: 100
