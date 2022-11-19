@@ -1,10 +1,5 @@
-add_library(decoder_faster
-
-        # maybe your files here
-
-        huffman.cpp
-        fft.cpp
-        decoder.cpp)
+# You can add your .cpp files at sources.cmake
+include(sources.cmake)
 
 link_decoder_deps(decoder_faster)
 target_link_libraries(test_faster decoder_faster)
