@@ -2,21 +2,28 @@ find_package(PNG)
 find_package(JPEG)
 find_package(FFTW)
 
+set(DECODER_UTIL_FILES
+    utils/logger_init.cpp
+    utils/libjpg_reader.cpp
+    utils/png_encoder.cpp 
+    utils/test_commons.cpp
+)
+
 add_catch(test_decoder_huffman 
     huffman/tests/test_huffman.cpp
-    utils/logger_init.cpp
+    ${DECODER_UTIL_FILES}
 )
 
 add_catch(test_decoder_fftw
     fftw/tests/test_fft.cpp
-    utils/logger_init.cpp
+    ${DECODER_UTIL_FILES}
 )
 
 add_catch(test_decoder_baseline
     huffman/tests/test_huffman.cpp
     fftw/tests/test_fft.cpp
     baseline/tests/test_baseline.cpp
-    utils/logger_init.cpp
+    ${DECODER_UTIL_FILES}
 )
 
 add_catch(test_decoder_faster
@@ -24,7 +31,7 @@ add_catch(test_decoder_faster
     fftw/tests/test_fft.cpp
     baseline/tests/test_baseline.cpp
     faster/tests/test_faster.cpp
-    utils/logger_init.cpp
+    ${DECODER_UTIL_FILES}
 )
 
 if (NOT TEST_SOLUTION)
@@ -34,7 +41,7 @@ if (NOT TEST_SOLUTION)
         baseline/tests/test_baseline.cpp
         faster/tests/test_faster.cpp
         progressive/tests/test_progressive.cpp
-        utils/logger_init.cpp
+        ${DECODER_UTIL_FILES}
     )
 endif ()
 

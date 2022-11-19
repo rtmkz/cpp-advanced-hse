@@ -1,7 +1,6 @@
-#pragma once
+#include "png_encoder.hpp"
 
 #include <png.h>
-#include "image.h"
 
 #include <string>
 #include <stdexcept>

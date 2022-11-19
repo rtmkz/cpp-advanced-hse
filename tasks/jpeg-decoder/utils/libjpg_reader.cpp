@@ -1,6 +1,5 @@
-#pragma once
+#include "libjpg_reader.hpp"
 
-#include "image.h"
 #include <jpeglib.h>
 
 #include <cstdio>
