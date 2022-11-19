@@ -1,9 +1,8 @@
-#include <logger_init.hpp>
-
-#include <chrono>
-
 #include <test_commons.hpp>
 
+#include <catch.hpp>
+
+#include <chrono>
 #include <iostream>
 
 TEST_CASE("huge", "[jpg]") {

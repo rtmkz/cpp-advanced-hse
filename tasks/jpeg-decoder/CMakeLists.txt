@@ -4,23 +4,27 @@ find_package(FFTW)
 
 add_catch(test_huffman 
     huffman/tests/test_huffman.cpp
+    utils/logger_init.cpp
 )
 
 add_catch(test_fft
     fftw/tests/test_fft.cpp
+    utils/logger_init.cpp
 )
 
 add_catch(test_baseline
     huffman/tests/test_huffman.cpp
     fftw/tests/test_fft.cpp
     baseline/tests/test_baseline.cpp
+    utils/logger_init.cpp
 )
 
 add_catch(test_faster
     huffman/tests/test_huffman.cpp
     fftw/tests/test_fft.cpp
     baseline/tests/test_baseline.cpp
-    faster/test_faster.cpp
+    faster/tests/test_faster.cpp
+    utils/logger_init.cpp
 )
 
 if (NOT TEST_SOLUTION)
@@ -28,8 +32,9 @@ if (NOT TEST_SOLUTION)
         huffman/tests/test_huffman.cpp
         fftw/tests/test_fft.cpp
         baseline/tests/test_baseline.cpp
-        faster/test_faster.cpp
-        progressive/test_progressive.cpp
+        faster/tests/test_faster.cpp
+        progressive/tests/test_progressive.cpp
+        utils/logger_init.cpp
     )
 endif ()
 

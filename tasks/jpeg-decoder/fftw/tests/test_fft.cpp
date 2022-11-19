@@ -1,6 +1,6 @@
-#include <logger_init.hpp>
-
 #include <fft.h>
+
+#include <catch.hpp>
 
 TEST_CASE("Dimensions check") {
     std::vector<double> input;

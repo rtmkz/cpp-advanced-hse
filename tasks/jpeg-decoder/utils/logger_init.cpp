@@ -1,5 +1,3 @@
-#pragma once
-
 #define CATCH_CONFIG_MAIN
 #include <catch.hpp>
 #undef CHECK
@@ -26,6 +24,6 @@ public:
     }
 };
 
-CATCH_REGISTER_LISTENER(LoggerInitializer)
+CATCH_REGISTER_LISTENER(LoggerInitializer);
 
 #endif

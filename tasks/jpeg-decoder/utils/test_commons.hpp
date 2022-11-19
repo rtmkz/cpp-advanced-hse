@@ -1,7 +1,9 @@
 #pragma once
 
+#include <catch.hpp>
+#include <decoder.h>
+
 #include "image.h"
-#include "catch.hpp"
 #include "png_encoder.h"
 #include "libjpg_reader.h"
 
@@ -10,8 +12,6 @@
 #include <iostream>
 #include <fstream>
 #include <optional>
-
-#include <decoder.h>
 
 int artifact_index = 0;
 #ifdef HSE_ARTIFACTS_DIR

@@ -1,6 +1,6 @@
-#include <logger_init.hpp>
-
 #include <huffman.h>
+
+#include <catch.hpp>
 
 #include <cstdint>
 #include <stdexcept>

@@ -1,6 +1,6 @@
-#include <logger_init.hpp>
-
 #include <test_commons.hpp>
+
+#include <catch.hpp>
 
 TEST_CASE("jfif (grayscale)", "[jpg]") {
     CheckImage("progressive.jpg");
