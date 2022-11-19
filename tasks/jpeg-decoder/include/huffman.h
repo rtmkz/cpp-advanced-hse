@@ -10,6 +10,12 @@ class HuffmanTree {
 public:
     HuffmanTree();
 
+    HuffmanTree(const HuffmanTree&) = delete;
+    HuffmanTree& operator=(const HuffmanTree&) = delete;
+
+    HuffmanTree(HuffmanTree&&);
+    HuffmanTree& operator=(HuffmanTree&&);
+
     // code_lengths is the array of size no more than 16 with number of
     // terminated nodes in the Huffman tree.
     // values are the values of the terminated nodes in the consecutive
