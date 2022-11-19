@@ -2,13 +2,35 @@ find_package(PNG)
 find_package(JPEG)
 find_package(FFTW)
 
-add_catch(test_huffman huffman/test_huffman.cpp)
-add_catch(test_fft fftw/test_fft.cpp)
-add_catch(test_baseline baseline/test_baseline.cpp)
-add_catch(test_faster faster/test_faster.cpp)
+add_catch(test_huffman 
+    huffman/tests/test_huffman.cpp
+)
+
+add_catch(test_fft
+    fftw/tests/test_fft.cpp
+)
+
+add_catch(test_baseline
+    huffman/tests/test_huffman.cpp
+    fftw/tests/test_fft.cpp
+    baseline/tests/test_baseline.cpp
+)
+
+add_catch(test_faster
+    huffman/tests/test_huffman.cpp
+    fftw/tests/test_fft.cpp
+    baseline/tests/test_baseline.cpp
+    faster/test_faster.cpp
+)
 
 if (NOT TEST_SOLUTION)
-    add_catch(test_progressive progressive/test_progressive.cpp)
+    add_catch(test_progressive 
+        huffman/tests/test_huffman.cpp
+        fftw/tests/test_fft.cpp
+        baseline/tests/test_baseline.cpp
+        faster/test_faster.cpp
+        progressive/test_progressive.cpp
+    )
 endif ()
 
 target_compile_definitions(test_baseline PUBLIC HSE_TASK_DIR="${CMAKE_CURRENT_SOURCE_DIR}/")
