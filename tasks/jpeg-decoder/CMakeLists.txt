@@ -2,21 +2,21 @@ find_package(PNG)
 find_package(JPEG)
 find_package(FFTW)
 
+add_catch(test_decoder_huffman 
+    huffman/tests/test_huffman.cpp
+    utils/logger_init.cpp
+)
+
+add_catch(test_decoder_fftw
+    fftw/tests/test_fft.cpp
+    utils/logger_init.cpp
+)
+
 set(DECODER_UTIL_FILES
     utils/logger_init.cpp
     utils/libjpg_reader.cpp
     utils/png_encoder.cpp 
     utils/test_commons.cpp
-)
-
-add_catch(test_decoder_huffman 
-    huffman/tests/test_huffman.cpp
-    ${DECODER_UTIL_FILES}
-)
-
-add_catch(test_decoder_fftw
-    fftw/tests/test_fft.cpp
-    ${DECODER_UTIL_FILES}
 )
 
 add_catch(test_decoder_baseline

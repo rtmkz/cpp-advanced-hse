@@ -4,8 +4,8 @@
 
 class DctCalculator::Impl {};
 
-DctCalculator::DctCalculator(size_t width, std::vector<double> *input,
-                             std::vector<double> *output) {
+DctCalculator::DctCalculator(size_t width, std::vector<double> *input, std::vector<double> *output)
+    : impl_() {
     (void)width;
     (void)input;
     (void)output;
@@ -13,3 +13,5 @@ DctCalculator::DctCalculator(size_t width, std::vector<double> *input,
 
 void DctCalculator::Inverse() {
 }
+
+DctCalculator::~DctCalculator() = default;
