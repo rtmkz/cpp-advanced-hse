@@ -1,8 +1,8 @@
-#include "../utils/init.h"
+#include <logger_init.hpp>
 
 #include <string>
 
-#include "../utils/test_commons.hpp"
+#include <test_commons.hpp>
 
 TEST_CASE("small jfif (4:2:0)", "[jpg]") {
     CheckImage("small.jpg", ":)");

@@ -1,8 +1,8 @@
-#include "../utils/init.h"
+#include <logger_init.hpp>
 
 #include <chrono>
 
-#include "../utils/test_commons.hpp"
+#include <test_commons.hpp>
 
 #include <iostream>
 

@@ -1,6 +1,8 @@
-#include "fft.h"
+#include <fft.h>
 
 #include <fftw3.h>
+
+class DctCalculator::Impl {};
 
 DctCalculator::DctCalculator(size_t width, std::vector<double> *input,
                              std::vector<double> *output) {

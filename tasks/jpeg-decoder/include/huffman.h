@@ -3,10 +3,13 @@
 #include <vector>
 #include <cstddef>
 #include <cstdint>
+#include <memory>
 
 // HuffmanTree decoder for DHT section.
 class HuffmanTree {
 public:
+    HuffmanTree();
+
     // code_lengths is the array of size no more than 16 with number of
     // terminated nodes in the Huffman tree.
     // values are the values of the terminated nodes in the consecutive
@@ -17,4 +20,10 @@ public:
     // returns true and overwrites |value|. If it is intermediate, returns false
     // and value is unmodified.
     bool Move(bool bit, int& value);
+
+    ~HuffmanTree();
+
+private:
+    class Impl;
+    std::unique_ptr<Impl> impl_;
 };
