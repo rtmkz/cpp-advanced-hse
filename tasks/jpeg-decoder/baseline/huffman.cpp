@@ -17,4 +17,8 @@ bool HuffmanTree::Move(bool bit, int &value) {
     return true;
 }
 
+HuffmanTree::HuffmanTree(HuffmanTree &&) = default;
+
+HuffmanTree &HuffmanTree::operator=(HuffmanTree &&) = default;
+
 HuffmanTree::~HuffmanTree() = default;
