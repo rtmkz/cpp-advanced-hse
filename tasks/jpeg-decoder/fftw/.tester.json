@@ -1,7 +1,8 @@
 {
   "allow_change": [
-    "fft.cpp",
-    "fft.h"
+    "*.h",
+    "*.cpp",
+    "sources.cmake"
   ],
   "tests": "test_fft",
   "solutions": "private",

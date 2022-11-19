@@ -1,8 +1,8 @@
 {
   "allow_change": [
-    "*.cpp",
     "*.h",
-    "CMakeLists.txt"
+    "*.cpp",
+    "sources.cmake"
   ],
   "tests": [
     "test_baseline",

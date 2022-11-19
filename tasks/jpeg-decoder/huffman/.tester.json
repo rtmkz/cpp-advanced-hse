@@ -1,9 +1,10 @@
 {
   "allow_change": [
-    "huffman.cpp",
-    "huffman.h"
+    "*.h",
+    "*.cpp",
+    "sources.cmake"
   ],
   "tests": "test_huffman",
   "solutions": "private",
-  "disable_tsan" : true
+  "disable_tsan": true
 }
