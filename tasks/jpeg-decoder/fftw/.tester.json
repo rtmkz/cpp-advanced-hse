@@ -4,7 +4,7 @@
     "*.cpp",
     "sources.cmake"
   ],
-  "tests": "test_fft",
+  "tests": "test_decoder_fftw",
   "solutions": "private",
   "disable_tsan" : true,
   "forbidden_regexp" : [

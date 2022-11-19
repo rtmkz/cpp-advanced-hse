@@ -4,11 +4,7 @@
     "*.cpp",
     "sources.cmake"
   ],
-  "tests": [
-    "test_baseline",
-    "test_huffman",
-    "test_fft"
-  ],
+  "tests": "test_decoder_baseline",
   "solutions": "private",
   "disable_tsan": true
 }

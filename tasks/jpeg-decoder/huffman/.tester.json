@@ -4,7 +4,7 @@
     "*.cpp",
     "sources.cmake"
   ],
-  "tests": "test_huffman",
+  "tests": "test_decoder_huffman",
   "solutions": "private",
   "disable_tsan": true
 }

@@ -2,24 +2,24 @@ find_package(PNG)
 find_package(JPEG)
 find_package(FFTW)
 
-add_catch(test_huffman 
+add_catch(test_decoder_huffman 
     huffman/tests/test_huffman.cpp
     utils/logger_init.cpp
 )
 
-add_catch(test_fft
+add_catch(test_decoder_fftw
     fftw/tests/test_fft.cpp
     utils/logger_init.cpp
 )
 
-add_catch(test_baseline
+add_catch(test_decoder_baseline
     huffman/tests/test_huffman.cpp
     fftw/tests/test_fft.cpp
     baseline/tests/test_baseline.cpp
     utils/logger_init.cpp
 )
 
-add_catch(test_faster
+add_catch(test_decoder_faster
     huffman/tests/test_huffman.cpp
     fftw/tests/test_fft.cpp
     baseline/tests/test_baseline.cpp
@@ -28,7 +28,7 @@ add_catch(test_faster
 )
 
 if (NOT TEST_SOLUTION)
-    add_catch(test_progressive 
+    add_catch(test_decoder_progressive 
         huffman/tests/test_huffman.cpp
         fftw/tests/test_fft.cpp
         baseline/tests/test_baseline.cpp
@@ -38,16 +38,16 @@ if (NOT TEST_SOLUTION)
     )
 endif ()
 
-target_compile_definitions(test_baseline PUBLIC HSE_TASK_DIR="${CMAKE_CURRENT_SOURCE_DIR}/")
-target_compile_definitions(test_faster PUBLIC HSE_TASK_DIR="${CMAKE_CURRENT_SOURCE_DIR}/")
+target_compile_definitions(test_decoder_baseline PUBLIC HSE_TASK_DIR="${CMAKE_CURRENT_SOURCE_DIR}/")
+target_compile_definitions(test_decoder_faster PUBLIC HSE_TASK_DIR="${CMAKE_CURRENT_SOURCE_DIR}/")
 if (NOT TEST_SOLUTION)
-    target_compile_definitions(test_progressive PUBLIC HSE_TASK_DIR="${CMAKE_CURRENT_SOURCE_DIR}/")
+    target_compile_definitions(test_decoder_progressive PUBLIC HSE_TASK_DIR="${CMAKE_CURRENT_SOURCE_DIR}/")
 endif ()
 
 if (GRADER)
-    target_compile_definitions(test_baseline PUBLIC HSE_ARTIFACTS_DIR="/tmp/artifacts")
+    target_compile_definitions(test_decoder_baseline PUBLIC HSE_ARTIFACTS_DIR="/tmp/artifacts")
     if (NOT TEST_SOLUTION)
-        target_compile_definitions(test_progressive PUBLIC HSE_ARTIFACTS_DIR="/tmp/artifacts")
+        target_compile_definitions(test_decoder_progressive PUBLIC HSE_ARTIFACTS_DIR="/tmp/artifacts")
     endif ()
 endif ()
 

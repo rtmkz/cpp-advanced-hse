@@ -4,12 +4,7 @@
     "*.cpp",
     "sources.cmake"
   ],
-  "tests": [
-    "test_faster",
-    "test_baseline",
-    "test_huffman",
-    "test_fft"
-  ],
+  "tests": "test_decoder_faster",
   "solutions": "private",
   "disable_tsan": true
 }

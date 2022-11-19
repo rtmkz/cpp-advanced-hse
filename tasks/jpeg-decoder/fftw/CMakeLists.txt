@@ -2,4 +2,4 @@
 include(sources.cmake)
 
 link_decoder_deps(decoder_fftw)
-target_link_libraries(test_fft decoder_fftw)
+target_link_libraries(test_decoder_fftw decoder_fftw)
