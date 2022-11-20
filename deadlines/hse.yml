@@ -28,7 +28,7 @@ scoring:
     policy: hard
 
   defaultGroup: weekly
-  finalDeadline: 31-12-2022 00:00
+  finalDeadline: 28-12-2022 01:00
   retakePenalty: 0.6
 
 
