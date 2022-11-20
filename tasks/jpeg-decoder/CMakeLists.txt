@@ -1,6 +1,6 @@
-find_package(PNG)
-find_package(JPEG)
-find_package(FFTW)
+find_package(PNG PATHS /usr/local/opt/libpng)
+find_package(JPEG PATHS /usr/local/opt/libjpeg)
+find_package(FFTW PATHS /usr/local/opt/fftw)
 
 add_catch(test_decoder_huffman 
     huffman/tests/test_huffman.cpp
