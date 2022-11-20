@@ -186,9 +186,27 @@ assignments:
     - task: condvars/unbuffered-channel
       score: 100
 
+- title:    11-jpeg-decoder
+  start:    21-11-2022 00:00
+  deadline: 27-12-2022 23:59
+  group:    large
+  tasks:
+    - task: jpeg-decoder/huffman
+      score: 200
+    - task: jpeg-decoder/fftw
+      score: 150
+    - task: jpeg-decoder/baseline
+      score: 250
+    - task: jpeg-decoder/faster
+      score: 150
+    - task: jpeg-decoder/fuzzing
+      score: 250
+    - task: jpeg-decoder/progressive
+      score: 250
+
 - title:    bonus
   start:    31-08-2022 18:00
-  deadline: 31-12-2022 23:59
+  deadline: 27-12-2022 23:59
   group:    bonus
   tasks:
   - task: bonus/bad-hash
