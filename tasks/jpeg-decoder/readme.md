@@ -134,9 +134,9 @@ brew install libjpeg libpng fftw
 
 * [Wikipedia](https://en.wikipedia.org/wiki/JPEG), русскую версию читать не стоит.
 * [Пошаговый разбор с Хабра](https://habrahabr.ru/post/102521/).
-* [JPEG-snoop](https://www.impulseadventure.com/photo/jpeg-snoop.html), утилита для дебага,
+* [JPEG-snoop](https://github.com/ImpulseAdventure/JPEGsnoop), утилита для дебага,
   без проблем запускается под wine (Ubuntu) или CrossOver (OS X), показывает подробную информацию 
-  про JPEG файл. На этом же сайте много полезных статей про JPEG.
+  про JPEG файл
 * [Спецификация JPEG](http://www.w3.org/Graphics/JPEG/itu-t81.pdf), понадобится для progressive части.
 * [Дополнительный пост для любознательных](https://habrahabr.ru/post/206264/).
 * [Презентация](JPEG_Decoder.pdf)
