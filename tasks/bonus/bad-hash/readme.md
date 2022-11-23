@@ -3,9 +3,9 @@
 Это задача типа [crashme](https://gitlab.com/danlark/cpp-advanced-hse/-/blob/main/docs/crashme.md).
 
 Исходный код находится в файле `main.cpp`.
-Исполняемый файл запускается на Ubuntu 20.04 и получен командой
+Исполняемый файл запускается на Ubuntu 22.04 и получен командой
 ```shell
-clang++-11 main.cpp -o bad_hash -O2 -std=c++20
+clang++-14 main.cpp -o bad_hash -O2 -std=c++20
 ```
 **Обратите внимание**, файл скомпилирован с `libstdc++`.
 

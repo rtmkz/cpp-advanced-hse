@@ -9,7 +9,7 @@ fi
 
 TASK_PATH=../tasks/$1
 CLANG_PATH=../run-clang-format.py
-CLANG_TIDY=clang-tidy-11
+CLANG_TIDY=clang-tidy-14
 
 if [ ! -f compile_commands.json ]; then
     echo "Run this script from the build directory"

@@ -2,13 +2,13 @@
 
 Здесь описано, как настроить окружение на Windows с использованием WSL (Windows Subsystem from Linux) и VSC (Visual Studio Code) или Vim. Однако мы рекомендуем перейти на Linux.
 
-1. Установите WSL2 [по инструкции](https://docs.microsoft.com/ru-ru/windows/wsl/install-win10#manual-installation-steps). Дистрибутив лучше взять Ubuntu 20.04.
+1. Установите WSL2 [по инструкции](https://docs.microsoft.com/ru-ru/windows/wsl/install-win10#manual-installation-steps). Дистрибутив лучше взять Ubuntu 22.04.
 2. Запустите WSL2 и установите в ней необходимые инструменты (компилятор, отладчик, CMake):
 
 ```
 sudo apt update
-sudo apt install -y g++-10 gdb cmake
-sudo ln -s /usr/bin/g++-10 /usr/bin/g++
+sudo apt install -y g++-12 gdb cmake
+sudo ln -s /usr/bin/g++-12 /usr/bin/g++
 ```
 
 После убедитесь, что все установилось как надо: `cmake --version` должен выдавать версию не ниже 3.13, `g++ --version`--- не ниже 10.3.
