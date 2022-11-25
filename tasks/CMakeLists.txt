@@ -11,6 +11,7 @@ add_subdirectory(patterns)
 add_subdirectory(meta)
 add_subdirectory(baby-threads)
 add_subdirectory(condvars)
+add_subdirectory(lock-free)
 
 # Big homeworks
 add_subdirectory(smart-ptrs)
