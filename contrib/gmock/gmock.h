@@ -2803,6 +2803,8 @@ class StrEqualityMatcher {
                      bool case_sensitive)
       : string_(str), expect_eq_(expect_eq), case_sensitive_(case_sensitive) {}
 
+  StrEqualityMatcher(const StrEqualityMatcher&) = default;
+
 #if GTEST_HAS_ABSL
   bool MatchAndExplain(const absl::string_view& s,
                        MatchResultListener* listener) const {
@@ -2873,6 +2875,8 @@ class HasSubstrMatcher {
   explicit HasSubstrMatcher(const StringType& substring)
       : substring_(substring) {}
 
+  HasSubstrMatcher(const HasSubstrMatcher&) = default;
+
 #if GTEST_HAS_ABSL
   bool MatchAndExplain(const absl::string_view& s,
                        MatchResultListener* listener) const {
@@ -2930,6 +2934,8 @@ class StartsWithMatcher {
   explicit StartsWithMatcher(const StringType& prefix) : prefix_(prefix) {
   }
 
+  StartsWithMatcher(const StartsWithMatcher&) = default;
+
 #if GTEST_HAS_ABSL
   bool MatchAndExplain(const absl::string_view& s,
                        MatchResultListener* listener) const {
@@ -2985,6 +2991,8 @@ template <typename StringType>
 class EndsWithMatcher {
  public:
   explicit EndsWithMatcher(const StringType& suffix) : suffix_(suffix) {}
+
+  EndsWithMatcher(const EndsWithMatcher&) = default;
 
 #if GTEST_HAS_ABSL
   bool MatchAndExplain(const absl::string_view& s,
