@@ -39,6 +39,8 @@ void RunTest(int threads_count, int concurrency_level) {
 }
 
 TEST(Order, NewTest) {
+    int callback_invocations_count = 0;
+
     for (int i = 0; i < 10; ++i) {
         Semaphore semaphore(1);
         int time = 0;
@@ -46,8 +48,9 @@ TEST(Order, NewTest) {
         threads.reserve(3);
         std::atomic<bool> flag = false;
 
-        threads.emplace_back([&time, &semaphore, &flag]() {
-            semaphore.Enter([&time](int& value) {
+        threads.emplace_back([&time, &semaphore, &flag, &callback_invocations_count]() {
+            semaphore.Enter([&time, &callback_invocations_count](int& value) {
+                ++callback_invocations_count;
                 auto cur_time = time++;
                 ASSERT_EQ(0, cur_time);
                 --value;
@@ -60,8 +63,9 @@ TEST(Order, NewTest) {
 
         std::this_thread::sleep_for(std::chrono::milliseconds(50));
 
-        threads.emplace_back([&time, &semaphore]() {
-            semaphore.Enter([&time](int& value) {
+        threads.emplace_back([&time, &semaphore, &callback_invocations_count]() {
+            semaphore.Enter([&time, &callback_invocations_count](int& value) {
+                ++callback_invocations_count;
                 auto cur_time = time++;
                 ASSERT_EQ(1, cur_time);
                 --value;
@@ -70,10 +74,11 @@ TEST(Order, NewTest) {
             semaphore.Leave();
         });
 
-        threads.emplace_back([&time, &semaphore, &flag]() {
+        threads.emplace_back([&time, &semaphore, &flag, &callback_invocations_count]() {
             while (!flag) {
             }
-            semaphore.Enter([&time](int& value) {
+            semaphore.Enter([&time, &callback_invocations_count](int& value) {
+                ++callback_invocations_count;
                 auto cur_time = time++;
                 ASSERT_EQ(2, cur_time);
                 --value;
@@ -89,6 +94,8 @@ TEST(Order, NewTest) {
             cur.join();
         }
     }
+
+    ASSERT_EQ(callback_invocations_count, 30);
 }
 
 TEST(Order, Mutex) {
