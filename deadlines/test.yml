@@ -217,3 +217,20 @@ assignments:
       score: 250
     - task: jpeg-decoder/progressive
       score: 250
+
+- title:    12-lock-free
+  start:    26-11-2022 00:00
+  deadline: 10-12-2022 23:59
+  tasks:
+    - task: futex
+      score: 100
+    - task: fast-queue
+      score: 100
+    - task: mpsc-stack
+      score: 100
+    - task: rw-spinlock
+      score: 100
+    - task: hazard-ptr
+      score: 100
+    - task: sync-map
+      score: 100
