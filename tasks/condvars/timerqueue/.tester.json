@@ -9,14 +9,12 @@
         "--gtest_repeat=10",
         "--gtest_shuffle"
     ],
-    "forbidden_containers": [
-        "thread"
-    ],
     "forbidden_regexp": [
         "sleep",
         "yield",
         "seconds",
         "milliseconds",
-        "minutes"
+        "minutes",
+        "thread"
     ]
 }
