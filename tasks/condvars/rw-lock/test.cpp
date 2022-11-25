@@ -58,7 +58,7 @@ TEST(Correctness, Increment) {
 
     std::cerr << "read count " << read_count << ", write count " << write_count << "\n";
 
-    ASSERT_GT(read_count, 50'000);
+    ASSERT_GT(read_count, 10'000);
     ASSERT_GT(write_count, 10'000);
 }
 
