@@ -26,20 +26,27 @@ TEST(Correctness, Increment) {
     threads.reserve(threads_count);
     int write_count = 0;
     std::atomic<int> read_count(0);
+    int i_am_not_thread_safe = 0;
 
     for (int i = 0; i < threads_count; ++i) {
         if (i % 2 == 0) {
-            threads.emplace_back([time_limit, &read_count, &rw_lock]() {
+            threads.emplace_back([time_limit, &read_count, &rw_lock, &i_am_not_thread_safe]() {
                 auto start = Now();
                 while (ElapsedTime(start) < time_limit) {
-                    rw_lock.Read([&read_count]() { ++read_count; });
+                    rw_lock.Read([&read_count, &i_am_not_thread_safe]() {
+                        ++read_count;
+                        ASSERT_GE(i_am_not_thread_safe, 0);  // just to force reading
+                    });
                 }
             });
         } else {
-            threads.emplace_back([time_limit, &write_count, &rw_lock]() {
+            threads.emplace_back([time_limit, &write_count, &rw_lock, &i_am_not_thread_safe]() {
                 auto start = Now();
                 while (ElapsedTime(start) < time_limit) {
-                    rw_lock.Write([&write_count]() { ++write_count; });
+                    rw_lock.Write([&write_count, &i_am_not_thread_safe]() {
+                        ++write_count;
+                        ++i_am_not_thread_safe;  // writing to thread unsafe
+                    });
                 }
             });
         }
@@ -50,6 +57,9 @@ TEST(Correctness, Increment) {
     }
 
     std::cerr << "read count " << read_count << ", write count " << write_count << "\n";
+
+    ASSERT_GT(read_count, 50'000);
+    ASSERT_GT(write_count, 10'000);
 }
 
 TEST(Concurrency, RLock) {
