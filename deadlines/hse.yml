@@ -208,17 +208,17 @@ assignments:
   start:    26-11-2022 00:00
   deadline: 10-12-2022 23:59
   tasks:
-    - task: futex
+    - task: lock-free/futex
       score: 100
-    - task: fast-queue
+    - task: lock-free/rw-spinlock
       score: 100
-    - task: mpsc-stack
+    - task: lock-free/fast-queue
       score: 100
-    - task: rw-spinlock
+    - task: lock-free/mpsc-stack
       score: 100
-    - task: hazard-ptr
+    - task: lock-free/hazard-ptr
       score: 100
-    - task: sync-map
+    - task: lock-free/sync-map
       score: 100
 
 - title:    bonus
