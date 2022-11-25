@@ -51,6 +51,7 @@ TEST(Order, NewTest) {
                 auto cur_time = time++;
                 ASSERT_EQ(0, cur_time);
                 --value;
+                ASSERT_TRUE(value >= 0);
             });
             while (!flag) {
             }
@@ -64,6 +65,7 @@ TEST(Order, NewTest) {
                 auto cur_time = time++;
                 ASSERT_EQ(1, cur_time);
                 --value;
+                ASSERT_TRUE(value >= 0);
             });
             semaphore.Leave();
         });
@@ -75,6 +77,7 @@ TEST(Order, NewTest) {
                 auto cur_time = time++;
                 ASSERT_EQ(2, cur_time);
                 --value;
+                ASSERT_TRUE(value >= 0);
             });
             semaphore.Leave();
         });
