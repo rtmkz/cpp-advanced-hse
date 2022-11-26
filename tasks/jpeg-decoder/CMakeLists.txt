@@ -2,6 +2,13 @@ find_package(PNG)
 find_package(JPEG)
 find_package(FFTW)
 
+message(STATUS "Path to PNG includes: ${PNG_INCLUDE_DIRS}")
+message(STATUS "Path to PNG library: ${PNG_LIBRARY}")
+message(STATUS "Path to JPEG includes: ${JPEG_INCLUDE_DIRS}")
+message(STATUS "Path to JPEG library: ${JPEG_LIBRARIES}")
+message(STATUS "Path to FFTW includes: ${FFTW_INCLUDES}")
+message(STATUS "Path to FFTW library: ${FFTW_LIBRARIES}")
+
 add_catch(test_decoder_huffman 
     huffman/tests/test_huffman.cpp
     utils/logger_init.cpp
