@@ -2,6 +2,20 @@ find_package(PNG)
 find_package(JPEG)
 find_package(FFTW)
 
+# If you have problems with libraries
+# (paths below are displayed empty in CMake log or build does not work),
+# then you are possibly on MacOS. First, uncomment these lines and retry.
+# If this did not help, try to find path to your libs by running
+# `brew --prefix fftw` and replacing /usr/local/opt/fftw below with your location.
+# (And respectively with libpng and jpeg.)
+
+# set(PNG_INCLUDE_DIRS  /usr/local/opt/libpng/include)
+# set(PNG_LIBRARY       /usr/local/opt/libpng/lib/libpng.dylib)
+# set(JPEG_INCLUDE_DIRS /usr/local/opt/jpeg/include)
+# set(JPEG_LIBRARIES    /usr/local/opt/jpeg/libjpeg.dylib)
+# set(FFTW_INCLUDES     /usr/local/opt/fftw/include)
+# set(FFTW_LIBRARIES    /usr/local/opt/fftw/lib/libfftw3.dylib)
+
 message(STATUS "Path to PNG includes: ${PNG_INCLUDE_DIRS}")
 message(STATUS "Path to PNG library: ${PNG_LIBRARY}")
 message(STATUS "Path to JPEG includes: ${JPEG_INCLUDE_DIRS}")
