@@ -12,10 +12,7 @@
     "benchmarks": [
         "bench_rwlock"
     ],
-    "forbidden_containers": [
-        "shared_mutex"
-    ],
     "forbidden_regexp": [
-        "std\\s*::\\s*shared_mutex"
+        "shared_mutex"
     ]
 }

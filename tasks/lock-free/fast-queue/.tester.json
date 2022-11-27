@@ -13,7 +13,7 @@
         "bench_fast_queue"
     ],
     "scorer": "scorer.py",
-    "forbidden_containers": [
+    "forbidden_regexp": [
         "mutex"
     ]
 }

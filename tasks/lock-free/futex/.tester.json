@@ -12,7 +12,7 @@
     "benchmarks": [
         "bench_futex"
     ],
-    "forbidden_containers": [
+    "forbidden_regexp": [
         "mutex"
     ],
     "scorer": "scorer.py"
