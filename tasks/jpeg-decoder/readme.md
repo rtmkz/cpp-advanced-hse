@@ -35,6 +35,8 @@ sudo apt install libjpeg-dev libpng-dev libfftw3-dev
 brew install libjpeg libpng fftw
 ```
 
+На MacOS могут возникать проблемы с определением этих библиотек CMake. Инструкции для такого случая есть в [CMakeLists.txt](./CMakeLists.txt).
+
 ## Оценивание
 
 Задача разделена на 6 подзадач.
