@@ -15,7 +15,7 @@ def get_score(results):
             'real_time': result['real_time'],
             'cpu_time': result['cpu_time']
         }
-        if times['cpu_time'] > 50:
+        if times['cpu_time'] > 30:
             print('Median value', times, 'is too high ¯\_(ツ)_/¯')
             sys.exit(1)
         print('Ok:', times)
