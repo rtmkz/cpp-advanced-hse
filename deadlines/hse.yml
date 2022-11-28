@@ -212,9 +212,9 @@ assignments:
       score: 100
     - task: lock-free/rw-spinlock
       score: 100
-    - task: lock-free/fast-queue
-      score: 100
     - task: lock-free/mpsc-stack
+      score: 100
+    - task: lock-free/fast-queue
       score: 100
     - task: lock-free/hazard-ptr
       score: 100
