@@ -14,5 +14,6 @@
     ],
     "forbidden_regexp": [
         "shared_mutex"
-    ]
+    ],
+    "scorer": "scorer.py"
 }
