@@ -13,7 +13,8 @@
         "bench_rwlock"
     ],
     "forbidden_regexp": [
-        "shared_mutex"
+        "shared_mutex",
+        "atomic"
     ],
     "scorer": "scorer.py"
 }
