@@ -1,5 +1,5 @@
 {
-    "allow_change": ["check_names.cpp", "**/*.h"],
+    "allow_change": ["check_names.cpp"],
     "tests": ["check-names"],
     "test_script": "run_tests.sh",
     "disable_asan": true,
