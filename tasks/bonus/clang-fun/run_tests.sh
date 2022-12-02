@@ -1,10 +1,9 @@
 #!/bin/bash
 
-set -e
+set -ex
 
 S=$(pwd)
-B=$S/../build/relwithdebinfo
-# B=$S/../build
+B=$S/../../../build/RelWithDebInfo
 
 $B/check-names $S/tests/no-dict/*.cpp $S/check_names.cpp -p $B >/tmp/no-dict-result.txt 2>/dev/null
 $B/check-names $S/tests/dict/*.cpp -p $B -dict $S/tests/dict/dict.txt >/tmp/dict-result.txt 2>/dev/null
