@@ -234,3 +234,5 @@ assignments:
     score: 100
   - task: bonus/matrix-2.0
     score: 100
+  - task: bonus/executors
+    score: 100
