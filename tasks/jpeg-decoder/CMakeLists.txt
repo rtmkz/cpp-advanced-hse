@@ -111,7 +111,7 @@ if (NOT TEST_SOLUTION)
 endif ()
 
 if (NOT CMAKE_CXX_COMPILER_ID MATCHES "^Clang$")
-    message(WARNING "Clang is required for fuzzing tests")
+    message(WARNING "Clang is required for fuzzing tests (Apple Clang does not fit too). This is just warning, you can use your current compiler for all tasks except fuzzing. Go to tasks/jpeg-decoder/README.md for guide about clang installation.")
 else()
     add_executable(fuzz_decoder_huffman huffman/tests/fuzz_huffman.cpp)
     add_executable(fuzz_decoder_fftw fftw/tests/fuzz_fft.cpp)
