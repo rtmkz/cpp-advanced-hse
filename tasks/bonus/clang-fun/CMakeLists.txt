@@ -2,14 +2,13 @@ if (APPLE)
     message(WARNING "Task bonus/clang-fun works only on Linux")
 else()
     find_package(LLVM)
+    message(STATUS "Found LLVM ${LLVM_PACKAGE_VERSION}")
+    message(STATUS "Using LLVMConfig.cmake in: ${LLVM_DIR}")
+    message(STATUS "LLVM include dir is ${LLVM_INCLUDE_DIR}")
 
     if (${LLVM_PACKAGE_VERSION} VERSION_LESS 14)
         message(WARNING "You need at least LLVM 14 to correctly build bonus/clang-fun")
     else()
-        message(STATUS "Found LLVM ${LLVM_PACKAGE_VERSION}")
-        message(STATUS "Using LLVMConfig.cmake in: ${LLVM_DIR}")
-        message(STATUS "LLVM include dir is ${LLVM_INCLUDE_DIR}")
-
         add_executable(check-names check_names.cpp)
 
         target_include_directories(check-names PUBLIC ${LLVM_INCLUDE_DIRS})
