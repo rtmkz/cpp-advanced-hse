@@ -237,4 +237,4 @@ assignments:
   - task: bonus/clang-fun
     score: 100
   - task: bonus/executors
-    score: 100
+    score: 500
