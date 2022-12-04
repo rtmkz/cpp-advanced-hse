@@ -28,7 +28,7 @@ scoring:
     policy: hard
 
   defaultGroup: weekly
-  finalDeadline: 31-12-2022 00:00
+  finalDeadline: 28-12-2022 01:00
   retakePenalty: 0.6
 
 
@@ -87,6 +87,22 @@ assignments:
   - task: types/itertools
     score: 100
 
+- title:    03-smart-ptrs
+  start:    18-09-2022 22:00
+  deadline: 09-10-2022 23:59
+  group:    large
+  tasks:
+    - task:  smart-ptrs/unique
+      score: 200
+    - task:  smart-ptrs/shared
+      score: 300
+    - task:  smart-ptrs/weak
+      score: 200
+    - task:  smart-ptrs/shared-from-this
+      score: 200
+    - task:  smart-ptrs/intrusive
+      score: 100
+
 - title:    05-errors
   start:    30-09-2022 18:00
   deadline: 13-10-2022 23:59
@@ -113,23 +129,7 @@ assignments:
   - task: patterns/small-test-framework
     score: 100
   - task: patterns/scala-vector
-    score: 100
-
-- title:    03-smart-ptrs
-  start:    18-09-2022 22:00
-  deadline: 09-10-2022 23:59
-  group:    large
-  tasks:
-    - task:  smart-ptrs/unique
-      score: 200
-    - task:  smart-ptrs/shared
-      score: 300
-    - task:  smart-ptrs/weak
-      score: 200
-    - task:  smart-ptrs/shared-from-this
-      score: 200
-    - task:  smart-ptrs/intrusive
-      score: 100
+    score: 100 
 
 - title:    07-meta
   start:    15-10-2022 15:00
@@ -159,7 +159,7 @@ assignments:
       score: 100
 
 - title:    09-baby-threads
-  start:    05-11-2022 13:00
+  start:    05-11-2022 23:00
   deadline: 19-11-2022 23:59
   tasks:
     - task: baby-threads/is-prime
@@ -212,9 +212,9 @@ assignments:
       score: 100
     - task: lock-free/rw-spinlock
       score: 100
-    - task: lock-free/fast-queue
-      score: 100
     - task: lock-free/mpsc-stack
+      score: 100
+    - task: lock-free/fast-queue
       score: 100
     - task: lock-free/hazard-ptr
       score: 100
@@ -228,6 +228,7 @@ assignments:
   tasks:
   - task: bonus/bad-hash
     score: 100
+    crashme: true
   - task: bonus/bad-rand
     score: 100
     crashme: true
