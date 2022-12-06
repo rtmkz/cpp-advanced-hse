@@ -206,7 +206,7 @@ assignments:
 
 - title:    12-lock-free
   start:    26-11-2022 00:00
-  deadline: 10-12-2022 23:59
+  deadline: 11-12-2022 23:59
   tasks:
     - task: lock-free/futex
       score: 100
