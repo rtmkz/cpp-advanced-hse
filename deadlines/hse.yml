@@ -41,6 +41,7 @@ assignments:
     score: 100
   - task: intro/gcd
     score: 100
+    crashme: true
 
 - title:    01-memory
   start:    02-09-2022 15:00
@@ -65,8 +66,10 @@ assignments:
     score: 100
   - task: move/reallol
     score: 100
+    crashme: true
   - task: move/rule-of-5
     score: 100
+    crashme: true
   - task: move/cow-vector
     score: 100
   - task: move/compressed-pair
@@ -228,8 +231,10 @@ assignments:
   tasks:
   - task: bonus/bad-hash
     score: 100
-#   - task: bonus/bad-rand
-#     score: 100
+    crashme: true
+#  - task: bonus/bad-rand
+#    score: 100
+#    crashme: true
   - task: bonus/solve-or-die
     score: 100
   - task: bonus/matrix-2.0
