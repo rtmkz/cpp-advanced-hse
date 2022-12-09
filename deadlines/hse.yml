@@ -232,9 +232,9 @@ assignments:
   - task: bonus/bad-hash
     score: 100
     crashme: true
-#  - task: bonus/bad-rand
-#    score: 100
-#    crashme: true
+  - task: bonus/bad-rand
+    score: 100
+    crashme: true
   - task: bonus/solve-or-die
     score: 100
   - task: bonus/matrix-2.0
