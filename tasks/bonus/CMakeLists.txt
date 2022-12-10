@@ -1,4 +1,5 @@
 add_subdirectory(bad-hash)
+add_subdirectory(bad-rand)
 add_subdirectory(solve-or-die)
 add_subdirectory(matrix-2.0)
 add_subdirectory(executors)
