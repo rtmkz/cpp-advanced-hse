@@ -10,23 +10,23 @@ std::array<std::atomic<int>, 32> enqueued;
 std::array<std::atomic<int>, 32> dequeued;
 std::atomic<int> counter;
 
-MPMCBoundedQueue<int> queue(64);
+MPMCBoundedQueue<int> bounded_queue(64);
 
 void StressEnqueue(benchmark::State& state) {
     while (state.KeepRunning()) {
-        queue.Enqueue(0);
+        bounded_queue.Enqueue(0);
     }
 }
 
 void StressEnqueueDequeue(benchmark::State& state) {
     if (state.thread_index % 2) {
         while (state.KeepRunning()) {
-            queue.Enqueue(0);
+            bounded_queue.Enqueue(0);
         }
     } else {
         int val;
         while (state.KeepRunning()) {
-            queue.Dequeue(val);
+            bounded_queue.Dequeue(val);
         }
     }
 }
@@ -35,15 +35,15 @@ void CorrectnessEnqueueDequeue(benchmark::State& state) {
     ++counter;
     if (state.thread_index == 0) {
         int val;
-        while (queue.Dequeue(val)) {
-            queue.Dequeue(val);
+        while (bounded_queue.Dequeue(val)) {
+            bounded_queue.Dequeue(val);
         }
     }
     if (state.thread_index % 2) {
         int index = state.thread_index / 2;
         int counter = 0;
         while (state.KeepRunning()) {
-            if (queue.Enqueue(index)) {
+            if (bounded_queue.Enqueue(index)) {
                 ++counter;
             }
         }
@@ -52,7 +52,7 @@ void CorrectnessEnqueueDequeue(benchmark::State& state) {
         int val;
         std::vector<int> counters(32, 0);
         while (state.KeepRunning()) {
-            if (queue.Dequeue(val)) {
+            if (bounded_queue.Dequeue(val)) {
                 ++counters[val];
             }
         }
@@ -62,7 +62,7 @@ void CorrectnessEnqueueDequeue(benchmark::State& state) {
     }
     if (--counter == 0) {
         int val;
-        while (queue.Dequeue(val)) {
+        while (bounded_queue.Dequeue(val)) {
             ++dequeued[val];
         }
         for (size_t i = 0; i < enqueued.size(); ++i) {
