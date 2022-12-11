@@ -1,6 +1,6 @@
 {
     "allow_change": [
-        "hazard_ptr.h",
+        "*.h",
         "hazard_ptr.cpp"
     ],
     "tests": [
