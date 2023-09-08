@@ -7,7 +7,7 @@ stages:
 
 .check:
   stage: test
-  image: cr.yandex/crpoem3mqq83iobvune7/hse-cxx-build:latest
+  image: cr.yandex/crppmgcujiph4hvf0dup/hse-cxx-build:latest
   allow_failure: true
   script:
     - cmake --version
@@ -53,7 +53,7 @@ deploy:
   - docker
   stage: release
   script:
-  - docker pull cr.yandex/crpoem3mqq83iobvune7/hse-cxx-build:latest
+  - docker pull cr.yandex/crppmgcujiph4hvf0dup/hse-cxx-build:latest
   - git checkout .
-  - docker build -f infra/testenv.docker -t cr.yandex/crpoem3mqq83iobvune7/hse-cxx-testenv .
-  - docker push cr.yandex/crpoem3mqq83iobvune7/hse-cxx-testenv:latest
+  - docker build -f infra/testenv.docker -t cr.yandex/crppmgcujiph4hvf0dup/hse-cxx-testenv .
+  - docker push cr.yandex/crppmgcujiph4hvf0dup/hse-cxx-testenv:latest

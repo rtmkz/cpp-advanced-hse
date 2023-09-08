@@ -1,4 +1,4 @@
-FROM cr.yandex/crpoem3mqq83iobvune7/hse-cxx-build:latest
+FROM cr.yandex/crppmgcujiph4hvf0dup/hse-cxx-build:latest
 
 COPY . /opt/shad
 
