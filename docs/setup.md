@@ -10,17 +10,18 @@ OSX тоже должен работать.
 будут задачи с С++20, это минимальная версия компилятора, которую мы будем
 использовать и агрессивно увеличивать, если потребуется.
 
-Если вы на Windows и никак не можете перейти на Linux, можно использовать WSL2 + VSC или Vim. Более подробная инструкция [здесь](/docs/windows.md).
+Если вы на Windows и никак не можете перейти на Linux, можно использовать WSL2 + VSCode или Vim. Более подробная инструкция [здесь](/docs/windows.md).
 
 ## Регистрация в системе
 
-1. Создайте аккаунт на https://gitlab.com/. Если аккаунт уже есть и вы готовы решать с него задачи, новый создавать не надо.
+1. Создайте аккаунт на https://gitlab.cpp-hse.net/.
+1. Дождитесь подтверждения аккаунта от администраторов.
 1. Добавьте ssh-ключ в аккаунт:
     * Сгенерируйте ssh ключ, если у вас его еще нет.
      ```
      ssh-keygen -N "" -f ~/.ssh/id_rsa
      ```
-    * Скопируйте содержимое файла id_rsa.pub (`cat ~/.ssh/id_rsa.pub`) в https://gitlab.com/-/profile/keys
+    * Скопируйте содержимое файла id_rsa.pub (`cat ~/.ssh/id_rsa.pub`) в https://gitlab.cpp-hse.net/-/profile/keys
     * Проверьте, что ssh ключ работает. Выполните команду `ssh git@gitlab.com`. Вы должны увидеть такое приветствие:
      ```
      $ ssh git@gitlab.com
@@ -62,11 +63,11 @@ OSX тоже должен работать.
    `ADDRESS` нужно скопировать со страницы репозитория (My Repository в интерфейсе https://cpp-hse.net/). Синяя кнопка Clone -> Clone with SSH.
    Адрес будет вида
    ```
-   git@gitlab.com:cpp-advanced-hse-2021/group-Ivan-Ivanov-SuperVanechka1337.git
+   git@cpp-hse.gitlab.net:advanced-2023/group-Ivan-Ivanov-SuperVanechka1337.git
    ```
    У вас есть много вариантов, в чем писать код. Мы рекомендуем использовать CLion/Vim/VSCode/Sublime.
    Для Vim, VSCode и многих прочих редакторов наилучшим решением при работе с C++ является [clangd](https://clangd.llvm.org/).
-   
+
 ## Сдача первой задачи
  - Перейдите на cpp-hse.net и выберите задачу из группы [Setup](https://cpp-hse.net/#Setup). Решите ее.
 
