@@ -56,7 +56,7 @@ assignments:
   - task: memory/intrusive-list
     score: 100
   - task: memory/deque
-    score: 100
+    score: 300
 
 - title:    bonus
   start:    09-09-2023 18:00
