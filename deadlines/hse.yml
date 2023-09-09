@@ -35,7 +35,7 @@ scoring:
 assignments:
 - title:    00-setup
   start:    09-09-2023 15:00
-  deadline: 22-09-2023 23:59
+  deadline: 21-09-2023 23:59
   tasks:
   - task: intro/multiplication
     score: 100
@@ -45,7 +45,7 @@ assignments:
 
 - title:    01-memory
   start:    09-09-2023 15:00
-  deadline: 22-09-2023 23:59
+  deadline: 21-09-2023 23:59
   tasks:
   - task: memory/dedup
     score: 100
