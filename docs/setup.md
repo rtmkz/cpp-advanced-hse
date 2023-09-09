@@ -22,12 +22,12 @@ OSX тоже должен работать.
      ssh-keygen -N "" -f ~/.ssh/id_rsa
      ```
     * Скопируйте содержимое файла id_rsa.pub (`cat ~/.ssh/id_rsa.pub`) в https://gitlab.cpp-hse.net/-/profile/keys
-    * Проверьте, что ssh ключ работает. Выполните команду `ssh git@gitlab.com`. Вы должны увидеть такое приветствие:
+    * Проверьте, что ssh ключ работает. Выполните команду `ssh git@gitlab.cpp-hse.net`. Вы должны увидеть такое приветствие:
      ```
-     $ ssh git@gitlab.com
+     $ ssh git@gitlab.cpp-hse.net
      PTY allocation request failed on channel 0
      Welcome to GitLab, $USERNAME!
-     Connection to gitlab.com closed.
+     Connection to gitlab.cpp-hse.net closed.
      ```
 
 1. Зарегистрируйтесь на https://cpp-hse.net. Секрет для регистрации выдаст семинарист в чате семинарской группы. Авторизация на сайте происходит через GitLab; для входа используйте подготовленный выше аккаунт GitLab.
