@@ -1,11 +1,9 @@
-FROM ubuntu:22.04
+FROM ubuntu:22.04 AS base
 
-RUN echo "Don't use cache #3" > /.force_full_rebuild
+RUN echo "Don't use cache #4" > /.force_full_rebuild
 
 RUN apt-get update
 RUN apt-get install -y wget gnupg
-
-RUN apt-get update
 
 RUN DEBIAN_FRONTEND="noninteractive" apt-get install -y \
     build-essential \
@@ -43,4 +41,14 @@ RUN apt-get install -y clang-format-14 clang-tidy-14
 
 RUN apt-get install -y libjpeg-dev libfftw3-dev
 
-#COPY clang-tidy /usr/bin/hse-clang-tidy
+FROM base AS hse-clang-tidy-builder
+
+# Install HSE clang-tidy
+RUN git clone https://github.com/danlark1/llvm-project --depth=1 hse-llvm-project
+RUN cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=RelWithDebInfo -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra" hse-llvm-project/llvm
+RUN cmake --build build --target=clang-tidy
+RUN cp build/bin/clang-tidy /hse-clang-tidy
+RUN strip /hse-clang-tidy
+
+FROM base
+COPY --from=hse-clang-tidy-builder /hse-clang-tidy /usr/bin/hse-clang-tidy
