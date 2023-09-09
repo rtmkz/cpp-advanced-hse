@@ -5,13 +5,13 @@
 Если у вас завершается с ошибкой скрипт отправки решения `submit.py`, первое, что нужно сделать - это запустить его с опцией `-v` (verbose), которая даст подробный вывод и позволит выяснить источник проблемы.
 
 
-## `git@gitlab.com: Permission denied (publickey)` при попытке сдать задачу
+## `git@gitlab.cpp-hse.net: Permission denied (publickey)` при попытке сдать задачу
 
-Это означает, что публичный SSH-ключ либо не прописан на Gitlab, либо прописан с ошибкой. Посмотреть список зарегистрированных SSH ключей можно в настройках на gitlab.com (`Preferences` -> `SSH Keys` -> `Your SSH keys`). Там же можно добавить новый ключ.
+Это означает, что публичный SSH-ключ либо не прописан на Gitlab, либо прописан с ошибкой. Посмотреть список зарегистрированных SSH ключей можно в настройках на gitlab.cpp-hse.net (`Preferences` -> `SSH Keys` -> `Your SSH keys`). Там же можно добавить новый ключ.
 
 Если вы работаете с репозиторием на виртуальной машине, то генерировать SSH-ключ нужно также на ней.
 
-Если вы уверены, что добавили правильный ключ, но ошибка не уходит, то можно сравнить SHA256 хэши ключа на Gitlab (указан на странице ключа в настройках) с тем, что используется при аутентификации (можно найти в выводе `ssh -v git@gitlab.com` в строчке вида `Will attempt key...`).
+Если вы уверены, что добавили правильный ключ, но ошибка не уходит, то можно сравнить SHA256 хэши ключа на Gitlab (указан на странице ключа в настройках) с тем, что используется при аутентификации (можно найти в выводе `ssh -v git@gitlab.cpp-hse.net` в строчке вида `Will attempt key...`).
 
 ## `fatal: No such remote 'student'` при попытке сдать задачу
 
@@ -20,14 +20,14 @@
 ```
 origin  https://gitlab.com/danlark/cpp-advanced-hse (fetch)
 origin  https://gitlab.com/danlark/cpp-advanced-hse (push)
-student git@gitlab.com:cpp-advanced-hse-2022/hse-Name-Surname-Login.git (fetch)
-student git@gitlab.com:cpp-advanced-hse-2022/hse-Name-Surname-Login.git (push)
+student git@gitlab.cpp-hse.net:advanced-2023/hse-Name-Surname-Login.git (fetch)
+student git@gitlab.cpp-hse.net:advanced-2023/hse-Name-Surname-Login.git (push)
 ```
 
-Важно, что у `student` должен быть указан именно SSH URL (начинается с `git@gitlab.com`). Если у вас что-то не так, то пересоздайте remote:
+Важно, что у `student` должен быть указан именно SSH URL (начинается с `git@gitlab.cpp-hse.net`). Если у вас что-то не так, то пересоздайте remote:
 ```
 git remote remove student
-git remote add student git@gitlab.com:cpp-advanced-hse-2022/hse-Name-Surname-Login.git
+git remote add student git@gitlab.cpp-hse.net:advanced-2023/hse-Name-Surname-Login.git
 ```
 
 ## Проблемы в CLion IDE
@@ -47,5 +47,3 @@ git remote add student git@gitlab.com:cpp-advanced-hse-2022/hse-Name-Surname-Log
 1. Проверьте, что CLion открыт в `cpp-advanced-hse`, а не в какой-то его поддиректории
 2. Проверьте, что установлена свежая версия CLion
 3. Если проблема остается, удалите директорию `.idea` в репозитории и перезагрузите IDE. Это сотрет настройки рабочей области, такие как сборочные конфигурации - их нужно будет пересоздать.
-
-## 
