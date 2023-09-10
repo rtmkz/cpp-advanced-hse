@@ -23,14 +23,14 @@
 ```
 origin  https://gitlab.com/danlark/cpp-advanced-hse (fetch)
 origin  https://gitlab.com/danlark/cpp-advanced-hse (push)
-student git@gitlab.cpp-hse.net:advanced-2023/hse-Name-Surname-Login.git (fetch)
-student git@gitlab.cpp-hse.net:advanced-2023/hse-Name-Surname-Login.git (push)
+student ssh://git@gitlab.cpp-hse.net:2224/advanced-2023/hse-Name-Surname-Login.git (fetch)
+student ssh://git@gitlab.cpp-hse.net:2224/advanced-2023/hse-Name-Surname-Logingit (push)
 ```
 
 Важно, что у `student` должен быть указан именно SSH URL (начинается с `git@gitlab.cpp-hse.net`). Если у вас что-то не так, то пересоздайте remote:
 ```
 git remote remove student
-git remote add student git@gitlab.cpp-hse.net:advanced-2023/hse-Name-Surname-Login.git
+git remote add student ssh://git@gitlab.cpp-hse.net:2224/advanced-2023/hse-Name-Surname-Login.git
 ```
 
 ## Проблемы в CLion IDE
