@@ -30,12 +30,15 @@ int main() {
 
     // With great power comes great responsibility, we have to align memory ourselves:
     char memory[5];
-    printf("%p\n", memory);
+    printf("%p\n", static_cast<void*>(memory));
     auto ptr2 = new (memory) int{42};  // This is UB.
 
     alignas(int) char aligned_memory[5];
-    auto ptr3 = new (memory) int{42};  // This is fine.
+    auto ptr3 = new (aligned_memory) int{42};  // This is fine.
 
     FillBuf("kek");
     FillBuf("double kek");
+
+    (void) ptr2;
+    (void) ptr3;
 }
