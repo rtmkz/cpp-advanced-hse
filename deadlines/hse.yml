@@ -58,6 +58,25 @@ assignments:
   - task: memory/deque
     score: 300
 
+- title:    02-move
+  start:    16-09-2023 23:00
+  deadline: 28-09-2023 23:59
+  tasks:
+  - task: move/harakiri
+    score: 100
+  - task: move/reallol
+    score: 100
+    crashme: true
+  - task: move/rule-of-5
+    score: 100
+    crashme: true
+  - task: move/cow-vector
+    score: 100
+  - task: move/compressed-pair
+    score: 100
+  - task: move/string-operations
+    score: 200
+
 - title:    bonus
   start:    09-09-2023 18:00
   deadline: 23-12-2023 23:59
