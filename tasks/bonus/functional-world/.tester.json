@@ -1,0 +1,7 @@
+{
+    "allow_change": "deque.h",
+    "tests": "test_functional_world",
+    "solutions": "private",
+    "banned_regex": "#include|class|struct",
+    "disable_tsan": true
+  }
