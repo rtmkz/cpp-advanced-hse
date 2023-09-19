@@ -110,7 +110,7 @@ def ensure_list(value):
     return value
 
 
-if __name__ == "__main__":
+def submit():
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "-v", "--verbose",
@@ -149,3 +149,11 @@ if __name__ == "__main__":
     create_commits(task_name, ensure_list(task_config["allow_change"]))
 
     push_branches(task_name)
+
+
+if __name__ == "__main__":
+    try:
+        submit()
+    except:
+        print("Something went wrong. Most frequent issues are described at https://gitlab.com/danlark/cpp-advanced-hse/-/blob/main/docs/troubleshooting.md")
+        raise
