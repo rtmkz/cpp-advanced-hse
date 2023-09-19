@@ -1,8 +1,5 @@
 #include <catch.hpp>
 
-#undef WRAPUP
-#undef THEN
-#undef FINALLY
 #include "functions.h"
 
 #include <vector>
