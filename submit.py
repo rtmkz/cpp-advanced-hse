@@ -110,25 +110,7 @@ def ensure_list(value):
     return value
 
 
-def submit():
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "-v", "--verbose",
-        help="increase output verbosity",
-        action="store_true"
-    )
-
-    parser.add_argument(
-        "task_path",
-        nargs='?',
-        help="task relative path",
-        default=''
-    )
-
-    args = parser.parse_args()
-    VERBOSE = args.verbose
-
-    task_name = args.task_path
+def submit(task_name):
     if task_name == '':
         real_current_path = os.path.realpath(".")
         task_group_name = os.path.basename(os.path.dirname(real_current_path))
@@ -153,7 +135,24 @@ def submit():
 
 if __name__ == "__main__":
     try:
-        submit()
+        parser = argparse.ArgumentParser()
+        parser.add_argument(
+            "-v", "--verbose",
+            help="increase output verbosity",
+            action="store_true"
+        )
+
+        parser.add_argument(
+            "task_path",
+            nargs='?',
+            help="task relative path",
+            default=''
+        )
+
+        args = parser.parse_args()
+        VERBOSE = args.verbose
+
+        submit(args.task_path)
     except:
         print("Something went wrong. Most frequent issues are described at https://gitlab.com/danlark/cpp-advanced-hse/-/blob/main/docs/troubleshooting.md")
         raise
