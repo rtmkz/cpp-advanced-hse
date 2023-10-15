@@ -132,7 +132,7 @@ assignments:
   - task: patterns/small-test-framework
     score: 100
   - task: patterns/scala-vector
-    score: 100 
+    score: 200
 
 - title:    bonus
   start:    09-09-2023 18:00
