@@ -121,7 +121,7 @@ assignments:
 
 - title:    06-patterns
   start:    15-10-2023 18:00
-  deadline: 26-10-2023 23:59
+  deadline: 02-11-2023 23:59
   tasks:
   - task: patterns/any
     score: 100
