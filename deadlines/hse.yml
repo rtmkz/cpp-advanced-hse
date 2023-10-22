@@ -134,6 +134,33 @@ assignments:
   - task: patterns/scala-vector
     score: 200
 
+- title:    07-meta
+  start:    22-10-2023 22:00
+  deadline: 05-11-2023 23:59
+  tasks:
+  - task: meta/compile-eval
+    score: 100
+  - task: meta/constexpr-map
+    score: 100
+  - task: meta/function-ref
+    score: 100
+
+- title:    08-scheme
+  start:    22-10-2023 22:00
+  deadline: 12-11-2023 23:59
+  group:    large
+  tasks:
+    - task:  scheme/tokenizer
+      score: 200
+    - task:  scheme/parser
+      score: 200
+    - task:  scheme/basic
+      score: 300
+    - task:  scheme/advanced
+      score: 200
+    - task:  scheme/tidy
+      score: 100
+
 - title:    bonus
   start:    09-09-2023 18:00
   deadline: 23-12-2023 23:59
