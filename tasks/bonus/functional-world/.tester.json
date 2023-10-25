@@ -1,0 +1,7 @@
+{
+    "allow_change": "functions.h",
+    "tests": "test_functional_world",
+    "solutions": "private",
+    "banned_regex": "#include|class|struct|union",
+    "disable_tsan": true
+  }
