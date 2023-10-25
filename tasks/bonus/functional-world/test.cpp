@@ -1,8 +1,5 @@
 #include <catch.hpp>
 
-#undef WRAPUP
-#undef THEN
-#undef FINALLY
 #include "functions.h"
 
 #include <vector>
@@ -46,19 +43,9 @@ std::string MarkBonus(const std::string& bonus) {
     return (bonus == "functional-world") ? "fun-vee" : "humdrum-vee";
 }
 
-// 0 <= i <= 9
-char ToCharDigit(uint8_t i) { return '0' + i; }
-auto Identity(int i) { return i; }
-
-auto Wrap(int i) { return List(List(i, 2 * i, 3 * i)); }
-auto IntToStringList(int i) { return List(std::to_string(i)); }
-auto StringToIntList(const std::string& s) { return List(std::stoi(s)); }
-
-// can use std::any here
 auto X10(char i) { return List(i, i, i, i, i, i, i, i, i, i); }
-auto ToList(int i) { return List(i); }
-
-auto RandomModify(int i) { return List('0' + i, Empty{}, i * i * i); }
+auto PseudoRandomModify(int i) { return List('0' + i, Empty{}, i * i * i); }
+auto Destroy(int i) { return List(); }
 
 /* ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- */
 
@@ -76,12 +63,12 @@ TEST_CASE("List") {
 
     int i = 123456789;
     auto tuple_like = List("string", 'c');
-    auto weirdo = List(SomeStruct{1, 2.0f, "somestruct"}, Empty{}, "weird...", std::vector<int>{5, 5, 5}, Empty{}, 100);
+    auto weirdo = List(SomeStruct{1, 2.0f, {"somestruct"}}, Empty{}, "weird...", std::vector<int>{5, 5, 5}, Empty{}, i);
 };
 
 TEST_CASE("Length") {
     REQUIRE(length(List()) == 0);
-    REQUIRE(length(List(1, '10', "100")) == 3);
+    REQUIRE(length(List('1', 10, "100")) == 3);
     REQUIRE(length(List(List(1), List('1', '2'), List("1", "2", "3"))) == 3);
     REQUIRE(length(List("I'm so huge... I guess")) == 1);
     
@@ -104,7 +91,7 @@ TEST_CASE("Accumulate") {
 
 /* Head & Tail have no need to compile for empty lists */
 TEST_CASE("Head & Tail") {
-    auto list = List(1, "2", 'c', Empty{});
+    auto list = List(1, STR("2"), 'c', Empty{});
     REQUIRE(head(list) == 1);
 
     auto list1 = tail(list);
@@ -160,6 +147,7 @@ TEST_CASE("Concat") {
 }
 
 // Have no need to compile if lists have different sizes
+// Should be implemented without cycles, use C++20
 TEST_CASE("Equal") {
     REQUIRE(equal(List(1, 2, 3), List(1, 2, 3)));
     REQUIRE(equal(List(), List()));
@@ -182,7 +170,7 @@ TEST_CASE("Equal") {
                                            "fun-vee", "humdrum-vee", "humdrum-vee")));
 
         REQUIRE(equal(for_each(CreateEmpty, bonuses), List(Empty{}, Empty{}, Empty{}, Empty{}, Empty{}, Empty{}, Empty{})));
-        REQUIRE(equal(for_each(ToCharDigit, List(1, 2)), List('1', '2')));
+        REQUIRE(equal(for_each([](int a) { return '0' + a; }, List(1, 2)), List('1', '2')));
     }
 
     SECTION("Concat") {
@@ -211,13 +199,13 @@ TEST_CASE("Sum Two Lists") {
 }
 
 TEST_CASE("FlatMap") {
-    auto mapped = flatmap(IntToStringList, List(10000, 9999, -1));
-    REQUIRE(equal(mapped, List("10000", "9999", "-1")));
+    auto mapped = flatmap(Destroy, List(10000, 9999, -1));
+    REQUIRE(equal(mapped, List()));
 
     auto x10 = flatmap(X10, List('x'));
     REQUIRE(equal(x10, List('x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x')));
 
-    auto randomized = flatmap(RandomModify, List(8, 4, 9));
+    auto randomized = flatmap(PseudoRandomModify, List(8, 4, 9));
     REQUIRE(equal(randomized, List('8', Empty{}, 512, '4', Empty{}, 64, '9', Empty{}, 729)));
 }
 
@@ -237,17 +225,38 @@ TEST_CASE("You Shall Not PASS") {
 
 /* ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- */
 
+template <typename T>
+auto Identity(T t) { return t; }
+
+auto ToList(int i) { return List(i); }
+
+auto IntToStringList(int i) { return List(std::to_string(i)); }
+auto StringToIntList(const std::string& s) { return List(std::stoi(s)); }
+
+auto Wrap(int i) { return List(List(i, 2 * i, 3 * i)); }
+
+template <typename T>
+auto TrashTransform(T value) {
+    return List(List(value), 11.1111, " you cannot ", List(value, value, value), 
+                SomeStruct{1, 77.7f, {"survive this"}}, CNT, List(List(List())), Empty{});
+}
+
+#define SuperTrashTransormator TrashTransform<std::any>
+#define SuperIdentity Identity<std::any>
+
+/* ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- */
+
 TEST_CASE("Functional World") {
     {
-        auto result = List(1, 2, 3) > Identity;
+        auto result = List(1, 2, 3) > Identity<int>;
         REQUIRE(equal(result, List(1, 2, 3)));
     }
     {
-        auto result = List(1, 2, 3) >= ToList > Identity;
+        auto result = List(1, 2, 3) >= ToList > Identity<int>;
         REQUIRE(equal(result, List(1, 2, 3)));
     }
     {
-        auto result = List(1, 2, 3, 4, 5) >= IntToStringList;
+        auto result = List(1, 2, 3, 4, 5) >= IntToStringList > Identity<std::string>;
         REQUIRE(equal(result, List("1", "2", "3", "4", "5")));
     }
     {
@@ -257,5 +266,12 @@ TEST_CASE("Functional World") {
     {
         auto result = List(1, 2, 3) >= Wrap >= tail > Square;
         REQUIRE(equal(result, List(4, 9, 16, 36, 36, 81)));
+    }
+}
+
+TEST_CASE("Functional World Horror") {
+    {
+        auto result = List(10, "20") >= SuperTrashTransormator >= SuperTrashTransormator >= SuperTrashTransormator > SuperIdentity;
+        REQUIRE(length(result) == 1024);
     }
 }
