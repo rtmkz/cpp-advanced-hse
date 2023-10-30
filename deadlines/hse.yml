@@ -136,7 +136,7 @@ assignments:
 
 - title:    07-meta
   start:    22-10-2023 22:00
-  deadline: 05-11-2023 23:59
+  deadline: 12-11-2023 23:59
   tasks:
   - task: meta/compile-eval
     score: 100
