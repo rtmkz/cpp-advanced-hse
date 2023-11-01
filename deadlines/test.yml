@@ -126,4 +126,4 @@ assignments:
   - task: bonus/executors
     score: 500
   - task: bonus/functional-world
-    score: 100
+    score: 200
