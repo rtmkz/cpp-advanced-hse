@@ -2,9 +2,14 @@
     "allow_change": "functions.h",
     "tests": "test_functional_world",
     "solutions": "private",
-    "banned_regex": "#include|class|struct|union",
     "disable_tsan": true,
     "disable_asan": true,
-    "build_timeout": 1800,
+    "build_timeout": 2000,
+    "forbidden_regexp": [
+        "#include",
+        "class",
+        "struct",
+        "union"
+    ],
     "linter": false
 }
