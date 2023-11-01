@@ -106,6 +106,61 @@ assignments:
     - task:  smart-ptrs/intrusive
       score: 100
 
+- title:    05-errors
+  start:    07-10-2023 18:00
+  deadline: 19-10-2023 23:59
+  tasks:
+  - task: errors/safe-transform
+    score: 100
+  - task: errors/defer
+    score: 100
+  - task: errors/tryhard
+    score: 100
+  - task: errors/grep
+    score: 100
+
+- title:    06-patterns
+  start:    15-10-2023 18:00
+  deadline: 02-11-2023 23:59
+  tasks:
+  - task: patterns/any
+    score: 100
+  - task: patterns/pimpl
+    score: 100
+  - task: patterns/editor
+    score: 100
+  - task: patterns/small-test-framework
+    score: 100
+  - task: patterns/scala-vector
+    score: 200
+
+- title:    07-meta
+  start:    22-10-2023 22:00
+  deadline: 12-11-2023 23:59
+  tasks:
+  - task: meta/compile-eval
+    score: 100
+  - task: meta/constexpr-map
+    score: 100
+  - task: meta/function-ref
+    score: 100
+
+- title:    08-scheme
+  start:    22-10-2023 22:00
+  deadline: 12-11-2023 23:59
+  group:    large
+  tasks:
+    - task:  scheme/tokenizer
+      score: 200
+    - task:  scheme/parser
+      score: 200
+    - task:  scheme/basic
+      score: 300
+    - task:  scheme/advanced
+      score: 200
+    - task:  scheme/tidy
+      score: 100
+
 - title:    bonus
   start:    09-09-2023 18:00
   deadline: 23-12-2023 23:59
