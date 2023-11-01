@@ -4,5 +4,6 @@
     "solutions": "private",
     "banned_regex": "#include|class|struct|union",
     "disable_tsan": true,
-    "disable_asan": true
-  }
+    "disable_asan": true,
+    "build_timeout": 1800
+}
