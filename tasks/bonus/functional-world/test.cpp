@@ -6,9 +6,10 @@
 #include <string>
 #include <functional>
 #include <cstdint>
+#include <random>
 #include <any>
 
-/* ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- */
+/* ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- */
 
 struct Empty {
     bool operator==(const Empty&) const { return true; }
@@ -33,7 +34,7 @@ struct StaticCounter {
     }
 };
 
-/* ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- */
+/* ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- */
 
 int Square(int x) { return x * x; }
 
@@ -47,12 +48,12 @@ auto X10(char i) { return List(i, i, i, i, i, i, i, i, i, i); }
 auto PseudoRandomModify(int i) { return List('0' + i, Empty{}, i * i * i); }
 auto Destroy(int i) { return List(); }
 
-/* ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- */
+/* ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- */
 
 #define STR(buffer) std::string(buffer)
 #define CNT StaticCounter{}
 
-/* ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- */
+/* ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- */
 
 TEST_CASE("List") {
     auto empty = List();
@@ -147,17 +148,23 @@ TEST_CASE("Concat") {
 }
 
 // Have no need to compile if lists have different sizes
+// Have no need to compile for incomparable types
 // Should be implemented without cycles, use C++20
 TEST_CASE("Equal") {
     REQUIRE(equal(List(1, 2, 3), List(1, 2, 3)));
     REQUIRE(equal(List(), List()));
     REQUIRE(equal(List(1, 2, 3), List(1.0, 2, 3.0f)));
+    REQUIRE(equal(List(std::vector<uint64_t>{1, 2, 3}, 2.0f, Empty{}), List(std::vector<uint64_t>{1, 2, 3}, 2.0f, Empty{})));
+
+    REQUIRE(!equal(List(1, 2, 3), List(2, 4, 6)));
+    REQUIRE(!equal(List(STR("aaa")), List(STR("bbb"))));
+    REQUIRE(!equal(List(Empty{}, Empty{}, 777), List(Empty{}, Empty{}, 999)));
 
     SECTION("Head & Tail") {
         auto list = List(1, '2', "third", 4.0f);
         REQUIRE(equal(tail(list), List('2', "third", 4.0f)));
         REQUIRE(equal(tail(tail(list)), List("third", 4.0f)));
-        
+
         auto third = List(head(tail(tail(list))));
         REQUIRE(equal(List("third", 4.0f), concat(third, List(4.0f))));
     }
@@ -177,6 +184,14 @@ TEST_CASE("Equal") {
         REQUIRE(equal(List(1, 2, 3, 4), concat(List(1, 2, 3), List(4))));
         REQUIRE(equal(concat(List(), concat(List(), List())), List()));
         REQUIRE(equal(concat(List('a', "b", "C"), List(9999, 8888, 7777)), List('a', "b", "C", 9999, 8888, 7777)));
+    }
+
+    SECTION("Stress") {
+        std::mt19937 gen;
+        for (size_t i = 0; i < 1000; ++i) {
+            auto val1 = gen() % 10, val2 = gen() % 10, val3 = gen() % 10, val4 = gen() % 11;
+            REQUIRE(!equal(List(val1, val2, val3, val4), List(10 - val1, 10 - val2, 10 - val3, 11 - val4)));
+        }
     }
 }
 
