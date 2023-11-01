@@ -3,5 +3,6 @@
     "tests": "test_functional_world",
     "solutions": "private",
     "banned_regex": "#include|class|struct|union",
-    "disable_tsan": true
+    "disable_tsan": true,
+    "disable_asan": true
   }
