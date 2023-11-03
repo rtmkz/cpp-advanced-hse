@@ -7,6 +7,7 @@
 #include <vector>
 #include <string_view>
 
+
 template <typename Signature>
 struct TTestFunction;
 
@@ -19,8 +20,7 @@ struct TTestFunction<Ret(Args...)> {
 
 TEST_CASE("Default constructible") {
     static_assert(!std::is_default_constructible_v<FunctionRef<void()>>);
-    static_assert(!std::is_default_constructible_v<
-                  FunctionRef<int(double, void********* megaptr, TTestFunction<void(int)>)>>);
+    static_assert(!std::is_default_constructible_v<FunctionRef<int(double, void********* megaptr, TTestFunction<void(int)>)>>);
 }
 
 TEST_CASE("Sizeof") {
@@ -54,14 +54,23 @@ TEST_CASE("AsArgument") {
 
 TEST_CASE("Allocations") {
     EXPECT_ZERO_ALLOCATIONS(
-        int sum = 0; Iterate(0, 10, [&](int x) { sum += x; }); REQUIRE(sum == 45);
+        int sum = 0;
+        Iterate(0, 10, [&](int x) { sum += x; });
+        REQUIRE(sum == 45);
 
-        Iterate(0, 10, [&](int x) noexcept { sum += x; }); REQUIRE(sum == 90);
+        Iterate(0, 10, [&](int x) noexcept { sum += x; });
+        REQUIRE(sum == 90);
 
-        auto summer = [&](int x) { sum += x; }; Iterate(0, 10, summer); Iterate(0, 10, summer);
-        Iterate(0, 10, summer); REQUIRE(sum == 225);
+        auto summer = [&](int x) { sum += x; };
+        Iterate(0, 10, summer);
+        Iterate(0, 10, summer);
+        Iterate(0, 10, summer);
+        REQUIRE(sum == 225);
 
-        FunctionRef<void(int)> ref = summer; Iterate(0, 10, ref); REQUIRE(sum == 270););
+        FunctionRef<void(int)> ref = summer;
+        Iterate(0, 10, ref);
+        REQUIRE(sum == 270);
+    );
 }
 
 int global_sum = 0;
@@ -121,7 +130,9 @@ TEST_CASE("ForwardArguments") {
 }
 
 auto MakeLambda(int x) {
-    return [x] { return x; };
+    return [x] {
+        return x;
+    };
 }
 
 TEST_CASE("AntiStatic-1") {
@@ -138,10 +149,14 @@ TEST_CASE("AntiStatic-1") {
 }
 
 TEST_CASE("AntiStatic-2") {
-    FunctionRef<int()> r1(+[] { return 1; });
+    FunctionRef<int()> r1(+[] {
+        return 1;
+    });
     REQUIRE(r1() == 1);
 
-    FunctionRef<int()> r2(+[] { return 2; });
+    FunctionRef<int()> r2(+[] {
+        return 2;
+    });
     REQUIRE(r2() == 2);
 
     REQUIRE(r1() == 1);
