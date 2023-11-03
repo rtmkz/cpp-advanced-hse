@@ -128,3 +128,22 @@ TEST_CASE("ForwardArguments") {
     ref(std::make_unique<int>(5), x);
     REQUIRE(x == 'a');
 }
+
+auto MakeLambda(int x) {
+    return [x] {
+        return x;
+    };
+}
+
+TEST_CASE("AntiStatic") {
+    auto l1 = MakeLambda(1);
+    FunctionRef<int()> r1(l1);
+    REQUIRE(r1() == 1);
+
+    auto l2 = MakeLambda(2);
+    FunctionRef<int()> r2(l2);
+    REQUIRE(r2() == 2);
+
+    REQUIRE(r1() == 1);
+    REQUIRE(r2() == 2);
+}
