@@ -135,13 +135,28 @@ auto MakeLambda(int x) {
     };
 }
 
-TEST_CASE("AntiStatic") {
+TEST_CASE("AntiStatic-1") {
     auto l1 = MakeLambda(1);
     FunctionRef<int()> r1(l1);
     REQUIRE(r1() == 1);
 
     auto l2 = MakeLambda(2);
     FunctionRef<int()> r2(l2);
+    REQUIRE(r2() == 2);
+
+    REQUIRE(r1() == 1);
+    REQUIRE(r2() == 2);
+}
+
+TEST_CASE("AntiStatic-2") {
+    FunctionRef<int()> r1(+[] {
+        return 1;
+    });
+    REQUIRE(r1() == 1);
+
+    FunctionRef<int()> r2(+[] {
+        return 2;
+    });
     REQUIRE(r2() == 2);
 
     REQUIRE(r1() == 1);
