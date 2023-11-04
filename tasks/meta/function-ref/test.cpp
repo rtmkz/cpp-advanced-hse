@@ -90,6 +90,10 @@ TEST_CASE("FunctionPointer") {
     FunctionRef<void(int)> ref2{AddToGlobalSum};
     Iterate(0, 10, ref2);
     REQUIRE(global_sum == 135);
+
+    FunctionRef<void(int)> ref3 = &AddToGlobalSum;
+    Iterate(0, 10, ref3);
+    REQUIRE(global_sum == 180);
 }
 
 TEST_CASE("Reassign") {
@@ -148,15 +152,16 @@ TEST_CASE("AntiStatic-1") {
     REQUIRE(r2() == 2);
 }
 
+template<int N>
+int F() {
+    return N;
+}
+
 TEST_CASE("AntiStatic-2") {
-    FunctionRef<int()> r1(+[] {
-        return 1;
-    });
+    FunctionRef<int()> r1(F<1>);
     REQUIRE(r1() == 1);
 
-    FunctionRef<int()> r2(+[] {
-        return 2;
-    });
+    FunctionRef<int()> r2(F<2>);
     REQUIRE(r2() == 2);
 
     REQUIRE(r1() == 1);
