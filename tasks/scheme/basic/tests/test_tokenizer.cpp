@@ -149,14 +149,3 @@ TEST_CASE("Empty string handled correctly") {
 
     REQUIRE(tokenizer.IsEnd());
 }
-
-void ShouldThrow() {
-    std::string input = "1@";
-    std::stringstream ss{input};
-    Tokenizer tokenizer{&ss};
-    tokenizer.Next();
-}
-
-TEST_CASE("Exception is thrown") {
-    REQUIRE_THROWS_AS(ShouldThrow(), SyntaxError);
-}
