@@ -1,0 +1,7 @@
+{
+    "allow_change": ["polymorphism.h", "call_private.h"],
+    "tests": ["test_polymorphism", "test_call_private"],
+    "solutions": "private",
+    "disable_tsan": true,
+    "disable_asan": true
+}
