@@ -1,4 +1,4 @@
 add_gtest(test_call_private test_call_private.cpp)
 add_gtest(test_polymorphism test_polymorphism.cpp)
 
-target_compile_options(test_polymorphism PRIVATE -O0 -Wno-delete-non-abstract-non-virtual-dtor -fno-sanitize=undefined)
+target_compile_options(test_polymorphism PRIVATE -O0 -Wno-delete-non-abstract-non-virtual-dtor -fno-sanitize=vptr -fno-sanitize=leak)
