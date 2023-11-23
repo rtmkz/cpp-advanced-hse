@@ -1,102 +1,10 @@
+#include "test_polymorphism.hpp"
+
 #include <iostream>
-#include <cstdlib>
+#include <memory>
 #include <gtest/gtest.h>
 
 #include "polymorphism.h"
-
-void Trap() {
-    std::cout << "Trap" << std::endl;
-}
-
-int TrapInt() {
-    return 100;
-}
-
-int Sum(int a, int b) {
-    return a + b;
-}
-
-class Base {
-public:
-    virtual void Test() {
-        std::cout << "Base" << std::endl;
-    }
-    static constexpr size_t N = 1;
-};
-
-class Triple {
-public:
-    virtual void First() {
-        std::cout << "First" << std::endl;
-    }
-    virtual void Second() {
-        std::cout << "Second" << std::endl;
-    }
-    virtual void Third() {
-        std::cout << "Third" << std::endl;
-    }
-    static constexpr size_t N = 3;
-};
-
-class GuardedTriple {
-public:
-    static constexpr size_t N = 3;
-        void CallAll() {
-            Public();
-            Protected();
-            Private();
-        }
-
-public:
-    virtual void Public() {
-        std::cout << "Public" << std::endl;
-    }
-protected:
-    virtual void Protected() {
-        std::cout << "Protected" << std::endl;
-    }
-private:
-    virtual void Private() {
-        std::cout << "Private" << std::endl;
-    }
-};
-
-class ValueReturning {
-public:
-    virtual int ReturnValue() {
-        return 42;
-    }
-    static constexpr size_t N = 1;
-};
-
-#define __STRINGIFY__(X) #X
-#define STRINGIFY(X) __STRINGIFY__(X)
-#define __CONCAT__(X, Y) X##Y
-#define CONCAT(X, Y) __CONCAT__(X, Y)
-#define ADD_CNT(X) CONCAT(X, __COUNTER__)
-#define FIX(FUNC) virtual void ADD_CNT(FUNC)() { std::cout << std::to_string(call_id++) << std::endl; }
-#define HUNDRED(X) \
-    FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) \
-    FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) \
-    FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) \
-    FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) \
-    FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) \
-    FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) \
-    FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) \
-    FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) \
-    FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) \
-    FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) FIX(X) \
-
-
-class Huge {
-public:
-    HUNDRED(Func)
-    static constexpr size_t N = 100;
-private:
-    size_t call_id = 0;
-};
-
-/* ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- */
 
 class TestPolymorphism : public ::testing::Test {
 public:
@@ -114,8 +22,11 @@ protected:
     std::streambuf* old;
 };
 
+/*                                                 Intro                                                 */
+/* ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- */
+
 TEST_F(TestPolymorphism, Single) {
-    Base* base = new Base();
+    auto base = std::make_unique<Base>();
 
     base->Test();
     TrapObject<Base::N>(*base, &Trap);
@@ -138,8 +49,35 @@ TEST_F(TestPolymorphism, ExampleToThinkAbout) {
     ASSERT_EQ(buffer.str(), std::string("Base\nBase\nTrap\nBase\n"));
 }
 
+TEST_F(TestPolymorphism, Derived) {
+    auto derived = std::make_unique<Derived>();
+
+    derived->Test();
+    derived->BadTest();
+
+    TrapObject<Derived::N>(*derived, &Trap);
+
+    derived->Test();
+    derived->BadTest();
+
+    ASSERT_EQ(buffer.str(), std::string("Derived\nBadTest\nTrap\nTrap\n"));
+}
+
+TEST_F(TestPolymorphism, Final) {
+    auto final_class = std::make_unique<FinalClass>();
+
+    final_class->OhImSoVirtual();
+    TrapObject<FinalClass::N>(*final_class, &Trap);
+    final_class->OhImSoVirtual();
+
+    ASSERT_EQ(buffer.str(), "VIRTUAL!!!\nVIRTUAL!!!\n");
+}
+
+/*                                                 Basic                                                 */
+/* ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- */
+
 TEST_F(TestPolymorphism, Triple) {
-    Triple* triple = new Triple();
+    auto triple = std::make_unique<Triple>();
 
     triple->First();
     triple->Second();
@@ -154,24 +92,8 @@ TEST_F(TestPolymorphism, Triple) {
     ASSERT_EQ(buffer.str(), std::string("First\nSecond\nThird\nTrap\nTrap\nTrap\n"));
 }
 
-TEST_F(TestPolymorphism, TripleNotWhole) {
-    Triple* triple = new Triple();
-
-    triple->First();
-    triple->Second();
-    triple->Third();
-
-    TrapObject<2>(*triple, &Trap);
-
-    triple->First();
-    triple->Second();
-    // triple->Third(); // SEGFAULT
-
-    ASSERT_EQ(buffer.str(), std::string("First\nSecond\nThird\nTrap\nTrap\n"));
-}
-
 TEST_F(TestPolymorphism, GuardedTriple) {
-    GuardedTriple* triple = new GuardedTriple();
+    auto triple = std::make_unique<GuardedTriple>();
 
     triple->CallAll();
     TrapObject<GuardedTriple::N>(*triple, &Trap);
@@ -181,7 +103,7 @@ TEST_F(TestPolymorphism, GuardedTriple) {
 }
 
 TEST_F(TestPolymorphism, NonVoidReturn) {
-    ValueReturning* returning = new ValueReturning();
+    auto returning = std::make_unique<ValueReturning>();
 
     ASSERT_EQ(returning->ReturnValue(), 42);
     TrapObject<ValueReturning::N>(*returning, &TrapInt);
@@ -189,7 +111,7 @@ TEST_F(TestPolymorphism, NonVoidReturn) {
 }
 
 TEST_F(TestPolymorphism, TypeSlaughter1) {
-    ValueReturning* returning = new ValueReturning();
+    auto returning = std::make_unique<ValueReturning>();
 
     ASSERT_EQ(returning->ReturnValue(), 42);
     TrapObject<ValueReturning::N>(*returning, &Trap);
@@ -197,14 +119,58 @@ TEST_F(TestPolymorphism, TypeSlaughter1) {
     ASSERT_EQ(buffer.str(), std::string("Trap\n"));
 }
 
-
 TEST_F(TestPolymorphism, TypeSlaughter2) {
-    ValueReturning* returning = new ValueReturning();
+    auto returning = std::make_unique<ValueReturning>();
 
     ASSERT_EQ(returning->ReturnValue(), 42);
     TrapObject<ValueReturning::N>(*returning, &Sum);
     ASSERT_NE(returning->ReturnValue(), 42);
 }
+
+/*                                               AdvanceXD                                               */
+/* ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- */
+
+TEST_F(TestPolymorphism, VirtualDestructor1) {
+    {
+        auto unbreakable = std::make_unique<Indestructible>();
+        auto breakable = std::make_unique<Indestructible>();
+
+        TrapObject<Indestructible::N>(*unbreakable, &Trap);
+    }
+
+    ASSERT_EQ(buffer.str(), std::string("Destroyed\nTrap\n"));
+}
+
+TEST_F(TestPolymorphism, VirtualDestructor2) {
+    {
+        auto base = std::make_unique<GoodBase>();
+        
+        base->Test();
+        TrapObject<GoodBase::N>(*base, &Trap);
+        base->Test();
+    }
+
+    ASSERT_EQ(buffer.str(), std::string("GoodBase\nTrap\nTrap\n"));
+}
+
+TEST_F(TestPolymorphism, VirtualDestructor3) {
+    {
+        auto derived = std::make_unique<GoodDerived>();
+
+        derived->Test();
+        derived->NewVirtual();
+
+        TrapObject<GoodDerived::N>(*derived, &Trap);
+
+        derived->Test();
+        derived->NewVirtual();
+    }
+
+    ASSERT_EQ(buffer.str(), std::string("GoodDerived\nNewVirtual\nTrap\nTrap\nTrap\n"));    
+}
+
+/*                                               Stressful                                               */
+/* ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- */
 
 #define CALL(I) huge->Func##I()
 #define CALL_ALL() \
