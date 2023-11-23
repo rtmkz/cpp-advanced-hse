@@ -195,3 +195,5 @@ assignments:
     score: 500
   - task: bonus/functional-world
     score: 200
+  - task: bonus/hack-cpp-1.0
+    score: 100
