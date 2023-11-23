@@ -71,21 +71,21 @@ public:
     Complex(long n, uint p) : n_(n), p_(p) {}
 private:
     long Calculate(const std::string& s, std::array<char, 4> arr) {
-        long overflowed = SillyOverflowPow();
+        unsigned long overflowed = SillyOverflowPow();
         overflowed += n_ * p_ - p_ * p_ * p_;
         for (char c: arr) {
             overflowed *= (c - '0');
         }
-        return overflowed + s.size();
+        return (overflowed + s.size()) % 200200;
     }
     long SillyOverflowPow() {
         long n = n_;
         uint p = p_;
-        long long result = 1;
+        unsigned long long result = 1;
         while (p-- > 0) {
             result *= n;
         }
-        return result;
+        return result % 200200;
     }
 private:
     long n_;
@@ -155,7 +155,7 @@ TEST(CallPrivate, ComplexSillyOverflowPow) {
 
     auto value = ROB(complex, Complex, SillyOverflowPow);
     static_assert(std::is_same_v<decltype(value), long>);
-    ASSERT_EQ(value, -5560491172176901567);
+    ASSERT_EQ(value, 39449);
 }
 
 PREPARE_FOR_ROBBERY(Complex, Calculate, long, const std::string&, std::array<char, 4>);
@@ -164,7 +164,7 @@ TEST(CallPrivate, ComplexCalculate) {
 
     auto value = ROB(complex, Complex, Calculate, std::string("MUAHAHAHA"), {'x', 'o', 'x', 'o'});
     static_assert(std::is_same_v<decltype(value), long>);
-    ASSERT_EQ(value, -2876244452267900855);
+    ASSERT_EQ(value, 67321);
 }
 
 PREPARE_FOR_ROBBERY(Huge, Constant, std::string, size_t, size_t, std::vector<double>::allocator_type, float, float, Lady);
