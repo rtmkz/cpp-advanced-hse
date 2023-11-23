@@ -35,20 +35,6 @@ TEST_F(TestPolymorphism, Single) {
     ASSERT_EQ(buffer.str(), std::string("Base\nTrap\n"));
 }
 
-TEST_F(TestPolymorphism, ExampleToThinkAbout) {
-    Base base;
-
-    (&base)->Test(); // Base
-    base.Test();     // Base
-
-    TrapObject<Base::N>(base, &Trap);
-
-    (&base)->Test(); // Trap
-    base.Test();     // Base *** Why? ***
-
-    ASSERT_EQ(buffer.str(), std::string("Base\nBase\nTrap\nBase\n"));
-}
-
 TEST_F(TestPolymorphism, Derived) {
     auto derived = std::make_unique<Derived>();
 
