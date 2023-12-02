@@ -86,8 +86,7 @@ function(link_decoder_deps TARGET)
             ${PNG_INCLUDE_DIRS}
             ${FFTW_INCLUDES}
             ${JPEG_INCLUDE_DIRS}
-            ${DECODER_UTILS_DIR}
-            ${DECODER_INCLUDE_DIR})
+            ${DECODER_UTILS_DIR})
 
     target_link_libraries(${TARGET} PUBLIC
             ${FFTW_LIBRARIES}
