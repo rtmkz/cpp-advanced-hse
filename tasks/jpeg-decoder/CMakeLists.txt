@@ -80,7 +80,6 @@ if (GRADER)
 endif ()
 
 set(DECODER_UTILS_DIR ${CMAKE_CURRENT_SOURCE_DIR}/utils)
-set(DECODER_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 function(link_decoder_deps TARGET)
     target_include_directories(${TARGET} PUBLIC
