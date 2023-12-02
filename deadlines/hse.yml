@@ -163,7 +163,7 @@ assignments:
 
 - title:    09-baby-threads
   start:    16-11-2023 00:00
-  deadline: 29-11-2023 23:59
+  deadline: 30-11-2023 23:59
   tasks:
     - task: baby-threads/is-prime
       score: 100
