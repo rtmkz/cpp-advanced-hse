@@ -1,3 +1,5 @@
+// Don't change this file, it is not sent to the server.
+
 #pragma once
 
 #include <vector>
