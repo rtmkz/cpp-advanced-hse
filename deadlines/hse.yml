@@ -26,6 +26,7 @@ scoring:
   - name: bonus
     weight: 1.0
     policy: hard
+    maxScore: 1300
 
   defaultGroup: weekly
   finalDeadline: 30-12-2023 23:59
@@ -247,3 +248,5 @@ assignments:
     score: 200
   - task: bonus/hack-cpp-1.0
     score: 100
+  - task: bonus/bonus
+    score: 0
