@@ -24,9 +24,9 @@ public:
     // level order.
     void Build(const std::vector<uint8_t>& code_lengths, const std::vector<uint8_t>& values);
 
-    // Moves the state of the huffman tree by |bit|. If the node is terminated,
-    // returns true and overwrites |value|. If it is intermediate, returns false
-    // and value is unmodified.
+    // Moves the state of the Huffman tree by |bit|. If the node is terminal, returns true,
+    // overwrites |value| and resets the tree state. If the node is intermediate, false is
+    // returned without changing the value.
     bool Move(bool bit, int& value);
 
     ~HuffmanTree();
