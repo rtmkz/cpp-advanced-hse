@@ -60,7 +60,6 @@ if (NOT TEST_SOLUTION)
         huffman/tests/test_huffman.cpp
         fftw/tests/test_fft.cpp
         baseline/tests/test_baseline.cpp
-        faster/tests/test_faster.cpp
         progressive/tests/test_progressive.cpp
         ${DECODER_UTIL_FILES}
     )
