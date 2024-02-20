@@ -9,7 +9,7 @@ using std::string;
 
 std::vector<std::unique_ptr<string>> Duplicate(const std::vector<std::shared_ptr<string>>& items) {
     std::vector<std::unique_ptr<string>> out;
-    out.reserve(items.size());
+    out.reserve(items.size()); 
     for (auto& it : items) {
         out.emplace_back(std::make_unique<string>(*it));
     }
