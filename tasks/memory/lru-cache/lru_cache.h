@@ -6,14 +6,6 @@
 #include <list>
 #include <memory>
 
-struct Node {
-    std::string key, value;
-    std::shared_ptr<Node> prev, next;
-    Node() : prev(nullptr), next(nullptr) {
-    }
-    Node(std::string key, std::string value) : key(key), value(value), prev(nullptr), next(nullptr) {
-    }
-};
 
 class LruCache {
 public:
