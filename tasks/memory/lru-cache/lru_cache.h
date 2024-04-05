@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <unordered_map>
+#include <list>
 #include <memory>
 
 struct Node {
@@ -22,18 +23,12 @@ public:
 
     bool Get(const std::string& key, std::string* value);
 
-    void Update(const std::string& key);
-
     void Pop();
 
-    void Print() {
-        for (auto it : pos) {
-            std::cout << it.first << ' ' << it.second -> value << '\n';
-        }
-        std::cout << '\n';
-    }
-private:
-    std::shared_ptr<Node> head, tail;
-    size_t capacity;
-    std::unordered_map <std::string, std::shared_ptr<Node>> pos;
+private:        
+    using pss = std::pair<std::string, std::string>;
+
+    int capacity;
+    std::list<pss> list;
+    std::unordered_map<std::string, std::list<pss>::iterator> pos;
 };
