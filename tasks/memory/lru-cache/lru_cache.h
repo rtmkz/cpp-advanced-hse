@@ -26,9 +26,9 @@ public:
     void Pop();
 
 private:        
-    using pss = std::pair<std::string, std::string>;
+    using List = std::list<std::pair<std::string, std::string>>;
 
-    int capacity;
-    std::list<pss> list;
-    std::unordered_map<std::string, std::list<pss>::iterator> pos;
+    int capacity_;
+    List list_;
+    std::unordered_map<std::string, List::iterator> pos_;
 };
