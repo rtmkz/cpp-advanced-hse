@@ -25,8 +25,8 @@ public:
     size_t Size() const {
         return size_;
     }
-    
+
 private:
     const char* head;
-	size_t size_;
+    size_t size_;
 };
