@@ -103,6 +103,7 @@ public:
     List& operator=(const List&) = delete;
     List& operator=(List&& other) {
         std::swap(dummy_, other.dummy_);
+        other.dummy_ = nullptr;
         return *this;
     }
 
