@@ -119,6 +119,15 @@ int main() {
             std::cout << "unknown cmd" << std::endl;
         }
     }
-
+    
     return 0;
 }
+/*
+    crashing command:
+
+    push
+    1
+    dup
+    pop_carry
+    print
+*/
