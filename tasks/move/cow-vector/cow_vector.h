@@ -2,7 +2,18 @@
 
 #include <cstdint>
 #include <string>
+#include <vector>
 
+struct State {
+    int cnt;
+    std::vector<std::string> data;
+
+    State();
+    ~State();
+    State(const std::vector<std::string>& other);
+
+    void unlink();
+};
 
 class COWVector {
 public:
@@ -24,6 +35,8 @@ public:
     void PushBack(const std::string& value);
 
     void Set(size_t at, const std::string& value);
+
+    State* state_;
 
 private:
 };
