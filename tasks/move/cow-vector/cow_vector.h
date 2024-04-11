@@ -9,7 +9,6 @@ struct State {
     std::vector<std::string> data;
 
     State();
-    ~State();
     State(const std::vector<std::string>& other);
 
     void unlink();

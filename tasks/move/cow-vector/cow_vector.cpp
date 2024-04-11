@@ -3,11 +3,6 @@
 State::State() : cnt(1) {
 }
 
-State::~State() {
-    cnt = 0;
-    data.clear();
-}
-
 State::State(const std::vector<std::string>& other) {
     cnt = 1;
     data = other;
