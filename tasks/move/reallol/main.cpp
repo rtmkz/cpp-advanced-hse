@@ -65,7 +65,6 @@ int main() {
 
     for (int i = 0; i < 1000; ++i) {
         Banner();
-
         switch (GetCmd()) {
             case 1: {
                 if (users.size() > kMaxUsers) {
@@ -134,3 +133,71 @@ int main() {
 
     return 0;
 }
+
+/*
+
+crashing input:
+
+1
+zhan
+1
+nurs
+4
+zhan
+nurs
+2
+nurs
+1 1
+2
+nurs
+1 1
+2
+nurs
+1 1
+2
+nurs
+1 1
+2
+nurs
+1 1
+2
+nurs
+1 1
+2
+nurs
+1 1
+2
+nurs
+1 1
+2
+nurs
+1 1
+2
+nurs
+1 1
+2
+nurs
+1 1
+2
+nurs
+1 1
+2
+nurs
+1 1
+2
+nurs
+1 1
+2
+nurs
+1 1
+2
+nurs
+1 1
+2
+nurs
+1 1
+3
+zhan
+5
+
+*/
